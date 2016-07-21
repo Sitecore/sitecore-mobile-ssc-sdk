@@ -1,7 +1,7 @@
-Sitecore SSC Mobile SDK for Xamarin
+Sitecore Mobile SDK 2.0 (SSC-only) for Xamarin
 ========
 
-Sitecore SSC Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore. The framework enables developers to rapidly develop applications utilizing their existing .NET development skill sets. 
+Sitecore Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore. The framework enables developers to rapidly develop applications utilizing their existing .NET development skill sets. 
 The SDK includes the following features:
 
 * Fetching CMS Content
