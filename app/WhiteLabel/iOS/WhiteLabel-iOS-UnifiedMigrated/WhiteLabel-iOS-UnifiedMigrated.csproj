@@ -197,14 +197,6 @@
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
       <Name>Sitecore.MobileSDK</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
-      <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
-      <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI\Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI.csproj">
-      <Project>{F973D9C9-61F3-417F-92D1-F32E0CB59187}</Project>
-      <Name>Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

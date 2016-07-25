@@ -12,14 +12,14 @@
   [TestFixture]
   public class CreateSessionTest
   {
-    private IWebApiCredentials adminCredentials = new SSCCredentialsPOD("admin", "b");
+    private IScCredentials adminCredentials = new SSCCredentialsPOD("admin", "b", "sitecore");
 
     #region Explicit Construction
     [Test]
     public void TestSessionConfigForAuthenticatedSession()
     {
-      var sessionSettings = new SessionConfig("localhost", "sitecore");
-      var credentials = new SSCCredentialsPOD("root", "pass");
+      var sessionSettings = new SessionConfig("localhost");
+      var credentials = new SSCCredentialsPOD("root", "pass", "sitecore");
 
       Assert.IsNotNull(sessionSettings);
       Assert.IsNotNull(credentials);
@@ -27,14 +27,14 @@
       Assert.AreEqual("localhost", sessionSettings.InstanceUrl);
       Assert.AreEqual("root", credentials.Username);
       Assert.AreEqual("pass", credentials.Password);
-      Assert.AreEqual("sitecore", sessionSettings.Site);
+      Assert.AreEqual("sitecore", credentials.Domain);
     }
 
     [Test]
     public void TestSessionConfigAllowsBothNullForAuthenticatedSession()
     {
-      var sessionSettings = new SessionConfig("localhost", "sitecore");
-      var credentials = new SSCCredentialsPOD(null, null);
+      var sessionSettings = new SessionConfig("localhost");
+      var credentials = new SSCCredentialsPOD(null, null, "sitecore");
 
       Assert.IsNotNull(sessionSettings);
       Assert.IsNotNull(credentials);
@@ -42,15 +42,15 @@
       Assert.AreEqual("localhost", sessionSettings.InstanceUrl);
       Assert.IsNull(credentials.Username);
       Assert.IsNull(credentials.Password);
-      Assert.AreEqual("sitecore", sessionSettings.Site);
+      Assert.AreEqual("sitecore", credentials.Domain);
     }
 
 
     [Test]
     public void TestSessionConfigAllowsNullUsernameForAuthenticatedSession()
     {
-      var sessionSettings = new SessionConfig("localhost", "sitecore");
-      var credentials = new SSCCredentialsPOD(null, "pass");
+      var sessionSettings = new SessionConfig("localhost");
+      var credentials = new SSCCredentialsPOD(null, "pass", "sitecore");
 
       Assert.IsNotNull(sessionSettings);
       Assert.IsNotNull(credentials);
@@ -58,7 +58,7 @@
       Assert.AreEqual("localhost", sessionSettings.InstanceUrl);
       Assert.IsNull(credentials.Username);
       Assert.AreEqual("pass", credentials.Password);
-      Assert.AreEqual("sitecore", sessionSettings.Site);
+      Assert.AreEqual("sitecore", credentials.Domain);
     }
     #endregion Explicit Construction
 
@@ -70,7 +70,6 @@
         SitecoreSSCSessionBuilder.AnonymousSessionWithHost("sitecore.net")
           .DefaultDatabase("web")
           .DefaultLanguage("en")
-          .Site(" sitecore")
           .MediaLibraryRoot("/sitecore/media library")
           .DefaultMediaResourceExtension("ashx")
           .MediaPrefix("~/media");
@@ -85,13 +84,12 @@
     [Test]
     public void TestAuthenticatedSessionShouldBeCreatedByTheBuilder()
     {
-      IWebApiCredentials credentials = this.adminCredentials;
+      IScCredentials credentials = this.adminCredentials;
 
       var builder = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(credentials)
         .DefaultDatabase("web")
         .DefaultLanguage("en")
-        .Site("sitecore")
         .MediaLibraryRoot("/sitecore/media library")
         .DefaultMediaResourceExtension("ashx");
 
@@ -140,24 +138,6 @@
         .DefaultLanguage("en")
       );
     }
-
-    [Test]
-    public void TestSiteIsWriteOnce()
-    {
-      Assert.Throws<InvalidOperationException>(() =>
-        SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
-        .Credentials(this.adminCredentials)
-        .Site("sitecore")
-        .Site("/baz/baz")
-      );
-
-      Assert.Throws<InvalidOperationException>(() =>
-        SitecoreSSCSessionBuilder.AnonymousSessionWithHost("sitecore.net")
-        .Site("/ololo/trololo")
-        .Site("/foo/bar")
-      );
-    }
-
 
     [Test]
     public void TestMediaRootIsWriteOnce()
@@ -248,7 +228,6 @@
         (
           var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
           .Credentials(this.adminCredentials)
-          .Site(null)
           .BuildSession()
         )
       {

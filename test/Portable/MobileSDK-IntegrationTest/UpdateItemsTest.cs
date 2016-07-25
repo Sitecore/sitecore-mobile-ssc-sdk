@@ -34,7 +34,6 @@
     {
       return SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
-        .Site(testData.ShellSite)
         .DefaultDatabase("master")
         .BuildSession();
     }

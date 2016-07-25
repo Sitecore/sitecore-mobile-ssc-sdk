@@ -7,7 +7,7 @@
   using Foundation;
   using UIKit;
   using Sitecore.MobileSDK.API;
-  using Sitecore.MobileSDK.PasswordProvider.iOS;
+  using Sitecore.MobileSDK.PasswordProvider;
 
   public partial class AuthViewController : BaseTaskViewController
   {
@@ -27,7 +27,7 @@
       this.urlField.Text = "https://cms80u2.test24dk1.dk.sitecore.net/";
       this.loginField.Text = "admin";
       this.passwordField.Text = "b";
-      this.siteField.Text = "/sitecore/shell";
+      this.siteField.Text = "sitecore";
 
       this.loginField.Placeholder = NSBundle.MainBundle.LocalizedString("user_login_placeholder", null);
       this.passwordField.Placeholder = NSBundle.MainBundle.LocalizedString("password_placeholder", null);
@@ -47,12 +47,11 @@
     {
       try
       {
-        using (var credentials = new SecureStringPasswordProvider(this.loginField.Text, this.passwordField.Text))
+        using (var credentials = new ScUnsecuredCredentialsProvider(this.loginField.Text, this.passwordField.Text, this.siteField.Text))
         using 
         ( 
             var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.urlField.Text)
             .Credentials(credentials)
-            .Site(this.siteField.Text)
             .BuildReadonlySession()
         )
         {

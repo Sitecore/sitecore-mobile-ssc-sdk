@@ -62,7 +62,7 @@
       }
     }
 
-    public IWebApiCredentials Credentials
+    public IScCredentials Credentials
     {
       get
       {

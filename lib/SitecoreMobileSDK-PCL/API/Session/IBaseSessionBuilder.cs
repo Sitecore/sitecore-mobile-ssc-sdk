@@ -25,19 +25,6 @@ namespace Sitecore.MobileSDK.API.Session
     ISitecoreSSCReadonlySession BuildReadonlySession();
 
     /// <summary>
-    /// Specifies site parameter.
-    /// This parameter value will be used if appropriate parameter will be missed in request object.
-    /// For example: "/sitecore/shell"
-    /// 
-    /// The value is case insensitive.
-    /// </summary>
-    /// <param name="site">Site parameter.</param>
-    /// <returns>
-    /// this
-    /// </returns>
-    IBaseSessionBuilder Site(string site);
-
-    /// <summary>
     /// Specifies Item Web API version, 'v1' by default.
     /// This parameter value will be used if appropriate parameter will be missed in request object.
     /// 

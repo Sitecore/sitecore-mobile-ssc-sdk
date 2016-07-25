@@ -15,7 +15,7 @@
   public class ItemSourceTest
   {
     IMediaLibrarySettings mediaSettings;
-    IWebApiCredentials credentials;
+    IScCredentials credentials;
     ISessionConfig localhostConnection;
 
 
@@ -24,7 +24,8 @@
     {
       this.credentials = new SSCCredentialsPOD(
         "alex.fergusson", 
-        "man u is a champion");
+        "man u is a champion",
+        "sitecore");
 
       this.mediaSettings = new MediaLibrarySettings(
         "/sitecore/media library",

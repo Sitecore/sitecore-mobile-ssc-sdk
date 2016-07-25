@@ -23,7 +23,6 @@
 
       var result = new SessionConfigPOD();
       result.InstanceUrl = userConfig.InstanceUrl ?? this.defaultSessionConfig.InstanceUrl;
-      result.Site = userConfig.Site ?? this.defaultSessionConfig.Site;
 
       return result;
     }

@@ -23,12 +23,11 @@ namespace Sitecore.MobileSDK.PublicKey
     private readonly SessionConfigUrlBuilder sessionConfigBuilder;
     private readonly ISSCUrlParameters sscGrammar;
     private readonly HttpClient httpClient;
-    private readonly IWebApiCredentials credentials;
-    private string domain;
+    private readonly IScCredentials credentials;
 
     #endregion Private Variables
 
-    public GetPublicKeyTasks(IWebApiCredentials credentials, SessionConfigUrlBuilder sessionConfigBuilder, ISSCUrlParameters sscGrammar, HttpClient httpClient)
+    public GetPublicKeyTasks(IScCredentials credentials, SessionConfigUrlBuilder sessionConfigBuilder, ISSCUrlParameters sscGrammar, HttpClient httpClient)
     {
       this.sessionConfigBuilder = sessionConfigBuilder;
       this.sscGrammar = sscGrammar;
@@ -40,7 +39,6 @@ namespace Sitecore.MobileSDK.PublicKey
 
     public string BuildRequestUrlForRequestAsync(ISessionConfig request, CancellationToken cancelToken)
     {
-      this.domain = request.Site;
       return this.PrepareRequestUrl(request);
     }
 
@@ -50,7 +48,7 @@ namespace Sitecore.MobileSDK.PublicKey
 
       //TODO: @igk extract
       var stringContent = new StringContent("{\"domain\":\""
-                                            + this.domain
+                                            + this.credentials.Domain
                                             +"\",\"username\":\""
                                             + this.credentials.Username
                                             + "\",\"password\":\""

@@ -36,8 +36,8 @@ namespace Sitecore.MobileSDK.API.Session
     /// <value>
     /// The credentials.
     /// </value>
-    /// <seealso cref="IWebApiCredentials" />
-    IWebApiCredentials Credentials { get; }
+    /// <seealso cref="IScCredentials" />
+    IScCredentials Credentials { get; }
 
     /// <summary>
     /// Gets the settings : 

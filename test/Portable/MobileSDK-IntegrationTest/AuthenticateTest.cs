@@ -46,27 +46,9 @@
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.NotExistent)
           .BuildReadonlySession()
-      )
-      {
+      ) {
         bool response = await session.AuthenticateAsync();
         Assert.False(response);
-      }
-    }
-
-    //TODO: This testcase will fail after Item Web Api bugfix.
-    [Test]
-    public async void TestGetAuthenticationAsUserInExtranetDomainToShellSite()
-    {
-      using
-      (
-        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(testData.Users.Creatorex)
-          .Site(testData.ShellSite)
-          .BuildReadonlySession()
-      )
-      {
-        bool response = await session.AuthenticateAsync();
-        Assert.True(response);
       }
     }
 
@@ -77,7 +59,6 @@
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Creatorex)
-          .Site("/")
           .BuildReadonlySession()
       )
       {
@@ -93,23 +74,6 @@
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.SitecoreCreator)
-          .Site("/")
-          .BuildReadonlySession()
-      )
-      {
-        bool response = await session.AuthenticateAsync();
-        Assert.True(response);
-      }
-    }
-
-    [Test]
-    public async void TestGetAuthenticationAsUserInSitecoreDomainToShellSite()
-    {
-      using
-      (
-        var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(testData.Users.SitecoreCreator)
-          .Site(testData.ShellSite)
           .BuildReadonlySession()
       )
       {
@@ -124,7 +88,7 @@
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(new SSCCredentialsPOD(testData.Users.Admin.Username, "wrongpassword"))
+        .Credentials(new SSCCredentialsPOD(testData.Users.Admin.Username, "wrongpassword", "sitecore"))
         .BuildReadonlySession()
       )
       {
@@ -139,7 +103,7 @@
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(new SSCCredentialsPOD(testData.Users.Admin.Username, "Password $#%^&^*"))
+        .Credentials(new SSCCredentialsPOD(testData.Users.Admin.Username, "Password $#%^&^*", "sitecore"))
         .BuildReadonlySession()
       )
       {
@@ -154,7 +118,7 @@
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(new SSCCredentialsPOD("Username $#%^&^*", testData.Users.Admin.Password))
+          .Credentials(new SSCCredentialsPOD("Username $#%^&^*", testData.Users.Admin.Password, "sitecore"))
           .BuildReadonlySession()
       )
       {

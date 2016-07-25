@@ -13,7 +13,7 @@
   {
     public ScTestApiSession(
       ISessionConfig config,
-      IWebApiCredentials credentials,
+      IScCredentials credentials,
       IMediaLibrarySettings mediaSettings,
       ItemSource defaultSource = null) :
       base(config, credentials, mediaSettings, defaultSource)

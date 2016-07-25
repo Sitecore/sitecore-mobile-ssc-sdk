@@ -6,7 +6,7 @@
   /// A data provider for user's credentials.
   /// A secure implementation must be submitted by the user
   /// </summary>
-  public interface IWebApiCredentials : IDisposable
+  public interface IScCredentials : IDisposable
   {
 
     /// <summary>
@@ -14,7 +14,7 @@
     /// This method will be executed once the object is submitted to the session
     /// </summary>
     /// <returns>A copy of the current instance</returns>
-    IWebApiCredentials CredentialsShallowCopy();
+    IScCredentials CredentialsShallowCopy();
 
     /// <summary>
     /// Gets the username from the keychain.
@@ -25,7 +25,7 @@
     /// For example: "sitecore/admin"
     /// <seealso cref="ISessionConfig" />
     /// Or user name only, if you have "site" information.
-    /// For Example: "admin" and 'ISessionConfig'.Site == "/sitecore/shell" 
+    /// For Example: "admin" and 'ISessionConfig'.Site == "sitecore" 
     /// <seealso cref="ISessionConfig" />
     /// </value>
     string Username
@@ -41,6 +41,10 @@
     /// </value>
     string Password
     {
+      get;
+    }
+
+    string Domain {
       get;
     }
   }

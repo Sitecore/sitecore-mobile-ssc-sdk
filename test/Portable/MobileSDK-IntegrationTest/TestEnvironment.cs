@@ -13,7 +13,6 @@
         IsMediaHashesSupported = TestEndpointsConfig.IsMediaHashesSupported,
         InstanceUrl = TestEndpointsConfig.InstanceUrl,
 
-        ShellSite = "sitecore"
       };
 
       result.Items.Home.Id = "110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9";
@@ -59,22 +58,21 @@
     
     public bool IsMediaHashesSupported { get; private set; }
     public string InstanceUrl { get; private set; }
-    public string ShellSite { get; private set; }
 
     public UsersList Users = new UsersList();
     public ItemsList Items = new ItemsList();
 
     public class UsersList
     {
-      public SSCCredentialsPOD Admin = new SSCCredentialsPOD("admin", "b");
-      public SSCCredentialsPOD Anonymous = new SSCCredentialsPOD(null, null);
-      public SSCCredentialsPOD Creatorex = new SSCCredentialsPOD("extranet\\creatorex", "creatorex");
-      public SSCCredentialsPOD SitecoreCreator = new SSCCredentialsPOD("creator", "creator");
-      public SSCCredentialsPOD NoReadUserExtranet = new SSCCredentialsPOD("extranet\\noreadaccess", "noreadaccess");
-      public SSCCredentialsPOD FakeAnonymous = new SSCCredentialsPOD("extranet\\FakeAnonymous", "b");
-      public SSCCredentialsPOD NotExistent = new SSCCredentialsPOD("notexistent", "notexistent");
-      public SSCCredentialsPOD NoCreateAccess = new SSCCredentialsPOD("nocreate", "nocreate");
-      public SSCCredentialsPOD NoReadUserSitecore = new SSCCredentialsPOD("noreaduser", "noreaduser");
+      public SSCCredentialsPOD Admin = new SSCCredentialsPOD("admin", "b", "sitecore");
+      public SSCCredentialsPOD Anonymous = new SSCCredentialsPOD(null, null, null);
+      public SSCCredentialsPOD Creatorex = new SSCCredentialsPOD("creatorex", "creatorex", "extranet");
+      public SSCCredentialsPOD SitecoreCreator = new SSCCredentialsPOD("creator", "creator", "sitecore");
+      public SSCCredentialsPOD NoReadUserExtranet = new SSCCredentialsPOD("noreadaccess", "noreadaccess", "extranet");
+      public SSCCredentialsPOD FakeAnonymous = new SSCCredentialsPOD("FakeAnonymous", "b", "extranet");
+      public SSCCredentialsPOD NotExistent = new SSCCredentialsPOD("notexistent", "notexistent", "sitecore");
+      public SSCCredentialsPOD NoCreateAccess = new SSCCredentialsPOD("nocreate", "nocreate", "sitecore");
+      public SSCCredentialsPOD NoReadUserSitecore = new SSCCredentialsPOD("noreaduser", "noreaduser", "sitecore");
     }
 
     public class ItemsList

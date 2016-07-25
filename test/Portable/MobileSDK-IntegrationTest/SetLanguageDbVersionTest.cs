@@ -298,89 +298,6 @@
     }
 
     [Test]
-    public async void TestGetItemWithShellSite()
-    {
-      var site = testData.ShellSite;
-      using
-      (
-        var session = this.CreateCreatorexSession(site)
-      )
-      {
-        var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
-
-        testData.AssertItemsCount(0, response);
-      }
-    }
-
-    [Test]
-    public async void TestGetItemWithWebSite()
-    {
-      const string Site = "/";
-      using
-      (
-        var session = this.CreateCreatorexSession(Site)
-      )
-      {
-        var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
-
-        testData.AssertItemsCount(1, response);
-        ISitecoreItem resultItem = response[0];
-        testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-      }
-    }
-
-    [Test]
-    public async void TestGetItemWithShellSiteWithoutDomain()
-    {
-      const string Site = "/";
-      using
-      (
-        var session = this.CreateCreatorexSession(Site)
-      )
-      {
-        var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
-
-        testData.AssertItemsCount(1, response);
-        ISitecoreItem resultItem = response[0];
-        testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-      }
-    }
-
-    [Test]
-    public void TestGetItemWithEmptySiteDoNotReturnsException()
-    {
-      const string Site = "";
-      var session = this.CreateCreatorexSession(Site);
-      Assert.IsNotNull(session);
-    }
-    [Test]
-    public void TestGetItemWithInvalidSiteReturnsException()
-    {
-      const string Site = "/@$%/";
-      using
-      (
-        var session = this.CreateCreatorexSession(Site)
-      )
-      {
-        TestDelegate testCode = async () =>
-        {
-          var task = session.ReadItemAsync(this.requestWithVersionsItemId);
-          await task;
-        };
-        Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
-        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.RsaHandshakeException", exception.GetType().ToString());
-        Assert.AreEqual("[Sitecore Mobile SDK] Public key not received properly", exception.Message);
-        Assert.AreEqual("System.Xml.XmlException", exception.InnerException.GetType().ToString());
-
-
-        // Windows : "For security reasons DTD is prohibited in this XML document."
-        // iOS : {System.Xml.XmlException: Document Type Declaration (DTD) is prohibited in this XML.  Line 1, position 10.
-        Assert.True(exception.InnerException.Message.Contains("is prohibited in this XML"));
-        Assert.True(exception.InnerException.Message.Contains("DTD"));
-      }
-    }
-
-    [Test]
     public void TestGetItemWithNullVersionInRequestByPathReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path).Version(null).Build());
@@ -471,12 +388,11 @@
       return session;
     }
 
-    private ISitecoreSSCReadonlySession CreateCreatorexSession(string site)
+    private ISitecoreSSCReadonlySession CreateCreatorexSession()
     {
       var session =
         SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(this.testData.Users.Creatorex)
-          .Site(site)
           .DefaultDatabase("web")
           .DefaultLanguage("en")
           .BuildReadonlySession();

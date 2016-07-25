@@ -34,7 +34,6 @@
     {
       var result = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
-        .Site(testData.ShellSite)
         .BuildSession();
 
       return result;
@@ -412,7 +411,6 @@
     public void TestCreateItemByPathWithAnonymousUserReturnsException()
     {
       var anonymousSession = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
-        .Site(testData.ShellSite)
         .BuildSession();
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplatePath(testData.Items.Home.Template)
@@ -436,7 +434,6 @@
     {
       var anonymousSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.NoCreateAccess)
-        .Site(testData.ShellSite)
         .BuildSession();
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplatePath(testData.Items.Home.Template)

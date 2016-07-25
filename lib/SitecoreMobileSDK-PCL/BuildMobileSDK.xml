@@ -69,7 +69,7 @@
     <CallTarget Targets="clean"/>
     <CallTarget Targets="UnitTest"/>
     <CallTarget Targets="SitecoreMobileSDK"/>
-	<CallTarget Targets="PasswordProvider"/>
+	<!-- <CallTarget Targets="PasswordProvider"/> -->
     <CallTarget Targets="package"/>
 	<CallTarget Targets="DeviceTests"/>
     <CallTarget Targets="doc"/>
@@ -336,7 +336,7 @@
      />
 
 	 
-    <Exec 
+    <!-- <Exec
       Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.PasswordProvider.nuspec"
       WorkingDirectory="$(ScriptsDirectory)\nuget" />
     <Copy
@@ -346,7 +346,7 @@
     <Copy
       SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.1.0.2.nupkg"
       DestinationFolder="$(LocalNugetRepoDirectory)"
-     />
+     /> -->
 	 
 
     <Exec

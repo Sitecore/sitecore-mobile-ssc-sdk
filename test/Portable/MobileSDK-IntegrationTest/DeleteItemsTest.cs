@@ -39,7 +39,6 @@
     {
       return SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
-        .Site(testData.ShellSite)
         .DefaultDatabase("master")
         .BuildSession();
     }
@@ -82,7 +81,6 @@
       const string Db = "web";
       var itemSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
-        .Site(testData.ShellSite)
         .DefaultDatabase(Db)
         .BuildSession();
       ISitecoreItem item = await this.CreateItem("Item in web", null, itemSession);
@@ -110,33 +108,6 @@
       Assert.IsTrue(result.Deleted);
     }
 
-    [Test]
-    public async void TestDeleteItemByIdAsAnonymousFromShellSiteReturnsException()
-    {
-      await this.RemoveAll();
-
-      var anonymousSession = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
-        .DefaultDatabase("master")
-        .Site(testData.ShellSite)
-        .BuildSession();
-
-      ISitecoreItem item = await this.CreateItem("Item to delete as anonymous");
-
-      var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(item.Id)
-        .Build();
-
-      TestDelegate testCode = async () =>
-      {
-        var task = anonymousSession.DeleteItemAsync(request);
-        await task;
-      };
-      Exception exception = Assert.Throws<ParserException>(testCode);
-      Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.AreEqual("Access to site is not granted.", exception.InnerException.Message);
-
-      await session.DeleteItemAsync(request);
-    }
 
     [Test]
     public async void TestDeleteItemByIdWithoutDeleteAccessReturnsException()
@@ -146,7 +117,6 @@
       var noAccessSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.NoCreateAccess)
         .DefaultDatabase("master")
-        .Site(testData.ShellSite)
         .BuildSession();
 
       ISitecoreItem item = await this.CreateItem("Item to delete without delete access");

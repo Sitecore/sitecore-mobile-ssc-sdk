@@ -19,7 +19,6 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API.MediaItem;
-  using Sitecore.MobileSDK.PasswordProvider;
   using Sitecore.MobileSDK.PasswordProvider.Interface;
   using Sitecore.MobileSDK.Session;
   using Sitecore.MobileSDK.Items;
@@ -44,7 +43,7 @@ namespace Sitecore.MobileSDK
   {
     public ScApiSession(
       ISessionConfig config,
-      IWebApiCredentials credentials,
+      IScCredentials credentials,
       IMediaLibrarySettings mediaSettings,
       ItemSource defaultSource = null)
     {
@@ -143,7 +142,7 @@ namespace Sitecore.MobileSDK
       }
     }
 
-    public IWebApiCredentials Credentials
+    public IScCredentials Credentials
     {
       get
       {
@@ -172,7 +171,9 @@ namespace Sitecore.MobileSDK
 
     protected virtual async Task<string> GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken))
     {
-      IEnumerable<Cookie> oldCookies = this.cookies.GetCookies(new Uri(this.Config.InstanceUrl)).Cast<Cookie>();
+      
+      string url = SessionConfigValidator.AutocompleteInstanceUrlWithHttps(this.Config.InstanceUrl);
+      IEnumerable<Cookie> oldCookies = this.cookies.GetCookies(new Uri(url)).Cast<Cookie>();
       if (oldCookies.Count() > 0) { 
         return this.publicCertifiacte;
       }
@@ -185,12 +186,11 @@ namespace Sitecore.MobileSDK
         string result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
         this.publicCertifiacte = result;
 
-        //TODO: @igk debug info remove later
-
-        IEnumerable<Cookie> responseCookies = this.cookies.GetCookies(new Uri(this.Config.InstanceUrl)).Cast<Cookie>();
-        foreach (Cookie cookie in responseCookies) {
-          Debug.WriteLine("COOKIE_SET: " + cookie.Name + ": " + cookie.Value);
-        }
+        ////TODO: @igk debug info remove later
+        //IEnumerable<Cookie> responseCookies = this.cookies.GetCookies(new Uri(this.Config.InstanceUrl)).Cast<Cookie>();
+        //foreach (Cookie cookie in responseCookies) {
+        //  Debug.WriteLine("COOKIE_SET: " + cookie.Name + ": " + cookie.Value);
+        //}
       }
       catch (ObjectDisposedException)
       {
@@ -478,7 +478,7 @@ namespace Sitecore.MobileSDK
     private HttpClientHandler handler;
 
     protected readonly ISessionConfig sessionConfig;
-    private IWebApiCredentials credentials;
+    private IScCredentials credentials;
     private readonly IMediaLibrarySettings mediaSettings;
 
     private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemSSCV2Grammar();

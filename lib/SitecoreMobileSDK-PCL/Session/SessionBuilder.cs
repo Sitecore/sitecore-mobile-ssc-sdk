@@ -20,9 +20,7 @@
 
 
       ////////
-      SessionConfig conf = new SessionConfig(
-        this.instanceUrl,
-        this.site);
+      SessionConfig conf = new SessionConfig(this.instanceUrl);
 
       var mediaSettings = new MediaLibrarySettings(
         optionalMediaRoot,
@@ -97,7 +95,7 @@
     #endregion Constructor
 
     #region IAuthenticatedSessionBuilder
-    public IBaseSessionBuilder Credentials(IWebApiCredentials credentials)
+    public IBaseSessionBuilder Credentials(IScCredentials credentials)
     {
       // @adk : won't be invoked more than once.
       // No validation needed.
@@ -239,7 +237,7 @@
     private string mediaPrefix;
     DownloadStrategy resizingFlag = DownloadStrategy.Plain;
 
-    private IWebApiCredentials credentials = null;
+    private IScCredentials credentials = null;
     private ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);
     #endregion State
   }

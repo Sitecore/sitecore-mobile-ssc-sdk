@@ -107,7 +107,6 @@
           .Credentials(this.testData.Users.NotExistent)
           .DefaultDatabase("web")
           .DefaultLanguage("en")
-          .Site(testData.ShellSite)
           .BuildSession()
       )
       {
@@ -130,8 +129,7 @@
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-          .Credentials(new SSCCredentialsPOD("/?*not#valid@username", "*not_valid ^ pwd"))
-          .Site(testData.ShellSite)
+          .Credentials(new SSCCredentialsPOD("/?*not#valid@username", "*not_valid ^ pwd", "fdfdfd"))
           .BuildSession()
       )
       {
@@ -156,7 +154,6 @@
         var session = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
         .DefaultDatabase("web")
         .DefaultLanguage("en")
-        .Site(testData.ShellSite)
         .BuildReadonlySession()
       )
       {

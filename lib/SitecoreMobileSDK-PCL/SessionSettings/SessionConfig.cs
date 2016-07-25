@@ -9,11 +9,9 @@
   public class SessionConfig : ISessionConfig
   {
     public SessionConfig(
-      string instanceUrl,
-      string site = null)
+      string instanceUrl)
     {
       this.InstanceUrl = instanceUrl;
-      this.Site = site;
 
       this.Validate();
     }
@@ -22,8 +20,7 @@
     public virtual SessionConfig ShallowCopy()
     {
       SessionConfig result = new SessionConfig(
-        this.InstanceUrl,
-        this.Site
+        this.InstanceUrl
       );
 
       return result;
@@ -37,12 +34,6 @@
 
     #region Properties
     public string InstanceUrl
-    {
-      get;
-      protected set;
-    }
-
-    public string Site
     {
       get;
       protected set;

@@ -27,7 +27,7 @@
     public void TestBuildSessionWithEmptyUsernameReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-       .Credentials(new SSCCredentialsPOD("", testData.Users.Admin.Password))
+       .Credentials(new SSCCredentialsPOD("", testData.Users.Admin.Password, "sitecore"))
       );
       Assert.AreEqual("SessionBuilder.Credentials.Username : The input cannot be empty.", exception.Message);
     }
@@ -36,7 +36,7 @@
     public void TestBuildSessionWithEmptyPasswordReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-         .Credentials(new SSCCredentialsPOD("username", ""))
+         .Credentials(new SSCCredentialsPOD("username", "", "sitecore"))
          );
       Assert.AreEqual("SessionBuilder.Credentials.Password : The input cannot be empty.", exception.Message);
     }
@@ -45,7 +45,7 @@
     public void TestBuildSessionWithNullUsernameReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-         .Credentials(new SSCCredentialsPOD(null, "password"))
+         .Credentials(new SSCCredentialsPOD(null, "password", "sitecore"))
          );
       Assert.IsTrue(exception.Message.Contains("SessionBuilder.Credentials.Username"));
     }
@@ -54,7 +54,7 @@
     public void TestBuildSessionWithNullPasswordReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-         .Credentials(new SSCCredentialsPOD("username", null))
+         .Credentials(new SSCCredentialsPOD("username", null, "sitecore"))
          );
       Assert.IsTrue(exception.Message.Contains("SessionBuilder.Credentials.Password"));
     }
@@ -63,7 +63,7 @@
     public void TestBuildSessionWithNullUrlReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(null)
-        .Credentials(new SSCCredentialsPOD("Username", "Password"))
+        .Credentials(new SSCCredentialsPOD("Username", "Password", "sitecore"))
         );
       Assert.IsTrue(exception.Message.Contains("SessionBuilder.InstanceUrl"));
     }
@@ -72,7 +72,7 @@
     public void TestBuildSessionWithEmptyUrlReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("")
-        .Credentials(new SSCCredentialsPOD("Username", "Password"))
+        .Credentials(new SSCCredentialsPOD("Username", "Password", "sitecore"))
         );
       Assert.AreEqual("SessionBuilder.InstanceUrl : The input cannot be empty.", exception.Message);
     }
@@ -130,20 +130,6 @@
     }
 
     [Test]
-    public void TestBuildSessionWithNullSiteDoNotReturnsException()
-    {
-      using
-        (
-          var session = this.NewSession()
-          .Site(null)
-          .BuildSession()
-        )
-      {
-        Assert.IsNotNull(session);
-      }
-    }
-
-    [Test]
     public void TestBuildSessionWithMediaPrefixWithSpacesOnlyReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => this.NewSession()
@@ -155,7 +141,7 @@
     private IBaseSessionBuilder NewSession()
     {
       return SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
-        .Credentials(new SSCCredentialsPOD("username", "password"));
+        .Credentials(new SSCCredentialsPOD("username", "password", "sitecore"));
     }
   }
 }

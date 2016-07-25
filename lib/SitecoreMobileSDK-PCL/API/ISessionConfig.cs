@@ -23,17 +23,5 @@ namespace Sitecore.MobileSDK.API
     {
       get;
     }
-
-    /// <summary>
-    /// Specifies site parameter, must starts with "/" symbol.
-    /// For example: "/sitecore/shell".
-    /// 
-    /// The value is case insensitive.
-    /// </summary>
-    string Site
-    {
-      get;
-    }
-
   }
 }

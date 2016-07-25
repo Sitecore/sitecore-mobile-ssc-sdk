@@ -12,8 +12,9 @@
     {
       const string login = "admin";
       const string password = "bimba";
+      const string domain = "sitecore";
 
-      using (var passwordStorage = new SecureStringPasswordProvider(login, password))
+      using (var passwordStorage = new ScUnsecuredCredentialsProvider(login, password, domain))
       {
         Assert.AreEqual(login, passwordStorage.Username);
         Assert.AreEqual(password, passwordStorage.Password);
@@ -26,8 +27,9 @@
     {
       const string login = "duncan";
       const string password = "There can be only one";
+      const string domain = "sitecore";
 
-      using (var passwordStorage = new SecureStringPasswordProvider(login, password))
+      using (var passwordStorage = new ScUnsecuredCredentialsProvider(login, password, domain))
       {
         Assert.AreEqual(login, passwordStorage.Username);
         Assert.AreEqual(password, passwordStorage.Password);
@@ -47,9 +49,10 @@
     {
       const string login = null;
       const string password = "bimba";
+      const string domain = "sitecore";
 
       Assert.Throws<ArgumentException>(
-        () => new SecureStringPasswordProvider(login, password),
+        () => new ScUnsecuredCredentialsProvider(login, password, domain),
         "Exception for empty login expected");
     }
 
@@ -58,9 +61,10 @@
     {
       const string login = "";
       const string password = "bimba";
+      const string domain = "sitecore";
 
       Assert.Throws<ArgumentException>(
-        () => new SecureStringPasswordProvider(login, password),
+        () => new ScUnsecuredCredentialsProvider(login, password, domain),
         "Exception for empty login expected");
     }
 
@@ -69,8 +73,9 @@
     {
       const string login = "     ";
       const string password = "bimba";
+      const string domain = "sitecore";
 
-      using (var passwordStorage = new SecureStringPasswordProvider(login, password))
+      using (var passwordStorage = new ScUnsecuredCredentialsProvider(login, password, domain))
       {
         Assert.AreEqual(login, passwordStorage.Username);
         Assert.AreEqual(password, passwordStorage.Password);
@@ -83,8 +88,9 @@
     {
       const string login = "ashot";
       const string password = "";
+      const string domain = "sitecore";
 
-      using (var passwordStorage = new SecureStringPasswordProvider(login, password))
+      using (var passwordStorage = new ScUnsecuredCredentialsProvider(login, password, domain))
       {
         Assert.AreEqual(login, passwordStorage.Username);
         Assert.AreEqual(password, passwordStorage.Password);
@@ -97,8 +103,9 @@
     {
       const string login = "arnold";
       const string password = null;
+      const string domain = "sitecore";
 
-      using (var passwordStorage = new SecureStringPasswordProvider(login, password))
+      using (var passwordStorage = new ScUnsecuredCredentialsProvider(login, password, domain))
       {
         Assert.AreEqual(login, passwordStorage.Username);
         Assert.AreEqual(password, passwordStorage.Password);
@@ -112,8 +119,9 @@
     {
       const string login = "whitespace";
       const string password = "   ";
+      const string domain = "sitecore";
 
-      using (var passwordStorage = new SecureStringPasswordProvider(login, password))
+      using (var passwordStorage = new ScUnsecuredCredentialsProvider(login, password, domain))
       {
         Assert.AreEqual(login, passwordStorage.Username);
         Assert.AreEqual(password, passwordStorage.Password);

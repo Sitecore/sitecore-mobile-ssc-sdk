@@ -33,7 +33,6 @@
         var session =
           SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(url)
             .Credentials(this.testData.Users.Admin)
-            .Site("sitecore")
             .BuildReadonlySession()
       )
       {
