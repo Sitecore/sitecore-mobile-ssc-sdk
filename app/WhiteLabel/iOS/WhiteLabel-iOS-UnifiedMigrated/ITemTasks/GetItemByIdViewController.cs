@@ -85,7 +85,7 @@ namespace WhiteLabeliOS
                                              .Build();
 
           ScItemsResponse response = await session.ReadItemAsync(request);
-
+          response = await session.ReadItemAsync(request);
           if (response.Any())
           {
             this.ShowItemsList(response);
@@ -117,7 +117,7 @@ namespace WhiteLabeliOS
       {
         using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
         {
-          var request = ItemSSCRequestBuilder.ReadChildrenRequestWithId (itemIdTextField.Text)
+          var request = ItemSSCRequestBuilder.ReadChildrenRequestWithId(itemIdTextField.Text)
                                              .AddFieldsToRead("bla")
                                              .Build();
 

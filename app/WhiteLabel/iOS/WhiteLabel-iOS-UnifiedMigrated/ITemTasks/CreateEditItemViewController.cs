@@ -52,7 +52,7 @@
         using ( ISitecoreSSCSession session = this.instanceSettings.GetSession() )
         {
           var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.pathField.Text)
-            .ItemTemplatePath("76036f5e-cbce-46d1-af0a-4143f9b557aa")
+            .ItemTemplateId("76036f5e-cbce-46d1-af0a-4143f9b557aa")
             .ItemName(this.nameField.Text)
             .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
             .AddFieldsRawValuesByNameToSet("Text", textField.Text)

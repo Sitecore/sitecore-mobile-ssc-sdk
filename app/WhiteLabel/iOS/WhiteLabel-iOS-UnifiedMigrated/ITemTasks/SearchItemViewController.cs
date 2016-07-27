@@ -53,7 +53,9 @@ namespace WhiteLabeliOS
           this.ShowLoader();
 
           var request = ItemSSCRequestBuilder.SitecoreSearchRequest(queryTextField.Text)
-                                             .AddDescendingFieldsToSort("title")    
+                                             .AddDescendingFieldsToSort("title")  
+                                             .AddAscendingFieldsToSort("title")
+                                             .AddDescendingFieldsToSort("text")
                                              .Build();
 
           ScItemsResponse response = await session.RunSitecoreSearchAsync(request);

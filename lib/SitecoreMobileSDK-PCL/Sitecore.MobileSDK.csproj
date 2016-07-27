@@ -130,7 +130,6 @@
     <Compile Include="Validators\BaseValidator.cs" />
     <Compile Include="Validators\DuplicateEntryValidator.cs" />
     <Compile Include="UrlBuilder\CreateItem\CreateItemParameters.cs" />
-    <Compile Include="CrudTasks\AbstractCreateItemTask.cs" />
     <Compile Include="UserRequest\AbstractGetVersionedItemRequestBuilder.cs" />
     <Compile Include="UrlBuilder\CreateItem\AbstractCreateItemUrlBuilder.cs" />
     <Compile Include="Items\CreateItemByPathParameters.cs" />

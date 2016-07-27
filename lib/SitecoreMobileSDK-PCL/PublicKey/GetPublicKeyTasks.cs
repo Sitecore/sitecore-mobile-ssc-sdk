@@ -15,8 +15,9 @@ namespace Sitecore.MobileSDK.PublicKey
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.SSC;
   using Sitecore.MobileSDK.PasswordProvider.Interface;
+  using Sitecore.MobileSDK.API.Exceptions;
 
-  public class GetPublicKeyTasks : IRestApiCallTasks<ISessionConfig, string, Stream, string>
+  public class GetPublicKeyTasks : IRestApiCallTasks<ISessionConfig, string, string, string>
   {
     #region Private Variables
 
@@ -42,7 +43,7 @@ namespace Sitecore.MobileSDK.PublicKey
       return this.PrepareRequestUrl(request);
     }
 
-    public async Task<Stream> SendRequestForUrlAsync(string requestUrl, CancellationToken cancelToken)
+    public async Task<string> SendRequestForUrlAsync(string requestUrl, CancellationToken cancelToken)
     {
       Debug.WriteLine("REQUEST: " + requestUrl);
 
@@ -57,26 +58,21 @@ namespace Sitecore.MobileSDK.PublicKey
       
       HttpResponseMessage httpResponse = await this.httpClient.PostAsync(requestUrl, stringContent, cancelToken);
 
-      HttpContent responseContent = httpResponse.Content;
+      if (httpResponse.StatusCode != System.Net.HttpStatusCode.OK) {
+        throw new SitecoreMobileSdkException("status code is " + httpResponse.StatusCode.ToString());
+      }
 
-      Stream result = await responseContent.ReadAsStreamAsync();
-      return result;
+      return httpResponse.StatusCode.ToString();
     }
 
-    // disposes httpData
-    public async Task<string> ParseResponseDataAsync(Stream httpData, CancellationToken cancelToken)
+    public async Task<string> ParseResponseDataAsync(string status, CancellationToken cancelToken)
     {
-
-      using (Stream publicKeyStream = httpData)
-      {
         Func<string> syncParsePublicKey = () =>
         {
-          return "OK";
-          //return new PublicKeyXmlParser().Parse(publicKeyStream, cancelToken);
+          return status;
         };
         string result = await Task.Factory.StartNew(syncParsePublicKey, cancelToken);
         return result;
-      }
     }
 
     private string PrepareRequestUrl(ISessionConfig instanceUrl)

@@ -25,10 +25,10 @@
     {      
       if (IsValidSchemeOfInstanceUrl(url)) {
         string lowercaseUrl = url.ToLowerInvariant();
-        if (!lowercaseUrl.StartsWith("https://")) {
-          lowercaseUrl.Insert(5, "s");
+        if (!lowercaseUrl.StartsWith("https://", System.StringComparison.CurrentCulture)) {
+          lowercaseUrl = lowercaseUrl.Insert(4, "s");
         }
-        return url;
+        return lowercaseUrl;
       }
 
       char[] slashes = { '/' };
@@ -43,8 +43,8 @@
     {
       string lowercaseUrl = url.ToLowerInvariant();
 
-      bool isHttps = lowercaseUrl.StartsWith("https://");
-      bool isHttp = lowercaseUrl.StartsWith("http://");
+      bool isHttps = lowercaseUrl.StartsWith("https://", System.StringComparison.CurrentCulture);
+      bool isHttp = lowercaseUrl.StartsWith("http://", System.StringComparison.CurrentCulture);
       bool result = (isHttps || isHttp);
 
       return result;

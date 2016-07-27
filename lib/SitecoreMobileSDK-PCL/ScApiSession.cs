@@ -169,52 +169,55 @@ namespace Sitecore.MobileSDK
 
     #region Encryption
 
-    protected virtual async Task<string> GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken))
+    protected virtual async Task GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken))
     {
-      
-      string url = SessionConfigValidator.AutocompleteInstanceUrlWithHttps(this.Config.InstanceUrl);
-      IEnumerable<Cookie> oldCookies = this.cookies.GetCookies(new Uri(url)).Cast<Cookie>();
-      if (oldCookies.Count() > 0) { 
-        return this.publicCertifiacte;
+      if (this.credentials != null) {
+
+        string url = SessionConfigValidator.AutocompleteInstanceUrl(this.Config.InstanceUrl);
+        IEnumerable<Cookie> prevCookies = this.cookies.GetCookies(new Uri(url)).Cast<Cookie>();
+        bool noCookies = true;
+
+        if (prevCookies.Count() > 0) {
+          noCookies = this.CookiesExpired(prevCookies);
+        }
+
+        if (noCookies) {
+
+          try {
+            var sessionConfigBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.sscGrammar);
+            var taskFlow = new GetPublicKeyTasks(this.credentials, sessionConfigBuilder, this.sscGrammar, this.httpClient);
+
+            await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
+
+          } catch (ObjectDisposedException) {
+            // CancellationToken.ThrowIfCancellationRequested()
+            throw;
+          } catch (OperationCanceledException) {
+            // CancellationToken.ThrowIfCancellationRequested()
+            // and TaskCanceledException
+            throw;
+          } catch (SitecoreMobileSdkException ex) {
+            // throw unwrapped exception as if GetPublicKeyAsync() is an atomic phase
+            throw new RsaHandshakeException("[Sitecore Mobile SDK] ASPXAUTH not received properly", ex.InnerException);
+          } catch (Exception ex) {
+            throw new RsaHandshakeException("[Sitecore Mobile SDK] ASPXAUTH not received properly", ex);
+          }
+
+        }
       }
 
-      try
-      {
-        var sessionConfigBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.sscGrammar);
-        var taskFlow = new GetPublicKeyTasks(this.credentials, sessionConfigBuilder, this.sscGrammar, this.httpClient);
+    }
 
-        string result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
-        this.publicCertifiacte = result;
-
-        ////TODO: @igk debug info remove later
-        //IEnumerable<Cookie> responseCookies = this.cookies.GetCookies(new Uri(this.Config.InstanceUrl)).Cast<Cookie>();
-        //foreach (Cookie cookie in responseCookies) {
-        //  Debug.WriteLine("COOKIE_SET: " + cookie.Name + ": " + cookie.Value);
-        //}
-      }
-      catch (ObjectDisposedException)
-      {
-        // CancellationToken.ThrowIfCancellationRequested()
-        throw;
-      }
-      catch (OperationCanceledException)
-      {
-        // CancellationToken.ThrowIfCancellationRequested()
-        // and TaskCanceledException
-        throw;
-      }
-      catch (SitecoreMobileSdkException ex)
-      {
-        // throw unwrapped exception as if GetPublicKeyAsync() is an atomic phase
-        throw new RsaHandshakeException("[Sitecore Mobile SDK] Public key not received properly", ex.InnerException);
-      }
-      catch (Exception ex)
-      {
-        throw new RsaHandshakeException("[Sitecore Mobile SDK] Public key not received properly", ex);
+    private bool CookiesExpired(IEnumerable<Cookie> cookies)
+    {
+      foreach (Cookie cookie in cookies) {
+        if (cookie.Expired) {
+          return true;
+        }
       }
 
-      return this.publicCertifiacte;
-    } 
+      return false;
+    }
 
     //protected virtual async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync(CancellationToken cancelToken = default(CancellationToken))
     //{
@@ -251,7 +254,7 @@ namespace Sitecore.MobileSDK
     {
       ISitecoreStoredSearchRequest requestCopy = request.DeepCopySitecoreStoredSearchRequest();
 
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
+      await this.GetPublicKeyAsync(cancelToken);
 
       ISitecoreStoredSearchRequest autocompletedRequest = this.requestMerger.FillSitecoreStoredSearchGaps(requestCopy);
 
@@ -265,7 +268,7 @@ namespace Sitecore.MobileSDK
     {
       IReadItemsByIdRequest requestCopy = request.DeepCopyGetItemByIdRequest();
 
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
+      await this.GetPublicKeyAsync(cancelToken);
 
       IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps(requestCopy);
 
@@ -279,7 +282,7 @@ namespace Sitecore.MobileSDK
     {
       ISitecoreSearchRequest requestCopy = request.DeepCopySitecoreSearchRequest();
 
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
+      await this.GetPublicKeyAsync(cancelToken);
 
       ISitecoreSearchRequest autocompletedRequest = this.requestMerger.FillSitecoreSearchGaps(requestCopy);
 
@@ -297,7 +300,7 @@ namespace Sitecore.MobileSDK
     {
       IReadItemsByIdRequest requestCopy = request.DeepCopyGetItemByIdRequest();
 
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
+      await this.GetPublicKeyAsync(cancelToken);
 
       IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps(requestCopy);
 
@@ -311,7 +314,7 @@ namespace Sitecore.MobileSDK
     {
       IReadItemsByIdRequest requestCopy = request.DeepCopyGetItemByIdRequest();
 
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
+      await this.GetPublicKeyAsync(cancelToken);
       IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps(requestCopy);
 
       var urlBuilder = new ItemByIdUrlBuilder(this.restGrammar, this.sscGrammar);
@@ -324,7 +327,7 @@ namespace Sitecore.MobileSDK
     {
       IReadItemsByPathRequest requestCopy = request.DeepCopyGetItemByPathRequest();
 
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
+      await this.GetPublicKeyAsync(cancelToken);
       IReadItemsByPathRequest autocompletedRequest = this.requestMerger.FillReadItemByPathGaps(requestCopy);
 
       var urlBuilder = new ItemByPathUrlBuilder(this.restGrammar, this.sscGrammar);
@@ -368,7 +371,7 @@ namespace Sitecore.MobileSDK
 
     private async Task<Stream> DownloadHashedMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
+      await this.GetPublicKeyAsync(cancelToken);
 
       MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(
         this.restGrammar,
@@ -398,7 +401,7 @@ namespace Sitecore.MobileSDK
     {
       ICreateItemByPathRequest requestCopy = request.DeepCopyCreateItemByPathRequest();
      
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
+      await this.GetPublicKeyAsync(cancelToken);
 
       //TODO: @igk debug info remove later
       IEnumerable<Cookie> responseCookies = this.cookies.GetCookies(new Uri(this.Config.InstanceUrl)).Cast<Cookie>();
@@ -422,7 +425,7 @@ namespace Sitecore.MobileSDK
     {
       IUpdateItemByIdRequest requestCopy = request.DeepCopyUpdateItemByIdRequest();
 
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
+      await this.GetPublicKeyAsync(cancelToken);
 
       IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps(requestCopy);
 
@@ -440,7 +443,7 @@ namespace Sitecore.MobileSDK
     {
       IDeleteItemsByIdRequest requestCopy = request.DeepCopyDeleteItemRequest();
 
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
+      await this.GetPublicKeyAsync(cancelToken);
 
       IDeleteItemsByIdRequest autocompletedRequest = this.requestMerger.FillDeleteItemByIdGaps(requestCopy);
 
@@ -458,7 +461,7 @@ namespace Sitecore.MobileSDK
     {
       var sessionUrlBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.sscGrammar);
 
-      var authResult = await this.GetPublicKeyAsync(cancelToken);
+      await this.GetPublicKeyAsync(cancelToken);
 
       var taskFlow = new AuthenticateTasks(this.restGrammar, this.sscGrammar, sessionUrlBuilder, this.httpClient);
 
@@ -483,9 +486,6 @@ namespace Sitecore.MobileSDK
 
     private readonly IRestServiceGrammar restGrammar = RestServiceGrammar.ItemSSCV2Grammar();
     private readonly ISSCUrlParameters sscGrammar =SSCUrlParameters.ItemSSCV2UrlParameters();
-
-
-    private string publicCertifiacte;
 
     #endregion Private Variables
   }
