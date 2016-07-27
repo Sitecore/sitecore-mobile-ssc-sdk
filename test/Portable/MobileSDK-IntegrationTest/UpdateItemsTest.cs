@@ -165,9 +165,10 @@
       }
       string parentPath = parentItem == null ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(parentPath)
-        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName(itemName)
         .Build();
+      
       var createResponse = await itemSession.CreateItemAsync(request);
 
       Assert.IsTrue(createResponse.Created);

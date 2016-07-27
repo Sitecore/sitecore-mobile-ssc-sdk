@@ -40,10 +40,6 @@
       get;
     }
 
-    DownloadStrategy MediaDownloadStrategy
-    {
-      get;
-    }
   }
 }
 

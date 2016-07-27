@@ -64,7 +64,7 @@
       var expectedItem = this.CreateTestItem("Create by parent path and template Path");
 
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
         .Build();
@@ -81,7 +81,7 @@
       var expectedItem = this.CreateTestItem("Create by parent path and template ID");
 
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.TemplateId)
+        .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
         .Build();
@@ -108,7 +108,7 @@
       const string CreatedTitle = "Created title";
       const string CreatedText = "Created text";
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-         .ItemTemplatePath(testData.Items.Home.Template)
+         .ItemTemplateId(testData.Items.Home.TemplateId)
          .ItemName(expectedItem.DisplayName)
          .Database("master")
          .AddFieldsRawValuesByNameToSet("Title", CreatedTitle)
@@ -137,7 +137,7 @@
       const string CreatedTitle = "ఉక్రెయిన్ కు గ్లోరీ Ruhm für die Ukraine";
       const string CreatedText = "युक्रेन गौरव גלורי לאוקראינה";
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
         .AddFieldsRawValuesByNameToSet("Title", CreatedTitle)
@@ -166,7 +166,7 @@
       const string CreatedTitle = "Existent title";
       const string CreatedTexttt = "Not existent texttt";
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
         .AddFieldsRawValuesByNameToSet("Title", CreatedTitle)
@@ -194,7 +194,7 @@
       const string FieldName = "__Standard values";
       const string FieldValue = "Created standard value 000!! ))";
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
         .AddFieldsRawValuesByNameToSet(FieldName, FieldValue)
@@ -224,7 +224,7 @@
       const string FieldValue = "<div>Welcome to Sitecore!</div><div><br /><a href=\"~/link.aspx?_id=A2EE64D5BD7A4567A27E708440CAA9CD&amp;_z=z\">Accelerometer</a></div>";
 
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.TemplateId)
+        .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
         .AddFieldsRawValuesByNameToSet(FieldName, FieldValue)
@@ -254,7 +254,7 @@
       const string FieldValue = "Duplicate value";
 
       var exception = Assert.Throws<InvalidOperationException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName("Set duplicate fields")
         .AddFieldsRawValuesByNameToSet(FieldName, FieldValue)
         .AddFieldsRawValuesByNameToSet(FieldName, FieldValue));
@@ -268,7 +268,7 @@
       var expectedItem = this.CreateTestItem("Create and get invalid field");
       const string FieldName = "@*<<invalid!`fieldname=)";
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
         .Build();
@@ -283,25 +283,25 @@
     public void TestCreateItemWithEmptyOrNullFieldsReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath("/Sample/Sample Item")
+        .ItemTemplateId("76036F5E-CBCE-46D1-AF0A-4143F9B557AA")
         .ItemName("SomeValidName")
         .AddFieldsRawValuesByNameToSet(null, "somevalue"));
       Assert.IsTrue(exception.Message.Contains("fieldName"));
 
       var exception1 = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath("/Sample/Sample Item")
+        .ItemTemplateId("76036F5E-CBCE-46D1-AF0A-4143F9B557AA")
         .ItemName("SomeValidName")
         .AddFieldsRawValuesByNameToSet("", "somevalue"));
       Assert.AreEqual("CreateItemByIdRequestBuilder.fieldName : The input cannot be empty.", exception1.Message);
 
       var exception2 = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath("/Sample/Sample Item")
+        .ItemTemplateId("76036F5E-CBCE-46D1-AF0A-4143F9B557AA")
         .ItemName("SomeValidName")
         .AddFieldsRawValuesByNameToSet("somekey", null));
       Assert.IsTrue(exception2.Message.Contains("fieldValue"));
 
       var exception3 = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath("/Sample/Sample Item")
+        .ItemTemplateId("76036F5E-CBCE-46D1-AF0A-4143F9B557AA")
         .ItemName("SomeValidName")
         .AddFieldsRawValuesByNameToSet("somekey", ""));
       Assert.AreEqual("CreateItemByIdRequestBuilder.fieldValue : The input cannot be empty.", exception3.Message);
@@ -315,7 +315,7 @@
       var expectedItem = this.CreateTestItem("Create and set invalid field");
       const string FieldName = "@*<<%#==_&@";
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName(expectedItem.DisplayName)
         .Database("master")
         .AddFieldsRawValuesByNameToSet(FieldName, FieldName)
@@ -339,7 +339,7 @@
     public void TestCreateItemByPathWithEmptyNameReturnsException()
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName("")
         .Build());
       Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
@@ -349,7 +349,7 @@
     public void TestCreateItemByPathWithSpacesOnlyInItemName()
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-         .ItemTemplatePath(testData.Items.Home.Template)
+         .ItemTemplateId(testData.Items.Home.TemplateId)
          .ItemName("  ")
          .Build());
       Assert.AreEqual("CreateItemByPathRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
@@ -359,7 +359,7 @@
     public void TestCreateItemByPathWithNullItemNameReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-         .ItemTemplatePath(testData.Items.Home.Template)
+         .ItemTemplateId(testData.Items.Home.TemplateId)
          .ItemName(null)
          .Build());
       Assert.IsTrue(exception.Message.Contains("CreateItemByPathRequestBuilder.ItemName"));
@@ -370,7 +370,7 @@
     {
       const string ItemName = "@*<<%#==_&@";
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName(ItemName)
         .Database("master")
         .Build();
@@ -391,7 +391,7 @@
     {
       const string Template = "@*<<%#==_&@";
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(Template)
+        .ItemTemplateId(Template)
         .ItemName("item with invalid template")
         .Database("master")
         .Build();
@@ -413,7 +413,7 @@
       var anonymousSession = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
         .BuildSession();
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName("item created with anonymous user")
         .Database("master")
         .Build();
@@ -436,7 +436,7 @@
         .Credentials(testData.Users.NoCreateAccess)
         .BuildSession();
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath(testData.Items.Home.Template)
+        .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName("item created with nocreate user")
         .Database("master")
         .Build();
@@ -456,7 +456,7 @@
     public void TestCreateItemByPathWithEmptyTemplateReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-         .ItemTemplatePath("")
+         .ItemTemplateId("")
          .ItemName("Item with empty template")
          .Build());
       Assert.AreEqual("CreateItemByPathRequestBuilder.ItemTemplate : The input cannot be empty.", exception.Message);
@@ -476,7 +476,7 @@
     public void TestCreateItemByPathWithSpacesOnlyInTemplateReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplatePath("   ")
+        .ItemTemplateId("   ")
         .ItemName("Item with empty template")
          .Build());
       Assert.AreEqual("CreateItemByPathRequestBuilder.ItemTemplate : The input cannot be empty.", exception.Message);
@@ -496,7 +496,7 @@
     public void TestCreateItemByPathhWithNullTemplateReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-         .ItemTemplatePath(null)
+         .ItemTemplateId(null)
          .ItemName("Item with empty template")
          .Build());
       Assert.IsTrue(exception.Message.Contains("CreateItemByIdRequestBuilder.ItemTemplate"));
@@ -506,7 +506,7 @@
     public void TestCreateItemByNullPathReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(null)
-         .ItemTemplatePath("Some template")
+         .ItemTemplateId("76036F5E-CBCE-46D1-AF0A-4143F9B557AA")
          .ItemName("Item with null parent path")
          .Build());
       Assert.IsTrue(exception.Message.Contains("CreateItemByPathRequestBuilder.ItemPath"));
@@ -516,7 +516,7 @@
     public void TestCreateItemWithSpacesOnlyInPathReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath("  ")
-        .ItemTemplatePath("Some template")
+        .ItemTemplateId("76036F5E-CBCE-46D1-AF0A-4143F9B557AA")
         .ItemName("Item with empty parent path")
         .Build());
       Assert.AreEqual("CreateItemByPathRequestBuilder.ItemPath : The input cannot be empty.", exception.Message);
@@ -526,7 +526,7 @@
     public void TestCreateItemByPathWithNullDatabaseDoNotReturnsException()
     {
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(testData.Items.Home.Path)
-         .ItemTemplatePath("Some template")
+         .ItemTemplateId("76036F5E-CBCE-46D1-AF0A-4143F9B557AA")
          .ItemName("Item with null db")
          .Database(null)
          .Build();
@@ -537,7 +537,7 @@
     public void TestCreateItemByPathWithEmptyDatabaseDoNotReturnsException()
     {
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(testData.Items.Home.Path)
-         .ItemTemplatePath("Some template")
+         .ItemTemplateId("76036F5E-CBCE-46D1-AF0A-4143F9B557AA")
          .ItemName("Item with empty db")
          .Database("")
          .Build();
@@ -548,7 +548,7 @@
     public void TestCreateItemByPathWithNullLanguageDoNotReturnsException()
     {
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(testData.Items.Home.Path)
-         .ItemTemplatePath("Some template")
+         .ItemTemplateId("76036F5E-CBCE-46D1-AF0A-4143F9B557AA")
          .ItemName("Item with null language")
          .Language(null)
          .Build();
@@ -559,7 +559,7 @@
     public void TestCreateItemByPathWithSpacesOnlyInDatabaseReturnsException()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(testData.Items.Home.Path)
-         .ItemTemplatePath("Some template")
+         .ItemTemplateId("76036F5E-CBCE-46D1-AF0A-4143F9B557AA")
          .ItemName("Item with empty db")
          .Database("   ")
          .Build());
@@ -572,7 +572,7 @@
       {
         DisplayName = name,
         Path = testData.Items.CreateItemsHere.Path + "/" + name,
-        Template = this.testData.Items.Home.Template
+        TemplateId = this.testData.Items.Home.TemplateId
       };
     }
 

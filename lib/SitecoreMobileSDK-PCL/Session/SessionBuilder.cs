@@ -25,8 +25,7 @@
       var mediaSettings = new MediaLibrarySettings(
         optionalMediaRoot,
         optionalMediaExtension,
-        optionalMediaPrefix,
-        this.resizingFlag);
+        optionalMediaPrefix);
 
       var itemSource = new ItemSource(
         this.itemSourceAccumulator.Database,
@@ -221,11 +220,6 @@
       return this;
     }
 
-    public IBaseSessionBuilder MediaResizingStrategy(DownloadStrategy resizingFlag)
-    {
-      this.resizingFlag = resizingFlag;
-      return this;
-    }
     #endregion IAnonymousSessionBuilder
 
     #region State
@@ -235,7 +229,6 @@
     private string mediaRoot;
     private string mediaExtension;
     private string mediaPrefix;
-    DownloadStrategy resizingFlag = DownloadStrategy.Plain;
 
     private IScCredentials credentials = null;
     private ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);

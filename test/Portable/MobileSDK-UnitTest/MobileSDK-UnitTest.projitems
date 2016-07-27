@@ -25,11 +25,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)ItemSourceTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemSourceUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemSSCRequestBuilderTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LoginAndPasswordEncryptionTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PagingRequestBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PagingUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PortablePasswordStorageTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PublicKeyParsingTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ResourseUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigMergerTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigUrlBuilderTest.cs" />

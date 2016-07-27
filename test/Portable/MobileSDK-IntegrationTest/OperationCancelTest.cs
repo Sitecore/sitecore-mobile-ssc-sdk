@@ -42,23 +42,6 @@
       this.mediaSettings = null;
     }
 
-
-    [Test]
-    public void TestCancelExceptionIsNotWrappedForGetPublicKeyRequest()
-    {
-      TestDelegate testAction = async () =>
-      {
-        var cancel = new CancellationTokenSource();
-
-        Task<string> action = this.session.GetPublicKeyAsyncPublic(cancel.Token);
-        cancel.Cancel();
-
-        await action;
-      };
-      Assert.Catch<OperationCanceledException>(testAction);
-    }
-
-
     [Test]
     public void TestCancelExceptionIsNotWrappedForItemByIdRequest()
     {

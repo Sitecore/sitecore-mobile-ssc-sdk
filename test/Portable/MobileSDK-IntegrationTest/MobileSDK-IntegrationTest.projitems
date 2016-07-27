@@ -20,9 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ReadPagedItemsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OperationCancelTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetPublicKeyTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GetMediaItemsWithHashesTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetMediaItemsTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GetItemsWithScopeTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetItemsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetFieldsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemsTest.cs" />

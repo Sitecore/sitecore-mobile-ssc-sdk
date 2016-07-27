@@ -340,24 +340,7 @@ namespace Sitecore.MobileSDK
     {
       IMediaResourceDownloadRequest requestCopy = request.DeepCopyReadMediaRequest();
       IMediaResourceDownloadRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(requestCopy);
-      DownloadStrategy downloadStrategyFromUser = this.mediaSettings.MediaDownloadStrategy;
 
-      if (DownloadStrategy.Plain == downloadStrategyFromUser)
-      {
-        return await this.DownloadPlainMediaResourceAsync(autocompletedRequest, cancelToken);
-      }
-      else if (DownloadStrategy.Hashed == downloadStrategyFromUser)
-      {
-        return await this.DownloadHashedMediaResourceAsync(autocompletedRequest, cancelToken);
-      }
-      else
-      {
-        throw new ArgumentException("Unexpected media download strategy specified");
-      }
-    }
-
-    private async Task<Stream> DownloadPlainMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
       MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(
         this.restGrammar,
         this.sscGrammar,
@@ -367,31 +350,6 @@ namespace Sitecore.MobileSDK
 
       var taskFlow = new GetResourceTask(urlBuilder, this.httpClient);
       return await RestApiCallFlow.LoadResourceFromNetworkFlow(request, taskFlow, cancelToken);
-    }
-
-    private async Task<Stream> DownloadHashedMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      await this.GetPublicKeyAsync(cancelToken);
-
-      MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(
-        this.restGrammar,
-        this.sscGrammar,
-        this.sessionConfig,
-        this.mediaSettings,
-        request.ItemSource);
-
-      var hashUrlGetterFlow = new GetMediaContentHashTask(urlBuilder, this.httpClient);
-      string hashedMediaUrl = await RestApiCallFlow.LoadRequestFromNetworkFlow(request, hashUrlGetterFlow, cancelToken);
-
-      try
-      {
-        Stream result = await this.httpClient.GetStreamAsync(hashedMediaUrl);
-        return result;
-      }
-      catch (Exception ex)
-      {
-        throw new LoadDataFromNetworkException(TaskFlowErrorMessages.NETWORK_EXCEPTION_MESSAGE, ex);
-      }
     }
     #endregion GetItems
 

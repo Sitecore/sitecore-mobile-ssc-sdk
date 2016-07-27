@@ -21,17 +21,17 @@
       this.GetPublicKeyInvocationsCount = 0;
     }
 
-    public async Task<string> GetPublicKeyAsyncPublic(CancellationToken cancelToken = default(CancellationToken))
+    public async Task GetPublicKeyAsyncPublic(CancellationToken cancelToken = default(CancellationToken))
     {
-      return await this.GetPublicKeyAsync(cancelToken);
+      await this.GetPublicKeyAsync(cancelToken);
     }
 
 
 
-    protected override async Task<string> GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken))
+    protected override async Task GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken))
     {
       ++this.GetPublicKeyInvocationsCount;
-      return await base.GetPublicKeyAsync(cancelToken);
+      await base.GetPublicKeyAsync(cancelToken);
     }
 
    

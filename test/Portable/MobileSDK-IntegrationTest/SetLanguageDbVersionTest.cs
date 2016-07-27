@@ -168,7 +168,7 @@
           DisplayName = this.testData.Items.Home.DisplayName,
           Id = this.testData.Items.Home.Id,
           Path = this.testData.Items.Home.Path,
-          Template = "Sitecore Client/Home"
+          TemplateId = this.testData.Items.Home.TemplateId
         };
         testData.AssertItemsAreEqual(expectedItem, resultItem);
         Assert.AreEqual("Welcome to Sitecore", resultItem["Title"].RawValue);

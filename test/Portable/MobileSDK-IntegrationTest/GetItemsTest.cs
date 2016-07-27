@@ -124,7 +124,7 @@
       {
         DisplayName = ItemWithSpacesName,
         Path = ItemWithSpacesPath,
-        Template = testData.Items.Home.Template
+        TemplateId = testData.Items.Home.TemplateId
       };
       testData.AssertItemsAreEqual(expectedItem, response[0]);
     }
@@ -139,7 +139,7 @@
       {
         DisplayName = ItemWithSpacesName,
         Path = ItemWithSpacesPath,
-        Template = testData.Items.Home.Template
+        TemplateId = testData.Items.Home.TemplateId
       };
       testData.AssertItemsAreEqual(expectedItem, response[0]);
 
@@ -163,7 +163,7 @@
       {
         DisplayName = "宇都宮",
         Path = ItemInterationalPath,
-        Template = testData.Items.Home.Template
+        TemplateId = testData.Items.Home.TemplateId
       };
       testData.AssertItemsAreEqual(expectedItem, response[0]);
     }
@@ -176,7 +176,7 @@
       var expectedItem = new TestEnvironment.Item {
         DisplayName = "ではまた明日",
         Path = ItemInterationalPath,
-        Template = testData.Items.Home.Template
+        TemplateId = testData.Items.Home.TemplateId
       };
       testData.AssertItemsAreEqual(expectedItem, response[0]);
     }

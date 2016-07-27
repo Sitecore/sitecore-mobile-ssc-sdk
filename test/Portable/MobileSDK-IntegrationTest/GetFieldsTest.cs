@@ -235,42 +235,6 @@
     }
 
     [Test]
-    public async void TestGetSeveralItemsByQueryWithContentFields()
-    {
-      var request = ItemSSCRequestBuilder.ReadChildrenRequestWithId(testData.Items.Home.Id)
-        .Build();
-      var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
-
-      testData.AssertItemsCount(4, response);
-
-      var expectedAllowedParentItem = new TestEnvironment.Item
-      {
-        DisplayName = "Allowed_Parent",
-        Template = "Sample/Sample Item"
-      };
-      ISitecoreItem actualAllowedParentItem = response[0];
-      testData.AssertItemsAreEqual(expectedAllowedParentItem, actualAllowedParentItem);
-
-      Assert.AreEqual(2, actualAllowedParentItem.FieldsCount);
-      Assert.AreEqual("Allowed_Parent", actualAllowedParentItem["Title"].RawValue);
-
-
-      var expectedTestFieldsItem = new TestEnvironment.Item
-      {
-        DisplayName = "Test Fields",
-        Template = "Test Templates/Sample fields"
-      };
-
-      ISitecoreItem actualTestFieldsItem = response[3];
-      testData.AssertItemsAreEqual(expectedTestFieldsItem, actualTestFieldsItem);
-
-      Assert.AreEqual(19, actualTestFieldsItem.FieldsCount);
-      Assert.AreEqual("Text", actualTestFieldsItem["Text"].RawValue);
-      Assert.AreEqual("1", actualTestFieldsItem["CheckBoxField"].RawValue);
-      Assert.AreEqual("Normal Text", actualTestFieldsItem["Normal Text"].RawValue);
-    }
-
-    [Test]
     public async void TestGetItemByIdWithAllFieldsWithoutReadAccessToSomeFields()
     {
       var sessionCreatorexUser =
@@ -296,7 +260,7 @@
       var expectedItemTestTemplate = new TestEnvironment.Item
       {
         DisplayName = "Test Fields",
-        Template = "Test Templates/Sample fields"
+        TemplateId = "5FC0D542-E27B-4E55-A1F0-702E959DCD6C"
       };
       testData.AssertItemsAreEqual(expectedItemTestTemplate, response[0]);
       ISitecoreItem item = response[0];

@@ -268,30 +268,7 @@
     }
     #endregion Validate Null
 
-    [Test]
-    public void TestHashingFlagCanBeSet()
-    {
-      using (var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
-        .Credentials(this.adminCredentials)
-        .MediaResizingStrategy(DownloadStrategy.Plain)
-        .BuildSession())
-      {
-        Assert.IsNotNull(session);
-        Assert.IsNotNull(session.MediaLibrarySettings);
-        Assert.AreEqual(DownloadStrategy.Plain, session.MediaLibrarySettings.MediaDownloadStrategy);
-      }
-
-
-      using (var otherSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
-        .Credentials(this.adminCredentials)
-        .MediaResizingStrategy(DownloadStrategy.Hashed)
-        .BuildSession())
-      {
-        Assert.IsNotNull(otherSession);
-        Assert.IsNotNull(otherSession.MediaLibrarySettings);
-        Assert.AreEqual(DownloadStrategy.Hashed, otherSession.MediaLibrarySettings.MediaDownloadStrategy);
-      }
-    }
+   
   }
 }
 

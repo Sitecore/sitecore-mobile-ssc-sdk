@@ -25,15 +25,9 @@
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
-      if (this.testData.IsMediaHashesSupported)
-      {
-        Assert.Ignore();
-      }
-
       this.session =
         SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin)
-          .MediaResizingStrategy(DownloadStrategy.Plain)
           .BuildReadonlySession();
     }
 
