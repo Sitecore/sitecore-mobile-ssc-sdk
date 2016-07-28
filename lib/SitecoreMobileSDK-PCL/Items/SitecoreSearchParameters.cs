@@ -13,6 +13,7 @@
       IQueryParameters queryParameters, 
       IPagingParameters pagingSettings,
       ISortParameters sortParameters,
+      bool includeStandardFields,
       string term)
     {
       this.Term = term;
@@ -21,6 +22,8 @@
       this.QueryParameters = queryParameters;
       this.PagingSettings = pagingSettings;
       this.SortParameters = sortParameters;
+      this.IcludeStanderdTemplateFields = includeStandardFields;
+
     }
 
     public virtual ISitecoreSearchRequest DeepCopySitecoreSearchRequest()
@@ -50,7 +53,7 @@
         pagingSettings = this.PagingSettings.PagingParametersCopy();
       }
 
-      return new SitecoreSearchParameters(connection, itemSrc, payload, pagingSettings, this.SortParameters, this.Term);
+      return new SitecoreSearchParameters(connection, itemSrc, payload, pagingSettings, this.SortParameters, this.IcludeStanderdTemplateFields, this.Term);
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()

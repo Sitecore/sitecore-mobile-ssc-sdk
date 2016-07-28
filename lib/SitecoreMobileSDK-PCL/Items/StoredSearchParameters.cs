@@ -13,6 +13,7 @@
       IQueryParameters queryParameters, 
       IPagingParameters pagingSettings,
       string itemId,
+      bool includeStandardFields,
       string term)
     {
       this.SessionSettings = sessionSettings;
@@ -21,6 +22,7 @@
       this.QueryParameters = queryParameters;
       this.PagingSettings = pagingSettings;
       this.Term = term;
+      this.IcludeStanderdTemplateFields = includeStandardFields;
     }
 
     public virtual ISitecoreStoredSearchRequest DeepCopySitecoreStoredSearchRequest()
@@ -50,7 +52,7 @@
         pagingSettings = this.PagingSettings.PagingParametersCopy();
       }
 
-      return new StoredSearchParameters(connection, itemSrc, payload, pagingSettings, this.ItemId, this.Term);
+      return new StoredSearchParameters(connection, itemSrc, payload, pagingSettings, this.ItemId, this.IcludeStanderdTemplateFields, this.Term);
     }
 
     public virtual ISitecoreSearchRequest DeepCopySitecoreSearchRequest()

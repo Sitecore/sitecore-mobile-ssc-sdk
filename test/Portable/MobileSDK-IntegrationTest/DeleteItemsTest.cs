@@ -79,11 +79,8 @@
       await this.RemoveAll();
 
       const string Db = "web";
-      var itemSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
-        .Credentials(testData.Users.Admin)
-        .DefaultDatabase(Db)
-        .BuildSession();
-      ISitecoreItem item = await this.CreateItem("Item in web", null, itemSession);
+
+      ISitecoreItem item = await this.CreateItem(Db, "Item in web", null);
 
       var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(item.Id)
         .Database(Db)
@@ -98,8 +95,8 @@
     {
       await this.RemoveAll();
 
-      ISitecoreItem parentItem = await this.CreateItem("Parent item");
-      ISitecoreItem childItem = await this.CreateItem("Child item", parentItem);
+      ISitecoreItem parentItem = await this.CreateItem("master", "Parent item");
+      ISitecoreItem childItem = await this.CreateItem("master", "Child item", parentItem);
 
       var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(childItem.Id)
         .Build();
@@ -119,20 +116,18 @@
         .DefaultDatabase("master")
         .BuildSession();
 
-      ISitecoreItem item = await this.CreateItem("Item to delete without delete access");
+      ISitecoreItem item = await this.CreateItem("master", "Item to delete without delete access");
 
       var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(item.Id)
         .Build();
 
-      TestDelegate testCode = async () =>
-      {
-        var task = noAccessSession.DeleteItemAsync(request);
-        await task;
-      };
-      Exception exception = Assert.Throws<ParserException>(testCode);
-      Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("DeleteItem - Delete right required"));
+ 
+      var result = await noAccessSession.DeleteItemAsync(request);
+
+      Console.WriteLine(result.StatusCode.ToString());
+
+      Assert.IsTrue(result.StatusCode == 500);
+      Assert.IsFalse(result.Deleted);
 
       await session.DeleteItemAsync(request);
     }
@@ -154,7 +149,7 @@
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.DeleteItemRequestWithId("invalid id")
         .Build());
-      Assert.AreEqual("DeleteItemByIdRequestBuilder.ItemId : Item id must have curly braces '{}'", exception.Message);
+      Assert.AreEqual("DeleteItemByIdRequestBuilder.ItemId : wrong item id", exception.Message);
     }
 
   
@@ -184,27 +179,33 @@
       Assert.AreEqual("DeleteItemByIdRequestBuilder.ItemId : The input cannot be empty.", exception.Message);
     }
 
-    private async Task<ISitecoreItem> CreateItem(string itemName, ISitecoreItem parentItem = null, ISitecoreSSCSession itemSession = null)
+    private async Task<ISitecoreItem> CreateItem(string database, string itemName, ISitecoreItem parentItem = null)
     {
-      if (itemSession == null)
+      using (var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
+             .Credentials(testData.Users.Admin)
+             .DefaultDatabase("master")
+             .BuildSession()) 
       {
-        itemSession = this.session;
+        string parentPath = (parentItem == null) ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
+
+        var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(parentPath)
+          .ItemTemplateId(testData.Items.Home.TemplateId)
+          .ItemName(itemName)
+          .Database(database)
+          .Build();
+
+        var createResponse = await session.CreateItemAsync(request);
+
+        Assert.IsTrue(createResponse.Created);
+
+        var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(parentPath + "/" + itemName)
+                                               .Database(database)
+                                               .Build();
+
+        var readResponse = await session.ReadItemAsync(readRequest);
+
+        return readResponse[0];
       }
-      string parentPath = (parentItem == null) ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
-      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(parentPath)
-        .ItemTemplateId(testData.Items.Home.TemplateId)
-        .ItemName(itemName)
-        .Build();
-      var createResponse = await itemSession.CreateItemAsync(request);
-
-     Assert.IsTrue(createResponse.Created);
-
-      var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + itemName)
-                                         .Build();
-
-      var readResponse = await itemSession.ReadItemAsync(readRequest);
-
-      return readResponse[0];
     }
 
     private async Task DeleteAllItems(string database)

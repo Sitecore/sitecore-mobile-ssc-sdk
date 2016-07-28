@@ -130,7 +130,7 @@
     }
 
     [Test]
-    public async void TestCreateItemByIdWithInternationalNameAndFields()
+    public async void TestCreateItemByPathWithInternationalNameAndFields()
     {
       await this.RemoveAll();
       var expectedItem = this.CreateTestItem("International Слава Україні ウクライナへの栄光 عالمي");
@@ -204,6 +204,7 @@
 
       var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
                                         .Database("master")
+                                        .IcludeStanderdTemplateFields(true)
                                         .Build();
 
       var readResponse = await session.ReadItemAsync(readRequest);
@@ -211,12 +212,11 @@
       var resultItem = this.CheckCreatedItem(readResponse, expectedItem);
       Assert.AreEqual(FieldValue, resultItem[FieldName].RawValue);
 
-
     }
 
     //Item Web API issue #451738
     [Test]
-    public async void TestCreateItemByIdAndSetHtmlFieldValue()
+    public async void TestCreateItemByPathAndSetHtmlFieldValue()
     {
       await this.RemoveAll();
       var expectedItem = this.CreateTestItem("Set HTML in field");
@@ -262,24 +262,6 @@
     }
 
     [Test]
-    public async void TestCreateItemByPathAndGetInvalidEmptyAndNullFields()
-    {
-      await this.RemoveAll();
-      var expectedItem = this.CreateTestItem("Create and get invalid field");
-      const string FieldName = "@*<<invalid!`fieldname=)";
-      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplateId(testData.Items.Home.TemplateId)
-        .ItemName(expectedItem.DisplayName)
-        .Database("master")
-        .Build();
-
-      var createResponse = await session.CreateItemAsync(request);
-
-      Assert.IsFalse(createResponse.Created);
-
-    }
-
-    [Test]
     public void TestCreateItemWithEmptyOrNullFieldsReturnsException()
     {
       var exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
@@ -292,7 +274,7 @@
         .ItemTemplateId("76036F5E-CBCE-46D1-AF0A-4143F9B557AA")
         .ItemName("SomeValidName")
         .AddFieldsRawValuesByNameToSet("", "somevalue"));
-      Assert.AreEqual("CreateItemByIdRequestBuilder.fieldName : The input cannot be empty.", exception1.Message);
+      Assert.AreEqual("CreateItemByPathRequestBuilder.fieldName : The input cannot be empty.", exception1.Message);
 
       var exception2 = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplateId("76036F5E-CBCE-46D1-AF0A-4143F9B557AA")
@@ -304,7 +286,7 @@
         .ItemTemplateId("76036F5E-CBCE-46D1-AF0A-4143F9B557AA")
         .ItemName("SomeValidName")
         .AddFieldsRawValuesByNameToSet("somekey", ""));
-      Assert.AreEqual("CreateItemByIdRequestBuilder.fieldValue : The input cannot be empty.", exception3.Message);
+      Assert.AreEqual("CreateItemByPathRequestBuilder.fieldValue : The input cannot be empty.", exception3.Message);
     }
 
 
@@ -342,7 +324,7 @@
         .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName("")
         .Build());
-      Assert.AreEqual("CreateItemByIdRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
+      Assert.AreEqual("CreateItemByPathRequestBuilder.ItemName : The input cannot be empty.", exception.Message);
     }
 
     [Test]
@@ -366,7 +348,7 @@
     }
 
     [Test]
-    public void TestCreateItemByIdWithInvalidItemNameReturnsException()
+    public async void TestCreateItemByPathWithInvalidItemNameReturnsE()
     {
       const string ItemName = "@*<<%#==_&@";
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
@@ -375,62 +357,32 @@
         .Database("master")
         .Build();
 
-      TestDelegate testCode = async () =>
-      {
-        var task = session.CreateItemAsync(request);
-        await task;
-      };
-      var exception = Assert.Throws<ParserException>(testCode);
-      Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.AreEqual("An item name cannot contain any of the following characters: \\/:?\"<>|[] (controlled by the setting InvalidItemNameChars)", exception.InnerException.Message);
+      var result = await session.CreateItemAsync(request);
+    
+      Assert.IsTrue(result.StatusCode == 500);
+      Assert.IsFalse(result.Created);
     }
 
     [Test]
-    public void TestCreateItemByPathWithInvalidItemTemplateReturnsException()
-    {
-      const string Template = "@*<<%#==_&@";
-      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-        .ItemTemplateId(Template)
-        .ItemName("item with invalid template")
-        .Database("master")
-        .Build();
-
-      TestDelegate testCode = async () =>
-      {
-        var task = session.CreateItemAsync(request);
-        await task;
-      };
-      var exception = Assert.Throws<ParserException>(testCode);
-      Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.AreEqual("Template item not found.", exception.InnerException.Message);
-    }
-
-    [Test]
-    public void TestCreateItemByPathWithAnonymousUserReturnsException()
+    public async void TestCreateItemByPathWithAnonymousUserReturnsException()
     {
       var anonymousSession = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
         .BuildSession();
+      
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName("item created with anonymous user")
         .Database("master")
         .Build();
 
-      TestDelegate testCode = async () =>
-      {
-        var task = anonymousSession.CreateItemAsync(request);
-        await task;
-      };
-      var exception = Assert.Throws<ParserException>(testCode);
-      Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.AreEqual("Access to site is not granted.", exception.InnerException.Message);
+      var result = await anonymousSession.CreateItemAsync(request);
+
+      Assert.IsTrue(result.StatusCode == 500);
+      Assert.IsFalse(result.Created);
     }
 
     [Test]
-    public void TestCreateItemByIdWithUserWithoutCreateAccessReturnsException()
+    public async void TestCreateItemByPathWithUserWithoutCreateAccessReturnsException()
     {
       var anonymousSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.NoCreateAccess)
@@ -441,15 +393,10 @@
         .Database("master")
         .Build();
 
-      TestDelegate testCode = async () =>
-      {
-        var task = anonymousSession.CreateItemAsync(request);
-        await task;
-      };
-      Exception exception = Assert.Throws<ParserException>(testCode);
-      Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-      Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
-      Assert.True(exception.InnerException.Message.Contains("AddFromTemplate - Add access required"));
+      var result = await anonymousSession.CreateItemAsync(request);
+
+      Assert.IsTrue(result.StatusCode == 500);
+      Assert.IsFalse(result.Created);
     }
 
     [Test]
@@ -495,11 +442,13 @@
     [Test]
     public void TestCreateItemByPathhWithNullTemplateReturnsException()
     {
-      Exception exception = Assert.Throws<ArgumentNullException>(() => ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
-         .ItemTemplateId(null)
-         .ItemName("Item with empty template")
-         .Build());
-      Assert.IsTrue(exception.Message.Contains("CreateItemByIdRequestBuilder.ItemTemplate"));
+      Exception exception = Assert.Throws<ArgumentNullException>(() =>
+                              ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
+                                                    .ItemTemplateId(null)
+                                                    .ItemName("Item with empty template")
+                                                    .Build());
+      
+      Assert.IsTrue(exception.Message.Contains("CreateItemByPathRequestBuilder.ItemTemplate"));
     }
 
     [Test]

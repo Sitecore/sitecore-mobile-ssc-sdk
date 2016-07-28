@@ -361,12 +361,6 @@ namespace Sitecore.MobileSDK
      
       await this.GetPublicKeyAsync(cancelToken);
 
-      //TODO: @igk debug info remove later
-      IEnumerable<Cookie> responseCookies = this.cookies.GetCookies(new Uri(this.Config.InstanceUrl)).Cast<Cookie>();
-      foreach (Cookie cookie in responseCookies) {
-        Debug.WriteLine("COOKIE_SET: " + cookie.Name + ": " + cookie.Value);
-      }
-
       ICreateItemByPathRequest autocompletedRequest = this.requestMerger.FillCreateItemByPathGaps(requestCopy);
 
       var urlBuilder = new CreateItemByPathUrlBuilder(this.restGrammar, this.sscGrammar);

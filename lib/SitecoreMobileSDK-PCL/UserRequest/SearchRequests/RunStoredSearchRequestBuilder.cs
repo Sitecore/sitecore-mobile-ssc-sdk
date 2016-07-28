@@ -27,6 +27,7 @@ namespace Sitecore.MobileSDK.UserRequest.SearchRequest
         this.queryParameters, 
         pagingSettings,
         this.itemId,
+        this.icludeStanderdTemplateFields,
         this.term);
 
       return result;

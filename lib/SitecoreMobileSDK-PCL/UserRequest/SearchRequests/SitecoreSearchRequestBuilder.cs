@@ -26,6 +26,7 @@ namespace Sitecore.MobileSDK
         this.queryParameters, 
         pagingSettings,
         this.sortParameters,
+        this.icludeStanderdTemplateFields,
         this.term);
 
       return result;

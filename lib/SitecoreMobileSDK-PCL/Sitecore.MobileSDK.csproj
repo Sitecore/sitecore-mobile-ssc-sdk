@@ -113,7 +113,6 @@
     <Compile Include="UserRequest\DeleteRequest\AbstractDeleteItemRequestBuilder.cs" />
     <Compile Include="UserRequest\DeleteRequest\DeleteItemByIdRequestBuilder.cs" />
     <Compile Include="Utils\UrlBuilderUtils.cs" />
-    <Compile Include="Items\ReadItemByQueryParameters.cs" />
     <Compile Include="Items\ReadItemsByIdParameters.cs" />
     <Compile Include="UserRequest\UserRequestMerger.cs" />
     <Compile Include="UserRequest\ItemSourceFieldMerger.cs" />
@@ -168,7 +167,6 @@
     <Compile Include="API\Request\Template\ISetNewItemNameBuilder.cs" />
     <Compile Include="API\Request\IMediaResourceDownloadRequest.cs" />
     <Compile Include="API\Request\IGetRenderingHtmlRequest.cs" />
-    <Compile Include="Items\ReadRenderingHTMLParameters.cs" />
     <Compile Include="API\Request\IRenderingHtmlRequestParametersBuilder.cs" />
     <Compile Include="Items\MediaResourceDownloadParameters.cs" />
     <Compile Include="API\Request\IGetMediaItemRequestParametersBuilder.cs" />

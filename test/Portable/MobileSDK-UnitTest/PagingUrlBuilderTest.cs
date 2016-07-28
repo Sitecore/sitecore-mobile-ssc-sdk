@@ -104,7 +104,7 @@
     public void TestValidRequestWithPath()
     {
       IPagingParameters paging = new MutablePagingParameters(3, 5);
-      var request = new ReadItemByPathParameters(this.sessionConfig, this.defaultSource, null, paging, "/sitecore/content");
+      var request = new ReadItemByPathParameters(this.sessionConfig, this.defaultSource, null, paging, true, "/sitecore/content");
 
       string result = this.builderForPath.GetUrlForRequest(request);
       string expected = "http://tumba.yumba/-/item/v1%2fsitecore%2fcontent?page=3&pageSize=5";
@@ -116,7 +116,7 @@
     public void TestValidRequestWithPathForShellSite()
     {
       IPagingParameters paging = new MutablePagingParameters(1, 10);
-      var request = new ReadItemByPathParameters(this.sitecoreShellConfig, this.defaultSource, null, paging, "/x/y/z");
+      var request = new ReadItemByPathParameters(this.sitecoreShellConfig, this.defaultSource, null, paging, true, "/x/y/z");
 
       string result = this.builderForPath.GetUrlForRequest(request);
       string expected = "http://trololo.net/-/item/v234%2fsitecore%2fshell%2fx%2fy%2fz?page=1&pageSize=10";
@@ -128,7 +128,7 @@
     public void TestPagingCanBeOmittedForPath()
     {
       IPagingParameters paging = null;
-      var request = new ReadItemByPathParameters(this.sessionConfig, this.defaultSource, null, paging, "/root");
+      var request = new ReadItemByPathParameters(this.sessionConfig, this.defaultSource, null, paging, true, "/root");
 
       string result = this.builderForPath.GetUrlForRequest(request);
       string expected = "http://tumba.yumba/-/item/v1%2froot";
@@ -142,7 +142,7 @@
     public void TestNegativePageNumberIsNotAllowed()
     {
       IPagingParameters paging = new MutablePagingParameters(-1, 5);
-      var request = new ReadItemByPathParameters(this.sessionConfig, this.defaultSource, null, paging, "/sitecore/content");
+      var request = new ReadItemByPathParameters(this.sessionConfig, this.defaultSource, null, paging, true, "/sitecore/content");
 
       Assert.Throws<ArgumentException>(() => this.builderForPath.GetUrlForRequest(request));
     }

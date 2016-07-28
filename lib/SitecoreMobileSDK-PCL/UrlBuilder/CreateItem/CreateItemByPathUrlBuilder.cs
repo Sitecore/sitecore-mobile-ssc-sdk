@@ -23,6 +23,12 @@
 
       string result = hostUrl + escapedPath;
 
+      string parameters = this.GetParametersString(request);
+
+      if (!string.IsNullOrEmpty(parameters)) {
+        result += this.RestGrammar.HostAndArgsSeparator + parameters;
+      }
+
       return result.ToLowerInvariant();
     }
 

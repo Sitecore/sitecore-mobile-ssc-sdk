@@ -18,20 +18,6 @@ namespace Sitecore.MobileSDK.UserRequest
       this.SessionConfigMerger = new SessionConfigMerger(defaultSessionConfig);
     }
 
-    public IGetRenderingHtmlRequest FillGetRenderingHtmlGaps(IGetRenderingHtmlRequest userRequest)
-    {
-      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
-      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
-
-      return new ReadRenderingHtmlParameters(
-        mergedSessionConfig, 
-        mergedSource, 
-        userRequest.ParametersValuesByName,
-        userRequest.SourceId, 
-        userRequest.RenderingId
-      );
-    }
-
     public IReadItemsByIdRequest FillReadItemByIdGaps(IReadItemsByIdRequest userRequest)
     {
       IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
@@ -59,6 +45,7 @@ namespace Sitecore.MobileSDK.UserRequest
         userRequest.QueryParameters, 
         pagingSettings,
         userRequest.ItemId,
+        userRequest.IcludeStanderdTemplateFields,
         userRequest.Term);
     }
 
@@ -74,6 +61,7 @@ namespace Sitecore.MobileSDK.UserRequest
         userRequest.QueryParameters, 
         pagingSettings, 
         userRequest.SortParameters,
+        userRequest.IcludeStanderdTemplateFields,
         userRequest.Term);
     }
 
@@ -88,21 +76,8 @@ namespace Sitecore.MobileSDK.UserRequest
         mergedSource, 
         userRequest.QueryParameters, 
         pagingSettings,
+        userRequest.IcludeStanderdTemplateFields,
         userRequest.ItemPath);
-    }
-
-    public IReadItemsByQueryRequest FillReadItemByQueryGaps(IReadItemsByQueryRequest userRequest)
-    {
-      IItemSource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.ItemSource);
-      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
-
-      IPagingParameters pagingSettings = userRequest.PagingSettings;
-      return new ReadItemByQueryParameters(
-        mergedSessionConfig, 
-        mergedSource, 
-        userRequest.QueryParameters, 
-        pagingSettings,
-        userRequest.SitecoreQuery);
     }
 
     public IMediaResourceDownloadRequest FillReadMediaItemGaps(IMediaResourceDownloadRequest userRequest)

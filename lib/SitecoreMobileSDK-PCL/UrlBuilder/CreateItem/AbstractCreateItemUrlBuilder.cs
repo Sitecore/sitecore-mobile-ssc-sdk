@@ -40,33 +40,25 @@
       return hostUrl;
     }
 
+    protected string GetParametersString(TRequest request)
+    {
+      var parametersString = "";
+
+      var database = request.ItemSource.Database;
+
+      if (!string.IsNullOrEmpty(database)) {
+        if (!string.IsNullOrEmpty(parametersString)) {
+          parametersString += this.RestGrammar.FieldSeparator;
+        }
+        parametersString += this.SSCGrammar.DatabaseParameterName + this.RestGrammar.KeyValuePairSeparator
+          + database;
+      }
+      return parametersString;
+    }
+
     public abstract void ValidateSpecificPart(TRequest request);
 
-//    //TODO: IGK probable we do not need this class at all for now
-//    protected override string GetSpecificPartForRequest(TRequest request)
-//    {
-//      return "";
 
-////      string escapedTemplate = UrlBuilderUtils.EscapeDataString(request.ItemTemplateId).ToLowerInvariant();
-////      string escapedName = UrlBuilderUtils.EscapeDataString(request.ItemName);
-////
-////      string result =
-////        this.sscGrammar.TemplateParameterName
-////        + this.restGrammar.KeyValuePairSeparator
-////        + escapedTemplate;
-////
-////
-////      if (!string.IsNullOrEmpty(escapedName))
-////      {
-////        result = result
-////          + this.restGrammar.FieldSeparator
-////          + this.sscGrammar.ItemNameParameterName
-////          + this.restGrammar.KeyValuePairSeparator
-////          + escapedName;
-////      }
-////
-////      return result;
-//    }
   }
 }
 

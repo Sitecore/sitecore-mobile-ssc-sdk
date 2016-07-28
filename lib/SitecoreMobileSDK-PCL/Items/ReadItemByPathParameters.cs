@@ -12,6 +12,7 @@
       IItemSource itemSource,
       IQueryParameters queryParameters,
       IPagingParameters pagingSettings,
+      bool includeStandardFields,
       string itemPath)
     {
       this.SessionSettings = sessionSettings;
@@ -19,6 +20,7 @@
       this.ItemPath = itemPath;
       this.QueryParameters = queryParameters;
       this.PagingSettings = pagingSettings;
+      this.IcludeStanderdTemplateFields = includeStandardFields;
     }
 
     public virtual IReadItemsByPathRequest DeepCopyGetItemByPathRequest()
@@ -49,7 +51,7 @@
       }
 
 
-      return new ReadItemByPathParameters(connection, itemSrc, payload, pagingSettings, this.ItemPath);
+      return new ReadItemByPathParameters(connection, itemSrc, payload, pagingSettings, this.IcludeStanderdTemplateFields, this.ItemPath);
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
