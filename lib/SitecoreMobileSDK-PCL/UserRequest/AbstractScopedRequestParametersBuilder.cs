@@ -37,15 +37,15 @@ namespace Sitecore.MobileSDK.UserRequest
       }
     }
 
-    protected bool resultIcludeStanderdTemplateFields {
+    protected bool resultIncludeStanderdTemplateFields {
       get {
         return this.icludeStanderdTemplateFields;
       }
     }
 
-    public IScopedRequestParametersBuilder<T> IcludeStanderdTemplateFields(bool include)
+    public IScopedRequestParametersBuilder<T> IncludeStanderdTemplateFields(bool include)
     {
-      return (IScopedRequestParametersBuilder<T>)base.IcludeStanderdTemplateFields(include);
+      return (IScopedRequestParametersBuilder<T>)base.IncludeStanderdTemplateFields(include);
     }
 
     public IScopedRequestParametersBuilder<T> Database(string sitecoreDatabase)

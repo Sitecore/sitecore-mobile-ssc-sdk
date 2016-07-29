@@ -339,6 +339,9 @@ namespace Sitecore.MobileSDK
     public async Task<Stream> DownloadMediaResourceAsync(IMediaResourceDownloadRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       IMediaResourceDownloadRequest requestCopy = request.DeepCopyReadMediaRequest();
+
+      await this.GetPublicKeyAsync(cancelToken);
+
       IMediaResourceDownloadRequest autocompletedRequest = this.requestMerger.FillReadMediaItemGaps(requestCopy);
 
       MediaItemUrlBuilder urlBuilder = new MediaItemUrlBuilder(

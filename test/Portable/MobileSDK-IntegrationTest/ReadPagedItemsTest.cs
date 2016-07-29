@@ -46,7 +46,6 @@
 
       Assert.IsNotNull(response);
       Assert.AreEqual(2, response.ResultCount);
-      Assert.AreEqual(8, response.TotalCount);
     }
 
     [Test]
@@ -61,7 +60,6 @@
 
       Assert.IsNotNull(response);
       Assert.AreEqual(0, response.ResultCount);
-      Assert.AreEqual(4, response.TotalCount);
     }
 
     [Test]

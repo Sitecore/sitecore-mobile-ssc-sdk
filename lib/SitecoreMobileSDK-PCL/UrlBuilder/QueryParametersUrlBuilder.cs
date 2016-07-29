@@ -64,15 +64,14 @@
 
       Func<string, string> fieldTransformerFunc = (currentField) =>
       {
-        string escapedField = UrlBuilderUtils.EscapeDataString(currentField);
-        return restGrammar.ItemFieldSeparator + escapedField;
+        return restGrammar.ItemFieldSeparator + currentField;
       };
       var fieldsWithSeparators = fields.Select(fieldTransformerFunc);
 
       string strFieldsList = string.Concat(fieldsWithSeparators);
       string strFieldsListWithoutLeadingSeparator = strFieldsList.Remove(0, 1);
 
-      result += strFieldsListWithoutLeadingSeparator;
+      result += UrlBuilderUtils.EscapeDataString(strFieldsListWithoutLeadingSeparator);
 
       return result;
     }

@@ -4,6 +4,7 @@
   using System.Threading.Tasks;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Exceptions;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Session;
 
@@ -83,26 +84,23 @@
     }
 
     [Test]
-    public async void TestGetItemByInvalidId()
-    {
-      const string ItemInvalidId = "{4%75_B3E2 D050FA|cF4E1}";
-      var response = await GetItemById(ItemInvalidId);
-      testData.AssertItemsCount(0, response);
-    }
-
-    [Test]
-    public async void TestGetItemByNotExistentId()
+    public void TestGetItemByNotExistentId()
     {
       const string NotExistentId = "{3D6658D8-QQQQ-QQQQ-B3E2-D050FABCF4E1}";
-      var response = await GetItemById(NotExistentId);
-      testData.AssertItemsCount(0, response);
+
+      TestDelegate testCode = async () => {
+        await GetItemById(NotExistentId);
+      };
+
+      var exception = Assert.Throws<ParserException>(testCode);
+      Assert.IsTrue(exception.Message.Contains("unexpected format"));
     }
 
     [Test]
     public void TestGetItemByIdWithPathInParamsReturnsError()
     {
       Exception exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Path).Build());
-      Assert.AreEqual("ReadItemByIdRequestBuilder.ItemId : Item id must have curly braces '{}'", exception.Message);
+      Assert.AreEqual("ReadItemByIdRequestBuilder.ItemId : wrong item id", exception.Message);
     }
 
     [Test]
@@ -146,11 +144,16 @@
     }
 
     [Test]
-    public async void TestGetItemByNotExistentPath()
+    public void TestGetItemByNotExistentPath()
     {
       const string PathNotExistent = "/not/existent/path";
-      var response = await GetItemByPath(PathNotExistent);
-      testData.AssertItemsCount(0, response);
+
+      TestDelegate testCode = async () => {
+        await GetItemByPath(PathNotExistent);
+      };
+
+      var exception = Assert.Throws<ParserException>(testCode);
+      Assert.IsTrue(exception.Message.Contains("unexpected format"));
     }
 
     [Test]
@@ -247,7 +250,7 @@
     }
 
     [Test]
-    public async void TestGetItemByPathWithUserWithoutReadAccessToHomeItem()
+    public void TestGetItemByPathWithUserWithoutReadAccessToHomeItem()
     {
       var sessionWithoutAccess =
         SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
@@ -255,9 +258,13 @@
           .BuildReadonlySession();
 
       var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
-      var response = await sessionWithoutAccess.ReadItemAsync(request);
 
-      testData.AssertItemsCount(0, response);
+      TestDelegate testCode = async () => {
+        await sessionWithoutAccess.ReadItemAsync(request);
+      };
+
+      var exception = Assert.Throws<ParserException>(testCode);
+      Assert.IsTrue(exception.Message.Contains("unexpected format"));
     }
 
     private async Task<ScItemsResponse> GetItemById(string id)

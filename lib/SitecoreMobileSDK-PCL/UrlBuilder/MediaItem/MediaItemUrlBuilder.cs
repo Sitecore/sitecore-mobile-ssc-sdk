@@ -166,9 +166,9 @@
 
 
     private const string DOT_SEPARATOR = ".";
-    private const string LANGUAGE_KEY = "la";
-    private const string VERSION_KEY = "vs";
-    private const string DATABASE_KEY = "db";
+    private const string LANGUAGE_KEY = "sc_language";
+    private const string VERSION_KEY = "version";
+    private const string DATABASE_KEY = "sc_database";
 
     private IItemSource itemSource;
     private IRestServiceGrammar restGrammar;

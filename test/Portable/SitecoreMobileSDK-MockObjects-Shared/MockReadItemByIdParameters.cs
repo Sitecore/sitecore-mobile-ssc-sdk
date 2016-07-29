@@ -54,6 +54,6 @@
 
     public int CopyInvocationCount { get; private set; }
 
-    public bool IcludeStanderdTemplateFields { get; private set; }
+    public bool IncludeStanderdTemplateFields { get; private set; }
   }
 }

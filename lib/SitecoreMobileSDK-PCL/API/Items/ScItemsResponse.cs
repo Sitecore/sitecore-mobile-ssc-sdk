@@ -13,34 +13,26 @@ namespace Sitecore.MobileSDK.API.Items
   /// </summary>
   public class ScItemsResponse : IEnumerable<ISitecoreItem>
   {
-    //FIXME: int totalCount, int resultCount not available forSSC fix
     /// <summary>
     /// Initializes a new instance of the <see cref="ScItemsResponse"/> class.
     /// </summary>
-    /// <param name="totalCount">Total items count in response</param>
-    /// <param name="resultCount">Received items count in response</param>
     /// <param name="items">List of <see cref="ISitecoreItem"/></param>
-    public ScItemsResponse(int totalCount, int resultCount, List<ISitecoreItem> items)
+    public ScItemsResponse(List<ISitecoreItem> items)
     {
-      this.TotalCount = totalCount;
-      this.ResultCount = resultCount;
       this.Items = items;
     }
 
     #region Paging
-    /// <summary>
-    /// Returns total count of items matching the request.
-    /// 
-    /// Note : TotalCount is equal to ResultCount while "page", "pageSize" parameters are not supported by the Sitecore Mobile SDK.
-    /// </summary>
-    public int TotalCount { get; private set; }
 
     /// <summary>
     /// Returns items count received for a given page.
     /// 
-    /// Note : ResultCount is equal to TotalCount while "page", "pageSize" parameters are not supported by the Sitecore Mobile SDK.
     /// </summary>
-    public int ResultCount { get; private set; }
+    public int ResultCount { 
+      get {
+        return this.Items.Count;
+      }
+    }
     #endregion Paging
 
     #region IEnumerable 

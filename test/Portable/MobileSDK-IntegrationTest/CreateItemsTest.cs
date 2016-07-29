@@ -204,7 +204,7 @@
 
       var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
                                         .Database("master")
-                                        .IcludeStanderdTemplateFields(true)
+                                        .IncludeStanderdTemplateFields(true)
                                         .Build();
 
       var readResponse = await session.ReadItemAsync(readRequest);

@@ -76,7 +76,7 @@
     /// <seealso cref="AddFieldsToRead(System.Collections.Generic.IEnumerable{string})" />
     IScopedRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams);
 
-    IScopedRequestParametersBuilder<T> IcludeStanderdTemplateFields(bool include);
+    IScopedRequestParametersBuilder<T> IncludeStanderdTemplateFields(bool include);
 
     /// <summary>
     /// Builds request with specified parameters.

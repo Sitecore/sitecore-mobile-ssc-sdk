@@ -94,7 +94,7 @@
         Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
 
         Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.RsaHandshakeException", exception.GetType().ToString());
-        Assert.AreEqual("[Sitecore Mobile SDK] Public key not received properly", exception.Message);
+        Assert.AreEqual("[Sitecore Mobile SDK] ASPXAUTH not received properly", exception.Message);
       }
     }
 
@@ -115,11 +115,10 @@
           var task = session.ReadItemAsync(this.requestWithItemId);
           await task;
         };
-        Exception exception = Assert.Throws<ParserException>(testCode);
+        Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
 
-        Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
+        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.RsaHandshakeException", exception.GetType().ToString());
+        Assert.AreEqual("[Sitecore Mobile SDK] ASPXAUTH not received properly", exception.Message);
       }
     }
 
@@ -138,11 +137,10 @@
           var task = session.ReadItemAsync(this.requestWithItemId);
           await task;
         };
-        Exception exception = Assert.Throws<ParserException>(testCode);
+        Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
 
-        Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
-        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.SSCJsonErrorException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Access to site is not granted."));
+        Assert.AreEqual("Sitecore.MobileSDK.API.Exceptions.RsaHandshakeException", exception.GetType().ToString());
+        Assert.AreEqual("[Sitecore Mobile SDK] ASPXAUTH not received properly", exception.Message);
       }
     }
 
@@ -159,8 +157,8 @@
       {
         TestDelegate testCode = async () =>
         {
-          var task = session.ReadItemAsync(this.requestWithItemId);
-          await task;
+          var result = await session.ReadItemAsync(this.requestWithItemId);
+          Console.WriteLine(result[0].DisplayName);
         };
         Exception exception = Assert.Throws<ParserException>(testCode);
 

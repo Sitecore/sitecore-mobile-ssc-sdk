@@ -22,7 +22,7 @@
       this.QueryParameters = queryParameters;
       this.PagingSettings = pagingSettings;
       this.SortParameters = sortParameters;
-      this.IcludeStanderdTemplateFields = includeStandardFields;
+      this.IncludeStanderdTemplateFields = includeStandardFields;
 
     }
 
@@ -53,7 +53,7 @@
         pagingSettings = this.PagingSettings.PagingParametersCopy();
       }
 
-      return new SitecoreSearchParameters(connection, itemSrc, payload, pagingSettings, this.SortParameters, this.IcludeStanderdTemplateFields, this.Term);
+      return new SitecoreSearchParameters(connection, itemSrc, payload, pagingSettings, this.SortParameters, this.IncludeStanderdTemplateFields, this.Term);
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
@@ -71,7 +71,7 @@
   
     public IPagingParameters PagingSettings { get; private set; }
 
-    public bool IcludeStanderdTemplateFields { get; private set; }
+    public bool IncludeStanderdTemplateFields { get; private set; }
 
     public ISortParameters SortParameters { get; private set; }
   }

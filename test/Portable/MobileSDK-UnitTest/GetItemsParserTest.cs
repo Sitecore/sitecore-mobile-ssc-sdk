@@ -76,8 +76,6 @@
       string rawResponse = "{\n  \"statusCode\": 200,\n  \"result\": {\n    \"totalCount\": 0,\n    \"resultCount\": 0,\n    \"items\": []\n  }\n}";
       ScItemsResponse response = ScItemsParser.Parse(rawResponse, CancellationToken.None);
 
-      Assert.AreEqual(0, response.TotalCount);
-      Assert.AreEqual(0, response.ResultCount);
       Assert.AreEqual(0, response.ResultCount);
     }
 

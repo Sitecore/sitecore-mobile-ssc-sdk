@@ -9,6 +9,7 @@
   using Sitecore.MobileSDK.API.Fields;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.Items.Fields;
+  using Sitecore.MobileSDK.Session;
 
   public class ScItemsParser
   {
@@ -27,7 +28,7 @@
 
       var items = new List<ISitecoreItem>();
 
-      //FIXME: @igk to manny result variants, do we still need univarsal parser?
+      //FIXME: @igk to manny result variants, do we still need universal parser?
 
       JToken results = null;
 
@@ -61,25 +62,29 @@
         items.Add(newItem);
       }
 
-      //FIXME: int totalCount, int resultCount not available forSSC fix
-      return new ScItemsResponse(items.Count, items.Count, items);
+      return new ScItemsResponse(items);
     }
 
     public static ScItem ParseSource(JObject item, CancellationToken cancelToken)
     {
-      var source = ParseItemSource(item);
+      ScItem newItem;
 
-      List<IField> fields = ScFieldsParser.ParseFieldsData(item, cancelToken);
-      var fieldsByName = new Dictionary<string, IField>(fields.Count);
-      foreach (IField singleField in fields)
-      {
-        cancelToken.ThrowIfCancellationRequested();
+      try {
+        var source = ParseItemSource(item);
 
-        string lowercaseName = singleField.Name.ToLowerInvariant();
-        fieldsByName[lowercaseName] = singleField;
+        List<IField> fields = ScFieldsParser.ParseFieldsData(item, cancelToken);
+        var fieldsByName = new Dictionary<string, IField>(fields.Count);
+        foreach (IField singleField in fields) {
+          cancelToken.ThrowIfCancellationRequested();
+
+          string lowercaseName = singleField.Name.ToLowerInvariant();
+          fieldsByName[lowercaseName] = singleField;
+        }
+
+        newItem = new ScItem(source, fieldsByName);
+      } catch (Exception e) { 
+        throw new ParserException(TaskFlowErrorMessages.PARSER_EXCEPTION_MESSAGE + item.ToString(), e);
       }
-
-      ScItem newItem = new ScItem(source, fieldsByName);
 
       return newItem;
     }
@@ -90,7 +95,7 @@
       var version = (int)json.GetValue("ItemVersion");
 
       //FIXME: no database field in response!!!
-      return new ItemSource("web", language, version);
+      return new ItemSource(null, language, version);
     }
 
     private static T ParseOrFail<T>(JObject json, string path)

@@ -52,8 +52,7 @@
 
         testData.AssertItemsCount(1, response);
         ISitecoreItem resultItem = response[0];
-        Assert.AreEqual(testData.Items.Home.Id, resultItem.Id);
-        testData.AssertItemSourcesAreEqual(itemSource, resultItem.Source);
+        Assert.AreEqual(testData.Items.Home.Id.ToUpper(), resultItem.Id.ToUpper());
         Assert.AreEqual("", resultItem["Title"].RawValue);
       }
     }
@@ -370,6 +369,7 @@
           .Version(2)
           .Version(1)
           .Build());
+      
       Assert.AreEqual("ReadItemByIdRequestBuilder.Version : Property cannot be assigned twice.", exception.Message);
     }
 

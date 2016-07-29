@@ -230,7 +230,7 @@
     }
 
     [Test]
-    public async void TestMediaWithoutAccessToFolder()
+    public void TestMediaWithoutAccessToFolder()
     {
       const string MediaPath = "/sitecore/media library/Images/kirkorov";
       var sessionNoReadAccess =
@@ -238,20 +238,16 @@
           .Credentials(this.testData.Users.NoReadUserExtranet)
           .BuildReadonlySession();
 
-      var options = new MediaOptionsBuilder().Set
-        .Scale(1)
-        .Build();
       var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
-        .DownloadOptions(options)
         .Build();
 
-      using (var response = await sessionNoReadAccess.DownloadMediaResourceAsync(request))
-      using (var ms = new MemoryStream())
-      {
-        await response.CopyToAsync(ms);
-        var expectedItem = await this.GetItemByPath(MediaPath);
-        Assert.AreEqual(expectedItem["size"].RawValue, ms.Length.ToString(CultureInfo.InvariantCulture));
-      }
+
+      TestDelegate testCode = async () => {
+        await sessionNoReadAccess.DownloadMediaResourceAsync(request);
+      };
+
+    Assert.Throws<LoadDataFromNetworkException>(testCode);
+
     }
 
     [Test]

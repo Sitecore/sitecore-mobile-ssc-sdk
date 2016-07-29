@@ -17,6 +17,11 @@
 
       BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.VersionNumber, this.GetType().Name + ".Version");
 
+      this.itemSourceAccumulator = new ItemSourcePOD(
+        this.itemSourceAccumulator.Database,
+        this.itemSourceAccumulator.Language,
+        itemVersion);
+      
       return this;
     }
 
@@ -52,9 +57,9 @@
       return (IGetVersionedItemRequestParametersBuilder<T>)base.ItemsPerPage(itemsCountPerPage);
     }
 
-    new public IGetVersionedItemRequestParametersBuilder<T> IcludeStanderdTemplateFields(bool include)
+    new public IGetVersionedItemRequestParametersBuilder<T> IncludeStanderdTemplateFields(bool include)
     {
-      return (IGetVersionedItemRequestParametersBuilder<T>)base.IcludeStanderdTemplateFields(include);
+      return (IGetVersionedItemRequestParametersBuilder<T>)base.IncludeStanderdTemplateFields(include);
     }
     #endregion Compatibility Casts
   }

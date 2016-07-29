@@ -150,7 +150,6 @@
 
     public void AssertItemsCount(int itemCount, ScItemsResponse response)
     {
-      Assert.AreEqual(itemCount, response.TotalCount);
       Assert.AreEqual(itemCount, response.ResultCount);
     }
   }

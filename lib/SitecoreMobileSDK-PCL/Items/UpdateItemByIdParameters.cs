@@ -57,7 +57,7 @@
 
     public IDictionary<string, string> FieldsRawValuesByName { get; private set; }
 
-    public bool IcludeStanderdTemplateFields { get; private set; }
+    public bool IncludeStanderdTemplateFields { get; private set; }
   }
 }
 

@@ -42,6 +42,6 @@
     /// <seealso cref="IQueryParameters" />
     IQueryParameters QueryParameters { get; }
 
-    bool IcludeStanderdTemplateFields { get; }
+    bool IncludeStanderdTemplateFields { get; }
   }
 }

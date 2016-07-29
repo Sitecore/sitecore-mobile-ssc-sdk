@@ -9,8 +9,8 @@
       result.FieldSeparator = "&";
       result.HostAndArgsSeparator = "?";
       result.PathComponentSeparator = "/";
-      result.ItemFieldSeparator = "|";
-
+      result.ItemFieldSeparator = ",";
+      result.SearchFieldSeparator = "|";
       return result;
     }
 
@@ -23,6 +23,7 @@
     public string HostAndArgsSeparator { get; private set; }
     public string PathComponentSeparator { get; private set; }
     public string ItemFieldSeparator { get; private set; }
+    public string SearchFieldSeparator { get; private set; }
   }
 }
 

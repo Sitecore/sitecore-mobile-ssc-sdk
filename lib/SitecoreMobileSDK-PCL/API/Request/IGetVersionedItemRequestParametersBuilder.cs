@@ -65,7 +65,7 @@ namespace Sitecore.MobileSDK.API.Request
     /// <seealso cref="AddFieldsToRead(System.Collections.Generic.IEnumerable{string})" />
     new IGetVersionedItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams);
 
-    new IGetVersionedItemRequestParametersBuilder<T> IcludeStanderdTemplateFields(bool include);
+    new IGetVersionedItemRequestParametersBuilder<T> IncludeStanderdTemplateFields(bool include);
 
   }
 }

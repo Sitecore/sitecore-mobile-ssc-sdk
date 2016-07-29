@@ -30,7 +30,7 @@
 
       if (request.SortParameters.Fields != null) {
         foreach (string field in request.SortParameters.Fields) {
-          sortValue += this.restGrammar.ItemFieldSeparator + field;
+          sortValue += this.restGrammar.SearchFieldSeparator + field;
         }
 
         sortValue = sortValue.Remove(0, 1);

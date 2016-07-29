@@ -22,7 +22,7 @@
       this.QueryParameters = queryParameters;
       this.PagingSettings = pagingSettings;
       this.Term = term;
-      this.IcludeStanderdTemplateFields = includeStandardFields;
+      this.IncludeStanderdTemplateFields = includeStandardFields;
     }
 
     public virtual ISitecoreStoredSearchRequest DeepCopySitecoreStoredSearchRequest()
@@ -52,7 +52,7 @@
         pagingSettings = this.PagingSettings.PagingParametersCopy();
       }
 
-      return new StoredSearchParameters(connection, itemSrc, payload, pagingSettings, this.ItemId, this.IcludeStanderdTemplateFields, this.Term);
+      return new StoredSearchParameters(connection, itemSrc, payload, pagingSettings, this.ItemId, this.IncludeStanderdTemplateFields, this.Term);
     }
 
     public virtual ISitecoreSearchRequest DeepCopySitecoreSearchRequest()
@@ -79,7 +79,7 @@
   
     public IPagingParameters PagingSettings { get; private set; }
 
-    public bool IcludeStanderdTemplateFields { get; private set; }
+    public bool IncludeStanderdTemplateFields { get; private set; }
 
     public ISortParameters SortParameters { 
       get {

@@ -29,7 +29,7 @@ namespace Sitecore.MobileSDK.UserRequest
         mergedSource, 
         userRequest.QueryParameters, 
         pagingSettings,
-        userRequest.IcludeStanderdTemplateFields,
+        userRequest.IncludeStanderdTemplateFields,
         userRequest.ItemId);
     }
 
@@ -45,7 +45,7 @@ namespace Sitecore.MobileSDK.UserRequest
         userRequest.QueryParameters, 
         pagingSettings,
         userRequest.ItemId,
-        userRequest.IcludeStanderdTemplateFields,
+        userRequest.IncludeStanderdTemplateFields,
         userRequest.Term);
     }
 
@@ -61,7 +61,7 @@ namespace Sitecore.MobileSDK.UserRequest
         userRequest.QueryParameters, 
         pagingSettings, 
         userRequest.SortParameters,
-        userRequest.IcludeStanderdTemplateFields,
+        userRequest.IncludeStanderdTemplateFields,
         userRequest.Term);
     }
 
@@ -76,7 +76,7 @@ namespace Sitecore.MobileSDK.UserRequest
         mergedSource, 
         userRequest.QueryParameters, 
         pagingSettings,
-        userRequest.IcludeStanderdTemplateFields,
+        userRequest.IncludeStanderdTemplateFields,
         userRequest.ItemPath);
     }
 

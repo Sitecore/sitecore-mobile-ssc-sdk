@@ -7,6 +7,7 @@
     string FieldSeparator { get; }
     string HostAndArgsSeparator { get; }
     string ItemFieldSeparator { get; }
+    string SearchFieldSeparator { get; }
   }
 }
 
