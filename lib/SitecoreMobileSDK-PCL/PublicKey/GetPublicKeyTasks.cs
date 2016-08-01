@@ -17,7 +17,7 @@ namespace Sitecore.MobileSDK.PublicKey
   using Sitecore.MobileSDK.PasswordProvider.Interface;
   using Sitecore.MobileSDK.API.Exceptions;
 
-  public class GetPublicKeyTasks : IRestApiCallTasks<ISessionConfig, string, string, string>
+  public class GetPublicKeyTasks : IRestApiCallTasks<ISessionConfig, string, string, ScAuthResponse>
   {
     #region Private Variables
 
@@ -58,21 +58,18 @@ namespace Sitecore.MobileSDK.PublicKey
       
       HttpResponseMessage httpResponse = await this.httpClient.PostAsync(requestUrl, stringContent, cancelToken);
 
-      if (httpResponse.StatusCode != System.Net.HttpStatusCode.OK) {
-        throw new SitecoreMobileSdkException("status code is " + httpResponse.StatusCode.ToString());
-      }
-
-      return httpResponse.StatusCode.ToString();
+      int code = (int)httpResponse.StatusCode;
+      return code.ToString();
     }
 
-    public async Task<string> ParseResponseDataAsync(string status, CancellationToken cancelToken)
+    public async Task<ScAuthResponse> ParseResponseDataAsync(string status, CancellationToken cancelToken)
     {
-        Func<string> syncParsePublicKey = () =>
-        {
-          return status;
-        };
-        string result = await Task.Factory.StartNew(syncParsePublicKey, cancelToken);
-        return result;
+      Func<ScAuthResponse> syncParseResponse = () =>
+      {
+        return new ScAuthResponse(status);
+      };
+
+      return await Task.Factory.StartNew(syncParseResponse, cancelToken);
     }
 
     private string PrepareRequestUrl(ISessionConfig instanceUrl)

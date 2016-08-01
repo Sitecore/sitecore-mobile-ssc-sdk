@@ -27,7 +27,6 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.CrudTasks;
   using Sitecore.MobileSDK.CrudTasks.Resource;
   using Sitecore.MobileSDK.Validators;
-  using Sitecore.MobileSDK.Authenticate;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
@@ -169,8 +168,10 @@ namespace Sitecore.MobileSDK
 
     #region Encryption
 
-    protected virtual async Task GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken))
+    protected virtual async Task<ScAuthResponse> GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken))
     {
+      ScAuthResponse response = null;
+
       if (this.credentials != null) {
 
         string url = SessionConfigValidator.AutocompleteInstanceUrl(this.Config.InstanceUrl);
@@ -187,7 +188,7 @@ namespace Sitecore.MobileSDK
             var sessionConfigBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.sscGrammar);
             var taskFlow = new GetPublicKeyTasks(this.credentials, sessionConfigBuilder, this.sscGrammar, this.httpClient);
 
-            await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
+            response = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
 
           } catch (ObjectDisposedException) {
             // CancellationToken.ThrowIfCancellationRequested()
@@ -203,8 +204,12 @@ namespace Sitecore.MobileSDK
             throw new RsaHandshakeException("[Sitecore Mobile SDK] ASPXAUTH not received properly", ex);
           }
 
+        } else {
+          response = new ScAuthResponse("200");
         }
       }
+
+      return response;
 
     }
 
@@ -412,17 +417,13 @@ namespace Sitecore.MobileSDK
 
     #region Authentication
 
-    public async Task<bool> AuthenticateAsync(CancellationToken cancelToken = default(CancellationToken))
+    public async Task<ScAuthResponse> AuthenticateAsync(CancellationToken cancelToken = default(CancellationToken))
     {
       var sessionUrlBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.sscGrammar);
 
-      await this.GetPublicKeyAsync(cancelToken);
+      var result = await this.GetPublicKeyAsync(cancelToken);
 
-      var taskFlow = new AuthenticateTasks(this.restGrammar, this.sscGrammar, sessionUrlBuilder, this.httpClient);
-
-     SSCJsonStatusMessage result = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
-
-      return result.StatusCode == 200;
+      return result;
     }
 
     #endregion Authentication

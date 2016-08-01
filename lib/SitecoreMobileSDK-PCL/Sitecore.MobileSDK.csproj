@@ -76,8 +76,6 @@
     <Compile Include="API\Session\IMediaActions.cs" />
     <Compile Include="API\Session\IReadItemActions.cs" />
     <Compile Include="API\Session\IUpdateItemActions.cs" />
-    <Compile Include="Authenticate\AuthenticateResponseParser.cs" />
-    <Compile Include="Authenticate\AuthenticateTasks.cs" />
     <Compile Include="CrudTasks\DeleteItemTasks.cs" />
     <Compile Include="Items\DeleteItemsResponseParser.cs" />
     <Compile Include="Items\Delete\DeleteItemByIdParameters.cs" />
@@ -221,6 +219,7 @@
     <Compile Include="API\Request\IBaseReadRequestParametersBuilder.cs" />
     <Compile Include="Credentials\ScUnsecuredCredentialsProvider.cs" />
     <Compile Include="Credentials\IScCredentials.cs" />
+    <Compile Include="PublicKey\ScAuthResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

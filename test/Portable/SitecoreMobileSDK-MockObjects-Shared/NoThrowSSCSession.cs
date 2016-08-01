@@ -12,6 +12,7 @@
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.PasswordProvider;
   using Sitecore.MobileSDK.PasswordProvider.Interface;
+  using Sitecore.MobileSDK.PublicKey;
 
   public class NoThrowSSCSession : ISitecoreSSCSession
   {
@@ -147,7 +148,7 @@
 
     #region Authentication
 
-    public async Task<bool> AuthenticateAsync(CancellationToken cancelToken = default(CancellationToken))
+    public async Task<ScAuthResponse> AuthenticateAsync(CancellationToken cancelToken = default(CancellationToken))
     {
       try
       {
@@ -156,7 +157,7 @@
       catch (Exception ex)
       {
         Debug.WriteLine("Suppressed exception : " + Environment.NewLine + ex.ToString());
-        return false;
+        return new ScAuthResponse(ex.ToString());
       }
     }
 

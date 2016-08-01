@@ -33,8 +33,8 @@
           .BuildReadonlySession()
       )
       {
-        bool response = await session.AuthenticateAsync();
-        Assert.True(response);
+        var response = await session.AuthenticateAsync();
+        Assert.True(response.IsSuccessful);
       }
     }
 
@@ -47,8 +47,8 @@
           .Credentials(testData.Users.NotExistent)
           .BuildReadonlySession()
       ) {
-        bool response = await session.AuthenticateAsync();
-        Assert.False(response);
+        var response = await session.AuthenticateAsync();
+        Assert.False(response.IsSuccessful);
       }
     }
 
@@ -62,8 +62,8 @@
           .BuildReadonlySession()
       )
       {
-        bool response = await session.AuthenticateAsync();
-        Assert.True(response);
+        var response = await session.AuthenticateAsync();
+        Assert.True(response.IsSuccessful);
       }
     }
 
@@ -77,8 +77,8 @@
           .BuildReadonlySession()
       )
       {
-        bool response = await session.AuthenticateAsync();
-        Assert.True(response);
+        var response = await session.AuthenticateAsync();
+        Assert.True(response.IsSuccessful);
       }
     }
 
@@ -92,8 +92,8 @@
         .BuildReadonlySession()
       )
       {
-        bool response = await session.AuthenticateAsync();
-        Assert.False(response);
+        var response = await session.AuthenticateAsync();
+        Assert.False(response.IsSuccessful);
       }
     }
 
@@ -107,8 +107,8 @@
         .BuildReadonlySession()
       )
       {
-        bool response = await session.AuthenticateAsync();
-        Assert.False(response);
+        var response = await session.AuthenticateAsync();
+        Assert.False(response.IsSuccessful);
       }
     }
 
@@ -122,8 +122,8 @@
           .BuildReadonlySession()
       )
       {
-        bool response = await session.AuthenticateAsync();
-        Assert.False(response);
+        var response = await session.AuthenticateAsync();
+        Assert.False(response.IsSuccessful);
       }
     }
 
@@ -142,7 +142,7 @@
           await session.AuthenticateAsync();
         };
         Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
-        Assert.True(exception.Message.Contains("Public key not received properly"));
+        Assert.True(exception.Message.Contains("ASPXAUTH not received properly"));
 
 
         // TODO : create platform specific files for this test case
@@ -174,11 +174,10 @@
         {
           await session.AuthenticateAsync();
         };
-        Exception exception = Assert.Throws<RsaHandshakeException>(testCode);
-        Assert.True(exception.Message.Contains("Public key not received properly"));
+        Exception exception = Assert.Throws<UriFormatException>(testCode);
 
-        Assert.AreEqual("System.UriFormatException", exception.InnerException.GetType().ToString());
-        Assert.True(exception.InnerException.Message.Contains("Invalid URI: The hostname could not be parsed"));
+        Assert.AreEqual("System.UriFormatException", exception.GetType().ToString());
+        Assert.True(exception.Message.Contains("Invalid URI: The hostname could not be parsed"));
       }
     }
 
@@ -193,8 +192,8 @@
           .BuildReadonlySession()
       )
       {
-        bool response = await session.AuthenticateAsync();
-        Assert.True(response);
+        var response = await session.AuthenticateAsync();
+        Assert.True(response.IsSuccessful);
       }
     }
   }

@@ -52,7 +52,7 @@ namespace Sitecore.MobileSDK.CrudTasks
       //TODO: @igk debug request output, remove later
       Debug.WriteLine("REQUEST: " + request);
       var result = await this.httpClient.SendAsync(request, cancelToken);
-     // return await result.Content.ReadAsStringAsync();
+
       int code = (int)result.StatusCode;
       return code.ToString();
     }

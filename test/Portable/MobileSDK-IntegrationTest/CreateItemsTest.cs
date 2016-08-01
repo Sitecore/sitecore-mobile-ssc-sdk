@@ -202,6 +202,8 @@
 
       var createResponse = await session.CreateItemAsync(request);
 
+      Assert.IsTrue(createResponse.Created);
+
       var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
                                         .Database("master")
                                         .IncludeStanderdTemplateFields(true)
@@ -542,15 +544,16 @@
 
       ScItemsResponse items = await this.noThrowCleanupSession.ReadChildrenAsync(getItemsToDelet);
 
-      foreach (var item in items) { 
+      if (items != null) {
+        foreach (var item in items) {
 
-        var deleteFromMaster = ItemSSCRequestBuilder.DeleteItemRequestWithId(item.Id)
-          .Database(database)
-          .Build();
-        await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
-      
+          var deleteFromMaster = ItemSSCRequestBuilder.DeleteItemRequestWithId(item.Id)
+            .Database(database)
+            .Build();
+          await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
+
+        }
       }
-
     }
   }
 }

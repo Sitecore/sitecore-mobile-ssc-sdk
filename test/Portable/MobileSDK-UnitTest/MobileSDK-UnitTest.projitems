@@ -9,7 +9,6 @@
     <Import_RootNamespace>Sitecore.MobileSdkUnitTest</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)AuthenticateParserTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CreateItemByPathUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CreateSessionTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemByIdUrlBuilderTest.cs" />

@@ -21,20 +21,18 @@
       this.GetPublicKeyInvocationsCount = 0;
     }
 
-    public async Task GetPublicKeyAsyncPublic(CancellationToken cancelToken = default(CancellationToken))
+    public async Task<ScAuthResponse> GetPublicKeyAsyncPublic(CancellationToken cancelToken = default(CancellationToken))
     {
-      await this.GetPublicKeyAsync(cancelToken);
+      return await this.GetPublicKeyAsync(cancelToken);
     }
 
 
 
-    protected override async Task GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken))
+    protected override async Task<ScAuthResponse> GetPublicKeyAsync(CancellationToken cancelToken = default(CancellationToken))
     {
       ++this.GetPublicKeyInvocationsCount;
-      await base.GetPublicKeyAsync(cancelToken);
+      return await base.GetPublicKeyAsync(cancelToken);
     }
-
-   
 
     public int GetPublicKeyInvocationsCount { get; private set; }
   }
