@@ -3,7 +3,7 @@ namespace Sitecore.MobileSDK.API.Request
   /// <summary>
   /// Inteface represents basic parameters neccesessary for read item by GUID requests.
   /// </summary>
-  public interface IReadItemsByIdRequest : IBaseReadItemsRequest
+  public interface IReadItemsByIdRequest : IBaseItemRequest
   {
     /// <summary>
     /// Performs deep copy of request.

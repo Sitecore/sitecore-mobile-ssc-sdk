@@ -3,7 +3,7 @@ namespace Sitecore.MobileSDK.API.Request
   /// <summary>
   /// Inteface represents basic parameters neccesessary for read item by path requests.
   /// </summary>
-  public interface IReadItemsByPathRequest : IBaseReadItemsRequest
+  public interface IReadItemsByPathRequest : IBaseItemRequest
   {
     /// <summary>
     /// Performs deep copy of request.

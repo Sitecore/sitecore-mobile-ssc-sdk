@@ -220,6 +220,7 @@
     <Compile Include="Credentials\ScUnsecuredCredentialsProvider.cs" />
     <Compile Include="Credentials\IScCredentials.cs" />
     <Compile Include="PublicKey\ScAuthResponse.cs" />
+    <Compile Include="UrlBuilder\GetItemsUrlBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

@@ -23,7 +23,6 @@ namespace Sitecore.MobileSDK.UserRequest.ReadRequest
         null, 
         this.itemSourceAccumulator, 
         this.queryParameters, 
-        pagingSettings,
         this.icludeStanderdTemplateFields,
         this.itemId);
 

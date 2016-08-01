@@ -11,7 +11,6 @@
       ISessionConfig sessionSettings,
       IItemSource itemSource,
       IQueryParameters queryParameters,
-      IPagingParameters pagingSettings,
       bool includeStandardFields,
       string itemPath)
     {
@@ -19,7 +18,6 @@
       this.ItemSource = itemSource;
       this.ItemPath = itemPath;
       this.QueryParameters = queryParameters;
-      this.PagingSettings = pagingSettings;
       this.IncludeStanderdTemplateFields = includeStandardFields;
     }
 
@@ -28,7 +26,6 @@
       ISessionConfig connection = null;
       IItemSource itemSrc = null;
       IQueryParameters payload = null;
-      IPagingParameters pagingSettings = null;
 
       if (null != this.SessionSettings)
       {
@@ -45,13 +42,7 @@
         payload = this.QueryParameters.DeepCopy();
       }
 
-      if (null != this.PagingSettings)
-      {
-        pagingSettings = this.PagingSettings.PagingParametersCopy();
-      }
-
-
-      return new ReadItemByPathParameters(connection, itemSrc, payload, pagingSettings, this.IncludeStanderdTemplateFields, this.ItemPath);
+      return new ReadItemByPathParameters(connection, itemSrc, payload, this.IncludeStanderdTemplateFields, this.ItemPath);
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
@@ -66,8 +57,6 @@
     public ISessionConfig SessionSettings { get; private set; }
 
     public IQueryParameters QueryParameters { get; private set; }
-
-    public IPagingParameters PagingSettings { get; private set; }
 
     public bool IncludeStanderdTemplateFields { get; private set; }
   }

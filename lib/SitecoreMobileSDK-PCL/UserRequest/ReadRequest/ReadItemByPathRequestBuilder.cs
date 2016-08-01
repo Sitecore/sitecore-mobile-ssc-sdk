@@ -25,7 +25,6 @@
         sessionSettings, 
         this.itemSourceAccumulator, 
         this.queryParameters, 
-        pagingSettings,
         this.icludeStanderdTemplateFields,
         this.itemPath);
 

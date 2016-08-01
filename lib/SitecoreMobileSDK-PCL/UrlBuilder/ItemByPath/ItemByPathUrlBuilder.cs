@@ -6,7 +6,7 @@
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
-  public class ItemByPathUrlBuilder : GetPagedItemsUrlBuilder<IReadItemsByPathRequest>
+  public class ItemByPathUrlBuilder : GetItemsUrlBuilder<IReadItemsByPathRequest>
   {
     public ItemByPathUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
       : base(restGrammar, sscGrammar)
@@ -32,7 +32,6 @@
 
     protected override void ValidateSpecificRequest(IReadItemsByPathRequest request)
     {
-      base.ValidateSpecificRequest(request);
       ItemPathValidator.ValidateItemPath(request.ItemPath, this.GetType().Name + ".ItemPath");
     }
   }

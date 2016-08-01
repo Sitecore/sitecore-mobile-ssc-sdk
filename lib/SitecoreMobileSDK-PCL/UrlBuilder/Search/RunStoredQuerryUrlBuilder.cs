@@ -6,7 +6,7 @@
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
-  public class RunStoredQuerryUrlBuilder : GetPagedItemsUrlBuilder<IReadItemsByIdRequest>
+  public class RunStoredQuerryUrlBuilder : GetItemsUrlBuilder<IReadItemsByIdRequest>
   {
     public RunStoredQuerryUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
       : base(restGrammar, sscGrammar)
@@ -29,7 +29,6 @@
 
     protected override void ValidateSpecificRequest(IReadItemsByIdRequest request)
     {
-      base.ValidateSpecificRequest(request);
       ItemIdValidator.ValidateItemId(request.ItemId, this.GetType().Name + ".ItemId");
     }
   }
