@@ -22,7 +22,7 @@
     public void TestParseValidResponse()
     {
       string rawResponse = VALID_RESPONSE;
-      ScItemsResponse response = ScItemsParser.Parse(rawResponse, CancellationToken.None);
+      ScItemsResponse response = ScItemsParser.Parse(rawResponse, "web", CancellationToken.None);
       Assert.AreEqual(1, response.ResultCount);
 
       ISitecoreItem item1 = response[0];
@@ -51,7 +51,7 @@
       {
         string rawResponse = responseBegin + i.ToString() + responseEnd;
 
-        ScItemsResponse response = ScItemsParser.Parse(rawResponse, CancellationToken.None);
+        ScItemsResponse response = ScItemsParser.Parse(rawResponse, "web", CancellationToken.None);
         Assert.AreEqual(0, response.ResultCount);
       }
     }
@@ -59,14 +59,14 @@
     [Test]
     public void TestParseEmptyResponse()
     {
-      TestDelegate action = () => ScItemsParser.Parse(string.Empty, CancellationToken.None);
+      TestDelegate action = () => ScItemsParser.Parse(string.Empty, "web", CancellationToken.None);
       Assert.Throws<ArgumentException>(action, "cannot parse empty response");
     }
 
     [Test]
     public void TestParseNullResponse()
     {
-      TestDelegate action = () => ScItemsParser.Parse(null, CancellationToken.None);
+      TestDelegate action = () => ScItemsParser.Parse(null, "web", CancellationToken.None);
       Assert.Throws<ArgumentException>(action, "cannot parse null response");
     }
 
@@ -74,7 +74,7 @@
     public void TestParseResponseWithEmptyItems()
     {
       string rawResponse = "{\n  \"statusCode\": 200,\n  \"result\": {\n    \"totalCount\": 0,\n    \"resultCount\": 0,\n    \"items\": []\n  }\n}";
-      ScItemsResponse response = ScItemsParser.Parse(rawResponse, CancellationToken.None);
+      ScItemsResponse response = ScItemsParser.Parse(rawResponse, "web", CancellationToken.None);
 
       Assert.AreEqual(0, response.ResultCount);
     }
@@ -83,7 +83,7 @@
     public void TestParseInvalidResponse()
     {
       string rawResponse = "{\n  \"statusCode\": 200,\n  \"result\": {\n    \"Invalidtotaldount\": 0,\n    \"InvalidresultCount\": 0,\n    \"items\": []\n  }\n}";
-      TestDelegate action = () => ScItemsParser.Parse(rawResponse, CancellationToken.None);
+      TestDelegate action = () => ScItemsParser.Parse(rawResponse, "web", CancellationToken.None);
 
       // @adk.review : waybe we should we wrap this? 
       Assert.Throws<JsonException>(action, "JsonException should be here");
@@ -93,7 +93,7 @@
     public void TestParseErrorResponse()
     {
       string rawResponse = "{\"statusCode\":401,\"error\":{\"message\":\"Access to the \\u0027master\\u0027 database is denied. Only members of the Sitecore Client Users role can switch databases.\"}}";
-      TestDelegate action = () => ScItemsParser.Parse(rawResponse, CancellationToken.None);
+      TestDelegate action = () => ScItemsParser.Parse(rawResponse, "web", CancellationToken.None);
       SSCJsonErrorException exception = Assert.Throws<SSCJsonErrorException>(action, "ScResponseException should be here");
 
       Assert.AreEqual(401, exception.Response.StatusCode);
@@ -113,7 +113,7 @@
           int millisecondTimeout = 10;
           Thread.Sleep(millisecondTimeout);
 
-          return ScItemsParser.Parse(VALID_RESPONSE, cancel.Token);
+          return ScItemsParser.Parse(VALID_RESPONSE, "web", cancel.Token);
         });
         cancel.Cancel();
         await action;

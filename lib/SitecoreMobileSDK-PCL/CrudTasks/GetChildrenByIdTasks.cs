@@ -15,9 +15,17 @@
 
     protected override string UrlToGetItemWithRequest(IReadItemsByIdRequest request)
     {
+      this.privateDb = request.ItemSource.Database;
       return this.urlBuilder.GetUrlForRequest(request);
     }
 
+    public override string CurrentDb {
+      get {
+        return this.privateDb;
+      }
+    }
+
+    private string privateDb = null;
     private readonly ChildrenByIdUrlBuilder urlBuilder;
   }
 }

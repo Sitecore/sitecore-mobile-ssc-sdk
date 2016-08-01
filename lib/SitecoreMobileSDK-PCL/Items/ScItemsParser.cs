@@ -17,7 +17,7 @@
     {
     }
 
-    public static ScItemsResponse Parse(string responseString, CancellationToken cancelToken)
+    public static ScItemsResponse Parse(string responseString, string db, CancellationToken cancelToken)
     {
       if (string.IsNullOrEmpty(responseString))
       {
@@ -52,25 +52,25 @@
         {
           cancelToken.ThrowIfCancellationRequested();
 
-          ScItem newItem = ScItemsParser.ParseSource(item, cancelToken);
+          ScItem newItem = ScItemsParser.ParseSource(item, db, cancelToken);
           items.Add(newItem);
         }
       }
       else if (response is JObject)
       {
-        ScItem newItem = ScItemsParser.ParseSource(response as JObject, cancelToken);
+        ScItem newItem = ScItemsParser.ParseSource(response as JObject, db, cancelToken);
         items.Add(newItem);
       }
 
       return new ScItemsResponse(items);
     }
 
-    public static ScItem ParseSource(JObject item, CancellationToken cancelToken)
+    public static ScItem ParseSource(JObject item, string db, CancellationToken cancelToken)
     {
       ScItem newItem;
 
       try {
-        var source = ParseItemSource(item);
+        var source = ParseItemSource(item, db);
 
         List<IField> fields = ScFieldsParser.ParseFieldsData(item, cancelToken);
         var fieldsByName = new Dictionary<string, IField>(fields.Count);
@@ -89,13 +89,13 @@
       return newItem;
     }
 
-    private static ItemSource ParseItemSource(JObject json)
+    private static ItemSource ParseItemSource(JObject json, string db)
     {
       var language = (string)json.GetValue("ItemLanguage");
       var version = (int)json.GetValue("ItemVersion");
 
       //FIXME: no database field in response!!!
-      return new ItemSource(null, language, version);
+      return new ItemSource(db, language, version);
     }
 
     private static T ParseOrFail<T>(JObject json, string path)

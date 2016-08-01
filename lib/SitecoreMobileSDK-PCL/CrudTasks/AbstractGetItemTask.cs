@@ -14,6 +14,7 @@
   internal abstract class AbstractGetItemTask<TRequest> : IRestApiCallTasks<TRequest, HttpRequestMessage, string, ScItemsResponse>
       where TRequest : class
   {
+
     private AbstractGetItemTask()
     {
     }
@@ -49,7 +50,7 @@
       {
         //TODO: @igk debug response output, remove later
         Debug.WriteLine("RESPONSE: " + data);
-        return ScItemsParser.Parse(data, cancelToken);
+        return ScItemsParser.Parse(data, this.CurrentDb, cancelToken);
       };
       return await Task.Factory.StartNew(syncParseResponse, cancelToken);
     }
@@ -64,6 +65,8 @@
       }
 
     }
+
+    public abstract string CurrentDb { get; }
 
     protected abstract string UrlToGetItemWithRequest(TRequest request);
 
