@@ -94,7 +94,7 @@
       var language = (string)json.GetValue("ItemLanguage");
       var version = (int)json.GetValue("ItemVersion");
 
-      //FIXME: no database field in response!!!
+      //TODO: DB nont available in responce, use value from request if possible, shpuld be fixed on server side
       return new ItemSource(db, language, version);
     }
 
