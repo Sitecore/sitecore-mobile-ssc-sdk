@@ -6,8 +6,9 @@ namespace Sitecore.MobileSDK.CrudTasks
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.ItemById;
   using Sitecore.MobileSDK.UrlBuilder.Search;
+  using Sitecore.MobileSDK.API.Items;
 
-  internal class RunSitecoreSearchTasks : AbstractGetItemTask<ISitecoreSearchRequest>
+  internal class RunSitecoreSearchTasks : AbstractGetItemTask<ISitecoreSearchRequest, ScItemsResponse>
   {
     public RunSitecoreSearchTasks(RunSitecoreSearchUrlBuilder urlBuilder, HttpClient httpClient)
       : base(httpClient)

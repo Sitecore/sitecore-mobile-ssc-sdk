@@ -4,8 +4,9 @@
   using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Children;
+  using Sitecore.MobileSDK.API.Items;
 
-  internal class GetChildrenByIdTasks : AbstractGetItemTask<IReadItemsByIdRequest>
+  internal class GetChildrenByIdTasks : AbstractGetItemTask<IReadItemsByIdRequest, ScItemsResponse>
   {
     public GetChildrenByIdTasks(ChildrenByIdUrlBuilder urlBuilder, HttpClient httpClient)
       : base(httpClient)

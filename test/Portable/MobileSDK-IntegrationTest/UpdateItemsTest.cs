@@ -60,7 +60,7 @@
    
 
     [Test]
-    public async void TestUpdateItemByNotExistentId()
+    public void TestUpdateItemByNotExistentId()
     {
       var textValue = RandomText();
 
@@ -68,9 +68,14 @@
         .AddFieldsRawValuesByNameToSet("Text", textValue)
         .Build();
 
-      var result = await this.session.UpdateItemAsync(request);
+      TestDelegate testCode = async () => {
+        await this.session.UpdateItemAsync(request);
+      };
 
-      Assert.AreEqual(0, result.ResultCount);
+      var exception = Assert.Throws<ParserException>(testCode);
+
+      Assert.IsTrue(exception.Message.Contains("Sitecore Mobile SDK] Data from the internet has unexpected format"));
+
     }
 
     [Test]
@@ -78,7 +83,7 @@
     {
       var exception = Assert.Throws<ArgumentException>(() => ItemSSCRequestBuilder.UpdateItemRequestWithId(testData.Items.Home.Path)
         .Build());
-      Assert.AreEqual("UpdateItemByIdRequestBuilder.ItemId : Item id must have curly braces '{}'", exception.Message);
+      Assert.AreEqual("UpdateItemByIdRequestBuilder.ItemId : wrong item id", exception.Message);
     }
 
     [Test]
@@ -144,18 +149,13 @@
       var textValue = RandomText();
 
       var request = ItemSSCRequestBuilder.UpdateItemRequestWithId(testData.Items.ItemWithVersions.Id)
-        .AddFieldsRawValuesByNameToSet("Text", textValue)
+        .AddFieldsRawValuesByNameToSet("Text", textValue+"123")
         .Version(Version)
         .Build();
 
       var result = await this.session.UpdateItemAsync(request);
 
-      Assert.AreEqual(1, result.ResultCount);
-      var resultItem = result[0];
-      Assert.AreEqual(testData.Items.ItemWithVersions.Id, resultItem.Id);
-      Assert.AreEqual(textValue, resultItem["Text"].RawValue);
-      Assert.True(50 < resultItem.FieldsCount);
-      Assert.AreEqual(Version, resultItem.Source.VersionNumber);
+      Assert.IsTrue(result.Updated);
     }
 
     private async Task<ISitecoreItem> CreateItem(string itemName, ISitecoreItem parentItem = null, ISitecoreSSCSession itemSession = null)

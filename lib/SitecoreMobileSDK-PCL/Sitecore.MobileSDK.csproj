@@ -221,6 +221,7 @@
     <Compile Include="Credentials\IScCredentials.cs" />
     <Compile Include="PublicKey\ScAuthResponse.cs" />
     <Compile Include="UrlBuilder\GetItemsUrlBuilder.cs" />
+    <Compile Include="API\Items\ScUpdateItemResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

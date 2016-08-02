@@ -35,45 +35,6 @@
       this.testData = null;
     }
 
-    //    [Test]
-    //    public async void TestGetMediaItem()
-    //    {
-    //      // @igk !!! TEMPORARY TEST FOR CUSTOM USE, DO NOT DELETE, PLEASE !!!
-    //      IDownloadMediaOptions options = new MediaOptionsBuilder().Set
-    //        .SetDisplayAsThumbnail(true)
-    //        .Build();
-    //
-    //      var request = ItemSSCRequestBuilder.ReadMediaItemRequest("/sitecore/media library/Images/testname222")
-    //        .DownloadOptions(options)
-    //        .Database("master")
-    //        .Build();
-    //        
-    //      var response = await this.sessionAuthenticatedUser.DownloadMediaResourceAsync(request);
-    //     
-    //      byte[] data;
-    //
-    //      using (BinaryReader br = new BinaryReader(response))
-    //      {
-    //        data = br.ReadBytes((int)response.Length);
-    //      }
-    //
-    //      UIImage image = null;
-    //      image = new UIImage(NSData.FromArray(data));
-    //      //string text = reader.ReadToEnd();
-    //
-    //      var documentsDirectory = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-    //      string jpgFilename = System.IO.Path.Combine (documentsDirectory, "Photo.jpg"); // hardcoded filename, overwrites each time
-    //      NSData imgData = image.AsJPEG();
-    //      NSError err = null;
-    //      if (imgData.Save(jpgFilename, false, out err))
-    //      {
-    //        Console.WriteLine("saved as " + jpgFilename);
-    //      } else {
-    //        Console.WriteLine("NOT saved as " + jpgFilename + " because" + err.LocalizedDescription);
-    //      }
-    //     
-    //    }
-
     [Test]
     public async void TestGetItemById()
     {

@@ -86,7 +86,7 @@
         .Database("master")
         .Build();
 
-      var createResponse = await session.CreateItemAsync(request);
+      await session.CreateItemAsync(request);
 
       var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
                                         .Database("master")
@@ -94,7 +94,7 @@
 
       var readResponse = await session.ReadItemAsync(readRequest);
 
-      var resultItem = this.CheckCreatedItem(readResponse, expectedItem);
+      this.CheckCreatedItem(readResponse, expectedItem);
 
     }
 
@@ -115,7 +115,7 @@
          .AddFieldsRawValuesByNameToSet("Text", CreatedText)
          .Build();
 
-      var createResponse = await session.CreateItemAsync(request);
+      await session.CreateItemAsync(request);
 
       var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
                                         .Database("master")
@@ -144,7 +144,7 @@
         .AddFieldsRawValuesByNameToSet("Text", CreatedText)
         .Build();
 
-      var createResponse = await session.CreateItemAsync(request);
+      await session.CreateItemAsync(request);
 
       var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
                                         .Database("master")
@@ -173,7 +173,7 @@
         .AddFieldsRawValuesByNameToSet("Texttt", CreatedTexttt)
         .Build();
 
-      var createResponse = await session.CreateItemAsync(request);
+      await session.CreateItemAsync(request);
 
       var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
                                         .Database("master")
@@ -305,7 +305,7 @@
         .AddFieldsRawValuesByNameToSet(FieldName, FieldName)
         .Build();
 
-      var createResponse = await session.CreateItemAsync(request);
+      await session.CreateItemAsync(request);
 
       var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
                                         .Database("master")

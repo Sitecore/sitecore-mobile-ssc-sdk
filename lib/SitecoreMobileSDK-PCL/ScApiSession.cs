@@ -381,7 +381,7 @@ namespace Sitecore.MobileSDK
 
     #region Update Items
 
-    public async Task<ScItemsResponse> UpdateItemAsync(IUpdateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<ScUpdateItemResponse> UpdateItemAsync(IUpdateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       IUpdateItemByIdRequest requestCopy = request.DeepCopyUpdateItemByIdRequest();
 

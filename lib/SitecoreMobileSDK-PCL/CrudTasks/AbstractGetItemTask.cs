@@ -11,8 +11,9 @@
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.PublicKey;
 
-  internal abstract class AbstractGetItemTask<TRequest> : IRestApiCallTasks<TRequest, HttpRequestMessage, string, ScItemsResponse>
+  internal abstract class AbstractGetItemTask<TRequest, TResponse> : IRestApiCallTasks<TRequest, HttpRequestMessage, string, TResponse>
       where TRequest : class
+      where TResponse : class
   {
 
     private AbstractGetItemTask()
@@ -36,7 +37,7 @@
       return result;
     }
 
-    public async Task<string> SendRequestForUrlAsync(HttpRequestMessage requestUrl, CancellationToken cancelToken)
+    public virtual async Task<string> SendRequestForUrlAsync(HttpRequestMessage requestUrl, CancellationToken cancelToken)
     {
       //TODO: @igk debug request output, remove later
       Debug.WriteLine("REQUEST: " + requestUrl);
@@ -44,7 +45,7 @@
       return await httpResponse.Content.ReadAsStringAsync();
     }
 
-    public virtual async Task<ScItemsResponse> ParseResponseDataAsync(string data, CancellationToken cancelToken)
+    public virtual async Task<TResponse> ParseResponseDataAsync(string data, CancellationToken cancelToken)
     {
       Func<ScItemsResponse> syncParseResponse = () =>
       {
@@ -52,7 +53,7 @@
         Debug.WriteLine("RESPONSE: " + data);
         return ScItemsParser.Parse(data, this.CurrentDb, cancelToken);
       };
-      return await Task.Factory.StartNew(syncParseResponse, cancelToken);
+      return await Task.Factory.StartNew(syncParseResponse, cancelToken) as TResponse;
     }
 
     #endregion IRestApiCallTasks
@@ -70,7 +71,7 @@
 
     protected abstract string UrlToGetItemWithRequest(TRequest request);
 
-    private HttpClient httpClient;
+    protected HttpClient httpClient;
   }
 }
 

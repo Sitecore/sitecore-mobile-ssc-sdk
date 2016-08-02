@@ -19,7 +19,7 @@
     /// <returns>
     ///   <see cref="ScItemsResponse" /> Updated items list.
     /// </returns>
-    Task<ScItemsResponse> UpdateItemAsync(IUpdateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken));
+    Task<ScUpdateItemResponse> UpdateItemAsync(IUpdateItemByIdRequest request, CancellationToken cancelToken = default(CancellationToken));
   }
 }
 
