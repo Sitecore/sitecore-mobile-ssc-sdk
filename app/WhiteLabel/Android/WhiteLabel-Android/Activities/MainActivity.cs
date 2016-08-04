@@ -1,5 +1,6 @@
 ﻿namespace WhiteLabelAndroid.Activities
 {
+  using System.Net;
   using Android.App;
   using Android.Content;
   using Android.Content.PM;
@@ -48,7 +49,6 @@
       this.AddDeleteItemsButtons(container);
       this.AddMediaItemsButtons(container);
       this.AddAuthenticateButtons(container);
-      this.AddrenderingHtmlButtons(container);
     }
 
     private void AddReadItemsButtons(LinearLayout container)
@@ -84,14 +84,7 @@
       };
       createItemByIdButton.Click += (sender, e) => this.StartActivity(typeof(CreateItemByIdActivity));
 
-      var createItemByPathButton = new Button(this)
-      {
-        Text = this.GetString(Resource.String.text_create_item_by_path)
-      };
-      createItemByPathButton.Click += (sender, e) => this.StartActivity(typeof(CreateItemByPathActivity));
-
       container.AddView(createItemByIdButton);
-      container.AddView(createItemByPathButton);
     }
 
     private void AddDeleteItemsButtons(LinearLayout container)
@@ -113,14 +106,7 @@
       };
       downloadImageButton.Click += (sender, e) => this.StartActivity(typeof(DownloadImageActivtiy));
 
-      var uploadImageButton = new Button(this)
-      {
-        Text = this.GetString(Resource.String.text_upload_image)
-      };
-      uploadImageButton.Click += (sender, e) => this.StartActivity(typeof(UploadImageActivity));
-
       container.AddView(downloadImageButton);
-      container.AddView(uploadImageButton);
     }
 
     private void AddAuthenticateButtons(LinearLayout container)
@@ -134,15 +120,5 @@
       container.AddView(authenticateButton);
     }
 
-    private void AddrenderingHtmlButtons(LinearLayout container)
-    {
-      var renderingHtmlButton = new Button(this)
-      {
-        Text = this.GetString(Resource.String.text_get_rendering_html)
-      };
-      renderingHtmlButton.Click += (sender, e) => this.StartActivity(typeof(GetRenderingHtmlActivity));
-
-      container.AddView(renderingHtmlButton);
-    }
   }
 }

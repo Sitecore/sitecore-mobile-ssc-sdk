@@ -53,16 +53,9 @@ namespace WhiteLabelAndroid.Activities.Read
 
       this.Prefs = Prefs.From(this);
 
-      this.payloadRadioGroup = this.FindViewById<RadioGroup>(Resource.Id.group_payload_type);
-      
+        
       this.itemsListView = this.FindViewById<ListView>(Resource.Id.items_list);
       this.itemsListView.OnItemClickListener = this;
-
-      this.scopeParentCheckBox = this.FindViewById<CheckBox>(Resource.Id.checkbox_scope_parent);
-      this.scopeSelfCheckBox = this.FindViewById<CheckBox>(Resource.Id.checkbox_scope_self);
-      this.scopeChildrenCheckBox = this.FindViewById<CheckBox>(Resource.Id.checkbox_scope_children);
-
-      this.ScopeContainer = this.FindViewById<LinearLayout>(Resource.Id.container_scope);
 
       this.FieldNamEditText = this.FindViewById<EditText>(Resource.Id.field_item_field);
 
@@ -72,8 +65,6 @@ namespace WhiteLabelAndroid.Activities.Read
       this.GetItemsButton = this.FindViewById<Button>(Resource.Id.button_get_item);
 
       this.FieldNameContainer = this.FindViewById<LinearLayout>(Resource.Id.container_item_field);
-
-      this.PayloadContainer = this.FindViewById<LinearLayout>(Resource.Id.container_payload);
     }
 
     protected void PopulateItemsList(IEnumerable<ISitecoreItem> receivedItems)
