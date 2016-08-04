@@ -23,7 +23,7 @@ namespace Sitecore.MobileSDK.UserRequest.ReadRequest
         null, 
         this.itemSourceAccumulator, 
         this.queryParameters, 
-        this.resultIncludeStanderdTemplateFields,
+        this.resultIncludeStandardTemplateFields,
         this.itemId);
 
       return result;

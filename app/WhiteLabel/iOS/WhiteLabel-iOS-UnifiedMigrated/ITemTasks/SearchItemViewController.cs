@@ -58,7 +58,7 @@ namespace WhiteLabeliOS
                                              .AddDescendingFieldsToSort("text")
                                              .Build();
 
-          ScItemsResponse response = await session.RunSitecoreSearchAsync(request);
+          ScItemsResponse response = await session.RunSearchAsync(request);
 
           this.HideLoader();
 

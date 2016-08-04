@@ -88,7 +88,7 @@
 
     public CreateItemParameters CreateParameters { get; private set; }
 
-    public bool IncludeStanderdTemplateFields { get; private set; }
+    public bool IncludeStandardTemplateFields { get; private set; }
 
   }
 }

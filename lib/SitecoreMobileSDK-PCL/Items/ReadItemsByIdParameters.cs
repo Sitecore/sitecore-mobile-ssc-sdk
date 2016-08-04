@@ -18,7 +18,7 @@
       this.ItemSource = itemSource;
       this.ItemId = itemId;
       this.QueryParameters = queryParameters;
-      this.IncludeStanderdTemplateFields = icludeStanderdTemplateFields;
+      this.IncludeStandardTemplateFields = icludeStanderdTemplateFields;
     } 
 
     public virtual IReadItemsByIdRequest DeepCopyGetItemByIdRequest()
@@ -43,7 +43,7 @@
       }
 
 
-      return new ReadItemsByIdParameters(connection, itemSrc, payload, this.IncludeStanderdTemplateFields, this.ItemId);
+      return new ReadItemsByIdParameters(connection, itemSrc, payload, this.IncludeStandardTemplateFields, this.ItemId);
     }
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
@@ -61,7 +61,7 @@
 
     public IQueryParameters QueryParameters { get; private set; }
   
-    public bool IncludeStanderdTemplateFields { get; private set; }
+    public bool IncludeStandardTemplateFields { get; private set; }
   }
 }
 

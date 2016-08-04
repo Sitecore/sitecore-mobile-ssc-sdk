@@ -108,7 +108,7 @@
       return this.AddFieldsToRead((IEnumerable<string>)fieldParams);
     }
 
-    public IBaseRequestParametersBuilder<T> IncludeStanderdTemplateFields(bool include)
+    public IBaseRequestParametersBuilder<T> IncludeStandardTemplateFields(bool include)
     {
       this.icludeStanderdTemplateFields = include;
 

@@ -255,7 +255,7 @@ namespace Sitecore.MobileSDK
 
     #region SearchItems
 
-    public async Task<ScItemsResponse> RunStoredSearchAsync(ISitecoreStoredSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<ScItemsResponse> RunSearchAsync(ISitecoreStoredSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       ISitecoreStoredSearchRequest requestCopy = request.DeepCopySitecoreStoredSearchRequest();
 
@@ -265,6 +265,20 @@ namespace Sitecore.MobileSDK
 
       var urlBuilder = new RunStoredSearchUrlBuilder(this.restGrammar, this.sscGrammar);
       var taskFlow = new RunStoredSearchTasks(urlBuilder, this.httpClient);
+
+      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+    }
+
+    public async Task<ScItemsResponse> RunSearchAsync(ISitecoreSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      ISitecoreSearchRequest requestCopy = request.DeepCopySitecoreSearchRequest();
+
+      await this.GetPublicKeyAsync(cancelToken);
+
+      ISitecoreSearchRequest autocompletedRequest = this.requestMerger.FillSitecoreSearchGaps(requestCopy);
+
+      var urlBuilder = new RunSitecoreSearchUrlBuilder(this.restGrammar, this.sscGrammar);
+      var taskFlow = new RunSitecoreSearchTasks(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
@@ -279,20 +293,6 @@ namespace Sitecore.MobileSDK
 
       var urlBuilder = new RunStoredQuerryUrlBuilder(this.restGrammar, this.sscGrammar);
       var taskFlow = new RunStoredQuerryTasks(urlBuilder, this.httpClient);
-
-      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
-    }
-
-    public async Task<ScItemsResponse> RunSitecoreSearchAsync(ISitecoreSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      ISitecoreSearchRequest requestCopy = request.DeepCopySitecoreSearchRequest();
-
-      await this.GetPublicKeyAsync(cancelToken);
-
-      ISitecoreSearchRequest autocompletedRequest = this.requestMerger.FillSitecoreSearchGaps(requestCopy);
-
-      var urlBuilder = new RunSitecoreSearchUrlBuilder(this.restGrammar, this.sscGrammar);
-      var taskFlow = new RunSitecoreSearchTasks(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }

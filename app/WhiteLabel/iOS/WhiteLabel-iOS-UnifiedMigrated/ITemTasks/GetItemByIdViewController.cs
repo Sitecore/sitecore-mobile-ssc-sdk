@@ -81,8 +81,9 @@ namespace WhiteLabeliOS
 
           var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
                                              .AddFieldsToRead(this.fieldNameTextField.Text)
-                                             .IcludeStanderdTemplateFields(true)
+                                             .IncludeStandardTemplateFields(true)
                                              .Build();
+
 
           ScItemsResponse response = await session.ReadItemAsync(request);
           response = await session.ReadItemAsync(request);

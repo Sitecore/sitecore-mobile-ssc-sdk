@@ -57,9 +57,9 @@
       return (IGetVersionedItemRequestParametersBuilder<T>)base.ItemsPerPage(itemsCountPerPage);
     }
 
-    new public IGetVersionedItemRequestParametersBuilder<T> IncludeStanderdTemplateFields(bool include)
+    new public IGetVersionedItemRequestParametersBuilder<T> IncludeStandardTemplateFields(bool include)
     {
-      return (IGetVersionedItemRequestParametersBuilder<T>)base.IncludeStanderdTemplateFields(include);
+      return (IGetVersionedItemRequestParametersBuilder<T>)base.IncludeStandardTemplateFields(include);
     }
     #endregion Compatibility Casts
   }

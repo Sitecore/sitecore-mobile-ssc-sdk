@@ -32,7 +32,7 @@ namespace Sitecore.MobileSDK.API.Request
     /// </returns>
     IBaseRequestParametersBuilder<T> Language(string itemLanguage);
 
-    IBaseRequestParametersBuilder<T> IncludeStanderdTemplateFields(bool include);
+    IBaseRequestParametersBuilder<T> IncludeStandardTemplateFields(bool include);
 
     /// <summary>
     /// Builds request with specified parameters.

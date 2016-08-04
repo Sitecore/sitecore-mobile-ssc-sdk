@@ -97,7 +97,7 @@
       }
 
 
-      if (request.IncludeStanderdTemplateFields) {
+      if (request.IncludeStandardTemplateFields) {
         result =
           result +
           this.restGrammar.FieldSeparator 

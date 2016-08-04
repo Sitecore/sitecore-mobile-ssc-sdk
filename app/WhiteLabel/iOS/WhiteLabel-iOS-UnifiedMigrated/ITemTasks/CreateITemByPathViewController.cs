@@ -52,8 +52,8 @@
 
           this.ShowLoader();
 
-          ScItemsResponse response = await session.UpdateItemAsync(request);
-          if (response != null)
+          var response = await session.UpdateItemAsync(request);
+          if (response.Updated)
           {
             AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item updated successfully");
           }

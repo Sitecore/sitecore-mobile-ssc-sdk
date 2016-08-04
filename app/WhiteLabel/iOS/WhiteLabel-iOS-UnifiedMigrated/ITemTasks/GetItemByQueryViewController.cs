@@ -100,7 +100,7 @@
 
           this.ShowLoader();
 
-          ScItemsResponse response = await session.RunStoredSearchAsync(request);
+          ScItemsResponse response = await session.RunSearchAsync(request);
 
           this.HideLoader();
           if (response.ResultCount > 0)

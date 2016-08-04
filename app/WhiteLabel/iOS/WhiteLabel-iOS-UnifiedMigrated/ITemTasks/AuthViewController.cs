@@ -57,9 +57,9 @@
         {
           this.ShowLoader();
 
-          bool response = await session.AuthenticateAsync();
+          var response = await session.AuthenticateAsync();
 
-          if (response)
+          if (response.IsSuccessful)
           {
             AlertHelper.ShowLocalizedAlertWithOkOption("Message", "This user exist");
           }

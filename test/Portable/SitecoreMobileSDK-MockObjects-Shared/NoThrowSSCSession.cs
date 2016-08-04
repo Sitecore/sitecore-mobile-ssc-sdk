@@ -120,9 +120,18 @@
       return await this.InvokeNoThrow(this.workerSession.UpdateItemAsync(request, cancelToken));
     }
 
-    public async Task<ScItemsResponse> RunStoredSearchAsync(ISitecoreStoredSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
+    #endregion Update Items
+
+    #region Search Items
+
+    public async Task<ScItemsResponse> RunSearchAsync(ISitecoreStoredSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
-      return await this.InvokeNoThrow(this.workerSession.RunStoredSearchAsync(request, cancelToken));
+      return await this.InvokeNoThrow(this.workerSession.RunSearchAsync(request, cancelToken));
+    }
+
+    public async Task<ScItemsResponse> RunSearchAsync(ISitecoreSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      return await this.InvokeNoThrow(this.workerSession.RunSearchAsync(request, cancelToken));
     }
 
     public async Task<ScItemsResponse> RunStoredQuerryAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
@@ -130,12 +139,7 @@
       return await this.InvokeNoThrow(this.workerSession.RunStoredQuerryAsync(request, cancelToken));
     }
 
-    public async Task<ScItemsResponse> RunSitecoreSearchAsync(ISitecoreSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      return await this.InvokeNoThrow(this.workerSession.RunSitecoreSearchAsync(request, cancelToken));
-    }
-
-    #endregion Update Items
+    #endregion Search Items
 
     #region DeleteItems
 
