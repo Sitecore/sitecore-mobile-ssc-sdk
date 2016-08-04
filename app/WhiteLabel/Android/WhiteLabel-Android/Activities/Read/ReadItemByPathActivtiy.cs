@@ -42,14 +42,7 @@ namespace WhiteLabelAndroid.Activities.Read
     {
       try
       {
-        var builder = ItemWebApiRequestBuilder.ReadItemsRequestWithPath(path)
-          .Payload(this.GetSelectedPayload());
-
-        var scopes = this.GetSelectedScopes();
-        if (scopes.Any())
-        {
-          builder.AddScope(scopes);
-        }
+        var builder = ItemSSCRequestBuilder.ReadItemsRequestWithPath(path);
 
         if (!string.IsNullOrWhiteSpace(this.FieldNamEditText.Text))
         {

@@ -76,43 +76,6 @@ namespace WhiteLabelAndroid.Activities.Read
       this.PayloadContainer = this.FindViewById<LinearLayout>(Resource.Id.container_payload);
     }
 
-    protected IEnumerable<ScopeType> GetSelectedScopes()
-    {
-      var scopes = new List<ScopeType>();
-
-      if (this.scopeParentCheckBox.Checked)
-      {
-        scopes.Add(ScopeType.Parent);
-      }
-
-      if (this.scopeSelfCheckBox.Checked)
-      {
-        scopes.Add(ScopeType.Self);
-      }
-
-      if (this.scopeChildrenCheckBox.Checked)
-      {
-        scopes.Add(ScopeType.Children);
-      }
-
-      return scopes;
-    }
-
-    protected PayloadType GetSelectedPayload()
-    {
-      switch (this.payloadRadioGroup.CheckedRadioButtonId)
-      {
-        case Resource.Id.payload_min:
-          return PayloadType.Min;
-        case Resource.Id.payload_content:
-          return PayloadType.Content;
-        case Resource.Id.payload_full:
-          return PayloadType.Full;
-        default:
-          return PayloadType.Min;
-      }
-    }
-
     protected void PopulateItemsList(IEnumerable<ISitecoreItem> receivedItems)
     {
       this.items = receivedItems;

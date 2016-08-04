@@ -88,32 +88,7 @@ namespace WhiteLabelAndroid.Activities.Media
 
       try
       {
-        this.SetProgressBarIndeterminateVisibility(true);
-
-        using (ISitecoreWebApiSession session = Prefs.From(this).Session)
-        {
-          using (Stream stream = ContentResolver.OpenInputStream(this.imageUri))
-          {
-            var builder = ItemWebApiRequestBuilder.UploadResourceRequestWithParentPath(imagePath)
-              .ItemDataStream(stream)
-              .ContentType("image/jpg")
-              .ItemName(imageName)
-              .FileName("bugaga.jpg");
-
-            var response = await session.UploadMediaResourceAsync(builder.Build());
-
-            if (response != null && response.ResultCount > 0)
-            {
-              DialogHelper.ShowSimpleDialog(this, "Image uploaded", "Image path : " + response[0].Path);
-            }
-            else
-            {
-              var title = this.GetString(Resource.String.text_error);
-              DialogHelper.ShowSimpleDialog(this, title, "Failed to upload image");
-            }
-          }
-        }
-        this.SetProgressBarIndeterminateVisibility(false);
+        
       }
       catch (System.Exception exception)
       {

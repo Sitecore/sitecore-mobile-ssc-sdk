@@ -39,39 +39,39 @@ namespace WhiteLabelAndroid.Activities.Create
 
       try
       {
-        var builder = ItemWebApiRequestBuilder.CreateItemRequestWithParentId(parentId)
-          .ItemTemplatePath("Sample/Sample Item")
-          .ItemName(itemName);
+        //var builder = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(parentId)
+        //  .ItemTemplatePath("Sample/Sample Item")
+        //  .ItemName(itemName);
 
-        if (!string.IsNullOrEmpty(titleFieldValue))
-        {
-          builder.AddFieldsRawValuesByNameToSet("Title", titleFieldValue);
-        }
+        //if (!string.IsNullOrEmpty(titleFieldValue))
+        //{
+        //  builder.AddFieldsRawValuesByNameToSet("Title", titleFieldValue);
+        //}
 
-        if (!string.IsNullOrEmpty(textFieldValue))
-        {
-          builder.AddFieldsRawValuesByNameToSet("Text", textFieldValue);
-        }
+        //if (!string.IsNullOrEmpty(textFieldValue))
+        //{
+        //  builder.AddFieldsRawValuesByNameToSet("Text", textFieldValue);
+        //}
 
-        this.SetProgressBarIndeterminateVisibility(true);
+        //this.SetProgressBarIndeterminateVisibility(true);
 
-        using (var session = this.Prefs.Session)
-        {
-          var response = await session.CreateItemAsync(builder.Build());
+        //using (var session = this.Prefs.Session)
+        //{
+        //  var response = await session.CreateItemAsync(builder.Build());
 
-          this.SetProgressBarIndeterminateVisibility(false);
-          if (response.ResultCount == 0)
-          {
-            DialogHelper.ShowSimpleDialog(this, "Failed", "Failed to create item");
-          }
-          else
-          {
-            this.createItemId = response[0].Id;
+        //  this.SetProgressBarIndeterminateVisibility(false);
+        //  if (response.ResultCount == 0)
+        //  {
+        //    DialogHelper.ShowSimpleDialog(this, "Failed", "Failed to create item");
+        //  }
+        //  else
+        //  {
+        //    this.createItemId = response[0].Id;
 
-            var message = "Item path : " + response[0].Path;
-            DialogHelper.ShowSimpleDialog(this, "Item created", message);
-          }
-        }
+        //    var message = "Item path : " + response[0].Path;
+        //    DialogHelper.ShowSimpleDialog(this, "Item created", message);
+        //  }
+        //}
       }
       catch (System.Exception exception)
       {
@@ -101,7 +101,7 @@ namespace WhiteLabelAndroid.Activities.Create
 
       try
       {
-        var builder = ItemWebApiRequestBuilder.UpdateItemRequestWithId(this.createItemId);
+        var builder = ItemSSCRequestBuilder.UpdateItemRequestWithId(this.createItemId);
 
         if (!string.IsNullOrEmpty(titleFieldValue))
         {
@@ -119,14 +119,13 @@ namespace WhiteLabelAndroid.Activities.Create
         {
           var response = await session.UpdateItemAsync(builder.Build());
 
-          if (response.ResultCount == 0)
+          if (response.Updated)
           {
-            DialogHelper.ShowSimpleDialog(this, "Failed", "Failed to update item");
+            DialogHelper.ShowSimpleDialog(this, "Result", "Item updated successfully");
           }
           else
           {
-            var message = "Item path : " + response[0].Path;
-            DialogHelper.ShowSimpleDialog(this, "Item updated", message);
+            DialogHelper.ShowSimpleDialog(this, "Failed", "Failed to update item");
           }
         }
 

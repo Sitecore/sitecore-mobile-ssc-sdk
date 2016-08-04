@@ -5,8 +5,8 @@ namespace WhiteLabelAndroid.Activities
   using Android.Views;
   using Android.Widget;
 
-  using Sitecore.MobileSDK.PasswordProvider.Android;
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.PasswordProvider;
 
   [Activity]
   public class AuthenticateActivity : Activity
@@ -58,18 +58,17 @@ namespace WhiteLabelAndroid.Activities
 
       try
       {
-        using (var credentials = new SecureStringPasswordProvider(login, password))
-          using (var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
+        using (var credentials = new ScUnsecuredCredentialsProvider(login, password, "sitecore"))
+          using (var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
             .Credentials(credentials)
-            .Site(site)
             .BuildReadonlySession())
           {
             this.SetProgressBarIndeterminateVisibility(true);
 
-            bool response = await session.AuthenticateAsync();
+            var response = await session.AuthenticateAsync();
 
             this.SetProgressBarIndeterminateVisibility(false);
-            if (response)
+            if (response.IsSuccessful)
             {
               DialogHelper.ShowSimpleDialog(this, "Success", "This user exists");
             }

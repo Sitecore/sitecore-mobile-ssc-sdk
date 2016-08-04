@@ -2,7 +2,7 @@ namespace WhiteLabelAndroid
 {
   using Android.Content;
   using Android.Preferences;
-  using Sitecore.MobileSDK.PasswordProvider.Android;
+  using Sitecore.MobileSDK.PasswordProvider;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
@@ -114,27 +114,25 @@ namespace WhiteLabelAndroid
 
     #endregion Database
 
-    public ISitecoreWebApiSession Session
+    public ISitecoreSSCSession Session
     {
       get
       {
         bool isAuthentiated = !string.IsNullOrEmpty(this.Login) && !string.IsNullOrEmpty(this.Password);
 
-        ISitecoreWebApiSession session;
+        ISitecoreSSCSession session;
         if(isAuthentiated)
         {
-          var credentials = new SecureStringPasswordProvider(this.Login, this.Password);
+          var credentials = new ScUnsecuredCredentialsProvider(this.Login, this.Password, "sitecore");
 
-          session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(this.InstanceUrl)
+          session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.InstanceUrl)
             .Credentials(credentials)
             .DefaultDatabase(this.Database)
-            .Site(this.Site)
             .BuildSession();
         }
         else
         {
-          session = SitecoreWebApiSessionBuilder.AnonymousSessionWithHost(this.InstanceUrl)
-            .Site(this.Site)
+          session = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(this.InstanceUrl)
             .DefaultDatabase(this.Database)
             .BuildSession();
         }

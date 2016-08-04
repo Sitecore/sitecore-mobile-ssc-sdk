@@ -47,24 +47,7 @@ namespace WhiteLabelAndroid.Activities.Read
     {
       try
       {
-        var request = ItemWebApiRequestBuilder.ReadItemsRequestWithSitecoreQuery(query).Build();
-        this.SetProgressBarIndeterminateVisibility(true);
-
-        using (var session = this.Prefs.Session)
-        {
-          var response = await session.ReadItemAsync(request);
-          
-          if (response.ResultCount == 0)
-          {
-            DialogHelper.ShowSimpleDialog(this, Resource.String.text_item_received, Resource.String.text_no_item);
-          }
-          else
-          {
-            this.PopulateItemsList(response);
-          }
-        }
-
-        this.SetProgressBarIndeterminateVisibility(false);
+        
       }
       catch (Exception exception)
       {

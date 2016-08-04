@@ -51,29 +51,7 @@ namespace WhiteLabelAndroid.Activities
 
       try
       {
-        this.SetProgressBarIndeterminateVisibility(true);
-
-        using (ISitecoreWebApiSession session = Prefs.From(this).Session)
-        {
-          var request = ItemWebApiRequestBuilder.RenderingHtmlRequestWithSourceAndRenderingId(sourceId, renderingId)
-            .Build();
-
-          var response = await session.ReadRenderingHtmlAsync(request);
-
-          if (response != null)
-          {
-            var reader = new StreamReader(response);
-            string html = await reader.ReadToEndAsync();
-
-            this.webview.LoadDataWithBaseURL(null, html, null, null, null);
-          }
-          else
-          {
-            var title = this.GetString(Resource.String.text_error);
-            DialogHelper.ShowSimpleDialog(this, title, "Failed load rendering html");
-          }
-        }
-        this.SetProgressBarIndeterminateVisibility(false);
+        
       }
       catch (System.Exception exception)
       {

@@ -45,7 +45,7 @@ namespace WhiteLabelAndroid.Activities
 
       try
       {
-        var request = ItemWebApiRequestBuilder.DeleteItemRequestWithId(itemId).Build();
+        var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(itemId).Build();
 
         this.SetProgressBarIndeterminateVisibility(true);
 
@@ -69,9 +69,9 @@ namespace WhiteLabelAndroid.Activities
     private async void DeleteItemByPath()
     {
       var itemPathField = this.FindViewById<EditText>(Resource.Id.field_item_path);
-      var itempath = itemPathField.Text;
+      var itemId = itemPathField.Text;
 
-      if (string.IsNullOrWhiteSpace(itempath))
+      if (string.IsNullOrWhiteSpace(itemId))
       {
         Toast.MakeText(this, "Please enter item path", ToastLength.Long).Show();
         return;
@@ -79,17 +79,7 @@ namespace WhiteLabelAndroid.Activities
 
       try
       {
-        var request = ItemWebApiRequestBuilder.DeleteItemRequestWithPath(itempath).Build();
-
-        this.SetProgressBarIndeterminateVisibility(true);
-
-        using (var session = this.prefs.Session)
-        {
-          var response = await session.DeleteItemAsync(request);
-
-          this.SetProgressBarIndeterminateVisibility(false);
-          this.ShowResult(response);
-        }
+        
       }
       catch (System.Exception exception)
       {
@@ -113,18 +103,7 @@ namespace WhiteLabelAndroid.Activities
 
       try
       {
-        var request = ItemWebApiRequestBuilder.DeleteItemRequestWithSitecoreQuery(itemQuery).Build();
-
-        this.SetProgressBarIndeterminateVisibility(true);
-
-        using (var session = this.prefs.Session)
-        {
-          var response = await session.DeleteItemAsync(request);
-
-          this.SetProgressBarIndeterminateVisibility(false);
-
-          this.ShowResult(response);
-        }
+        
       }
       catch (System.Exception exception)
       {
@@ -137,13 +116,13 @@ namespace WhiteLabelAndroid.Activities
 
     private void ShowResult(ScDeleteItemsResponse response)
     {
-      if (response.Count == 0)
+      if (response.Deleted)
       {
-        DialogHelper.ShowSimpleDialog(this, "Failed", "No items deleted");
+        DialogHelper.ShowSimpleDialog(this, "Item deleted", "Item successsfully deleted");
       }
       else
       {
-        DialogHelper.ShowSimpleDialog(this, "Item deleted", "Item successsfully deleted");
+        DialogHelper.ShowSimpleDialog(this, "Failed", "No items deleted");
       }
     }
   }

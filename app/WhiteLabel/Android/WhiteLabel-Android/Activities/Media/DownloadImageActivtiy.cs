@@ -70,7 +70,7 @@ namespace WhiteLabelAndroid.Activities.Media
           builder.Height(height);
         }
 
-        var requestBuilder = ItemWebApiRequestBuilder.DownloadResourceRequestWithMediaPath(itemPath);
+        var requestBuilder = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(itemPath);
 
         IDownloadMediaOptions options = builder.Build();
         if (!options.IsEmpty)
