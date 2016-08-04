@@ -33,6 +33,10 @@
 
     protected override void OnCreate(Bundle bundle)
     {
+      ServicePointManager
+          .ServerCertificateValidationCallback +=
+          (sender, cert, chain, sslPolicyErrors) => true;
+      
       base.OnCreate(bundle);
       this.SetContentView(Resource.Layout.activity_main);
       this.SetTitle(Resource.String.app_name);
