@@ -54,7 +54,7 @@
     public async void TestGetItemByPathWithAllFields()
     {
       var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(testData.Items.Home.Path)
-                                         .IncludeStanderdTemplateFields(true)
+                                         .IncludeStandardTemplateFields(true)
                                          .Build();
       
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
@@ -235,7 +235,7 @@
     {
       var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("00CB2AC4-70DB-482C-85B4-B1F3A4CFE643")
                                          .AddFieldsToRead("Normal Text", "__Owner")
-                                         .IncludeStanderdTemplateFields(true)
+                                         .IncludeStandardTemplateFields(true)
                                          .Build();
       
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
