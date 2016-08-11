@@ -65,7 +65,6 @@
     <Compile Include="Activities\ItemFieldsActivity.cs" />
     <Compile Include="Activities\Read\ReadItemByPathActivtiy.cs" />
     <Compile Include="Activities\Read\ReadItemByIdActivity.cs" />
-    <Compile Include="Activities\Read\ReadItemByQueryActivtiy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

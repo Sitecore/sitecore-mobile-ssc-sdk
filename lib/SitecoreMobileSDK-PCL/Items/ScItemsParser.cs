@@ -82,7 +82,12 @@
         }
 
         newItem = new ScItem(source, fieldsByName);
-      } catch (Exception e) { 
+      } catch (Exception e) {
+        OperationCanceledException cancel = e as OperationCanceledException;
+        if (cancel != null) { 
+          throw cancel; 
+        }
+          
         throw new ParserException(TaskFlowErrorMessages.PARSER_EXCEPTION_MESSAGE + item.ToString(), e);
       }
 

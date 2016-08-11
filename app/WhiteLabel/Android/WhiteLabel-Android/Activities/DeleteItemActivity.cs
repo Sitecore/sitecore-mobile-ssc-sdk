@@ -24,12 +24,6 @@ namespace WhiteLabelAndroid.Activities
 
       var deleteItemByIdButton = FindViewById<Button>(Resource.Id.button_delete_by_id);
       deleteItemByIdButton.Click += (sender, args) => this.DeleteItemById();
-
-      var deleteItemByPathButton = FindViewById<Button>(Resource.Id.button_delete_by_path);
-      deleteItemByPathButton.Click += (sender, args) => this.DeleteItemByPath();
-
-      var deleteItemByQueryButton = FindViewById<Button>(Resource.Id.button_delete_by_query);
-      deleteItemByQueryButton.Click += (sender, args) => this.DeleteItemByQuery();
     }
 
     private async void DeleteItemById()
@@ -56,54 +50,6 @@ namespace WhiteLabelAndroid.Activities
           this.SetProgressBarIndeterminateVisibility(false);
           this.ShowResult(response);
         }
-      }
-      catch (System.Exception exception)
-      {
-        this.SetProgressBarIndeterminateVisibility(false);
-
-        var title = this.GetString(Resource.String.text_error);
-        DialogHelper.ShowSimpleDialog(this, title, exception.Message);
-      }
-    }
-
-    private async void DeleteItemByPath()
-    {
-      var itemPathField = this.FindViewById<EditText>(Resource.Id.field_item_path);
-      var itemId = itemPathField.Text;
-
-      if (string.IsNullOrWhiteSpace(itemId))
-      {
-        Toast.MakeText(this, "Please enter item path", ToastLength.Long).Show();
-        return;
-      }
-
-      try
-      {
-        
-      }
-      catch (System.Exception exception)
-      {
-        this.SetProgressBarIndeterminateVisibility(false);
-
-        var title = this.GetString(Resource.String.text_error);
-        DialogHelper.ShowSimpleDialog(this, title, exception.Message);
-      }
-    }
-
-    private async void DeleteItemByQuery()
-    {
-      var itemQueryField = this.FindViewById<EditText>(Resource.Id.field_item_query);
-      var itemQuery = itemQueryField.Text;
-
-      if (string.IsNullOrWhiteSpace(itemQuery))
-      {
-        Toast.MakeText(this, "Please enter query", ToastLength.Long).Show();
-        return;
-      }
-
-      try
-      {
-        
       }
       catch (System.Exception exception)
       {

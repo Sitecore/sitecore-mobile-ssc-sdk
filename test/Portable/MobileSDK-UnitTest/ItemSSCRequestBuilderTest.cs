@@ -15,7 +15,7 @@
     [Test]
     public void TestItemIdRequestBuilderWithAllFields()
     {
-      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .Database("web")
         .Language("en")
         .Version(1)
@@ -27,7 +27,7 @@
       Assert.IsNotNull( result.QueryParameters );
       Assert.IsNull(result.SessionSettings);
 
-      Assert.AreEqual("{dead-beef}", result.ItemId);
+      Assert.AreEqual("110d559f-dea5-42ea-9c1c-8a5df7e70ef9", result.ItemId);
       Assert.AreEqual("en", result.ItemSource.Language);
       Assert.AreEqual("web", result.ItemSource.Database);
       Assert.AreEqual(1, result.ItemSource.VersionNumber);
@@ -37,7 +37,7 @@
     [Test]
     public void TestItemIdRequestBuilderWithIdOnly()
     {
-      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("{abra-kadabra}").Build();
+      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9").Build();
 
       Assert.IsNotNull(result);
       Assert.IsNotNull(result.ItemSource);
@@ -46,7 +46,7 @@
       Assert.IsNull(result.SessionSettings);
 
 
-      Assert.AreEqual("{abra-kadabra}", result.ItemId);
+      Assert.AreEqual("110d559f-dea5-42ea-9c1c-8a5df7e70ef9", result.ItemId);
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
       Assert.IsNull(result.ItemSource.VersionNumber);
@@ -161,7 +161,7 @@
       string[] moarFields = { "1", "2", "4" };
       string[] expectedFields = { "Мама", "Мыла", "Раму", "1", "2", "4" };
 
-      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .AddFieldsToRead(fields)
         .AddFieldsToRead(moarFields)
         .Build();
@@ -174,7 +174,7 @@
 
 
 
-      Assert.AreEqual("{dead-c0de}", result.ItemId);
+      Assert.AreEqual("110d559f-dea5-42ea-9c1c-8a5df7e70ef9", result.ItemId);
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
       Assert.IsNull(result.ItemSource.VersionNumber);
@@ -190,7 +190,7 @@
 
       string[] expectedFields = { "Мама", "Мыла", "Раму", "1", "2", "4" };
 
-      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .AddFieldsToRead(fields)
         .AddFieldsToRead(moarFieldsList)
         .Build();
@@ -203,7 +203,7 @@
 
 
 
-      Assert.AreEqual("{dead-c0de}", result.ItemId);
+      Assert.AreEqual("110d559f-dea5-42ea-9c1c-8a5df7e70ef9", result.ItemId);
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
       Assert.IsNull(result.ItemSource.VersionNumber);
@@ -217,7 +217,7 @@
     {
       string[] expectedFields = { "Мыла", "Раму", "Мама" };
 
-      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .AddFieldsToRead("Мыла")
         .AddFieldsToRead("Раму")
         .AddFieldsToRead("Мама")
@@ -231,7 +231,7 @@
 
 
 
-      Assert.AreEqual("{dead-c0de}", result.ItemId);
+      Assert.AreEqual("110d559f-dea5-42ea-9c1c-8a5df7e70ef9", result.ItemId);
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
       Assert.IsNull(result.ItemSource.VersionNumber);
@@ -243,7 +243,7 @@
     public void TestDuplicatedFieldsCauseException()
     {
       Assert.Throws<InvalidOperationException>(() => 
-      ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+      ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .AddFieldsToRead("XXXXX")
         .AddFieldsToRead("YYY")
         .AddFieldsToRead("XXXXX")
@@ -254,7 +254,7 @@
     public void TestCaseInsensitiveDuplicatedFieldsCauseException()
     {
       Assert.Throws<InvalidOperationException>(() => 
-        ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .AddFieldsToRead("XXXXX")
         .AddFieldsToRead("YYY")
         .AddFieldsToRead("xxXXx")
@@ -266,7 +266,7 @@
     public void TestEmptyFieldsAreIgnored()
     {
       var request = 
-        ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .AddFieldsToRead("")
         .Build();
 
@@ -282,12 +282,12 @@
     public void TestNullFieldsAreNotIgnored()
     {
       {
-        TestDelegate action = () => ItemSSCRequestBuilder.ReadItemsRequestWithId ("{dead-c0de}").AddFieldsToRead ((string)null);
+        TestDelegate action = () => ItemSSCRequestBuilder.ReadItemsRequestWithId ("110d559f-dea5-42ea-9c1c-8a5df7e70ef9").AddFieldsToRead ((string)null);
         Assert.Throws<ArgumentNullException>(action);
       }
 
       {
-        TestDelegate action = () => ItemSSCRequestBuilder.ReadItemsRequestWithId ("{dead-c0de}").AddFieldsToRead ((IEnumerable<string>)null);
+        TestDelegate action = () => ItemSSCRequestBuilder.ReadItemsRequestWithId ("110d559f-dea5-42ea-9c1c-8a5df7e70ef9").AddFieldsToRead ((IEnumerable<string>)null);
         Assert.Throws<ArgumentNullException>(action);
       }
     }
@@ -296,7 +296,7 @@
     public void TestWhitespaceFieldsAreIgnored()
     {
       var request = 
-        ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+        ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .AddFieldsToRead("\n   \t   \r")
         .Build();
 
@@ -313,7 +313,7 @@
     {
       string[] expectedFields = { "alpha", "beta", "gamma" };
 
-      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-c0de}")
+      IReadItemsByIdRequest result =  ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .AddFieldsToRead("alpha", "beta", "gamma")
         .Build();
 
@@ -325,7 +325,7 @@
 
 
 
-      Assert.AreEqual("{dead-c0de}", result.ItemId);
+      Assert.AreEqual("110d559f-dea5-42ea-9c1c-8a5df7e70ef9", result.ItemId);
       Assert.IsNull(result.ItemSource.Language);
       Assert.IsNull(result.ItemSource.Database);
       Assert.IsNull(result.ItemSource.VersionNumber);
@@ -337,7 +337,7 @@
     [Test]
     public void TestNullDatabaseCanBeAssignedExplicitly()
     {
-      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .Database(null)
         .Build();
 
@@ -375,8 +375,8 @@
     #endregion Database Validation
 
 
-    #region Language Validationvar request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
-     
+    #region Language Validationvar request = ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
+
     [Test]
     public void TestNullLanguageCanBeAssignedExplicitly()
     {
@@ -390,7 +390,7 @@
     [Test]
     public void TestEmptyLanguageCanBeAssignedExplicitly()
     {
-      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .Language(string.Empty)
         .Build();
       Assert.IsNotNull(request);
@@ -448,7 +448,7 @@
     public void TestVersionCannotBeAssignedTwice()
     {
       Assert.Throws<InvalidOperationException>( () =>
-        ItemSSCRequestBuilder.ReadItemsRequestWithId("{dead-beef}")
+        ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .Version(2)
         .Version(99)
       );

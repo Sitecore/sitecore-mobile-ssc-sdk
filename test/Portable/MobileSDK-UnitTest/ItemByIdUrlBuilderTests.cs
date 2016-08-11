@@ -30,16 +30,12 @@
       this.builder = new ItemByIdUrlBuilder(restGrammar, webApiGrammar);
 
       SessionConfigPOD mutableSessionConfig = new SessionConfigPOD();
-      mutableSessionConfig.ItemSSCVersion = "v1";
       mutableSessionConfig.InstanceUrl = "sitecore.net";
-      mutableSessionConfig.Site = null;
       this.sessionConfig = mutableSessionConfig;
 
 
       mutableSessionConfig = new SessionConfigPOD();
-      mutableSessionConfig.ItemSSCVersion = "v234";
       mutableSessionConfig.InstanceUrl = "mobiledev1ua1.dk.sitecore.net:7119";
-      mutableSessionConfig.Site = "/sitecore/shell";
       this.sitecoreShellConfig = mutableSessionConfig;
 
       this.payload = new QueryParameters(null);
@@ -50,41 +46,6 @@
     {
       this.builder = null;
       this.sessionConfig = null;
-    }
-
-    [Test]
-    public void TestNullPayloadIsNotReplacedWithDefault()
-    {
-      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-      mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
-      mutableParameters.ItemId = "{   xxx   }";
-      mutableParameters.QueryParameters = new QueryParameters(null);
-
-      IReadItemsByIdRequest parameters = mutableParameters;
-
-      string result = this.builder.GetUrlForRequest(parameters);
-      string expected = "http://sitecore.net/-/item/v1?sc_database=web&language=en&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
-
-      Assert.AreEqual(expected, result);
-    }
-
-
-    [Test]
-    public void TestNullPayloadStructIsIgnored()
-    {
-      MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
-      mutableParameters.SessionSettings = this.sessionConfig;
-      mutableParameters.ItemSource = LegacyConstants.DefaultSource();
-      mutableParameters.ItemId = "{   xxx   }";
-      mutableParameters.QueryParameters = null;
-
-      IReadItemsByIdRequest parameters = mutableParameters;
-
-      string result = this.builder.GetUrlForRequest(parameters);
-      string expected = "http://sitecore.net/-/item/v1?sc_database=web&language=en&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
-
-      Assert.AreEqual(expected, result);
     }
 
     [Test]
@@ -108,13 +69,13 @@
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sessionConfig;
       mutableParameters.ItemSource = LegacyConstants.DefaultSource();
-      mutableParameters.ItemId = "{   xxx   }";
+      mutableParameters.ItemId = "110d559f-dea5-42ea-9c1c-8a5df7e70ef9";
       mutableParameters.QueryParameters = this.payload;
 
       IReadItemsByIdRequest parameters = mutableParameters;
 
       string result = this.builder.GetUrlForRequest(parameters);
-      string expected = "http://sitecore.net/-/item/v1?sc_database=web&language=en&payload=min&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
+      string expected = "http://sitecore.net/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9?database=web&language=en";
 
       Assert.AreEqual(expected, result);
     }
@@ -125,13 +86,13 @@
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sitecoreShellConfig;
       mutableParameters.ItemSource = LegacyConstants.DefaultSource();
-      mutableParameters.ItemId = "{   xxx   }";
+      mutableParameters.ItemId = "110d559f-dea5-42ea-9c1c-8a5df7e70ef9";
       mutableParameters.QueryParameters = this.payload;
 
       IReadItemsByIdRequest parameters = mutableParameters;
 
       string result = this.builder.GetUrlForRequest(parameters);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/-/item/v234%2fsitecore%2fshell?sc_database=web&language=en&payload=min&sc_itemid=%7b%20%20%20xxx%20%20%20%7d";
+      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9?database=web&language=en";
 
       Assert.AreEqual(expected, result);
     }
@@ -172,42 +133,25 @@
     {
       var connection = new SessionConfig("localhost");
 
-      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}").Build();
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9").Build();
       var requestMerger = new UserRequestMerger(connection, null);
       var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
 
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1?sc_itemid=%7bxxx-yyy-zzz%7d";
+      string expected = "http://localhost/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9";
 
       Assert.AreEqual(expected, result);
     }
 
-    [Test]
-    public void TestOptionalSourceAndExplicitPayload()
-    {
-      var connection = new SessionConfig("localhost");
-
-      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
-        .Build();
-      var requestMerger = new UserRequestMerger(connection, null);
-      var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
-
-      var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
-
-      string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1?sc_itemid=%7bxxx-yyy-zzz%7d";
-
-      Assert.AreEqual(expected, result);
-    }
 
     [Test]
     public void TestExplicitDatabase()
     {
       var connection = new SessionConfig("localhost");
 
-      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .Database("master")
         .Build();
       var requestMerger = new UserRequestMerger(connection, null);
@@ -216,17 +160,17 @@
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1?sc_database=master&sc_itemid=%7bxxx-yyy-zzz%7d";
+      string expected = "http://localhost/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9?database=master";
 
       Assert.AreEqual(expected, result);
     }
 
     [Test]
-    public void TestDatabaseAndExplicitLanguageAndPayload()
+    public void TestDatabaseAndExplicitLanguage()
     {
       var connection = new SessionConfig("localhost");
 
-      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{xxx-yyy-zzz}")
+      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .Language("da")
         .Build();
       var requestMerger = new UserRequestMerger(connection, null);
@@ -235,7 +179,7 @@
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1?language=da&payload=content&sc_itemid=%7bxxx-yyy-zzz%7d";
+      string expected = "http://localhost/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9?language=da";
 
       Assert.AreEqual(expected, result);
     }
@@ -246,7 +190,7 @@
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sitecoreShellConfig;
       mutableParameters.ItemSource = LegacyConstants.DefaultSource();
-      mutableParameters.ItemId = "{   xxx   }";
+      mutableParameters.ItemId = "110d559f-dea5-42ea-9c1c-8a5df7e70ef9";
 
       string[] fields = { "x", "y", "x" };
       IQueryParameters duplicatedFields = new QueryParameters(fields);
@@ -264,7 +208,7 @@
       MockGetItemsByIdParameters mutableParameters = new MockGetItemsByIdParameters();
       mutableParameters.SessionSettings = this.sitecoreShellConfig;
       mutableParameters.ItemSource = LegacyConstants.DefaultSource();
-      mutableParameters.ItemId = "{   xxx   }";
+      mutableParameters.ItemId = "110d559f-dea5-42ea-9c1c-8a5df7e70ef9";
 
       string[] fields = { "x", "y", "X" };
       IQueryParameters duplicatedFields = new QueryParameters(fields);

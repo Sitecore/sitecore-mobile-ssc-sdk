@@ -18,27 +18,4 @@
         android:layout_height="wrap_content"
         android:text="Delete Item By ID" />
 
-    <EditText
-        android:id="@+id/field_item_path"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_item_path" />
-
-    <Button
-        android:id="@+id/button_delete_by_path"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete Item By Path" />
-
-    <EditText
-        android:id="@+id/field_item_query"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_query" />
-
-    <Button
-        android:id="@+id/button_delete_by_query"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete Item By Query" />
 </LinearLayout>

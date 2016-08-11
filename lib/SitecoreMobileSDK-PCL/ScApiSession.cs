@@ -190,6 +190,9 @@ namespace Sitecore.MobileSDK
 
             response = await RestApiCallFlow.LoadRequestFromNetworkFlow(this.sessionConfig, taskFlow, cancelToken);
 
+            IEnumerable<Cookie> newCookies = this.cookies.GetCookies(new Uri(url)).Cast<Cookie>();
+            Debug.WriteLine(newCookies.ToString());
+
           } catch (ObjectDisposedException) {
             // CancellationToken.ThrowIfCancellationRequested()
             throw;

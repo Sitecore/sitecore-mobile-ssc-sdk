@@ -64,16 +64,9 @@
         Text = this.GetString(Resource.String.text_get_item_by_path)
       };
       itemPathButton.Click += (sender, e) => this.StartActivity(typeof(ReadItemByPathActivtiy));
-
-      var itemQueryButton = new Button(this)
-      {
-        Text = this.GetString(Resource.String.text_get_item_by_query)
-      };
-      itemQueryButton.Click += (sender, e) => this.StartActivity(typeof(ReadItemByQueryActivtiy));
-
+    
       container.AddView(itemIdButton);
       container.AddView(itemPathButton);
-      container.AddView(itemQueryButton);
     }
 
     private void AddCreateItemsButtons(LinearLayout container)

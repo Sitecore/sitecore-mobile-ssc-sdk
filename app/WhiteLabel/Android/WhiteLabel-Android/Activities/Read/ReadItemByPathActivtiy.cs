@@ -24,6 +24,7 @@ namespace WhiteLabelAndroid.Activities.Read
     {
       this.ItemFieldLabel.Text = this.GetString(Resource.String.text_path_label);
       this.ItemFieldEditText.Hint = this.GetString(Resource.String.hint_item_path);
+      this.ItemFieldEditText.Text = "/sitecore/content/Home";
 
       this.GetItemsButton.Click += (sender, args) =>
       {

@@ -49,12 +49,10 @@
         DeleteItemsResponseParser.ParseResponse(responseString, CancellationToken.None);
       };
 
-      var exception = Assert.Throws<SSCJsonErrorException>(action);
+      var exception = Assert.Throws<ParserException>(action);
 
-      Assert.AreEqual(401, exception.Response.StatusCode);
-      Assert.AreEqual("Access to the \u0027master\u0027 database is denied." +
-                      " Only members of the Sitecore Client Users role can switch databases.",
-        exception.Response.Message);
+      Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format",
+        exception.Message);
     }
 
     [Test]

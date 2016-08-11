@@ -16,6 +16,8 @@
 
     public static List<IField> ParseFieldsData(JObject fieldsData, CancellationToken cancelToken)
     { 
+      cancelToken.ThrowIfCancellationRequested();
+
       if (fieldsData == null)
       {
         throw new ArgumentNullException();

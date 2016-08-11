@@ -22,6 +22,7 @@ namespace WhiteLabelAndroid.Activities.Read
     {
       this.ItemFieldLabel.Text = this.GetString(Resource.String.text_id_label);
       this.ItemFieldEditText.Hint = this.GetString(Resource.String.hint_item_id);
+      this.ItemFieldEditText.Text = "110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9";
 
       this.GetItemsButton.Click += (sender, args) =>
       {

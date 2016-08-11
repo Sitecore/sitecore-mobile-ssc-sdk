@@ -58,7 +58,7 @@ namespace WhiteLabelAndroid.Activities
 
       try
       {
-        using (var credentials = new ScUnsecuredCredentialsProvider(login, password, "sitecore"))
+        using (var credentials = new ScUnsecuredCredentialsProvider(login, password, site))
           using (var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
             .Credentials(credentials)
             .BuildReadonlySession())

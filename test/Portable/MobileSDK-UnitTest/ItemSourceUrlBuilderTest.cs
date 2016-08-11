@@ -32,8 +32,9 @@
       ItemSource data = LegacyConstants.DefaultSource();
       ItemSourceUrlBuilder builder = new ItemSourceUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters(), data);
 
-      string expected = "sc_database=web&language=en";
-      Assert.AreEqual(expected, builder.BuildUrlQueryString());
+      string expected = "database=web&language=en";
+      string actual = builder.BuildUrlQueryString();
+      Assert.AreEqual(expected, actual);
     }
 
     [Test]
@@ -42,8 +43,9 @@
       ItemSource data = new ItemSource("master", "da", 100500);
       ItemSourceUrlBuilder builder = new ItemSourceUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters(), data);
 
-      string expected = "sc_database=master&language=da&sc_itemversion=100500";
-      Assert.AreEqual(expected, builder.BuildUrlQueryString());
+      string expected = "database=master&language=da&version=100500";
+      string actual = builder.BuildUrlQueryString();
+      Assert.AreEqual(expected, actual);
     }
 
     [Test]
@@ -52,8 +54,9 @@
       ItemSource data = new ItemSource("{master}", "da???", 123);
       ItemSourceUrlBuilder builder = new ItemSourceUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters(), data);
 
-      string expected = "sc_database=%7bmaster%7d&language=da%3f%3f%3f&sc_itemversion=123";
-      Assert.AreEqual(expected, builder.BuildUrlQueryString());
+      string expected = "database=%7bmaster%7d&language=da%3f%3f%3f&version=123";
+      string actual = builder.BuildUrlQueryString();
+      Assert.AreEqual(expected, actual);
     }
   }
 }

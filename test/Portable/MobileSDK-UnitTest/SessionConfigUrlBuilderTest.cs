@@ -15,11 +15,9 @@
       SessionConfigUrlBuilder builder = new SessionConfigUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
       SessionConfigPOD mockConfig = new SessionConfigPOD();
       mockConfig.InstanceUrl = "localhost";
-      mockConfig.ItemSSCVersion = "v1";
-      mockConfig.Site = "/sitecore/shell";
 
       string result = builder.BuildUrlString(mockConfig);
-      string expected = "http://localhost/-/item/v1%2fsitecore%2fshell";
+      string expected = "http://localhost/sitecore/api/ssc";
 
       Assert.AreEqual(expected, result);
     }
@@ -29,8 +27,6 @@
       SessionConfigUrlBuilder builder = new SessionConfigUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
       SessionConfigPOD mockConfig = new SessionConfigPOD();
       mockConfig.InstanceUrl = "localhost";
-      mockConfig.ItemSSCVersion = "v1";
-      mockConfig.Site = null;
 
       string result = builder.BuildUrlString(mockConfig);
       string expected = "http://localhost/-/item/v1";
@@ -47,16 +43,6 @@
       Assert.Throws<ArgumentNullException>(action);
     }
 
-    [Test]
-    public void TestBuildWithInvalidSite()
-    {
-      SessionConfigPOD mockConfig = new SessionConfigPOD();
-      mockConfig.InstanceUrl = "localhost";
-      mockConfig.ItemSSCVersion = "v1";
-
-      TestDelegate action = () => mockConfig.Site = "sitecore/shell";
-      Assert.Throws<ArgumentException>(action, "site must starts with '/'");
-    }
   }
 }
 

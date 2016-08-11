@@ -9,15 +9,12 @@
     <Import_RootNamespace>Sitecore.MobileSdkUnitTest</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)CreateItemByPathUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CreateSessionTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemByIdUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DeleteItemsResponseParserTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DownloadMediaOptionsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FieldsParserTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetItemsParserTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)HashedUrlRequestBuilderTest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)HashedUrlResponseTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemByIdUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemByPathUrlBuilderTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemSourceMergerTest.cs" />

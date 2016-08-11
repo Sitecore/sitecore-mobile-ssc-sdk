@@ -44,7 +44,7 @@
   <string name="hint_instance_url">Instance URL</string>
   <string name="hint_login">Login</string>
   <string name="hint_password">Password</string>
-  <string name="hint_site">Site</string>
+  <string name="hint_site">Domain</string>
   <string name="hint_database">Database</string>
   <string name="hint_item_parent_id">Parent Item Id</string>
   <string name="hint_item_parent_path">Parent Item Path</string>
@@ -68,4 +68,8 @@
   <string name="text_button_ok">OK</string>
 
   <string name="text_empty_fields_list">No fields</string>
+
+
+	<string name="text_id_label">Type Item Id</string>
+	
 </resources>

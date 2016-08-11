@@ -85,7 +85,7 @@
 
       var url = this.builder.GetUrlForRequest(parameters);
 
-      Assert.AreEqual("http://testurl/-/item/v1?sc_itemid=%7bb0ed4777-1f5d-478d-af47-145cca9e4311%7d", url);
+      Assert.AreEqual("http://testurl/sitecore/api/ssc/item/%7bb0ed4777-1f5d-478d-af47-145cca9e4311%7d", url);
     }
 
     [Test]
@@ -95,7 +95,7 @@
 
       var url = this.builder.GetUrlForRequest(parameters);
 
-      Assert.AreEqual("http://testurl/-/item/v1?sc_itemid=%7bb0ed4777-1f5d-478d-af47-145cca9e4311%7d&sc_database=master", url);
+      Assert.AreEqual("http://testurl/sitecore/api/ssc/item/%7bb0ed4777-1f5d-478d-af47-145cca9e4311%7d?database=master", url);
     }
   }
 }

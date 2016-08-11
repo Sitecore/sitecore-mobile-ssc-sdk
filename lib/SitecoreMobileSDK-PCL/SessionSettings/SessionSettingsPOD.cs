@@ -10,8 +10,6 @@ namespace Sitecore.MobileSDK.SessionSettings
     {
       SessionConfigPOD result = new SessionConfigPOD();
       result.InstanceUrl = this.InstanceUrl;
-      result.ItemSSCVersion = this.ItemSSCVersion;
-      result.Site = this.Site;
       result.MediaLibraryRoot = this.MediaLibraryRoot;
       result.DefaultMediaResourceExtension = this.DefaultMediaResourceExtension;
       result.MediaPrefix = this.MediaPrefix;
@@ -31,37 +29,6 @@ namespace Sitecore.MobileSDK.SessionSettings
 
     #region ISessionConfig
     public string InstanceUrl { get; set; }
-
-    public string ItemSSCVersion { get; set; }
-
-    public string Site
-    {
-      get
-      {
-        return this.site;
-      }
-      set
-      {
-        if (string.IsNullOrEmpty(value))
-        {
-          this.site = null;
-        }
-        else
-        {
-          string separator = "/";
-          string siteValue = value;
-          bool firstSymbolIsNotSlash = !siteValue.StartsWith(separator);
-          if (firstSymbolIsNotSlash)
-          {
-            throw new ArgumentException("SessionConfigPOD.Site : site must starts with '/'");
-          }
-          else
-          {
-            this.site = value;
-          }
-        }
-      }
-    }
 
     public string MediaLibraryRoot { get; set; }
 
@@ -96,18 +63,14 @@ namespace Sitecore.MobileSDK.SessionSettings
 
 
       bool isUrlEqual = object.Equals(this.InstanceUrl, other.InstanceUrl);
-      bool isVersionEqual = object.Equals(this.ItemSSCVersion, other.ItemSSCVersion);
-      bool isSiteEqual = object.Equals(this.Site, other.Site);
 
-      return isUrlEqual && isVersionEqual && isSiteEqual;
+      return isUrlEqual;
     }
 
     public override int GetHashCode()
     {
-      return base.GetHashCode() + this.InstanceUrl.GetHashCode() + this.ItemSSCVersion.GetHashCode() + this.Site.GetHashCode();
+      return base.GetHashCode() + this.InstanceUrl.GetHashCode();
     }
     #endregion Comparator
-
-    private string site;
   }
 }

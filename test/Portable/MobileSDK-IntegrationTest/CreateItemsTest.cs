@@ -144,17 +144,22 @@
         .AddFieldsRawValuesByNameToSet("Text", CreatedText)
         .Build();
 
-      await session.CreateItemAsync(request);
+      var result = await session.CreateItemAsync(request);
 
-      var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
-                                        .Database("master")
-                                        .Build();
+      Assert.IsTrue(result.StatusCode == 500);
+      Assert.IsFalse(result.Created);
 
-      var readResponse = await session.ReadItemAsync(readRequest);
 
-      var resultItem = this.CheckCreatedItem(readResponse, expectedItem);
-      Assert.AreEqual(CreatedTitle, resultItem["Title"].RawValue);
-      Assert.AreEqual(CreatedText, resultItem["Text"].RawValue);
+      //@igk International Names is allowed for cms v8.0 and lower
+      //var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
+      //                                  .Database("master")
+      //                                  .Build();
+
+      //var readResponse = await session.ReadItemAsync(readRequest);
+
+      //var resultItem = this.CheckCreatedItem(readResponse, expectedItem);
+      //Assert.AreEqual(CreatedTitle, resultItem["Title"].RawValue);
+      //Assert.AreEqual(CreatedText, resultItem["Text"].RawValue);
 
     }
 
@@ -309,13 +314,14 @@
 
       var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
                                         .Database("master")
+                                        .AddFieldsToRead(FieldName)
                                         .Build();
 
       var readResponse = await session.ReadItemAsync(readRequest);
 
       var resultItem = readResponse[0];
 
-      Assert.AreEqual(0, resultItem.FieldsCount);
+      Assert.AreEqual(9, resultItem.FieldsCount); //standard fields only
 
     }
 
@@ -379,7 +385,11 @@
 
       var result = await anonymousSession.CreateItemAsync(request);
 
-      Assert.IsTrue(result.StatusCode == 500);
+      Assert.IsTrue(result.StatusCode == 403);
+
+      //TODO: @igk if anonymous access is allowed error 500 returns, register bug for server side
+      //Assert.IsTrue(result.StatusCode == 500);
+
       Assert.IsFalse(result.Created);
     }
 

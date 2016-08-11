@@ -30,8 +30,6 @@
 
       SessionConfigPOD mutableSession = new SessionConfigPOD();
       mutableSession.InstanceUrl = "http://mobiledev1ua1.dk.sitecore.net";
-      mutableSession.ItemSSCVersion = "v2";
-      mutableSession.Site = "";
       this.sessionConfig = mutableSession;
 
       this.payload = new QueryParameters(null);
@@ -57,7 +55,7 @@
       IReadItemsByPathRequest request = mutableParameters;
 
       string result = this.builder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&language=en";
+      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/item?database=web&language=en&path=%2fpath%2fto%2fitem";
 
       Assert.AreEqual(expected, result);
     }
@@ -74,7 +72,7 @@
       IReadItemsByPathRequest request = mutableParameters;
 
       string result = this.builder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&language=en";
+      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/item?database=web&language=en&path=%2fpath%2fto%2fitem";
 
       Assert.AreEqual(expected, result);
     }
@@ -91,7 +89,7 @@
       IReadItemsByPathRequest request = mutableParameters;
 
       string result = this.builder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&language=en&payload=content";
+      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/item?database=web&language=en&path=%2fpath%2fto%2fitem";
 
       Assert.AreEqual(expected, result);
     }
@@ -107,7 +105,7 @@
 
       IReadItemsByPathRequest request = mutableParameters;
       string result = this.builder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&language=en";
+      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/item?database=web&language=en&path=%2fpath%2fto%2fitem";
 
       Assert.AreEqual(expected, result);
     }
@@ -124,7 +122,7 @@
       IReadItemsByPathRequest request = mutableParameters;
 
       string result = this.builder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%20to%20item?sc_database=web&language=en&payload=content";
+      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/item?database=web&language=en&path=%2fpath%20to%20item";
 
       Assert.AreEqual(expected, result);
     }
@@ -198,8 +196,7 @@
       IReadItemsByPathRequest request = mutableParameters;
 
       string result = this.builder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/-/item/v2%2fpath%2fto%2fitem?sc_database=web&language=en&payload=min&fields=x|y";
-
+      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/item?database=web&language=en&fields=x%2cy%2citemid%2citemname%2citempath%2cparentid%2ctemplateid%2ctemplatename%2citemlanguage%2citemversion%2cdisplayname&path=%2fpath%2fto%2fitem";
       Assert.AreEqual(expected, result);
     }
 
@@ -216,7 +213,7 @@
       var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1%2fsitecore%2fcontent%2foo";
+      string expected = "http://localhost/sitecore/api/ssc/item?path=%2fsitecore%2fcontent%2foo";
 
       Assert.AreEqual(expected, result);
     }
@@ -235,7 +232,7 @@
       var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1%2fsitecore%2fcontent%2foo?payload=full";
+      string expected = "http://localhost/sitecore/api/ssc/item?path=%2fsitecore%2fcontent%2foo";
 
       Assert.AreEqual(expected, result);
     }
@@ -254,7 +251,7 @@
       var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1%2fsitecore%2fcontent%2foo?sc_database=master";
+      string expected = "http://localhost/sitecore/api/ssc/item?database=master&path=%2fsitecore%2fcontent%2foo";
 
       Assert.AreEqual(expected, result);
     }
@@ -273,7 +270,7 @@
       var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/-/item/v1%2fsitecore%2fcontent%2foo?language=da&payload=content";
+      string expected = "http://localhost/sitecore/api/ssc/item?language=da&path=%2fsitecore%2fcontent%2foo";
 
       Assert.AreEqual(expected, result);
     }

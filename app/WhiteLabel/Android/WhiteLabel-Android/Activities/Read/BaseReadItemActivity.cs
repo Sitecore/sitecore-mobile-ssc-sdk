@@ -17,13 +17,8 @@ namespace WhiteLabelAndroid.Activities.Read
     protected Prefs Prefs;
     
     #region Views
-    private RadioGroup payloadRadioGroup;
     private ListView itemsListView;
 
-    private CheckBox scopeParentCheckBox;
-    private CheckBox scopeSelfCheckBox;
-    private CheckBox scopeChildrenCheckBox;
-    
     protected EditText FieldNamEditText;
 
     protected TextView ItemFieldLabel;
@@ -32,8 +27,7 @@ namespace WhiteLabelAndroid.Activities.Read
     protected Button GetItemsButton;
 
     protected LinearLayout FieldNameContainer;
-    protected LinearLayout PayloadContainer;
-    protected LinearLayout ScopeContainer;
+
     #endregion
 
     private IEnumerable<ISitecoreItem> items;

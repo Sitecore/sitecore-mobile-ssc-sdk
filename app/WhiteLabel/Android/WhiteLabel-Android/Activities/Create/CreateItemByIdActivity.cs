@@ -39,39 +39,36 @@ namespace WhiteLabelAndroid.Activities.Create
 
       try
       {
-        //var builder = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(parentId)
-        //  .ItemTemplatePath("Sample/Sample Item")
-        //  .ItemName(itemName);
+        var builder = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(parentId)
+          .ItemTemplateId("76036F5E-CBCE-46D1-AF0A-4143F9B557AA")
+          .ItemName(itemName);
 
-        //if (!string.IsNullOrEmpty(titleFieldValue))
-        //{
-        //  builder.AddFieldsRawValuesByNameToSet("Title", titleFieldValue);
-        //}
+        if (!string.IsNullOrEmpty(titleFieldValue))
+        {
+          builder.AddFieldsRawValuesByNameToSet("Title", titleFieldValue);
+        }
 
-        //if (!string.IsNullOrEmpty(textFieldValue))
-        //{
-        //  builder.AddFieldsRawValuesByNameToSet("Text", textFieldValue);
-        //}
+        if (!string.IsNullOrEmpty(textFieldValue))
+        {
+          builder.AddFieldsRawValuesByNameToSet("Text", textFieldValue);
+        }
 
-        //this.SetProgressBarIndeterminateVisibility(true);
+        this.SetProgressBarIndeterminateVisibility(true);
 
-        //using (var session = this.Prefs.Session)
-        //{
-        //  var response = await session.CreateItemAsync(builder.Build());
+        using (var session = this.Prefs.Session)
+        {
+          var response = await session.CreateItemAsync(builder.Build());
 
-        //  this.SetProgressBarIndeterminateVisibility(false);
-        //  if (response.ResultCount == 0)
-        //  {
-        //    DialogHelper.ShowSimpleDialog(this, "Failed", "Failed to create item");
-        //  }
-        //  else
-        //  {
-        //    this.createItemId = response[0].Id;
-
-        //    var message = "Item path : " + response[0].Path;
-        //    DialogHelper.ShowSimpleDialog(this, "Item created", message);
-        //  }
-        //}
+          this.SetProgressBarIndeterminateVisibility(false);
+          if (response.Created == false)
+          {
+            DialogHelper.ShowSimpleDialog(this, "Failed", "Failed to create item");
+          }
+          else
+          {
+            DialogHelper.ShowSimpleDialog(this, "Result", "Item created");
+          }
+        }
       }
       catch (System.Exception exception)
       {
@@ -84,6 +81,8 @@ namespace WhiteLabelAndroid.Activities.Create
 
     protected override async void PerformUpdateCreatedItemRequest()
     {
+      this.createItemId = this.ItemField.Text;
+          
       if (string.IsNullOrEmpty(this.createItemId))
       {
         Toast.MakeText(this, "Please create item before updating", ToastLength.Long).Show();
