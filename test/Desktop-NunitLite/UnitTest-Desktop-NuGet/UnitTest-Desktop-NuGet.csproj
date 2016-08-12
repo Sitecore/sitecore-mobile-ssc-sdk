@@ -56,12 +56,6 @@
     <Reference Include="Sitecore.MobileSDK">
       <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.Xamarin.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.MobileSDK.PasswordProvider.Interface">
-      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.Xamarin.1.0.0\lib\portable-win+net4+sl5+wp8\Sitecore.MobileSDK.PasswordProvider.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="Sitecore.MobileSDK.PasswordProvider.Windows">
-      <HintPath>..\..\..\solutions\packages\Sitecore.MobileSDK.PasswordProvider.1.0.1\lib\net4\Sitecore.MobileSDK.PasswordProvider.Windows.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
@@ -212,14 +206,8 @@
     <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableSessionConfig.cs">
       <Link>Mocks\MutableSessionConfig.cs</Link>
     </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableWebApiCredentialsPOD.cs">
-      <Link>Mocks\MutableWebApiCredentialsPOD.cs</Link>
-    </Compile>
     <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\NoThrowWebApiSession.cs">
       <Link>Mocks\NoThrowWebApiSession.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\WebApiCredentialsPOD.cs">
-      <Link>Mocks\WebApiCredentialsPOD.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

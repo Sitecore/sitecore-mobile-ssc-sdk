@@ -67,12 +67,11 @@
 <!-- ====================================================  -->
   <Target Name="QuickBuild">
     <CallTarget Targets="clean"/>
-    <CallTarget Targets="UnitTest"/>
+    <!-- <CallTarget Targets="UnitTest"/> -->
     <CallTarget Targets="SitecoreMobileSDK"/>
-	<!-- <CallTarget Targets="PasswordProvider"/> -->
     <CallTarget Targets="package"/>
-	<CallTarget Targets="DeviceTests"/>
-    <CallTarget Targets="doc"/>
+	<!-- <CallTarget Targets="DeviceTests"/> -->
+    <!-- <CallTarget Targets="doc"/> -->
   </Target>
 
   <Target Name="FullBuild">
@@ -134,103 +133,6 @@
   <Target Name="IntegrationTest-Android-Build">
   <Message Text="Building Android IntegrationTest Test App..." />
   </Target>
-  
-<!-- ====================================================  -->
-  <Target Name="PasswordProvider">
-    <Message Text="Building PasswordProvider Libraries..." />
-    <CallTarget Targets="PasswordProviderWin"/>
-    <CallTarget Targets="PasswordProviderIOS-Classic"/>
-	<CallTarget Targets="PasswordProviderIOS-Unified"/>
-    <CallTarget Targets="PasswordProviderAndroid"/>	
-  </Target>
-
-  <Target Name="PasswordProviderWin">
-    <Message Text="Building PasswordProvider For Windows..." />
-
-    <MSBuild 
-      Projects="@(PasswordStorageWinProject)" 
-      Targets="Build" 
-      Properties="Configuration=Release;" 
-    />
-	
-	 <ItemGroup>
-      <PasswordWinArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\windows\SecureStringPasswordProvider-windows\bin\Release\*.dll" />
-    </ItemGroup>
-	
-	<CallTarget Targets="PrepareDeploymentDir"/>
-	<Copy
-      SourceFiles="@(PasswordWinArtefacts)"
-      DestinationFolder="$(BinariesDeploymentDirectory) "
-     />
-  </Target>
-
-  <Target Name="PasswordProviderIOS-Classic">
-    <Message Text="Building PasswordProvider (Classic API) For iOS..." />
-	
-	<Exec
-	  Command="&quot;$(MSBuildExe)&quot; Sitecore.MobileSDK.PasswordProvider.iOS.csproj /t:Build;_RemoteBuild /p:Configuration=Release"
-	  WorkingDirectory="$(RepositoryRoot)\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS\" 
-    IgnoreExitCode="true"/>
-	
-	 <ItemGroup>
-      <PasswordIOSArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS\bin\Release\*.dll" />
-    </ItemGroup>
-	
-	<CallTarget Targets="PrepareDeploymentDir"/>
-	<Copy
-      SourceFiles="@(PasswordIOSArtefacts)"
-      DestinationFolder="$(BinariesDeploymentDirectory) "
-     />
-  </Target>
-
-  <Target Name="PasswordProviderIOS-Unified">
-    <Message Text="Building PasswordProvider (Unified API) For iOS..." />
-	
-	<Exec
-	  Command="&quot;$(MSBuildExe)&quot; Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI.csproj /t:Build;_RemoteBuild /p:Configuration=Release"
-	  WorkingDirectory="$(RepositoryRoot)\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI\" 
-    IgnoreExitCode="true"/>
-	
-	 <ItemGroup>
-      <PasswordIOSArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\iOS\Sitecore.MobileSDK.PasswordProvider.iOS.UnifiedAPI\bin\Release\*.dll" />
-    </ItemGroup>
-	
-	<CallTarget Targets="PrepareDeploymentDir"/>
-	<Copy
-      SourceFiles="@(PasswordIOSArtefacts)"
-      DestinationFolder="$(BinariesDeploymentDirectory) "
-     />
-  </Target>
-
-  <Target Name="PasswordProviderAndroid">
-    <Message Text="Building PasswordProvider For Android..." />
-
-
-  <Exec
-    Command="&quot;$(MSBuildExe)&quot; Sitecore.MobileSDK.PasswordProvider.Android.csproj /t:Build /p:Configuration=Release"
-    WorkingDirectory="$(RepositoryRoot)\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\" />
-	
-	 <ItemGroup>
-      <PasswordAndroidArtefacts Include="$(RepositoryRoot)\lib\PasswordProvider\Android\SecureStringPasswordProvider-Android\bin\Release\*.dll" />
-    </ItemGroup>
-	
-	<CallTarget Targets="PrepareDeploymentDir"/>
-	<Copy
-      SourceFiles="@(PasswordAndroidArtefacts)"
-      DestinationFolder="$(BinariesDeploymentDirectory) "/>
-	 
-  </Target>
-
-  <Target Name="PrepareDeploymentDir">
-    <MakeDir 
-      Condition="!Exists('$(DeploymentDirectory)')"
-      Directories="$(DeploymentDirectory)" 
-    />
-    <MakeDir 
-      Condition="!Exists('$(BinariesDeploymentDirectory)')"
-      Directories="$(BinariesDeploymentDirectory)" 
-    />
-  </Target>
 
 <!-- ====================================================  -->
   <Target Name="SitecoreMobileSDK">
@@ -253,6 +155,17 @@
       SourceFiles="@(MobileSdkArtefacts)"
       DestinationFolder="$(BinariesDeploymentDirectory) "
      />
+  </Target>
+
+ <Target Name="PrepareDeploymentDir">
+    <MakeDir 
+      Condition="!Exists('$(DeploymentDirectory)')"
+      Directories="$(DeploymentDirectory)" 
+    />
+    <MakeDir 
+      Condition="!Exists('$(BinariesDeploymentDirectory)')"
+      Directories="$(BinariesDeploymentDirectory)" 
+    />
   </Target>
 
 <!-- ====================================================  -->
@@ -327,45 +240,31 @@
       Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.nuspec"
       WorkingDirectory="$(ScriptsDirectory)\nuget" />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.Xamarin.1.0.1.nupkg"
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.1.0.0.nupkg"
       DestinationFolder="$(DeploymentDirectory)"
      />
 	<Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.Xamarin.1.0.1.nupkg"
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.1.0.0.nupkg"
       DestinationFolder="$(LocalNugetRepoDirectory)"
      />
 
-	 
-    <!-- <Exec
-      Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.PasswordProvider.nuspec"
-      WorkingDirectory="$(ScriptsDirectory)\nuget" />
-    <Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.1.0.2.nupkg"
-      DestinationFolder="$(DeploymentDirectory)"
-     />
-    <Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.PasswordProvider.1.0.2.nupkg"
-      DestinationFolder="$(LocalNugetRepoDirectory)"
-     /> -->
-	 
-
-    <Exec
+  <!--   <Exec
       Command="xamarin-component\xamarin-component.exe package"
       WorkingDirectory="$(ScriptsDirectory)\xamarin-store\MobileSDK"
     />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.Mobile.SDK-1.1.xam"
+      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.Mobile.SDK-1.0.xam"
       DestinationFolder="$(DeploymentDirectory)"
      />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.Mobile.SDK-1.1.xam"
+      SourceFiles="$(ScriptsDirectory)\xamarin-store\MobileSDK\Sitecore.Mobile.SDK-1.0.xam"
       DestinationFolder="$(LocalXamarinComponentsRepoDirectory)"
      />
 
    <Exec
-      Command="xamarin-component.exe install Sitecore.Mobile.SDK-1.1.xam"
+      Command="xamarin-component.exe install Sitecore.Mobile.SDK-1.0.xam"
     WorkingDirectory="$(LocalXamarinComponentsRepoDirectory)"
-    />
+    /> -->
 	    
   </Target>
 
