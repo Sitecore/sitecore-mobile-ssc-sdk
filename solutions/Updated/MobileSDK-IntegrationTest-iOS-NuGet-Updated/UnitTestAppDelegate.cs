@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Foundation;
 using UIKit;
 using MonoTouch.NUnit.UI;
+using System.Net;
 
 namespace MobileSDKIntegrationTestiOSNuGetUpdated
 {
@@ -27,6 +28,12 @@ namespace MobileSDKIntegrationTestiOSNuGetUpdated
     //
     public override bool FinishedLaunching(UIApplication app, NSDictionary options)
     {
+
+      ServicePointManager
+        .ServerCertificateValidationCallback +=
+          (sender, cert, chain, sslPolicyErrors) => true;
+
+
       // create a new window instance based on the screen size
       window = new UIWindow (UIScreen.MainScreen.Bounds);
       runner = new TouchRunner (window);

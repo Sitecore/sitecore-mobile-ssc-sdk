@@ -68,7 +68,7 @@
         //      await Task.Factory.StartNew(() => mockMutableRequest.ItemId = this.env.Items.MediaLibrary.Id);
         ScItemsResponse response = await loadItemsTask;
         var item = response[0];
-        Assert.AreEqual(homeId, item.Id);
+        Assert.AreEqual(homeId, item.Id.ToUpperInvariant());
       }
       catch (LoadDataFromNetworkException)
       {
