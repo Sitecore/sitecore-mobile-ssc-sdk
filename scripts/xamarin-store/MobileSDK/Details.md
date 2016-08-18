@@ -1,21 +1,19 @@
-Sitecore Mobile SDK - a Portable .NET Library
+Sitecore Mobile SDK 2.0 (SSC-only) for Xamarin - a Portable .NET Library
 ========
 
-Sitecore Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore. The framework enables developers to rapidly develop applications utilizing their existing .NET development skill sets. 
+The SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore. The framework enables developers to rapidly develop applications utilizing their existing .NET development skill sets. 
 The SDK includes the following features:
 
 * Fetching CMS Content
-* Source HTML renderings from Sitecore CMS
 * Create, Delete, Update Items
-* Downloading and Uploading Media Resources
-* Protect security sensitive data
+* Downloading Media Resources
 
 The library is PCL standard compliant and can be used on the following platforms :
 
-* iOS 7 and newer
+* iOS 8 and newer
 * Android 4.0 and newer
 * Windows Desktop (.NET 4.5)
-* Windows Phone 8 and newer
+* Windows Phone 8.1 and newer
 
 It uses the modern C# approaches such as :
 * PCL distribution
@@ -32,24 +30,21 @@ SITECORE SHARED SOURCE LICENSE
 As the SDK is designed as a portable class library (PCL), you can use the same code on all platforms to fetch the default "home" item content. 
 
 ```csharp
-using (var credentials = new SecureStringPasswordProvider("username", "password")) // providing secure credentials
+using (var credentials = new ScUnsecuredCredentialsProvider ("login", "password", "domain")) // providing secure credentials
 using 
 (
-  var session = SitecoreWebApiSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
+  var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(instanceUrl)
     .Credentials(credentials)
-    .WebApiVersion("v1")
     .DefaultDatabase("web")
     .DefaultLanguage("en")
     .MediaLibraryRoot("/sitecore/media library")
     .MediaPrefix("~/media/")
-    .DefaultMediaResourceExtension("ashx")
     .BuildSession()
 ) // Creating a session from credentials, instance URL and settings
 {
   // In order to fetch some data we have to build a request
-  var request = ItemWebApiRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
+  var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
   .AddFieldsToRead("text")
-  .AddScope(ScopeType.Self)
   .Build();
 
   // And execute it on a session asynchronously

@@ -1,20 +1,20 @@
 %YAML 1.2
 ---
 # "..\..\..\" -> is jenkins job's workspace
-name: Sitecore Mobile SDK for Xamarin
-id: Sitecore.Mobile.SDK
+name: Sitecore Mobile SDK 2.0 (SSC-only) for Xamarin
+id: Sitecore.MobileSDK
 publisher: Sitecore Corporation A/S
 license: License.md
 icons: 
   - icons\Sitecore.MobileSDK.Xamarin_128x128.png
   - icons\Sitecore.MobileSDK.Xamarin_512x512.png
 publisher-url: http://www.sitecore.net
-docs-url: https://github.com/Sitecore/sitecore-xamarin-pcl-sdk
-src-url: https://github.com/Sitecore/sitecore-xamarin-pcl-sdk
+docs-url: https://github.com/Sitecore/sitecore-mobile-pcl-sdk
+src-url: https://github.com/Sitecore/sitecore-mobile-pcl-sdk
 no_build: true
 is_shell: true
 packages:
-  "mobile": Sitecore.MobileSDK.Xamarin, Version=1.0.1
+  "mobile": Sitecore.MobileSDK, Version=1.0.0
 summary: "Use Sitecore CMS content in your native mobile apps written in C#."
 details: Details.md
 getting-started: GettingStarted.md
@@ -22,8 +22,8 @@ version: 1.1
 samples: 
   - name: iOS Sample
     path: ..\..\..\test\LocalXamarinStoreTest\iMobileSdkDemo\iMobileSdkDemo.sln
-    description: iOS Sample for Sitecore Mobile SDK. Downloads a single item and shows an alert with its fields.
+    description: iOS Sample for Sitecore Mobile SDK 2.0 (SSC-only) for Xamarin. Downloads a single item and shows an alert with its fields.
   - name: Android Sample
-    description: Android Sample for Sitecore Mobile SDK. Downloads a single item and shows an alert with its fields.
+    description: Android Sample for Sitecore Mobile SDK 2.0 (SSC-only) for Xamarin. Downloads a single item and shows an alert with its fields.
     path: ..\..\..\test\LocalXamarinStoreTest\AndroidMobileSdkDemo\AndroidMobileSdkDemo.sln
 ...
