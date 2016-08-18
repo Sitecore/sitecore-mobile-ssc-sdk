@@ -11,24 +11,24 @@
     <iconUrl>http://s4.uploads.im/S3BR8.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
 
-    <summary>Sitecore Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore.</summary>
+    <summary>Sitecore Mobile SDK 2.0 (SSC-only) for Xamarin is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore.</summary>
     
 
-    <description>Sitecore Mobile SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore. 
+    <description>Sitecore Mobile SDK 2.0 (SSC-only) for Xamarin is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore. 
 The framework enables developers to rapidly develop applications utilizing their existing .NET development skill sets. The SDK includes the following features:
 * Fetching CMS Content
 * Create, Delete, Update Items
 * Downloading Media Resources
 * Protect security sensitive data
 
-The applications powered by this SDK can request content from Sitecore efficiently and securely via Sitecore Item Web API RESTful web service.
+The applications powered by this SDK can request content from Sitecore efficiently and securely via Sitecore Services Clien REST web service.
 The SDK supports producing native applications through the Xamarin framework
 </description>
 
 
     <releaseNotes>Initial release with items manipulation support</releaseNotes>
 
-    <copyright>Copyright 1999-2015 Sitecore</copyright> 
+    <copyright>Copyright 1999-2016 Sitecore</copyright> 
     <tags>Sitecore iOS Android PCL Xamarin</tags>
    
     <dependencies>
