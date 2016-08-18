@@ -37,8 +37,6 @@ using
     .Credentials(credentials)
     .DefaultDatabase("web")
     .DefaultLanguage("en")
-    .MediaLibraryRoot("/sitecore/media library")
-    .MediaPrefix("~/media/")
     .BuildSession()
 ) // Creating a session from credentials, instance URL and settings
 {
