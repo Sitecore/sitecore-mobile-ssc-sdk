@@ -55,7 +55,7 @@ using
 ```
 # Downloads
 - [NuGet packages](https://www.nuget.org/packages/Sitecore.MobileSDK/)
-- [Xamarin component](https://www.nuget.org/packages/Sitecore.MobileSDK/)
+- [Xamarin component](https://components.xamarin.com/view/Sitecore.MobileSDK)
 
 # Links
 - [Documentation](https://doc.sitecore.net/mobile_sdk_for_xamarin)
