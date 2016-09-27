@@ -1,0 +1,21 @@
+%YAML 1.2
+---
+libraries: 
+  ios: ../lib/ios/Awesome.dll
+icons: 
+  - sitecore_mobile_sdk_2_128x128.png
+  - sitecore_mobile_sdk_2_512x512.png
+version: "1.0"
+details: Details.md
+getting-started: GettingStarted.md
+samples: 
+  iOS Sample: ../samples/AwesomeSample/AwesomeSample.sln
+id: sitecore_mobile_sdk_2
+summary: Use Sitecore CMS content in your native mobile apps written in C#.
+publisher-url: http://www.sitecore.net
+license: License.md
+screenshots: 
+  - screenshots/screenshot1.png
+name: Sitecore Mobile SDK 2.0 (SSC-only) for Xamarin
+publisher: Sitecore Corporation A/S
+...

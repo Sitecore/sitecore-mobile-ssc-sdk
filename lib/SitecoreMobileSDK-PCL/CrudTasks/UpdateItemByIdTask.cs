@@ -34,8 +34,6 @@ namespace Sitecore.MobileSDK.CrudTasks
         fieldsAvailable = (request.FieldsRawValuesByName.Count > 0);
       }
 
-      //TODO: IGK refactor this
-
       if (fieldsAvailable)
       {
         foreach (var fieldElem in request.FieldsRawValuesByName)

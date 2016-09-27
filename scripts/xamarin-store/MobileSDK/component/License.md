@@ -1,0 +1,1 @@
+# /Volumes/Sitecore/GitHub/SDKs/sitecore-SSC-sdk/scripts/xamarin-store/MobileSDK license

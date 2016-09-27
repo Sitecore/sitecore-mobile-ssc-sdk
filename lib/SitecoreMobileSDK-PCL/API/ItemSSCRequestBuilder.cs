@@ -40,7 +40,6 @@ namespace Sitecore.MobileSDK.API
       return new ReadChildrenByIdRequestBuilder(itemId);
     }
 
-    //TODO: @igk I should think about naming
     public static IGetVersionedItemRequestParametersBuilder<IReadItemsByIdRequest> StoredQuerryRequest(string itemId)
     {
       return new RunStoredQuerryRequestBuilder(itemId);

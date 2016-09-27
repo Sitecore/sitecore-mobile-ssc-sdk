@@ -1,0 +1,1 @@
+# Getting Started with /Volumes/Sitecore/GitHub/SDKs/sitecore-SSC-sdk/scripts/xamarin-store/MobileSDK

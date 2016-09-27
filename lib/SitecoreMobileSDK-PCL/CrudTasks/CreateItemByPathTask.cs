@@ -1,9 +1,11 @@
-﻿using System.Net;
-
+﻿
 namespace Sitecore.MobileSDK.CrudTasks
 {
   using System;
+  using System.Net;
+  using System.Collections.Generic;
   using System.Diagnostics;
+  using System.Linq;
   using System.Net.Http;
   using System.Text;
   using System.Threading;
@@ -53,8 +55,8 @@ namespace Sitecore.MobileSDK.CrudTasks
       Debug.WriteLine("REQUEST: " + request);
       var result = await this.httpClient.SendAsync(request, cancelToken);
 
-      int code = (int)result.StatusCode;
-      return code.ToString();
+      IEnumerable<string> headerValues = result.Headers.GetValues("Location");
+      return headerValues.FirstOrDefault();
     }
 
     public async Task<ScCreateItemResponse> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)

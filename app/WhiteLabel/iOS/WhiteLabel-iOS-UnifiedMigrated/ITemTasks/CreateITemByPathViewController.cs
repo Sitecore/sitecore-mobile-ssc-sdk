@@ -63,7 +63,7 @@
           }
         }
       }
-      catch(Exception e) 
+      catch
       {
         AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item updated successfully");
       }

@@ -63,7 +63,7 @@
           var response = await session.CreateItemAsync(request);
           if (response.Created)
           {
-            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item created successfully");
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item created successfully, Id is " + response.ItemId);
           }
           else
           {
@@ -71,9 +71,9 @@
           }
         }
       }
-      catch(Exception e) 
+      catch
       {
-        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item created successfully");
+        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item was not created");
       }
       finally
       {
