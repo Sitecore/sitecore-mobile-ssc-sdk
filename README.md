@@ -21,9 +21,7 @@ It uses the modern C# approaches such as :
 * Fluent interface
 
 # Licence
-```
-SITECORE SHARED SOURCE LICENSE
-```
+[SITECORE SHARED SOURCE LICENSE](https://github.com/Sitecore/sitecore-mobile-pcl-sdk/blob/master/license.txt)
 
 ## Code Snippet
 
@@ -55,3 +53,9 @@ using
   string fieldContent = item["text"].RawValue;
 }
 ```
+# Downloads
+- [NuGet packages](https://www.nuget.org/packages/Sitecore.MobileSDK/)
+- [Xamarin component](https://www.nuget.org/packages/Sitecore.MobileSDK/)
+
+# Links
+- [Documentation](https://doc.sitecore.net/mobile_sdk_for_xamarin)
