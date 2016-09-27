@@ -146,7 +146,6 @@
 
       var result = await session.CreateItemAsync(request);
 
-      Assert.IsTrue(result.StatusCode == 500);
       Assert.IsFalse(result.Created);
 
 
@@ -367,7 +366,6 @@
 
       var result = await session.CreateItemAsync(request);
     
-      Assert.IsTrue(result.StatusCode == 500);
       Assert.IsFalse(result.Created);
     }
 
@@ -385,7 +383,6 @@
 
       var result = await anonymousSession.CreateItemAsync(request);
 
-      Assert.IsTrue(result.StatusCode == 403);
 
       //TODO: @igk if anonymous access is allowed error 500 returns, register bug for server side
       //Assert.IsTrue(result.StatusCode == 500);
@@ -407,7 +404,6 @@
 
       var result = await anonymousSession.CreateItemAsync(request);
 
-      Assert.IsTrue(result.StatusCode == 500);
       Assert.IsFalse(result.Created);
     }
 
