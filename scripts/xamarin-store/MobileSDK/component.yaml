@@ -14,7 +14,7 @@ src-url: https://github.com/Sitecore/sitecore-mobile-pcl-sdk
 no_build: true
 is_shell: true
 packages:
-  "mobile": Sitecore.MobileSDK, Version=1.0.0
+  "mobile": Sitecore.MobileSDK.SSC, Version=1.0.0
 summary: "Use Sitecore CMS content in your native mobile apps written in C#."
 details: Details.md
 getting-started: GettingStarted.md
