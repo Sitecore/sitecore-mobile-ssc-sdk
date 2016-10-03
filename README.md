@@ -1,4 +1,4 @@
-Sitecore Mobile SDK 2.0 (SSC-only) for Xamarin - a Portable .NET Library
+Sitecore Mobile SDK (SSC) for Xamarin - a Portable .NET Library
 ========
 
 The SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore. The framework enables developers to rapidly develop applications utilizing their existing .NET development skill sets. 
@@ -54,8 +54,8 @@ using
 }
 ```
 # Downloads
-- [NuGet packages](https://www.nuget.org/packages/Sitecore.MobileSDK/)
-- [Xamarin component](https://components.xamarin.com/view/Sitecore.MobileSDK)
+- [NuGet packages](https://www.nuget.org/packages/Sitecore.MobileSDK.SSC/)
+- [Xamarin component](https://components.xamarin.com/view/sitecore.mobilesdk.ssc/)
 
 # Links
 - [Documentation](https://doc.sitecore.net/mobile_sdk_for_xamarin)
