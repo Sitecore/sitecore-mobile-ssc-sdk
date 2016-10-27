@@ -5,6 +5,7 @@ namespace Sitecore.MobileSDK.UserRequest
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Entity;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
@@ -144,6 +145,27 @@ namespace Sitecore.MobileSDK.UserRequest
 
       return new DeleteItemByQueryParameters(mergedSessionConfig, databse, userRequest.SitecoreQuery);
     }
+
+    #region Entity
+
+    public IReadEntitiesByPathRequest FillReadEntitiesByPathGaps(IReadEntitiesByPathRequest userRequest)
+    {
+      //FIXME: @igk implement
+      #warning FillReadEntitiesByPathGaps not implemented!
+      return userRequest;
+
+      //IEntitySource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.EntirySource);
+      //ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
+
+      //return new ReadItemsByIdParameters(
+      //  mergedSessionConfig,
+      //  mergedSource,
+      //  userRequest.QueryParameters,
+      //  userRequest.IncludeStandardTemplateFields,
+      //  userRequest.ItemId);
+    }
+
+    #endregion Entity
 
     public ItemSourceFieldMerger ItemSourceMerger { get; private set; }
     public SessionConfigMerger SessionConfigMerger { get; private set; }

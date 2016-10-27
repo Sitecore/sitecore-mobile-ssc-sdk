@@ -11,6 +11,7 @@ namespace Sitecore.MobileSDK.API.Session
     IConnectionActions,
     IMediaActions,
     IReadItemActions,
+    IReadEntityActions,
     ISearchActions
   {
   }

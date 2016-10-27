@@ -20,6 +20,7 @@
 
     public virtual string BuildUrlString(ISessionConfig request)
     {
+
       this.ValidateRequest(request);
 
       string autocompletedInstanceUrl = SessionConfigValidator.AutocompleteInstanceUrl(request.InstanceUrl);

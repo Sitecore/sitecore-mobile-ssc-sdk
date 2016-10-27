@@ -13,6 +13,7 @@
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Entities;
 
   public partial class GetItemByPathViewController : BaseTaskTableViewController
   {
@@ -63,40 +64,76 @@
       sender.Selected = !sender.Selected;
     }
 
+    //private async void SendRequest()
+    //{
+    //  try
+    //  {
+    //    using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
+    //    {
+    //      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
+    //        .AddFieldsToRead(this.fieldNameTextField.Text)
+    //        .Build();
+          
+    //      this.ShowLoader();
+
+    //      ScItemsResponse response = await session.ReadItemAsync(request);
+
+    //      if (response.Any())
+    //      {
+    //        this.ShowItemsList(response);
+    //      }
+    //      else
+    //      {
+    //        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+    //      }
+    //    }
+    //  }
+    //  catch(Exception e) 
+    //  {
+    //    this.CleanupTableViewBindings();
+    //    AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+    //  }
+    //  finally
+    //  {
+    //    BeginInvokeOnMainThread(delegate
+                                
+    //    {
+    //      this.FieldsTableView.ReloadData();
+    //      this.HideLoader();
+    //    });
+    //  }
+    //}
+
+    //Entity
     private async void SendRequest()
     {
-      try
-      {
-        using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
-        {
-          var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
-            .AddFieldsToRead(this.fieldNameTextField.Text)
-            .Build();
+      try {
+        using (ISitecoreSSCSession session = this.instanceSettings.GetSession()) {
           
+          var request = EntitySSCRequestBuilder.ReadEntitiesRequestWithPath()
+                                               .Namespace("aggregate")
+                                               .Controller("aggregate")
+                                               .Action("Todo")
+                                               .Build();
+
           this.ShowLoader();
 
-          ScItemsResponse response = await session.ReadItemAsync(request);
+          ScEntityResponse response = await session.ReadEntityAsync(request);
 
-          if (response.Any())
-          {
-            this.ShowItemsList(response);
-          }
-          else
-          {
-            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+          if (response.Any()) {
+            foreach(var entity in response) {
+              Console.WriteLine(entity["id"]);
+            }
+
+          } else {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entities not found");
           }
         }
-      }
-      catch(Exception e) 
-      {
+      } catch (Exception e) {
         this.CleanupTableViewBindings();
         AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-      }
-      finally
-      {
-        BeginInvokeOnMainThread(delegate
-                                
-        {
+      } finally {
+        BeginInvokeOnMainThread(delegate {
           this.FieldsTableView.ReloadData();
           this.HideLoader();
         });

@@ -43,27 +43,27 @@ namespace Sitecore.MobileSDK.UserRequest
       }
     }
 
-    public IScopedRequestParametersBuilder<T> IncludeStandardTemplateFields(bool include)
+    new public IScopedRequestParametersBuilder<T> IncludeStandardTemplateFields(bool include)
     {
       return (IScopedRequestParametersBuilder<T>)base.IncludeStandardTemplateFields(include);
     }
 
-    public IScopedRequestParametersBuilder<T> Database(string sitecoreDatabase)
+    new public IScopedRequestParametersBuilder<T> Database(string sitecoreDatabase)
     {
       return (IScopedRequestParametersBuilder<T>)base.Database(sitecoreDatabase);
     }
 
-    public IScopedRequestParametersBuilder<T> Language(string itemLanguage)
+    new public IScopedRequestParametersBuilder<T> Language(string itemLanguage)
     {
       return (IScopedRequestParametersBuilder<T>)base.Language(itemLanguage);
     } 
 
-    public IScopedRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
+    new public IScopedRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
     {
       return (IScopedRequestParametersBuilder<T>)base.AddFieldsToRead(fields);
     }
 
-    public IScopedRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
+    new public IScopedRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
     {
       return (IScopedRequestParametersBuilder<T>)base.AddFieldsToRead(fieldParams);
     }

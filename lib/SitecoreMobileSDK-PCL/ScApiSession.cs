@@ -1,17 +1,16 @@
-using System.Net;
-using System.Collections.Generic;
-using System.Linq;
-using System.Diagnostics;
-using Sitecore.MobileSDK.UrlBuilder.Children;
-using Sitecore.MobileSDK.UrlBuilder.Search;
+
 
 namespace Sitecore.MobileSDK
 {
   using System;
+  using System.Net;
   using System.IO;
   using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
+  using System.Linq;
+  using System.Diagnostics;
+  using System.Collections.Generic;
 
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
@@ -37,6 +36,12 @@ namespace Sitecore.MobileSDK
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
   using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
+  using Sitecore.MobileSDK.UrlBuilder.Children;
+  using Sitecore.MobileSDK.UrlBuilder.Search;
+  using Sitecore.MobileSDK.API.Entities;
+  using Sitecore.MobileSDK.UrlBuilder.Entity;
+  using Sitecore.MobileSDK.CrudTasks.Entity;
+  using Sitecore.MobileSDK.API.Request.Entity;
 
   public class ScApiSession : ISitecoreSSCSession
   {
@@ -302,7 +307,37 @@ namespace Sitecore.MobileSDK
 
     #endregion SearchItems
 
+    #region Entity
+
+    public async Task<ScEntityResponse> ReadEntityAsync(IReadEntitiesByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      IReadEntitiesByPathRequest requestCopy = request.DeepCopyReadEntitiesByPathRequest();
+
+      await this.GetPublicKeyAsync(cancelToken);
+      IReadEntitiesByPathRequest autocompletedRequest = this.requestMerger.FillReadEntitiesByPathGaps(requestCopy);
+
+      var urlBuilder = new EntityByPathUrlBuilder(this.restGrammar, this.sscGrammar);
+      var taskFlow = new GetEntitiesByPathTasks(urlBuilder, this.httpClient);
+
+      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+    }
+
+    #endregion Entity
+
     #region GetItems
+
+    public async Task<ScItemsResponse> ReadItemAsync(IReadItemsByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      IReadItemsByPathRequest requestCopy = request.DeepCopyGetItemByPathRequest();
+
+      await this.GetPublicKeyAsync(cancelToken);
+      IReadItemsByPathRequest autocompletedRequest = this.requestMerger.FillReadItemByPathGaps(requestCopy);
+
+      var urlBuilder = new ItemByPathUrlBuilder(this.restGrammar, this.sscGrammar);
+      var taskFlow = new GetItemsByPathTasks(urlBuilder, this.httpClient);
+
+      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+    }
 
     public async Task<ScItemsResponse> ReadChildrenAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
@@ -327,19 +362,6 @@ namespace Sitecore.MobileSDK
 
       var urlBuilder = new ItemByIdUrlBuilder(this.restGrammar, this.sscGrammar);
       var taskFlow = new GetItemsByIdTasks(urlBuilder, this.httpClient);
-
-      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
-    }
-
-    public async Task<ScItemsResponse> ReadItemAsync(IReadItemsByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
-    {
-      IReadItemsByPathRequest requestCopy = request.DeepCopyGetItemByPathRequest();
-
-      await this.GetPublicKeyAsync(cancelToken);
-      IReadItemsByPathRequest autocompletedRequest = this.requestMerger.FillReadItemByPathGaps(requestCopy);
-
-      var urlBuilder = new ItemByPathUrlBuilder(this.restGrammar, this.sscGrammar);
-      var taskFlow = new GetItemsByPathTasks(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
@@ -430,7 +452,6 @@ namespace Sitecore.MobileSDK
     }
 
     #endregion Authentication
-
 
     #region Private Variables
 

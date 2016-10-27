@@ -221,6 +221,21 @@
     <Compile Include="PublicKey\ScAuthResponse.cs" />
     <Compile Include="UrlBuilder\GetItemsUrlBuilder.cs" />
     <Compile Include="API\Items\ScUpdateItemResponse.cs" />
+    <Compile Include="API\Entities\IEntitySource.cs" />
+    <Compile Include="API\Entities\ISitecoreEntity.cs" />
+    <Compile Include="API\Entities\ScEntityResponse.cs" />
+    <Compile Include="API\Entities\EntitiesRequest\IReadEntitiesByPathRequest.cs" />
+    <Compile Include="API\Entities\UrlBuilders\EntityByPathUrlBuilder.cs" />
+    <Compile Include="API\Entities\CrudTasks\GetEntitiesByPathTasks.cs" />
+    <Compile Include="API\Entities\CrudTasks\AbstractGetEntityTask.cs" />
+    <Compile Include="API\Entities\ScEntitiesParser.cs" />
+    <Compile Include="API\Entities\ScEntity.cs" />
+    <Compile Include="API\Entities\Session\IReadEntityActions.cs" />
+    <Compile Include="API\EntitySSCRequestBuilder.cs" />
+    <Compile Include="API\Entities\EntitiesRequest\IBaseEntityRequestParametersBuilder.cs" />
+    <Compile Include="API\Entities\EntitiesRequest\RequestBuilders\ReadEntitiesByPathRequestBuilder.cs" />
+    <Compile Include="API\Entities\ReadEntitiesByPathParameters.cs" />
+    <Compile Include="API\Entities\EntitySource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -275,5 +290,11 @@
     <Folder Include="UrlBuilder\Search\" />
     <Folder Include="UrlBuilder\SortParameters\" />
     <Folder Include="Credentials\" />
+    <Folder Include="API\Entities\" />
+    <Folder Include="API\Entities\EntitiesRequest\" />
+    <Folder Include="API\Entities\UrlBuilders\" />
+    <Folder Include="API\Entities\CrudTasks\" />
+    <Folder Include="API\Entities\Session\" />
+    <Folder Include="API\Entities\EntitiesRequest\RequestBuilders\" />
   </ItemGroup>
 </Project>

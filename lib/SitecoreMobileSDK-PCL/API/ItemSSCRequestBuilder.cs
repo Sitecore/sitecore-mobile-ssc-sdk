@@ -1,5 +1,3 @@
-using Sitecore.MobileSDK.UserRequest.SearchRequest;
-using Sitecore.MobileSDK.Items;
 
 namespace Sitecore.MobileSDK.API
 {
@@ -11,6 +9,8 @@ namespace Sitecore.MobileSDK.API
   using Sitecore.MobileSDK.UserRequest.ReadRequest;
   using Sitecore.MobileSDK.UserRequest.UpdateRequest;
   using Sitecore.MobileSDK.UserRequest.DeleteRequest;
+  using Sitecore.MobileSDK.UserRequest.SearchRequest;
+  using Sitecore.MobileSDK.Items;
 
   /// <summary>
   /// Main factory to construct buider for concrete request. 

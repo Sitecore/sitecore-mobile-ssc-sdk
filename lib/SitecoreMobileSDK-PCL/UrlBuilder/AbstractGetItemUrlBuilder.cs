@@ -60,8 +60,11 @@
 
     protected virtual void ValidateRequest(TRequest request)
     {
-      this.ValidateCommonRequest(request);
-      this.ValidateSpecificRequest(request);
+      //FIXME: @igk turn on validation, commented in entities needs
+      #warning turn on validation
+
+      //this.ValidateCommonRequest(request);
+      //this.ValidateSpecificRequest(request);
     }
     #endregion Entry Point
 
