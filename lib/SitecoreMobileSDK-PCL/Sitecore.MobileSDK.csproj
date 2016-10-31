@@ -224,20 +224,25 @@
     <Compile Include="API\EntitySSCRequestBuilder.cs" />
     <Compile Include="Entities\CrudTasks\AbstractGetEntityTask.cs" />
     <Compile Include="Entities\CrudTasks\GetEntitiesByPathTasks.cs" />
-    <Compile Include="Entities\EntitiesRequest\IBaseEntityRequestParametersBuilder.cs" />
     <Compile Include="Entities\EntitiesRequest\IReadEntitiesByPathRequest.cs" />
-    <Compile Include="Entities\EntitiesRequest\RequestBuilders\ReadEntitiesByPathRequestBuilder.cs" />
+    <Compile Include="Entities\EntitiesRequest\RequestsBuilders\ReadEntitiesByPathRequestBuilder.cs" />
     <Compile Include="Entities\EntitySource.cs" />
     <Compile Include="Entities\IEntitySource.cs" />
     <Compile Include="Entities\ISitecoreEntity.cs" />
-    <Compile Include="Entities\ReadEntitiesByPathParameters.cs" />
     <Compile Include="Entities\ScEntitiesParser.cs" />
     <Compile Include="Entities\ScEntity.cs" />
-    <Compile Include="Entities\ScEntityResponse.cs" />
     <Compile Include="Entities\Session\IReadEntityActions.cs" />
     <Compile Include="Entities\UrlBuilders\AbstractGetEntityUrlBuilder.cs" />
     <Compile Include="Entities\UrlBuilders\EntityByPathUrlBuilder.cs" />
     <Compile Include="Entities\UrlBuilders\GetEntitiesUrlBuilder.cs" />
+    <Compile Include="Entities\Responses\ScEntityResponse.cs" />
+    <Compile Include="Entities\Responses\ScCreateEntityResponse.cs" />
+    <Compile Include="Entities\EntitiesRequest\ICreateEntityRequest.cs" />
+    <Compile Include="Entities\EntitiesRequest\RequestsBuilders\IBaseEntityRequestParametersBuilder.cs" />
+    <Compile Include="Entities\EntitiesRequest\ReadEntitiesByPathParameters.cs" />
+    <Compile Include="Entities\EntitiesRequest\IBaseEntityRequest.cs" />
+    <Compile Include="Entities\CrudTasks\CreateEntityhTask.cs" />
+    <Compile Include="Entities\EntitiesRequest\CreateEntitiesParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -293,5 +298,6 @@
     <Folder Include="UrlBuilder\SortParameters\" />
     <Folder Include="Credentials\" />
     <Folder Include="Entities\" />
+    <Folder Include="Entities\Responses\" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,8 @@
 ﻿
-namespace Sitecore.MobileSDK.Items
+namespace Sitecore.MobileSDK.Entities
 {
+  using System;
+  using System.Collections.Generic;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Entities;
   using Sitecore.MobileSDK.API.Items;
@@ -8,30 +10,27 @@ namespace Sitecore.MobileSDK.Items
   using Sitecore.MobileSDK.API.Request.Entity;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-  public class ReadEntitiesByPathParameters : IReadEntitiesByPathRequest
+  public class CreateEntitiesParameters : ICreateEntityRequest
   {
-    public ReadEntitiesByPathParameters(IEntitySource entitySource)
+    public CreateEntitiesParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource)
     {
       this.EntitySource = entitySource;
+      this.EntityId = id;
+      this.FieldsRawValuesByName = fieldsRawValuesByName;
     }
 
-    public ReadEntitiesByPathParameters(IEntitySource entitySource, ISessionConfig sessionConfig)
-    {
-      this.EntitySource = entitySource;
-      this.SessionSettings = sessionConfig;
-    }
-
-    public virtual IReadEntitiesByPathRequest DeepCopyReadEntitiesByPathRequest()
-    {
+    ICreateEntityRequest DeepCopyCreateEntityRequest() { 
       IEntitySource entitySource = null;
 
-      if (null != this.EntitySource)
-      {
+      if (null != this.EntitySource) {
         entitySource = this.EntitySource.ShallowCopy();
       }
 
-      return new ReadEntitiesByPathParameters(entitySource);
+      return new CreateEntitiesParameters(this.EntityId, this.FieldsRawValuesByName, entitySource);
     }
+
+    public string EntityId { get; private set; }
+    public IDictionary<string, string> FieldsRawValuesByName { get; private set; }
 
     public IEntitySource EntitySource { get; private set; }
 
@@ -39,7 +38,7 @@ namespace Sitecore.MobileSDK.Items
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
     {
-      return this.DeepCopyReadEntitiesByPathRequest();
+      return this.DeepCopyCreateEntityRequest();
     }
 
     public string ItemPath { get; private set; }

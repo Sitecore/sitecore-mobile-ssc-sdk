@@ -176,6 +176,23 @@ namespace Sitecore.MobileSDK.UserRequest
       //  userRequest.ItemId);
     }
 
+    public ICreateEntityRequest FillCreateEntityGaps(ICreateEntityRequest userRequest)
+    {
+      //FIXME: @igk implement
+#warning FillReadEntitiesByPathGaps not implemented!
+
+
+      EntitySource newSource = new EntitySource(userRequest.EntitySource.Namespase,
+                                                userRequest.EntitySource.Controller,
+                                                userRequest.EntitySource.Id,
+                                                userRequest.EntitySource.Action);
+
+      CreateEntitiesParameters newRequest = new CreateEntitiesParameters(userRequest.EntityId, userRequest.FieldsRawValuesByName, newSource);
+
+      return newRequest;
+
+    }
+
     #endregion Entity
 
     public ItemSourceFieldMerger ItemSourceMerger { get; private set; }

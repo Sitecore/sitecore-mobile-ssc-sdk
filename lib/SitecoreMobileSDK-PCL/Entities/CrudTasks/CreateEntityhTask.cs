@@ -1,5 +1,5 @@
 ﻿
-namespace Sitecore.MobileSDK.CrudTasks
+namespace Sitecore.MobileSDK.CrudTasks.Entity
 {
   using System;
   using System.Collections.Generic;
@@ -11,23 +11,26 @@ namespace Sitecore.MobileSDK.CrudTasks
   using System.Threading.Tasks;
   using Newtonsoft.Json;
   using Newtonsoft.Json.Linq;
+  using Sitecore.MobileSDK.API.Entities;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Entity;
+  using Sitecore.MobileSDK.Entities;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.TaskFlow;
-  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
+  using Sitecore.MobileSDK.UrlBuilder.Entity;
 
-  internal class CreateItemByPathTask<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScCreateItemResponse>
-    where T : class, ICreateItemByPathRequest
+  internal class CreateEntityhTask<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScCreateEntityResponse>
+    where T : class, ICreateEntityRequest
   {
-    private readonly CreateItemByPathUrlBuilder createItemBuilder;
+    private readonly EntityByPathUrlBuilder createEntityBuilder;
     private readonly HttpClient httpClient;
 
-    public CreateItemByPathTask(
-      CreateItemByPathUrlBuilder createItemBuilder,
+    public CreateEntityhTask(
+      EntityByPathUrlBuilder createEntityBuilder,
       HttpClient httpClient)
     {
-      this.createItemBuilder = createItemBuilder;
+      this.createEntityBuilder = createEntityBuilder;
       this.httpClient = httpClient;
 
       this.Validate();
@@ -35,7 +38,7 @@ namespace Sitecore.MobileSDK.CrudTasks
 
     public HttpRequestMessage BuildRequestUrlForRequestAsync(T request, CancellationToken cancelToken)
     {
-      var url = this.createItemBuilder.GetUrlForRequest(request);
+      var url = this.createEntityBuilder.GetUrlForRequest(request);
 
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Post, url);
 
@@ -57,13 +60,13 @@ namespace Sitecore.MobileSDK.CrudTasks
       return headerValues.FirstOrDefault();
     }
 
-    public async Task<ScCreateItemResponse> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)
+    public async Task<ScCreateEntityResponse> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)
     {
-      Func<ScCreateItemResponse> syncParseResponse = () =>
+      Func<ScCreateEntityResponse> syncParseResponse = () =>
       {
         //TODO: @igk debug response output, remove later
         Debug.WriteLine("RESPONSE: " + httpData);
-        return CreateItemResponseParser.ParseResponse(httpData, cancelToken);
+        return ScEntitiesParser.Parse(httpData, cancelToken);
       };
       return await Task.Factory.StartNew(syncParseResponse, cancelToken);
     }

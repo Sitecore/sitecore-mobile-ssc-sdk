@@ -45,7 +45,7 @@ namespace Sitecore.MobileSDK.UserRequest.ReadRequest.Entities
         this.entityAction
       );
 
-      ReadEntitiesByPathParameters result = new ReadEntitiesByPathParameters(entitySource);
+      ReadEntitiesByPathParameters result = new ReadEntitiesByPathParameters(entitySource, null);
 
       return result;
     }

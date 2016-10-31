@@ -313,11 +313,25 @@ namespace Sitecore.MobileSDK
     {
       IReadEntitiesByPathRequest requestCopy = request.DeepCopyReadEntitiesByPathRequest();
 
-      await this.GetPublicKeyAsync(cancelToken);
+      //await this.GetPublicKeyAsync(cancelToken);
       IReadEntitiesByPathRequest autocompletedRequest = this.requestMerger.FillReadEntitiesByPathGaps(requestCopy);
 
       var urlBuilder = new EntityByPathUrlBuilder(this.restGrammar, this.sscGrammar);
       var taskFlow = new GetEntitiesByPathTasks(urlBuilder, this.httpClient);
+
+      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+    }
+
+    public async Task<ScCreateEntityResponse> CreateEntityAsync(ICreateEntityRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      ICreateEntityRequest requestCopy = request.DeepCopyCreateEntityRequest();
+
+      //await this.GetPublicKeyAsync(cancelToken);
+
+      ICreateEntityRequest autocompletedRequest = this.requestMerger.FillCreateEntityGaps(requestCopy);
+
+      var urlBuilder = new EntityByPathUrlBuilder(this.restGrammar, this.sscGrammar);
+      var taskFlow = new CreateEntityhTask<ICreateEntityRequest>(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
