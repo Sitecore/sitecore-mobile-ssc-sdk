@@ -7,7 +7,7 @@
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
-  public class EntityByPathUrlBuilder : GetItemsUrlBuilder<IReadEntitiesByPathRequest>
+  public class EntityByPathUrlBuilder : GetEntitiesUrlBuilder<IReadEntitiesByPathRequest>
   {
     public EntityByPathUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
       : base(restGrammar, sscGrammar)
@@ -16,27 +16,24 @@
 
     protected override string GetHostUrlForRequest(IReadEntitiesByPathRequest request)
     {
-      string hostUrl = base.GetHostUrlForRequest(request);
-      string result = hostUrl;
+      string hostUrl = base.GetHostUrlForRequest(request);      string result = hostUrl;
 
       return result;
     }
 
     protected override string GetItemIdenticationForRequest(IReadEntitiesByPathRequest request)
     {
-      //string escapedPath = UrlBuilderUtils.EscapeDataString(request.ItemPath.ToLowerInvariant());
-      string strItemPath = request.EntitySource.Namespase
+      string strItemPath = UrlBuilderUtils.EscapeDataString(request.EntitySource.Namespase)
                                   + restGrammar.PathComponentSeparator
-                                  + request.EntitySource.Controller
+                                  + UrlBuilderUtils.EscapeDataString(request.EntitySource.Controller)
                                   + restGrammar.PathComponentSeparator;
       if (request.EntitySource.Id != null) {
-        strItemPath = strItemPath + request.EntitySource.Id;
+        strItemPath = strItemPath + UrlBuilderUtils.EscapeDataString(request.EntitySource.Id);
       }
 
-      strItemPath = strItemPath + request.EntitySource.Action;
-      string escapedPath = UrlBuilderUtils.EscapeDataString(strItemPath.ToLowerInvariant());
+      strItemPath = strItemPath + UrlBuilderUtils.EscapeDataString(request.EntitySource.Action);
 
-      return escapedPath;
+      return strItemPath;
     }
 
     protected override void ValidateSpecificRequest(IReadEntitiesByPathRequest request)

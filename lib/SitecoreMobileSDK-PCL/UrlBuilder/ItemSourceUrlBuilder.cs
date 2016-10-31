@@ -19,7 +19,9 @@
       this.restGrammar = restGrammar;
       this.sscGrammar = sscGrammar;
 
-      this.Validate();
+      //FIXME: @igk turn on validation, commented in entities needs
+      #warning turn on validation
+      //this.Validate();
     }
 
     public string BuildUrlQueryString()
@@ -51,7 +53,7 @@
       }
 
 
-      if (null != this.itemSource.VersionNumber)
+      if (this.itemSource != null && this.itemSource.VersionNumber != null )
       {
         int iVersion = this.itemSource.VersionNumber.Value;
         string strVersion = iVersion.ToString(CultureInfo.InvariantCulture);

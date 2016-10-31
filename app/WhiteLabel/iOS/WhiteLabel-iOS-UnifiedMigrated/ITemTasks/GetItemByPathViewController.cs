@@ -112,7 +112,7 @@
           
           var request = EntitySSCRequestBuilder.ReadEntitiesRequestWithPath()
                                                .Namespace("aggregate")
-                                               .Controller("aggregate")
+                                               .Controller("admin")
                                                .Action("Todo")
                                                .Build();
 
@@ -121,8 +121,9 @@
           ScEntityResponse response = await session.ReadEntityAsync(request);
 
           if (response.Any()) {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Entities count", response.Count().ToString());
             foreach(var entity in response) {
-              Console.WriteLine(entity["id"]);
+              Console.WriteLine("ENTITY: " + entity["id"].RawValue);
             }
 
           } else {

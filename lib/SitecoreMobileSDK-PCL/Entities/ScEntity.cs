@@ -10,8 +10,17 @@ namespace Sitecore.MobileSDK.Entities
 
   public class ScEntity : ISitecoreEntity
   {
+
+    private const string EntityIDKey = "Id";
+
     public ScEntity()
     {
+    }
+
+    public string Id {
+      get {
+        return this.FieldWithName(EntityIDKey).RawValue;
+      }
     }
 
     #region Class variables;

@@ -7,6 +7,8 @@ namespace Sitecore.MobileSDK.API.Entities
   //TODO: can be the ISitecoreItem's parent!!!???
   public interface ISitecoreEntity
   {
+    string Id { get; }
+
     int FieldsCount { get; }
 
     IField this[string caseInsensitiveFieldName] { get; }

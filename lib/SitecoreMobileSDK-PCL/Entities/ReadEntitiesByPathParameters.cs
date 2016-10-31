@@ -15,6 +15,12 @@ namespace Sitecore.MobileSDK.Items
       this.EntitySource = entitySource;
     }
 
+    public ReadEntitiesByPathParameters(IEntitySource entitySource, ISessionConfig sessionConfig)
+    {
+      this.EntitySource = entitySource;
+      this.SessionSettings = sessionConfig;
+    }
+
     public virtual IReadEntitiesByPathRequest DeepCopyReadEntitiesByPathRequest()
     {
       IEntitySource entitySource = null;

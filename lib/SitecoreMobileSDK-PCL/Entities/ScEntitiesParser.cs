@@ -28,13 +28,11 @@
 
       var items = new List<ISitecoreEntity>();
 
-      //FIXME: @igk to manny result variants, do we still need universal parser?
-
       JToken results = null;
 
       try
       {
-        results = response.Value<JToken>("Results");
+        results = response.Value<JToken>("value");
       }
       catch(Exception e)
       {

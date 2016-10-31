@@ -6,6 +6,7 @@ namespace Sitecore.MobileSDK.UserRequest
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Entity;
+  using Sitecore.MobileSDK.Entities;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.UrlBuilder.CreateItem;
@@ -152,7 +153,17 @@ namespace Sitecore.MobileSDK.UserRequest
     {
       //FIXME: @igk implement
       #warning FillReadEntitiesByPathGaps not implemented!
-      return userRequest;
+
+
+      EntitySource newSource = new EntitySource(userRequest.EntitySource.Namespase,
+                                                userRequest.EntitySource.Controller,
+                                                userRequest.EntitySource.Id,
+                                                userRequest.EntitySource.Action);
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
+
+      ReadEntitiesByPathParameters newRequest = new ReadEntitiesByPathParameters(newSource, mergedSessionConfig);
+
+      return newRequest;
 
       //IEntitySource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.EntirySource);
       //ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
