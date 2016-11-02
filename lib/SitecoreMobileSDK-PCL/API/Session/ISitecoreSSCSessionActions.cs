@@ -6,6 +6,7 @@ namespace Sitecore.MobileSDK.API.Session
   public interface ISitecoreSSCSessionActions :
     IReadItemActions,
     ICreateItemActions,
+    ICreateEntityActions,
     IUpdateItemActions,
     IConnectionActions,
     IDeleteItemActions,

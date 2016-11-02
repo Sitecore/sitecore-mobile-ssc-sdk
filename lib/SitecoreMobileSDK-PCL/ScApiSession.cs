@@ -331,7 +331,7 @@ namespace Sitecore.MobileSDK
       ICreateEntityRequest autocompletedRequest = this.requestMerger.FillCreateEntityGaps(requestCopy);
 
       var urlBuilder = new EntityByPathUrlBuilder(this.restGrammar, this.sscGrammar);
-      var taskFlow = new CreateEntityhTask<ICreateEntityRequest>(urlBuilder, this.httpClient);
+      var taskFlow = new CreateEntityTask<ICreateEntityRequest>(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }

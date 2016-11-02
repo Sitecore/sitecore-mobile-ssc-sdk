@@ -10,23 +10,31 @@ namespace Sitecore.MobileSDK.Entities
   using Sitecore.MobileSDK.API.Request.Entity;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-  public class CreateEntitiesParameters : ICreateEntityRequest
+  public class CreateEntityParameters : ICreateEntityRequest
   {
-    public CreateEntitiesParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource)
+    public CreateEntityParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource)
     {
       this.EntitySource = entitySource;
       this.EntityId = id;
       this.FieldsRawValuesByName = fieldsRawValuesByName;
     }
 
-    ICreateEntityRequest DeepCopyCreateEntityRequest() { 
+    public CreateEntityParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource, ISessionConfig sessionSettings)
+    {
+      this.EntitySource = entitySource;
+      this.EntityId = id;
+      this.FieldsRawValuesByName = fieldsRawValuesByName;
+      this.SessionSettings = sessionSettings;
+    }
+
+    public ICreateEntityRequest DeepCopyCreateEntityRequest() { 
       IEntitySource entitySource = null;
 
       if (null != this.EntitySource) {
         entitySource = this.EntitySource.ShallowCopy();
       }
 
-      return new CreateEntitiesParameters(this.EntityId, this.FieldsRawValuesByName, entitySource);
+      return new CreateEntityParameters(this.EntityId, this.FieldsRawValuesByName, entitySource);
     }
 
     public string EntityId { get; private set; }

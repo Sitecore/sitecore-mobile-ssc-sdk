@@ -225,24 +225,30 @@
     <Compile Include="Entities\CrudTasks\AbstractGetEntityTask.cs" />
     <Compile Include="Entities\CrudTasks\GetEntitiesByPathTasks.cs" />
     <Compile Include="Entities\EntitiesRequest\IReadEntitiesByPathRequest.cs" />
-    <Compile Include="Entities\EntitiesRequest\RequestsBuilders\ReadEntitiesByPathRequestBuilder.cs" />
+    <Compile Include="Entities\EntitiesRequest\RequestsBuilders\AbstractEntityRequestParametersBuilder.cs" />
     <Compile Include="Entities\EntitySource.cs" />
     <Compile Include="Entities\IEntitySource.cs" />
     <Compile Include="Entities\ISitecoreEntity.cs" />
-    <Compile Include="Entities\ScEntitiesParser.cs" />
     <Compile Include="Entities\ScEntity.cs" />
     <Compile Include="Entities\Session\IReadEntityActions.cs" />
     <Compile Include="Entities\UrlBuilders\AbstractGetEntityUrlBuilder.cs" />
     <Compile Include="Entities\UrlBuilders\EntityByPathUrlBuilder.cs" />
     <Compile Include="Entities\UrlBuilders\GetEntitiesUrlBuilder.cs" />
-    <Compile Include="Entities\Responses\ScEntityResponse.cs" />
-    <Compile Include="Entities\Responses\ScCreateEntityResponse.cs" />
     <Compile Include="Entities\EntitiesRequest\ICreateEntityRequest.cs" />
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\IBaseEntityRequestParametersBuilder.cs" />
     <Compile Include="Entities\EntitiesRequest\ReadEntitiesByPathParameters.cs" />
     <Compile Include="Entities\EntitiesRequest\IBaseEntityRequest.cs" />
     <Compile Include="Entities\CrudTasks\CreateEntityhTask.cs" />
     <Compile Include="Entities\EntitiesRequest\CreateEntitiesParameters.cs" />
+    <Compile Include="Entities\Responses\Read\ScEntitiesParser.cs" />
+    <Compile Include="Entities\Responses\Read\ScEntityResponse.cs" />
+    <Compile Include="Entities\Responses\Create\ScCreateEntityResponse.cs" />
+    <Compile Include="Entities\Responses\Create\ScCreateEntityParser.cs" />
+    <Compile Include="API\Session\ICreateEntityActions.cs" />
+    <Compile Include="Entities\EntitiesRequest\RequestsBuilders\AbstractChangeEntityRequestBuilder.cs" />
+    <Compile Include="Entities\EntitiesRequest\RequestsBuilders\ReadEntitiesByPathRequestBuilder.cs" />
+    <Compile Include="Entities\EntitiesRequest\RequestsBuilders\IChangeEntityParametersBuilder.cs" />
+    <Compile Include="Entities\EntitiesRequest\RequestsBuilders\CreateEntityRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -299,5 +305,7 @@
     <Folder Include="Credentials\" />
     <Folder Include="Entities\" />
     <Folder Include="Entities\Responses\" />
+    <Folder Include="Entities\Responses\Read\" />
+    <Folder Include="Entities\Responses\Create\" />
   </ItemGroup>
 </Project>

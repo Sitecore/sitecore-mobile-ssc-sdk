@@ -187,7 +187,9 @@ namespace Sitecore.MobileSDK.UserRequest
                                                 userRequest.EntitySource.Id,
                                                 userRequest.EntitySource.Action);
 
-      CreateEntitiesParameters newRequest = new CreateEntitiesParameters(userRequest.EntityId, userRequest.FieldsRawValuesByName, newSource);
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
+
+      CreateEntityParameters newRequest = new CreateEntityParameters(userRequest.EntityId, userRequest.FieldsRawValuesByName, newSource, mergedSessionConfig);
 
       return newRequest;
 

@@ -20,13 +20,13 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.UrlBuilder.Entity;
 
-  internal class CreateEntityhTask<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScCreateEntityResponse>
+  internal class CreateEntityTask<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScCreateEntityResponse>
     where T : class, ICreateEntityRequest
   {
     private readonly EntityByPathUrlBuilder createEntityBuilder;
     private readonly HttpClient httpClient;
 
-    public CreateEntityhTask(
+    public CreateEntityTask(
       EntityByPathUrlBuilder createEntityBuilder,
       HttpClient httpClient)
     {
@@ -52,7 +52,7 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
 
     public async Task<string> SendRequestForUrlAsync(HttpRequestMessage request, CancellationToken cancelToken)
     {
-      //TODO: @igk debug request output, remove later
+      //TODOvk: @igk debug request output, remove later
       Debug.WriteLine("REQUEST: " + request);
       var result = await this.httpClient.SendAsync(request, cancelToken);
 
@@ -66,12 +66,12 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
       {
         //TODO: @igk debug response output, remove later
         Debug.WriteLine("RESPONSE: " + httpData);
-        return ScEntitiesParser.Parse(httpData, cancelToken);
+        return ScCreateEntityParser.Parse(httpData, cancelToken);
       };
       return await Task.Factory.StartNew(syncParseResponse, cancelToken);
     }
 
-    public string GetFieldsListString(ICreateItemByPathRequest request)
+    public string GetFieldsListString(T request)
     {
       string result = string.Empty;
 
@@ -90,9 +90,7 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
         }
       }
 
-      //TODO: IGK check do we need some fields more. Documentation have no such content.
-      jsonObject.Add("TemplateID", request.ItemTemplateId);
-      jsonObject.Add("ItemName", request.ItemName);
+      jsonObject.Add("Id", request.EntityId);
 
       result = jsonObject.ToString(Formatting.None);
 
@@ -103,12 +101,12 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
     {
       if (null == this.httpClient)
       {
-        throw new ArgumentNullException("DeleteItemTasks.httpClient cannot be null");
+        throw new ArgumentNullException("CreateEntityTask.httpClient cannot be null");
       }
 
-      if (null == this.createItemBuilder)
+      if (null == this.createEntityBuilder)
       {
-        throw new ArgumentNullException("DeleteItemTasks.deleteItemsBuilder cannot be null");
+        throw new ArgumentNullException("CreateEntityTask.createEntityBuilder cannot be null");
       }
     }
   }

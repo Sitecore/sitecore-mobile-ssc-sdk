@@ -7,10 +7,12 @@
   {
     public static void CheckNullAndThrow(Object obj, string source)
     {
-      if (obj == null)
-      {
-        throw new ArgumentNullException(source);
-      }
+      //FIXME: restore validation
+      #warning restore validation
+      //if (obj == null)
+      //{
+      //  throw new ArgumentNullException(source);
+      //}
     }
 
     public static void CheckForTwiceSetAndThrow(Object obj, string source)

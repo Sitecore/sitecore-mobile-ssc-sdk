@@ -7,21 +7,21 @@
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
-  public class EntityByPathUrlBuilder : GetEntitiesUrlBuilder<IReadEntitiesByPathRequest>
+  public class EntityByPathUrlBuilder : GetEntitiesUrlBuilder<IBaseEntityRequest>
   {
     public EntityByPathUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
       : base(restGrammar, sscGrammar)
     {
     }
 
-    protected override string GetHostUrlForRequest(IReadEntitiesByPathRequest request)
+    protected override string GetHostUrlForRequest(IBaseEntityRequest request)
     {
-      string hostUrl = base.GetHostUrlForRequest(request);      string result = hostUrl;
+      string hostUrl = base.GetHostUrlForRequest(request);     
 
-      return result;
+      return hostUrl;
     }
 
-    protected override string GetItemIdenticationForRequest(IReadEntitiesByPathRequest request)
+    protected override string GetItemIdenticationForRequest(IBaseEntityRequest request)
     {
       string strItemPath = UrlBuilderUtils.EscapeDataString(request.EntitySource.Namespase)
                                   + restGrammar.PathComponentSeparator
@@ -36,7 +36,7 @@
       return strItemPath;
     }
 
-    protected override void ValidateSpecificRequest(IReadEntitiesByPathRequest request)
+    protected override void ValidateSpecificRequest(IBaseEntityRequest request)
     {
        //TODO: @igk implement
     }

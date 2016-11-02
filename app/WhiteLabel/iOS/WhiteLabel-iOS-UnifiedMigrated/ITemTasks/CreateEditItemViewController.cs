@@ -10,10 +10,10 @@
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Entities;
 
-	public partial class CreateEditItemViewController : BaseTaskViewController
+  public partial class CreateEditItemViewController : BaseTaskViewController
 	{
-    private string CreatedItemId;
 
 		public CreateEditItemViewController(IntPtr handle) : base(handle)
 		{
@@ -45,44 +45,80 @@
       this.SendRequest();
 		}
 
+    //private async void SendRequest()
+    //{
+    //  try
+    //  {
+    //    using ( ISitecoreSSCSession session = this.instanceSettings.GetSession() )
+    //    {
+    //      var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.pathField.Text)
+    //        .ItemTemplateId("76036f5e-cbce-46d1-af0a-4143f9b557aa")
+    //        .ItemName(this.nameField.Text)
+    //        .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
+    //        .AddFieldsRawValuesByNameToSet("Text", textField.Text)
+    //        .Build();
+           
+    //      this.ShowLoader();
+
+    //      var response = await session.CreateItemAsync(request);
+    //      if (response.Created)
+    //      {
+    //        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item created successfully, Id is " + response.ItemId);
+    //      }
+    //      else
+    //      {
+    //        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item was not created");
+    //      }
+    //    }
+    //  }
+    //  catch
+    //  {
+    //    AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item was not created");
+    //  }
+    //  finally
+    //  {
+    //    BeginInvokeOnMainThread(delegate
+    //    {
+    //      this.HideLoader();
+    //    });
+    //  }
+    //}
+
+
     private async void SendRequest()
     {
-      try
-      {
-        using ( ISitecoreSSCSession session = this.instanceSettings.GetSession() )
-        {
-          var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.pathField.Text)
-            .ItemTemplateId("76036f5e-cbce-46d1-af0a-4143f9b557aa")
-            .ItemName(this.nameField.Text)
-            .AddFieldsRawValuesByNameToSet("Title", titleField.Text)
-            .AddFieldsRawValuesByNameToSet("Text", textField.Text)
-            .Build();
-           
+      try {
+        using (ISitecoreSSCSession session = this.instanceSettings.GetSession()) {
+
+
+          var request = EntitySSCRequestBuilder.CreateEntityRequest(2)
+                                               .Namespace("aggregate")
+                                               .Controller("admin")
+                                               .Action("Todo")
+                                               .AddFieldsRawValuesByNameToSet("Title", "111111")
+                                               .AddFieldsRawValuesByNameToSet("Url", null)
+                                               .Build();
+          
+
           this.ShowLoader();
 
-          var response = await session.CreateItemAsync(request);
-          if (response.Created)
-          {
-            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item created successfully, Id is " + response.ItemId);
-          }
-          else
-          {
-            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item was not created");
+          ScCreateEntityResponse response = await session.CreateEntityAsync(request);
+          if (response.Created) {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entity created successfully, Id is " + response.createdEntity.Id);
+          } else {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entity was not created");
           }
         }
-      }
-      catch
-      {
-        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item was not created");
-      }
-      finally
-      {
-        BeginInvokeOnMainThread(delegate
-        {
+      } catch {
+        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entity was not created");
+      } finally {
+        BeginInvokeOnMainThread(delegate {
           this.HideLoader();
         });
       }
     }
+
+
 	}
 }
 

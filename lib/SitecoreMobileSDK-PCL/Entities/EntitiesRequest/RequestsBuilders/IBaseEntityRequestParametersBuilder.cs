@@ -9,7 +9,7 @@
 
     IBaseEntityRequestParametersBuilder<T> Namespace(string entityNamespace);
     IBaseEntityRequestParametersBuilder<T> Controller(string entityController);
-    IBaseEntityRequestParametersBuilder<T> Id(string entityId);
+    IBaseEntityRequestParametersBuilder<T> TaskId(string entityId);
     IBaseEntityRequestParametersBuilder<T> Action(string entityAction);
 
     T Build();

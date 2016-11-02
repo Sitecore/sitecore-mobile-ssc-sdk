@@ -15,7 +15,10 @@ namespace Sitecore.MobileSDK.API
       return new ReadEntitiesByPathRequestBuilder();
     }
 
-
+    public static IChangeEntityParametersBuilder<ICreateEntityRequest> CreateEntityRequest(int entityId)
+    {
+      return new CreateEntityRequestBuilder(entityId);
+    }
   }
 }
 
