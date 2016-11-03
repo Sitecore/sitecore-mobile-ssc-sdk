@@ -105,12 +105,53 @@
     //}
 
     //Entity
+    //private async void SendRequest()
+    //{
+    //  //get all entities
+
+    //  try {
+    //    using (ISitecoreSSCSession session = this.instanceSettings.GetSession()) {
+          
+    //      var request = EntitySSCRequestBuilder.ReadEntitiesRequestWithPath()
+    //                                           .Namespace("aggregate")
+    //                                           .Controller("admin")
+    //                                           .Action("Todo")
+    //                                           .Build();
+
+    //      this.ShowLoader();
+
+    //      ScEntityResponse response = await session.ReadEntityAsync(request);
+
+    //      if (response.Any()) {
+    //        AlertHelper.ShowLocalizedAlertWithOkOption("Entities count", response.Count().ToString());
+    //        foreach(var entity in response) {
+    //          Console.WriteLine("ENTITY: " + entity["id"].RawValue);
+    //        }
+
+    //      } else {
+    //        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entities not found");
+    //      }
+    //    }
+    //  } catch (Exception e) {
+    //    this.CleanupTableViewBindings();
+    //    AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+    //  } finally {
+    //    BeginInvokeOnMainThread(delegate {
+    //      this.FieldsTableView.ReloadData();
+    //      this.HideLoader();
+    //    });
+    //  }
+    //}
+
+
     private async void SendRequest()
     {
+      //get entity by id
+
       try {
         using (ISitecoreSSCSession session = this.instanceSettings.GetSession()) {
-          
-          var request = EntitySSCRequestBuilder.ReadEntitiesRequestWithPath()
+
+          var request = EntitySSCRequestBuilder.ReadEntityRequestById("1")
                                                .Namespace("aggregate")
                                                .Controller("admin")
                                                .Action("Todo")
@@ -122,7 +163,7 @@
 
           if (response.Any()) {
             AlertHelper.ShowLocalizedAlertWithOkOption("Entities count", response.Count().ToString());
-            foreach(var entity in response) {
+            foreach (var entity in response) {
               Console.WriteLine("ENTITY: " + entity["id"].RawValue);
             }
 

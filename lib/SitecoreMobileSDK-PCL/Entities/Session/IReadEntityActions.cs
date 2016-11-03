@@ -9,6 +9,8 @@ namespace Sitecore.MobileSDK.API.Session
   public interface IReadEntityActions
   {
     Task<ScEntityResponse> ReadEntityAsync(IReadEntitiesByPathRequest request, CancellationToken cancelToken = default(CancellationToken));
+    Task<ScEntityResponse> ReadEntityAsync(IReadEntityByIdRequest request, CancellationToken cancelToken = default(CancellationToken));
+
   }
 }
 

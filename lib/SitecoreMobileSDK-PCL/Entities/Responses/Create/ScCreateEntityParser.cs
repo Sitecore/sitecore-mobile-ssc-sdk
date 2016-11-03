@@ -17,7 +17,7 @@
     {
     }
 
-    public static ScCreateEntityResponse Parse(string responseString, CancellationToken cancelToken)
+    public static ScCreateEntityResponse Parse(string responseString, int statusCode, CancellationToken cancelToken)
     {
       if (string.IsNullOrEmpty(responseString))
       {
@@ -27,38 +27,12 @@
       var response = JToken.Parse(responseString);
 
 
-      ScEntity newItem = ScEntitiesParser.ParseSource(response as JObject, cancelToken);
+      ScEntity newItem = ScEntityParser.ParseSource(response as JObject, cancelToken);
 
-      return new ScCreateEntityResponse(newItem);
+      return new ScCreateEntityResponse(newItem, statusCode);
     }
 
-    public static ScEntity ParseSource(JObject item, CancellationToken cancelToken)
-    {
-      ScEntity newItem;
 
-      try {
-
-        List<IField> fields = ScFieldsParser.ParseFieldsData(item, cancelToken);
-        var fieldsByName = new Dictionary<string, IField>(fields.Count);
-        foreach (IField singleField in fields) {
-          cancelToken.ThrowIfCancellationRequested();
-
-          string lowercaseName = singleField.Name.ToLowerInvariant();
-          fieldsByName[lowercaseName] = singleField;
-        }
-
-        newItem = new ScEntity(fieldsByName);
-      } catch (Exception e) {
-        OperationCanceledException cancel = e as OperationCanceledException;
-        if (cancel != null) { 
-          throw cancel; 
-        }
-          
-        throw new ParserException(TaskFlowErrorMessages.PARSER_EXCEPTION_MESSAGE + item.ToString(), e);
-      }
-
-      return newItem;
-    }
 
   }
 }

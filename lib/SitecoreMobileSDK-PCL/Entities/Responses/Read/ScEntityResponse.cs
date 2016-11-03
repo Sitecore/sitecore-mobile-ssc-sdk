@@ -6,8 +6,9 @@ namespace Sitecore.MobileSDK.API.Entities
   public class ScEntityResponse : IEnumerable<ISitecoreEntity>
   {
     
-    public ScEntityResponse(List<ISitecoreEntity> entities)
+    public ScEntityResponse(List<ISitecoreEntity> entities, int statusCode)
     {
+      this.StatusCode = statusCode;
       this.Entities = entities;
     }
 
@@ -69,6 +70,18 @@ namespace Sitecore.MobileSDK.API.Entities
       /*private*/
       set;
     }
+
+    public int StatusCode {
+      get {
+        return this.statusCode;
+      }
+
+      private set {
+        this.statusCode = value;
+      }
+    }
+
+    private int statusCode = 0;
     #endregion IEnumerable
   }
 }

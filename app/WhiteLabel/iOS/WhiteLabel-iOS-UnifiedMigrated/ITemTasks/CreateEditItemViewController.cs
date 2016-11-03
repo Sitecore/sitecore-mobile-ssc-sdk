@@ -91,7 +91,7 @@
         using (ISitecoreSSCSession session = this.instanceSettings.GetSession()) {
 
 
-          var request = EntitySSCRequestBuilder.CreateEntityRequest(2)
+          var request = EntitySSCRequestBuilder.CreateEntityRequest("333")
                                                .Namespace("aggregate")
                                                .Controller("admin")
                                                .Action("Todo")
@@ -104,13 +104,13 @@
 
           ScCreateEntityResponse response = await session.CreateEntityAsync(request);
           if (response.Created) {
-            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entity created successfully, Id is " + response.createdEntity.Id);
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entity created successfully, Id is " + response.CreatedEntity.Id);
           } else {
             AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entity was not created");
           }
         }
-      } catch {
-        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entity was not created");
+      } catch (Exception e) {
+        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entity was not created: "+e.Message);
       } finally {
         BeginInvokeOnMainThread(delegate {
           this.HideLoader();

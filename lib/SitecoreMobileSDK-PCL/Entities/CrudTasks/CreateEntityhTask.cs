@@ -23,11 +23,11 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
   internal class CreateEntityTask<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScCreateEntityResponse>
     where T : class, ICreateEntityRequest
   {
-    private readonly EntityByPathUrlBuilder createEntityBuilder;
+    private readonly EntityByPathUrlBuilder<T> createEntityBuilder;
     private readonly HttpClient httpClient;
 
     public CreateEntityTask(
-      EntityByPathUrlBuilder createEntityBuilder,
+      EntityByPathUrlBuilder<T> createEntityBuilder,
       HttpClient httpClient)
     {
       this.createEntityBuilder = createEntityBuilder;
@@ -56,8 +56,9 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
       Debug.WriteLine("REQUEST: " + request);
       var result = await this.httpClient.SendAsync(request, cancelToken);
 
-      IEnumerable<string> headerValues = result.Headers.GetValues("Location");
-      return headerValues.FirstOrDefault();
+      this.statusCode = (int)result.StatusCode;
+
+      return await result.Content.ReadAsStringAsync();
     }
 
     public async Task<ScCreateEntityResponse> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)
@@ -66,7 +67,7 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
       {
         //TODO: @igk debug response output, remove later
         Debug.WriteLine("RESPONSE: " + httpData);
-        return ScCreateEntityParser.Parse(httpData, cancelToken);
+        return ScCreateEntityParser.Parse(httpData, this.statusCode, cancelToken);
       };
       return await Task.Factory.StartNew(syncParseResponse, cancelToken);
     }
@@ -109,5 +110,8 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
         throw new ArgumentNullException("CreateEntityTask.createEntityBuilder cannot be null");
       }
     }
+
+    private int statusCode = 0;
+
   }
 }

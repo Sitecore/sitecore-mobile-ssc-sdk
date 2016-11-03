@@ -240,7 +240,7 @@
     <Compile Include="Entities\EntitiesRequest\IBaseEntityRequest.cs" />
     <Compile Include="Entities\CrudTasks\CreateEntityhTask.cs" />
     <Compile Include="Entities\EntitiesRequest\CreateEntitiesParameters.cs" />
-    <Compile Include="Entities\Responses\Read\ScEntitiesParser.cs" />
+    <Compile Include="Entities\Responses\Read\ScReadEntitiesParser.cs" />
     <Compile Include="Entities\Responses\Read\ScEntityResponse.cs" />
     <Compile Include="Entities\Responses\Create\ScCreateEntityResponse.cs" />
     <Compile Include="Entities\Responses\Create\ScCreateEntityParser.cs" />
@@ -249,6 +249,12 @@
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\ReadEntitiesByPathRequestBuilder.cs" />
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\IChangeEntityParametersBuilder.cs" />
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\CreateEntityRequestBuilder.cs" />
+    <Compile Include="Entities\Responses\ScEntityParser.cs" />
+    <Compile Include="Entities\EntitiesRequest\IReadEntityByIdRequest.cs" />
+    <Compile Include="Entities\UrlBuilders\EntityByIdUrlBuilder.cs" />
+    <Compile Include="Entities\CrudTasks\GetEntityByIdTasks.cs" />
+    <Compile Include="Entities\EntitiesRequest\ReadEntityByIdParameters.cs" />
+    <Compile Include="Entities\EntitiesRequest\RequestsBuilders\ReadEntityByIdRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

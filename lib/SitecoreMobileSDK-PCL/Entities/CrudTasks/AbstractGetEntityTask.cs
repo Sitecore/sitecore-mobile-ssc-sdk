@@ -43,6 +43,9 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
       //TODO: @igk debug request output, remove later
       Debug.WriteLine("REQUEST: " + requestUrl);
       HttpResponseMessage httpResponse = await this.httpClient.SendAsync(requestUrl, cancelToken);
+
+      this.statusCode = (int)httpResponse.StatusCode;
+
       return await httpResponse.Content.ReadAsStringAsync();
     }
 
@@ -53,7 +56,7 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
         //TODO: @igk debug response output, remove later
         Debug.WriteLine("RESPONSE: " + data);
 
-        return ScEntitiesParser.Parse(data, cancelToken);
+        return ScReadEntitiesParser.Parse(data, this.statusCode, cancelToken);
       };
       return await Task.Factory.StartNew(syncParseResponse, cancelToken) as TResponse;
     }
@@ -68,6 +71,8 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
       }
 
     }
+
+    private int statusCode = 0;
 
     protected abstract string UrlToGetEntityWithRequest(TRequest request);
 

@@ -67,6 +67,13 @@
 
     }
 
+    public int HttpResponseStatusCode()
+    {
+      return this.statusCode;
+    }
+
+    private int statusCode = 0;
+
     public abstract string CurrentDb { get; }
 
     protected abstract string UrlToGetItemWithRequest(TRequest request);

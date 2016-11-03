@@ -164,16 +164,23 @@ namespace Sitecore.MobileSDK.UserRequest
       ReadEntitiesByPathParameters newRequest = new ReadEntitiesByPathParameters(newSource, mergedSessionConfig);
 
       return newRequest;
+    }
 
-      //IEntitySource mergedSource = this.ItemSourceMerger.FillItemSourceGaps(userRequest.EntirySource);
-      //ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
+    public IReadEntityByIdRequest FillReadEntityByIdGaps(IReadEntityByIdRequest userRequest)
+    {
+      //FIXME: @igk implement
+      #warning FillReadEntityByIdGaps not implemented!
 
-      //return new ReadItemsByIdParameters(
-      //  mergedSessionConfig,
-      //  mergedSource,
-      //  userRequest.QueryParameters,
-      //  userRequest.IncludeStandardTemplateFields,
-      //  userRequest.ItemId);
+
+      EntitySource newSource = new EntitySource(userRequest.EntitySource.Namespase,
+                                                userRequest.EntitySource.Controller,
+                                                userRequest.EntitySource.Id,
+                                                userRequest.EntitySource.Action);
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
+
+      ReadEntityByIdParameters newRequest = new ReadEntityByIdParameters(userRequest.EntityID, newSource, mergedSessionConfig);
+
+      return newRequest;
     }
 
     public ICreateEntityRequest FillCreateEntityGaps(ICreateEntityRequest userRequest)

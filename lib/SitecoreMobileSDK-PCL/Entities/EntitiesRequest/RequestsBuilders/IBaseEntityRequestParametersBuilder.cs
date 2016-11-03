@@ -1,8 +1,6 @@
 ﻿namespace Sitecore.MobileSDK.API.Request.Entity
 {
   using System.Collections.Generic;
-  using Sitecore.MobileSDK.API.Request.Paging;
-  using Sitecore.MobileSDK.API.Request.Parameters;
 
   public interface IBaseEntityRequestParametersBuilder<T> where T : class
   {
