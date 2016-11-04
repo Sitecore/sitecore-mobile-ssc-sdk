@@ -15,17 +15,17 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.UrlBuilder.Entity;
 
-  internal class CreateEntityTask<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScCreateEntityResponse>
-    where T : class, ICreateEntityRequest
+  internal class UpdateEntityTask<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScUpdateEntityResponse>
+    where T : class, IUpdateEntityRequest
   {
-    private readonly EntityByPathUrlBuilder<T> createEntityBuilder;
+    private readonly EntityByIdUrlBuilder<IUpdateEntityRequest> updateEntityBuilder;
     private readonly HttpClient httpClient;
 
-    public CreateEntityTask(
-      EntityByPathUrlBuilder<T> createEntityBuilder,
+    public UpdateEntityTask(
+      EntityByIdUrlBuilder<IUpdateEntityRequest> updateEntityBuilder,
       HttpClient httpClient)
     {
-      this.createEntityBuilder = createEntityBuilder;
+      this.updateEntityBuilder = updateEntityBuilder;
       this.httpClient = httpClient;
 
       this.Validate();
@@ -33,9 +33,9 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
 
     public HttpRequestMessage BuildRequestUrlForRequestAsync(T request, CancellationToken cancelToken)
     {
-      var url = this.createEntityBuilder.GetUrlForRequest(request);
+      var url = this.updateEntityBuilder.GetUrlForRequest(request);
 
-      HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Post, url);
+      HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Put, url);
 
       string fieldsList = this.GetFieldsListString(request);
       StringContent bodycontent = new StringContent(fieldsList, Encoding.UTF8, "application/json");
@@ -56,13 +56,10 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
       return await result.Content.ReadAsStringAsync();
     }
 
-    public async Task<ScCreateEntityResponse> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)
+    public async Task<ScUpdateEntityResponse> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)
     {
-      Func<ScCreateEntityResponse> syncParseResponse = () =>
-      {
-        //TODO: @igk debug response output, remove later
-        Debug.WriteLine("RESPONSE: " + httpData);
-        return ScCreateEntityParser.Parse(httpData, this.statusCode, cancelToken);
+      Func<ScUpdateEntityResponse> syncParseResponse = () => {
+        return new ScUpdateEntityResponse(this.statusCode);
       };
       return await Task.Factory.StartNew(syncParseResponse, cancelToken);
     }
@@ -77,8 +74,6 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
       if (fieldsAvailable) {
         fieldsAvailable = (request.FieldsRawValuesByName.Count > 0);
       }
-
-      //TODO: IGK refactor this
 
       if (fieldsAvailable) {
         foreach (var fieldElem in request.FieldsRawValuesByName) {
@@ -95,13 +90,11 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
 
     private void Validate()
     {
-      if (null == this.httpClient)
-      {
+      if (null == this.httpClient) {
         throw new ArgumentNullException("CreateEntityTask.httpClient cannot be null");
       }
 
-      if (null == this.createEntityBuilder)
-      {
+      if (null == this.updateEntityBuilder) {
         throw new ArgumentNullException("CreateEntityTask.createEntityBuilder cannot be null");
       }
     }

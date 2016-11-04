@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 namespace Sitecore.MobileSDK.API.Entities
 {
   public class ScCreateEntityResponse

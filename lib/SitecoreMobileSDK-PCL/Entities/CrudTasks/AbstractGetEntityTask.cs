@@ -8,7 +8,6 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
   using System.Threading.Tasks;
 
   using Sitecore.MobileSDK.TaskFlow;
-  using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.Entities;
   using Sitecore.MobileSDK.API.Entities;
 

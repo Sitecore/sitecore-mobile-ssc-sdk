@@ -329,7 +329,7 @@ namespace Sitecore.MobileSDK
       //await this.GetPublicKeyAsync(cancelToken);
       IReadEntityByIdRequest autocompletedRequest = this.requestMerger.FillReadEntityByIdGaps(requestCopy);
 
-      var urlBuilder = new EntityByIdUrlBuilder(this.restGrammar, this.sscGrammar);
+      var urlBuilder = new EntityByIdUrlBuilder<IReadEntityByIdRequest>(this.restGrammar, this.sscGrammar);
       var taskFlow = new GetEntityByIdTasks(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -345,6 +345,20 @@ namespace Sitecore.MobileSDK
 
       var urlBuilder = new EntityByPathUrlBuilder<ICreateEntityRequest>(this.restGrammar, this.sscGrammar);
       var taskFlow = new CreateEntityTask<ICreateEntityRequest>(urlBuilder, this.httpClient);
+
+      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+    }
+
+    public async Task<ScUpdateEntityResponse> UpdateEntityAsync(IUpdateEntityRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      IUpdateEntityRequest requestCopy = request.DeepCopyUpdateEntityRequest();
+
+      //await this.GetPublicKeyAsync(cancelToken);
+
+      IUpdateEntityRequest autocompletedRequest = this.requestMerger.FillUpdateEntityGaps(requestCopy);
+
+      var urlBuilder = new EntityByIdUrlBuilder<IUpdateEntityRequest>(this.restGrammar, this.sscGrammar);
+      var taskFlow = new UpdateEntityTask<IUpdateEntityRequest>(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }

@@ -255,6 +255,10 @@
     <Compile Include="Entities\CrudTasks\GetEntityByIdTasks.cs" />
     <Compile Include="Entities\EntitiesRequest\ReadEntityByIdParameters.cs" />
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\ReadEntityByIdRequestBuilder.cs" />
+    <Compile Include="Entities\EntitiesRequest\IUpdateEntityRequest.cs" />
+    <Compile Include="Entities\Responses\Update\ScUpdateEntityResponse.cs" />
+    <Compile Include="Entities\CrudTasks\UpdateEntityTask.cs" />
+    <Compile Include="Entities\EntitiesRequest\UpdateEntityParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -313,5 +317,6 @@
     <Folder Include="Entities\Responses\" />
     <Folder Include="Entities\Responses\Read\" />
     <Folder Include="Entities\Responses\Create\" />
+    <Folder Include="Entities\Responses\Update\" />
   </ItemGroup>
 </Project>

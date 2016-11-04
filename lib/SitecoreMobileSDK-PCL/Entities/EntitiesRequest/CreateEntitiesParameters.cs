@@ -15,14 +15,14 @@ namespace Sitecore.MobileSDK.Entities
     public CreateEntityParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource)
     {
       this.EntitySource = entitySource;
-      this.EntityId = id;
+      this.EntityID = id;
       this.FieldsRawValuesByName = fieldsRawValuesByName;
     }
 
     public CreateEntityParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource, ISessionConfig sessionSettings)
     {
       this.EntitySource = entitySource;
-      this.EntityId = id;
+      this.EntityID = id;
       this.FieldsRawValuesByName = fieldsRawValuesByName;
       this.SessionSettings = sessionSettings;
     }
@@ -34,13 +34,18 @@ namespace Sitecore.MobileSDK.Entities
         entitySource = this.EntitySource.ShallowCopy();
       }
 
-      return new CreateEntityParameters(this.EntityId, this.FieldsRawValuesByName, entitySource);
+      return new CreateEntityParameters(this.EntityID, this.FieldsRawValuesByName, entitySource);
     }
 
-    public string EntityId { get; private set; }
-    public IDictionary<string, string> FieldsRawValuesByName { get; private set; }
+    public virtual IReadEntityByIdRequest DeepCopyReadEntitiesByIdRequest()
+    {
+      return this.DeepCopyCreateEntityRequest();
+    }
 
-    public IEntitySource EntitySource { get; private set; }
+    public string EntityID { get; protected set; }
+    public IDictionary<string, string> FieldsRawValuesByName { get; protected set; }
+
+    public IEntitySource EntitySource { get; protected set; }
 
     //FIXME: @igk exclude IBaseItemRequest from parents and properties below
 
@@ -49,10 +54,10 @@ namespace Sitecore.MobileSDK.Entities
       return this.DeepCopyCreateEntityRequest();
     }
 
-    public string ItemPath { get; private set; }
-    public IItemSource ItemSource { get; private set; }
-    public ISessionConfig SessionSettings { get; private set; }
-    public IQueryParameters QueryParameters { get; private set; }
-    public bool IncludeStandardTemplateFields { get; private set; }
+    public string ItemPath { get; protected set; }
+    public IItemSource ItemSource { get; protected set; }
+    public ISessionConfig SessionSettings { get; protected set; }
+    public IQueryParameters QueryParameters { get; protected set; }
+    public bool IncludeStandardTemplateFields { get; protected set; }
   }
 }
