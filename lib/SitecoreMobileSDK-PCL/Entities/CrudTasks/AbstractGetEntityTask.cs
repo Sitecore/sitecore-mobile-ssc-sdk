@@ -71,7 +71,7 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
 
     }
 
-    private int statusCode = 0;
+    protected int statusCode = 0;
 
     protected abstract string UrlToGetEntityWithRequest(TRequest request);
 

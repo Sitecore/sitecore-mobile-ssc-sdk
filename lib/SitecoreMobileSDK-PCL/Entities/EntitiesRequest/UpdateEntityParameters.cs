@@ -7,7 +7,7 @@ namespace Sitecore.MobileSDK.Entities
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Entity;
 
-  public class UpdateEntityParameters : CreateEntityParameters, IUpdateEntityRequest
+  public class UpdateEntityParameters : ChangeEntitiesParameters, IUpdateEntityRequest
   {
     public UpdateEntityParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource)
     : base(id, fieldsRawValuesByName, entitySource)

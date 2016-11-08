@@ -164,9 +164,9 @@
     <Compile Include="ITemTasks\FieldsViewController.designer.cs">
       <DependentUpon>FieldsViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="ITemTasks\CreateITemByPathViewController.cs" />
+    <Compile Include="ITemTasks\UpdateItemViewController.cs" />
     <Compile Include="ITemTasks\CreateITemByPathViewController.designer.cs">
-      <DependentUpon>CreateITemByPathViewController.cs</DependentUpon>
+      <DependentUpon>UpdateItemViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="ITemTasks\AuthViewController.cs" />
     <Compile Include="ITemTasks\AuthViewController.designer.cs">

@@ -5,14 +5,15 @@ using Sitecore.MobileSDK.Entities;
 
 namespace Sitecore.MobileSDK.UserRequest.ReadRequest.Entities
 {
-  public class ReadEntityByIdRequestBuilder : AbstractEntityRequestParametersBuilder<IReadEntityByIdRequest>
+  public class ReadEntityByIdRequestBuilder<T> : AbstractEntityRequestParametersBuilder<T>
+  where T : class, IReadEntityByIdRequest
   {
     public ReadEntityByIdRequestBuilder(string entityId)
     {
       this.entityId = entityId;
     }
 
-    public override IReadEntityByIdRequest Build()
+    public override T Build()
     {
       IEntitySource entitySource = new EntitySource(
         this.entityNamespace,
@@ -23,9 +24,9 @@ namespace Sitecore.MobileSDK.UserRequest.ReadRequest.Entities
 
       ReadEntityByIdParameters result = new ReadEntityByIdParameters(this.entityId, entitySource);
 
-      return result;
+      return result as T;
     }
 
-    private string entityId;
+    protected string entityId;
   }
 }

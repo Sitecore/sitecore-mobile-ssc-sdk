@@ -6,15 +6,15 @@ namespace Sitecore.MobileSDK.UserRequest.ReadRequest.Entities
   using Sitecore.MobileSDK.API.Request.Entity;
   using Sitecore.MobileSDK.Entities;
 
-  public class CreateEntityRequestBuilder<T> : AbstractChangeEntityRequestBuilder<T>
-  where T : class, ICreateEntityRequest
+
+  public class DeleteEntityRequestBuilder : ReadEntityByIdRequestBuilder<IDeleteEntityRequest>
   {
-    public CreateEntityRequestBuilder(string entityId)
+    public DeleteEntityRequestBuilder(string entityId)
+      : base(entityId)
     {
-      this.entityId = entityId;
     }
 
-    public override T Build()
+    public override IDeleteEntityRequest Build()
     {
       IEntitySource entitySource = new EntitySource(
         this.entityNamespace,
@@ -23,9 +23,9 @@ namespace Sitecore.MobileSDK.UserRequest.ReadRequest.Entities
         this.entityAction
       );
 
-      ChangeEntitiesParameters result = new ChangeEntitiesParameters(this.entityId, this.FieldsRawValuesByName, entitySource);
+      DeleteEntityParameters result = new DeleteEntityParameters(this.entityId, entitySource);
 
-      return result as T;
+      return result;
     }
   }
 }

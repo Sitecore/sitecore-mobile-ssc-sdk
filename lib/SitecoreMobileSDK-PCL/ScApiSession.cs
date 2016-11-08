@@ -317,7 +317,7 @@ namespace Sitecore.MobileSDK
       IReadEntitiesByPathRequest autocompletedRequest = this.requestMerger.FillReadEntitiesByPathGaps(requestCopy);
 
       var urlBuilder = new EntityByPathUrlBuilder<IReadEntitiesByPathRequest>(this.restGrammar, this.sscGrammar);
-      var taskFlow = new GetEntitiesByPathTasks(urlBuilder, this.httpClient);
+      var taskFlow = new GetEntitiesByPathTask(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
@@ -330,7 +330,7 @@ namespace Sitecore.MobileSDK
       IReadEntityByIdRequest autocompletedRequest = this.requestMerger.FillReadEntityByIdGaps(requestCopy);
 
       var urlBuilder = new EntityByIdUrlBuilder<IReadEntityByIdRequest>(this.restGrammar, this.sscGrammar);
-      var taskFlow = new GetEntityByIdTasks(urlBuilder, this.httpClient);
+      var taskFlow = new GetEntityByIdTask(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
@@ -359,6 +359,20 @@ namespace Sitecore.MobileSDK
 
       var urlBuilder = new EntityByIdUrlBuilder<IUpdateEntityRequest>(this.restGrammar, this.sscGrammar);
       var taskFlow = new UpdateEntityTask<IUpdateEntityRequest>(urlBuilder, this.httpClient);
+
+      return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
+    }
+
+    public async Task<ScDeleteEntityResponse> DeleteEntityAsync(IDeleteEntityRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      IDeleteEntityRequest requestCopy = request.DeepCopyDeleteEntityRequest();
+
+      //await this.GetPublicKeyAsync(cancelToken);
+
+      IDeleteEntityRequest autocompletedRequest = this.requestMerger.FillDeleteEntityGaps(requestCopy);
+
+      var urlBuilder = new EntityByIdUrlBuilder<IDeleteEntityRequest>(this.restGrammar, this.sscGrammar);
+      var taskFlow = new DeleteEntityTask(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }

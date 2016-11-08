@@ -6,9 +6,9 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
   using Sitecore.MobileSDK.API.Request.Entity;
   using Sitecore.MobileSDK.UrlBuilder.Entity;
 
-  internal class GetEntitiesByPathTasks : AbstractGetEntityTask<IReadEntitiesByPathRequest, ScEntityResponse>
+  internal class GetEntitiesByPathTask : AbstractGetEntityTask<IReadEntitiesByPathRequest, ScEntityResponse>
   {
-    public GetEntitiesByPathTasks(EntityByPathUrlBuilder<IReadEntitiesByPathRequest> urlBuilder, HttpClient httpClient)
+    public GetEntitiesByPathTask(EntityByPathUrlBuilder<IReadEntitiesByPathRequest> urlBuilder, HttpClient httpClient)
       : base(httpClient)
     {
       this.urlBuilder = urlBuilder;

@@ -17,12 +17,22 @@ namespace Sitecore.MobileSDK.API
 
     public static IBaseEntityRequestParametersBuilder<IReadEntityByIdRequest> ReadEntityRequestById(string entityId)
     {
-      return new ReadEntityByIdRequestBuilder(entityId);
+      return new ReadEntityByIdRequestBuilder<IReadEntityByIdRequest>(entityId);
     }
 
     public static IChangeEntityParametersBuilder<ICreateEntityRequest> CreateEntityRequest(string entityId)
     {
-      return new CreateEntityRequestBuilder(entityId);
+      return new CreateEntityRequestBuilder<ICreateEntityRequest>(entityId);
+    }
+
+    public static IChangeEntityParametersBuilder<IUpdateEntityRequest> UpdateEntityRequest(string entityId)
+    {
+      return new CreateEntityRequestBuilder<IUpdateEntityRequest>(entityId);
+    }
+
+    public static IBaseEntityRequestParametersBuilder<IDeleteEntityRequest> DeleteEntityRequest(string entityId)
+    {
+      return new DeleteEntityRequestBuilder(entityId);
     }
   }
 }

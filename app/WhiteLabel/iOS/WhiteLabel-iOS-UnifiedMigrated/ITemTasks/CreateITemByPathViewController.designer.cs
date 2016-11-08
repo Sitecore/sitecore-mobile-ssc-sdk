@@ -9,8 +9,8 @@ using System.CodeDom.Compiler;
 
 namespace WhiteLabeliOS
 {
-	[Register ("CreateITemByPathViewController")]
-	partial class CreateITemByPathViewController
+	[Register ("UpdateItemViewController")]
+	partial class UpdateItemViewController
 	{
 		[Outlet]
 		UIKit.UIButton createButton { get; set; }

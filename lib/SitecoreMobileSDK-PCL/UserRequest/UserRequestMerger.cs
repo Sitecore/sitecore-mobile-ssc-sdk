@@ -196,7 +196,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
 
-      CreateEntityParameters newRequest = new CreateEntityParameters(userRequest.EntityID, userRequest.FieldsRawValuesByName, newSource, mergedSessionConfig);
+      ChangeEntitiesParameters newRequest = new ChangeEntitiesParameters(userRequest.EntityID, userRequest.FieldsRawValuesByName, newSource, mergedSessionConfig);
 
       return newRequest;
 
@@ -216,6 +216,24 @@ namespace Sitecore.MobileSDK.UserRequest
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
 
       UpdateEntityParameters newRequest = new UpdateEntityParameters(userRequest.EntityID, userRequest.FieldsRawValuesByName, newSource, mergedSessionConfig);
+
+      return newRequest;
+    }
+
+    public IDeleteEntityRequest FillDeleteEntityGaps(IDeleteEntityRequest userRequest)
+    {
+      //FIXME: @igk implement
+#warning FillDeleteEntityGaps not implemented!
+
+
+      EntitySource newSource = new EntitySource(userRequest.EntitySource.Namespase,
+                                                userRequest.EntitySource.Controller,
+                                                userRequest.EntitySource.Id,
+                                                userRequest.EntitySource.Action);
+
+      ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
+
+      DeleteEntityParameters newRequest = new DeleteEntityParameters(userRequest.EntityID, newSource, mergedSessionConfig);
 
       return newRequest;
     }

@@ -223,7 +223,7 @@
     <Compile Include="API\Items\ScUpdateItemResponse.cs" />
     <Compile Include="API\EntitySSCRequestBuilder.cs" />
     <Compile Include="Entities\CrudTasks\AbstractGetEntityTask.cs" />
-    <Compile Include="Entities\CrudTasks\GetEntitiesByPathTasks.cs" />
+    <Compile Include="Entities\CrudTasks\GetEntitiesByPathTask.cs" />
     <Compile Include="Entities\EntitiesRequest\IReadEntitiesByPathRequest.cs" />
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\AbstractEntityRequestParametersBuilder.cs" />
     <Compile Include="Entities\EntitySource.cs" />
@@ -239,12 +239,12 @@
     <Compile Include="Entities\EntitiesRequest\ReadEntitiesByPathParameters.cs" />
     <Compile Include="Entities\EntitiesRequest\IBaseEntityRequest.cs" />
     <Compile Include="Entities\CrudTasks\CreateEntityhTask.cs" />
-    <Compile Include="Entities\EntitiesRequest\CreateEntitiesParameters.cs" />
+    <Compile Include="Entities\EntitiesRequest\ChangeEntitiesParameters.cs" />
     <Compile Include="Entities\Responses\Read\ScReadEntitiesParser.cs" />
     <Compile Include="Entities\Responses\Read\ScEntityResponse.cs" />
     <Compile Include="Entities\Responses\Create\ScCreateEntityResponse.cs" />
     <Compile Include="Entities\Responses\Create\ScCreateEntityParser.cs" />
-    <Compile Include="API\Session\ICreateEntityActions.cs" />
+    <Compile Include="API\Session\IChangeEntityActions.cs" />
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\AbstractChangeEntityRequestBuilder.cs" />
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\ReadEntitiesByPathRequestBuilder.cs" />
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\IChangeEntityParametersBuilder.cs" />
@@ -252,13 +252,19 @@
     <Compile Include="Entities\Responses\ScEntityParser.cs" />
     <Compile Include="Entities\EntitiesRequest\IReadEntityByIdRequest.cs" />
     <Compile Include="Entities\UrlBuilders\EntityByIdUrlBuilder.cs" />
-    <Compile Include="Entities\CrudTasks\GetEntityByIdTasks.cs" />
+    <Compile Include="Entities\CrudTasks\GetEntityByIdTask.cs" />
     <Compile Include="Entities\EntitiesRequest\ReadEntityByIdParameters.cs" />
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\ReadEntityByIdRequestBuilder.cs" />
     <Compile Include="Entities\EntitiesRequest\IUpdateEntityRequest.cs" />
     <Compile Include="Entities\Responses\Update\ScUpdateEntityResponse.cs" />
     <Compile Include="Entities\CrudTasks\UpdateEntityTask.cs" />
     <Compile Include="Entities\EntitiesRequest\UpdateEntityParameters.cs" />
+    <Compile Include="Entities\Responses\Delete\ScDeleteEntityResponse.cs" />
+    <Compile Include="Entities\EntitiesRequest\IDeleteEntityRequest.cs" />
+    <Compile Include="Entities\EntitiesRequest\DeleteEntityParameters.cs" />
+    <Compile Include="Entities\CrudTasks\DeleteEntityTask.cs" />
+    <Compile Include="Entities\EntitiesRequest\RequestsBuilders\UpdateEntityRequestBuilder.cs" />
+    <Compile Include="Entities\EntitiesRequest\RequestsBuilders\DeleteEntityRequestBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -318,5 +324,6 @@
     <Folder Include="Entities\Responses\Read\" />
     <Folder Include="Entities\Responses\Create\" />
     <Folder Include="Entities\Responses\Update\" />
+    <Folder Include="Entities\Responses\Delete\" />
   </ItemGroup>
 </Project>

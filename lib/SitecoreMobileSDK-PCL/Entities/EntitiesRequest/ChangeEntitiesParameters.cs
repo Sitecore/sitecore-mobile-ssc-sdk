@@ -10,16 +10,16 @@ namespace Sitecore.MobileSDK.Entities
   using Sitecore.MobileSDK.API.Request.Entity;
   using Sitecore.MobileSDK.API.Request.Parameters;
 
-  public class CreateEntityParameters : ICreateEntityRequest
+  public class ChangeEntitiesParameters : IUpdateEntityRequest
   {
-    public CreateEntityParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource)
+    public ChangeEntitiesParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource)
     {
       this.EntitySource = entitySource;
       this.EntityID = id;
       this.FieldsRawValuesByName = fieldsRawValuesByName;
     }
 
-    public CreateEntityParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource, ISessionConfig sessionSettings)
+    public ChangeEntitiesParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource, ISessionConfig sessionSettings)
     {
       this.EntitySource = entitySource;
       this.EntityID = id;
@@ -27,19 +27,25 @@ namespace Sitecore.MobileSDK.Entities
       this.SessionSettings = sessionSettings;
     }
 
-    public ICreateEntityRequest DeepCopyCreateEntityRequest() { 
+    public IUpdateEntityRequest DeepCopyUpdateEntityRequest()
+    { 
       IEntitySource entitySource = null;
 
       if (null != this.EntitySource) {
         entitySource = this.EntitySource.ShallowCopy();
       }
 
-      return new CreateEntityParameters(this.EntityID, this.FieldsRawValuesByName, entitySource);
+      return new ChangeEntitiesParameters(this.EntityID, this.FieldsRawValuesByName, entitySource);
+    }
+
+    public ICreateEntityRequest DeepCopyCreateEntityRequest()
+    { 
+      return this.DeepCopyUpdateEntityRequest();
     }
 
     public virtual IReadEntityByIdRequest DeepCopyReadEntitiesByIdRequest()
     {
-      return this.DeepCopyCreateEntityRequest();
+      return this.DeepCopyUpdateEntityRequest();
     }
 
     public string EntityID { get; protected set; }
@@ -51,7 +57,7 @@ namespace Sitecore.MobileSDK.Entities
 
     public virtual IBaseItemRequest DeepCopyBaseGetItemRequest()
     {
-      return this.DeepCopyCreateEntityRequest();
+      return this.DeepCopyUpdateEntityRequest();
     }
 
     public string ItemPath { get; protected set; }
