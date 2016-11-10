@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder.Entity
+namespace Sitecore.MobileSDK.UrlBuilder.Entity
 {
   using Sitecore.MobileSDK.API.Request.Entity;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
@@ -22,15 +22,15 @@
 
     protected override string GetItemIdenticationForRequest(T request)
     {
-      string strItemPath = UrlBuilderUtils.EscapeDataString(request.EntitySource.Namespase)
+      string strItemPath = UrlBuilderUtils.EscapeDataString(request.EntitySource.EntityNamespace)
                                   + restGrammar.PathComponentSeparator
-                                  + UrlBuilderUtils.EscapeDataString(request.EntitySource.Controller)
+                                  + UrlBuilderUtils.EscapeDataString(request.EntitySource.EntityController)
                                   + restGrammar.PathComponentSeparator;
-      if (request.EntitySource.Id != null) {
-        strItemPath = strItemPath + UrlBuilderUtils.EscapeDataString(request.EntitySource.Id);
+      if (request.EntitySource.EntityId != null) {
+        strItemPath = strItemPath + UrlBuilderUtils.EscapeDataString(request.EntitySource.EntityId) + restGrammar.PathComponentSeparator;
       }
 
-      strItemPath = strItemPath + UrlBuilderUtils.EscapeDataString(request.EntitySource.Action);
+      strItemPath = strItemPath + UrlBuilderUtils.EscapeDataString(request.EntitySource.EntityAction);
 
       return strItemPath;
     }

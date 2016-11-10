@@ -1,23 +1,21 @@
-﻿
-namespace Sitecore.MobileSDK.Entities
-{
-  using Sitecore.MobileSDK.API.Entities;
 
+namespace Sitecore.MobileSDK.API.Entities
+{
 
   public class EntitySource : IEntitySource
   {
 
-    public EntitySource(string namespase, string controller, string id, string action)
+    public EntitySource(string entityNamespace, string controller, string id, string action)
     {
-      this.Namespase  = namespase;
-      this.Controller = controller;
-      this.Id         = id;
-      this.Action     = action;
+      this.EntityNamespace  = entityNamespace;
+      this.EntityController = controller;
+      this.EntityId         = id;
+      this.EntityAction     = action;
     }
 
     public virtual IEntitySource ShallowCopy()
     {
-      return new EntitySource(this.Namespase, this.Controller, this.Id, this.Action);
+      return new EntitySource(this.EntityNamespace, this.EntityController, this.EntityId, this.EntityAction);
     }
 
     public override bool Equals(object obj)
@@ -33,27 +31,27 @@ namespace Sitecore.MobileSDK.Entities
         return false;
       }
 
-      bool isNamespaseEqual = object.Equals(this.Namespase, other.Namespase);
-      bool isControllerEqual = object.Equals(this.Controller, other.Controller);
-      bool isIdEqual = object.Equals(this.Id, other.Id);
-      bool isActionEqual = object.Equals(this.Action, other.Action);
+      bool isNamespaceEqual = object.Equals(this.EntityNamespace, other.EntityNamespace);
+      bool isControllerEqual = object.Equals(this.EntityController, other.EntityController);
+      bool isIdEqual = object.Equals(this.EntityId, other.EntityId);
+      bool isActionEqual = object.Equals(this.EntityAction, other.EntityAction);
 
-      return isNamespaseEqual && isControllerEqual && isIdEqual && isActionEqual;
+      return isNamespaceEqual && isControllerEqual && isIdEqual && isActionEqual;
     }
 
     public override int GetHashCode()
     {
       return base.GetHashCode() 
-                 + this.Namespase.GetHashCode() 
-                 + this.Controller.GetHashCode() 
-                 + this.Id.GetHashCode()
-                 + this.Action.GetHashCode();
+                 + this.EntityNamespace.GetHashCode() 
+                 + this.EntityController.GetHashCode() 
+                 + this.EntityId.GetHashCode()
+                 + this.EntityAction.GetHashCode();
     }
 
-    public string Namespase  { get; protected set; }
-    public string Controller { get; protected set; }
-    public string Id         { get; protected set; }
-    public string Action     { get; protected set; }
+    public string EntityNamespace  { get; protected set; }
+    public string EntityController { get; protected set; }
+    public string EntityId         { get; protected set; }
+    public string EntityAction     { get; protected set; }
   }
 }
 

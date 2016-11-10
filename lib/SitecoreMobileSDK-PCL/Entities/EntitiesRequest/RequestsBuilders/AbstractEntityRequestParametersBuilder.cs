@@ -1,10 +1,7 @@
 ﻿
 namespace Sitecore.MobileSDK.UserRequest.ReadRequest.Entities
 {
-  using Sitecore.MobileSDK.API.Entities;
   using Sitecore.MobileSDK.API.Request.Entity;
-  using Sitecore.MobileSDK.Entities;
-  using Sitecore.MobileSDK.Items;
 
   public abstract class AbstractEntityRequestParametersBuilder<T> : IBaseEntityRequestParametersBuilder<T>
   where T : class

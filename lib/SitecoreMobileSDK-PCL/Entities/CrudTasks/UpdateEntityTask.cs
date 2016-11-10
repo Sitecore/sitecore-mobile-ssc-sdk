@@ -11,7 +11,6 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
   using Newtonsoft.Json.Linq;
   using Sitecore.MobileSDK.API.Entities;
   using Sitecore.MobileSDK.API.Request.Entity;
-  using Sitecore.MobileSDK.Entities;
   using Sitecore.MobileSDK.TaskFlow;
   using Sitecore.MobileSDK.UrlBuilder.Entity;
 

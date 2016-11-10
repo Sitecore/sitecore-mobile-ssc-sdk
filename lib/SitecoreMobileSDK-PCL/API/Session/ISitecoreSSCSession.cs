@@ -17,4 +17,3 @@ namespace Sitecore.MobileSDK.API.Session
     
   }
 }
-

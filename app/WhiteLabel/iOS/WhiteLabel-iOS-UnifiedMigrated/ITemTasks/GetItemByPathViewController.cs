@@ -14,6 +14,7 @@
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.Entities;
+  using Sitecore.MobileSDK.Entities;
 
   public partial class GetItemByPathViewController : BaseTaskTableViewController
   {
@@ -154,6 +155,7 @@
           var request = EntitySSCRequestBuilder.ReadEntityRequestById("1")
                                                .Namespace("aggregate")
                                                .Controller("admin")
+                                               .TaskId("id")
                                                .Action("Todo")
                                                .Build();
 

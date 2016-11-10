@@ -12,26 +12,8 @@ namespace Sitecore.MobileSDK.API.Session
   /// </summary>
   public interface IReadItemActions
   {
-    /// <summary>
-    /// Reads the item for item GUID asynchronously.
-    /// </summary>
-    /// <param name="request"><see cref="IReadItemsByIdRequest" /> Read item by Id request.</param>
-    /// <param name="cancelToken">The cancel token, should be called in case when you want to terminate request execution.</param>
-    /// <returns>
-    ///  <see cref="ScItemsResponse" /> Read Items list.
-    /// </returns>
     Task<ScItemsResponse> ReadItemAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken));
-
     Task<ScItemsResponse> ReadChildrenAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken));
-
-    /// <summary>
-    /// Reads the item for item Path asynchronously
-    /// </summary>
-    /// <param name="request"><see cref="IReadItemsByPathRequest" /> Read item by Path request.</param>
-    /// <param name="cancelToken">The cancel token, should be called in case when you want to terminate request execution.</param>
-    /// <returns>
-    ///  <see cref="ScItemsResponse" /> Read Items list.
-    /// </returns>
     Task<ScItemsResponse> ReadItemAsync(IReadItemsByPathRequest request, CancellationToken cancelToken = default(CancellationToken));
 
    }

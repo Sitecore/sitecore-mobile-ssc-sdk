@@ -1,7 +1,6 @@
 ﻿
 namespace Sitecore.MobileSDK.UserRequest.ReadRequest.Entities
 {
-  using System;
   using Sitecore.MobileSDK.API.Entities;
   using Sitecore.MobileSDK.API.Request.Entity;
   using Sitecore.MobileSDK.Entities;

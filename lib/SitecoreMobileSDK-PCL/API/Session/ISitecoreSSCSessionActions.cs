@@ -7,6 +7,7 @@ namespace Sitecore.MobileSDK.API.Session
     IReadItemActions,
     ICreateItemActions,
     IChangeEntityActions,
+    IReadEntityActions,
     IUpdateItemActions,
     IConnectionActions,
     IDeleteItemActions,

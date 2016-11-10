@@ -1,7 +1,6 @@
 ﻿
 namespace Sitecore.MobileSDK.Entities
 {
-  using System;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Entities;
   using Sitecore.MobileSDK.API.Fields;
@@ -27,9 +26,9 @@ namespace Sitecore.MobileSDK.Entities
 
     public IEnumerable<IField> Fields { get; private set; }
 
-    public IField this[string caseInsensitiveFieldName] {
+    public IField this[string caseSensitiveFieldName] {
       get {
-        return this.FieldWithName(caseInsensitiveFieldName);
+        return this.FieldWithName(caseSensitiveFieldName);
       }
     }
 
@@ -41,10 +40,9 @@ namespace Sitecore.MobileSDK.Entities
 
     private Dictionary<string, IField> FieldsByName { get; set; }
 
-    public IField FieldWithName(string caseInsensitiveFieldName)
+    public IField FieldWithName(string caseSensitiveFieldName)
     {
-      string lowercaseName = caseInsensitiveFieldName.ToLowerInvariant();
-      return this.FieldsByName[lowercaseName];
+      return this.FieldsByName[caseSensitiveFieldName];
     }
 
     #endregion Class variables;

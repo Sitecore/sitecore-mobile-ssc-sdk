@@ -1,6 +1,5 @@
 namespace Sitecore.MobileSDK.API.Entities
 {
-  using System;
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Fields;
 

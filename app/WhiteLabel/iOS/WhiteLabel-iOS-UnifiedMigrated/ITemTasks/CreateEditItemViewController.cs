@@ -103,8 +103,12 @@
           this.ShowLoader();
 
           ScCreateEntityResponse response = await session.CreateEntityAsync(request);
+          string entityId = response.CreatedEntity.Id;
+          string entityTitle = response.CreatedEntity["Title"].RawValue;
+
           if (response.Created) {
-            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entity created successfully, Id is " + response.CreatedEntity.Id);
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entity created successfully, Id is " + entityId 
+                                                       + "Title: " + entityTitle);
           } else {
             AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entity was not created");
           }

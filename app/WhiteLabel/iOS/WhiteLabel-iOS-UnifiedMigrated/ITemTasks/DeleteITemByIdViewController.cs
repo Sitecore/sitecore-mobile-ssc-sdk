@@ -10,8 +10,9 @@ namespace WhiteLabeliOS
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Entities;
 
-	public partial class DeleteITemByIdViewController : BaseTaskViewController
+  public partial class DeleteITemByIdViewController : BaseTaskViewController
 	{
 		public DeleteITemByIdViewController(IntPtr handle) : base (handle)
 		{
@@ -42,15 +43,11 @@ namespace WhiteLabeliOS
     //  {
     //      using (var session = this.instanceSettings.GetSession())
     //      {
-
     //      var request = ItemSSCRequestBuilder.DeleteItemRequestWithId(this.itemIdField.Text)
     //                                         .Database("master")
     //                                         .Build();
-
     //      this.ShowLoader();
-
     //      ScDeleteItemsResponse response = await session.DeleteItemAsync(request);
-
     //      if (response.Deleted)
     //      {
     //         AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item deleted successfully");
@@ -83,7 +80,7 @@ namespace WhiteLabeliOS
 
           this.ShowLoader();
 
-          var response = await session.DeleteEntityAsync(request);
+          ScDeleteEntityResponse response = await session.DeleteEntityAsync(request);
 
           if (response.Deleted) {
             AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The entity deleted successfully");

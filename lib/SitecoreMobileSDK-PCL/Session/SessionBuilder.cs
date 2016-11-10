@@ -1,6 +1,7 @@
 ﻿namespace Sitecore.MobileSDK.Session
 {
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Entities;
   using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.Items;
@@ -222,6 +223,35 @@
 
     #endregion IAnonymousSessionBuilder
 
+    #region Entity
+
+    //Namespace 
+    //Controller
+    //Id        
+    //Action    
+
+    public IBaseSessionBuilder EntityRouteNamespace(string entityNamespace)
+    {
+      if (string.IsNullOrEmpty(entityNamespace)) {
+        return this;
+      }
+
+      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database,
+        this.GetType().Name + ".DefaultDatabase");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(entityNamespace,
+        this.GetType().Name + ".DefaultDatabase");
+
+      this.itemSourceAccumulator =
+        new ItemSourcePOD(
+          entityNamespace,
+          this.itemSourceAccumulator.Language,
+          itemSourceAccumulator.VersionNumber);
+
+      return this;
+    }
+
+    #endregion Entity
+
     #region State
     private string instanceUrl;
     private string sscVersion;
@@ -232,6 +262,7 @@
 
     private IScCredentials credentials = null;
     private ItemSourcePOD itemSourceAccumulator = new ItemSourcePOD(null, null, null);
+    private IEntitySource entitySourceAccumulator = new EntitySource(null, null, null, null);
     #endregion State
   }
 }

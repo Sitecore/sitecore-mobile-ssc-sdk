@@ -1,7 +1,6 @@
 ﻿
 namespace Sitecore.MobileSDK.API.Request.Entity
 {
-  using System;
   using System.Collections.Generic;
 
   public interface IChangeEntityParametersBuilder<T> : IBaseEntityRequestParametersBuilder<T>

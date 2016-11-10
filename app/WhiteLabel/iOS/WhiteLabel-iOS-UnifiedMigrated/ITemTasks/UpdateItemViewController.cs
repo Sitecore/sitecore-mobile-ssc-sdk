@@ -8,6 +8,7 @@ namespace WhiteLabeliOS
   using UIKit;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Entities;
 
   public partial class UpdateItemViewController : BaseTaskViewController
   {
@@ -89,11 +90,12 @@ namespace WhiteLabeliOS
 
           this.ShowLoader();
 
-          var response = await session.UpdateEntityAsync(request);
+          ScUpdateEntityResponse response = await session.UpdateEntityAsync(request);
+
           if (response.Updated) {
-            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item updated successfully");
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The entity updated successfully");
           } else {
-            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The entity was not updated");
           }
         }
       } catch {

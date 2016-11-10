@@ -4,9 +4,9 @@ namespace Sitecore.MobileSDK.API.Entities
   {
     IEntitySource ShallowCopy();
 
-    string Namespase { get; }
-    string Controller { get; }
-    string Id { get; }
-    string Action { get; }
+    string EntityNamespace { get; }
+    string EntityController { get; }
+    string EntityId { get; }
+    string EntityAction { get; }
   }
 }

@@ -1,10 +1,10 @@
-﻿using System;
-using Sitecore.MobileSDK.API.Entities;
-using Sitecore.MobileSDK.API.Request.Entity;
-using Sitecore.MobileSDK.Entities;
-
+﻿
 namespace Sitecore.MobileSDK.UserRequest.ReadRequest.Entities
 {
+  using Sitecore.MobileSDK.API.Entities;
+  using Sitecore.MobileSDK.API.Request.Entity;
+  using Sitecore.MobileSDK.Entities;
+
   public class ReadEntityByIdRequestBuilder<T> : AbstractEntityRequestParametersBuilder<T>
   where T : class, IReadEntityByIdRequest
   {

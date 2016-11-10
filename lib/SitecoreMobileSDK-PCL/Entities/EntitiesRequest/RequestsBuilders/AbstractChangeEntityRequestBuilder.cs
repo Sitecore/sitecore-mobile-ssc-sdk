@@ -3,9 +3,7 @@ namespace Sitecore.MobileSDK.UserRequest.ReadRequest.Entities
 {
   using System;
   using System.Collections.Generic;
-  using Sitecore.MobileSDK.API.Entities;
   using Sitecore.MobileSDK.API.Request.Entity;
-  using Sitecore.MobileSDK.Entities;
   using Sitecore.MobileSDK.Validators;
 
   public abstract class AbstractChangeEntityRequestBuilder<T> : AbstractEntityRequestParametersBuilder<T>, IChangeEntityParametersBuilder<T>
