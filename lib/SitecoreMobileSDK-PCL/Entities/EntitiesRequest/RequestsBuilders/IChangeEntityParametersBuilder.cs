@@ -11,8 +11,10 @@ namespace Sitecore.MobileSDK.API.Request.Entity
     new IChangeEntityParametersBuilder<T> TaskId(string entityId);
     new IChangeEntityParametersBuilder<T> Action(string entityAction);
 
-    IChangeEntityParametersBuilder<T> AddFieldsRawValuesByNameToSet(IDictionary<string, string> fieldsRawValuesByName);
+    new IChangeEntityParametersBuilder<T> AddParametersRawValues(IDictionary<string, string> parametersValuesByName);
+    new IChangeEntityParametersBuilder<T> AddParametersRawValues(string parameterName, string parameterValue);
 
+    IChangeEntityParametersBuilder<T> AddFieldsRawValuesByNameToSet(IDictionary<string, string> fieldsRawValuesByName);
     IChangeEntityParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldName, string fieldValue);
   }
 }

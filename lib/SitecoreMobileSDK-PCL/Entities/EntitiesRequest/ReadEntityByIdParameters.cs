@@ -1,6 +1,7 @@
 ﻿
 namespace Sitecore.MobileSDK.Entities
 {
+  using System.Collections.Generic;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Entities;
   using Sitecore.MobileSDK.API.Items;
@@ -10,17 +11,19 @@ namespace Sitecore.MobileSDK.Entities
 
   public class ReadEntityByIdParameters : IReadEntityByIdRequest
   {
-    public ReadEntityByIdParameters(string id, IEntitySource entitySource, ISessionConfig sessionConfig)
+    public ReadEntityByIdParameters(string id, IEntitySource entitySource, IDictionary<string, string> parametersRawValuesByName, ISessionConfig sessionConfig)
     {
       this.EntityID = id;
       this.EntitySource = entitySource;
       this.SessionSettings = sessionConfig;
+      this.ParametersRawValuesByName = parametersRawValuesByName;
     }
 
-    public ReadEntityByIdParameters(string id, IEntitySource entitySource)
+    public ReadEntityByIdParameters(string id, IEntitySource entitySource, IDictionary<string, string> parametersRawValuesByName)
     {
       this.EntityID = id;
       this.EntitySource = entitySource;
+      this.ParametersRawValuesByName = parametersRawValuesByName;
     }
 
     public virtual IReadEntityByIdRequest DeepCopyReadEntitiesByIdRequest()
@@ -37,10 +40,11 @@ namespace Sitecore.MobileSDK.Entities
         sessionSettings = this.SessionSettings.SessionConfigShallowCopy();
       }
 
-      return new ReadEntityByIdParameters(this.EntityID, entitySource, sessionSettings);
+      return new ReadEntityByIdParameters(this.EntityID, entitySource, this.ParametersRawValuesByName, sessionSettings);
     }
 
     public IEntitySource EntitySource { get; private set; }
+    public IDictionary<string, string> ParametersRawValuesByName { get; private set; }
 
     public string EntityID { get; private set; }
 

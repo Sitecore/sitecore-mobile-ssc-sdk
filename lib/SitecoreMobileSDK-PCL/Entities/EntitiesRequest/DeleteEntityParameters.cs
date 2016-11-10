@@ -1,6 +1,7 @@
 ﻿
 namespace Sitecore.MobileSDK.Entities
 {
+  using System.Collections.Generic;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Entities;
   using Sitecore.MobileSDK.API.Request;
@@ -8,14 +9,14 @@ namespace Sitecore.MobileSDK.Entities
 
   public class DeleteEntityParameters : ReadEntityByIdParameters, IDeleteEntityRequest
   {
-    public DeleteEntityParameters(string id, IEntitySource entitySource)
-    : base(id, entitySource)
+    public DeleteEntityParameters(string id, IEntitySource entitySource, IDictionary<string, string> parametersRawValuesByName)
+    : base(id, entitySource, parametersRawValuesByName)
     {
 
     }
 
-    public DeleteEntityParameters(string id, IEntitySource entitySource, ISessionConfig sessionSettings)
-    : base(id, entitySource, sessionSettings)
+    public DeleteEntityParameters(string id, IEntitySource entitySource, IDictionary<string, string> parametersRawValuesByName, ISessionConfig sessionSettings)
+    : base(id, entitySource, parametersRawValuesByName, sessionSettings)
     {
 
     }
@@ -28,7 +29,7 @@ namespace Sitecore.MobileSDK.Entities
         entitySource = this.EntitySource.ShallowCopy();
       }
 
-      return new DeleteEntityParameters(this.EntityID, entitySource);
+      return new DeleteEntityParameters(this.EntityID, entitySource, this.ParametersRawValuesByName);
     }
 
 

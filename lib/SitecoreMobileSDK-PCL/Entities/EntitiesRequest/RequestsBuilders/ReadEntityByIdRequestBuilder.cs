@@ -22,7 +22,7 @@ namespace Sitecore.MobileSDK.UserRequest.ReadRequest.Entities
         this.entityAction
       );
 
-      ReadEntityByIdParameters result = new ReadEntityByIdParameters(this.entityId, entitySource);
+      ReadEntityByIdParameters result = new ReadEntityByIdParameters(this.entityId, entitySource, this.ParametersRawValuesByName);
 
       return result as T;
     }

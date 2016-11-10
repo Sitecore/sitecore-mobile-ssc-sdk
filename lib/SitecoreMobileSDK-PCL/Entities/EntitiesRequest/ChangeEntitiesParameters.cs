@@ -11,18 +11,20 @@ namespace Sitecore.MobileSDK.Entities
 
   public class ChangeEntitiesParameters : IUpdateEntityRequest
   {
-    public ChangeEntitiesParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource)
+    public ChangeEntitiesParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IDictionary<string, string> parametersRawValuesByName, IEntitySource entitySource)
     {
       this.EntitySource = entitySource;
       this.EntityID = id;
       this.FieldsRawValuesByName = fieldsRawValuesByName;
+      this.ParametersRawValuesByName = parametersRawValuesByName;
     }
 
-    public ChangeEntitiesParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource, ISessionConfig sessionSettings)
+    public ChangeEntitiesParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IDictionary<string, string> parametersRawValuesByName, IEntitySource entitySource, ISessionConfig sessionSettings)
     {
       this.EntitySource = entitySource;
       this.EntityID = id;
       this.FieldsRawValuesByName = fieldsRawValuesByName;
+      this.ParametersRawValuesByName = parametersRawValuesByName;
       this.SessionSettings = sessionSettings;
     }
 
@@ -34,7 +36,7 @@ namespace Sitecore.MobileSDK.Entities
         entitySource = this.EntitySource.ShallowCopy();
       }
 
-      return new ChangeEntitiesParameters(this.EntityID, this.FieldsRawValuesByName, entitySource);
+      return new ChangeEntitiesParameters(this.EntityID, this.FieldsRawValuesByName, this.ParametersRawValuesByName, entitySource);
     }
 
     public ICreateEntityRequest DeepCopyCreateEntityRequest()
@@ -49,6 +51,7 @@ namespace Sitecore.MobileSDK.Entities
 
     public string EntityID { get; protected set; }
     public IDictionary<string, string> FieldsRawValuesByName { get; protected set; }
+    public IDictionary<string, string> ParametersRawValuesByName { get; private set; }
 
     public IEntitySource EntitySource { get; protected set; }
 

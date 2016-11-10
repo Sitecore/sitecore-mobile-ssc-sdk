@@ -22,7 +22,8 @@ namespace Sitecore.MobileSDK.UserRequest.ReadRequest.Entities
         this.entityAction
       );
 
-      ChangeEntitiesParameters result = new ChangeEntitiesParameters(this.entityId, this.FieldsRawValuesByName, entitySource);
+      ChangeEntitiesParameters result = 
+        new ChangeEntitiesParameters(this.entityId, this.FieldsRawValuesByName, this.ParametersRawValuesByName, entitySource);
 
       return result as T;
     }

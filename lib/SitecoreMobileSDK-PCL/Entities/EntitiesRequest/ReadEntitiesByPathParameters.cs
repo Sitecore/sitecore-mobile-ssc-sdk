@@ -1,6 +1,7 @@
 ﻿
 namespace Sitecore.MobileSDK.Entities
 {
+  using System.Collections.Generic;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Entities;
   using Sitecore.MobileSDK.API.Items;
@@ -10,10 +11,11 @@ namespace Sitecore.MobileSDK.Entities
 
   public class ReadEntitiesByPathParameters : IReadEntitiesByPathRequest
   {
-    public ReadEntitiesByPathParameters(IEntitySource entitySource, ISessionConfig sessionConfig)
+    public ReadEntitiesByPathParameters(IEntitySource entitySource, ISessionConfig sessionConfig, IDictionary<string, string> parametersRawValuesByName)
     {
       this.EntitySource = entitySource;
       this.SessionSettings = sessionConfig;
+      this.ParametersRawValuesByName = parametersRawValuesByName;
     }
 
     public virtual IReadEntitiesByPathRequest DeepCopyReadEntitiesByPathRequest()
@@ -30,10 +32,11 @@ namespace Sitecore.MobileSDK.Entities
         sessionSettings = this.SessionSettings.SessionConfigShallowCopy();
       }
 
-      return new ReadEntitiesByPathParameters(entitySource, sessionSettings);
+      return new ReadEntitiesByPathParameters(entitySource, sessionSettings, this.ParametersRawValuesByName);
     }
 
     public IEntitySource EntitySource { get; private set; }
+    public IDictionary<string, string> ParametersRawValuesByName { get; private set; }
 
     //FIXME: @igk exclude IBaseItemRequest from parents and properties below
 

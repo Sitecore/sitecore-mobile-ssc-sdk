@@ -22,7 +22,11 @@ namespace Sitecore.MobileSDK.UserRequest.ReadRequest.Entities
         this.entityAction
       );
 
-      DeleteEntityParameters result = new DeleteEntityParameters(this.entityId, entitySource);
+      DeleteEntityParameters result = 
+        new DeleteEntityParameters(
+          this.entityId, 
+          entitySource,
+          this.ParametersRawValuesByName);
 
       return result;
     }

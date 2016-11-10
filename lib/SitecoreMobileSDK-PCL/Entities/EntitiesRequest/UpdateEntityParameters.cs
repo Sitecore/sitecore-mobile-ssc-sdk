@@ -9,14 +9,14 @@ namespace Sitecore.MobileSDK.Entities
 
   public class UpdateEntityParameters : ChangeEntitiesParameters, IUpdateEntityRequest
   {
-    public UpdateEntityParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource)
-    : base(id, fieldsRawValuesByName, entitySource)
+    public UpdateEntityParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IDictionary<string, string> parametersRawValuesByName, IEntitySource entitySource)
+      : base(id, fieldsRawValuesByName, parametersRawValuesByName, entitySource)
     { 
     
     }
 
-    public UpdateEntityParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IEntitySource entitySource, ISessionConfig sessionSettings)
-    : base(id, fieldsRawValuesByName, entitySource, sessionSettings)
+    public UpdateEntityParameters(string id, IDictionary<string, string> fieldsRawValuesByName, IDictionary<string, string> parametersRawValuesByName, IEntitySource entitySource, ISessionConfig sessionSettings)
+    : base(id, fieldsRawValuesByName, parametersRawValuesByName, entitySource, sessionSettings)
     {
 
     }
@@ -29,7 +29,7 @@ namespace Sitecore.MobileSDK.Entities
         entitySource = this.EntitySource.ShallowCopy();
       }
 
-      return new UpdateEntityParameters(this.EntityID, this.FieldsRawValuesByName, entitySource);
+      return new UpdateEntityParameters(this.EntityID, this.FieldsRawValuesByName, this.ParametersRawValuesByName, entitySource);
     }
 
     new public virtual ICreateEntityRequest DeepCopyCreateEntityRequest()
