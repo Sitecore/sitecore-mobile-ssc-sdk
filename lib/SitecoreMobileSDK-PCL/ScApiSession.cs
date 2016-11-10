@@ -47,6 +47,7 @@ namespace Sitecore.MobileSDK
   {
     public ScApiSession(
       ISessionConfig config,
+      IEntitySource entitySource,
       IScCredentials credentials,
       IMediaLibrarySettings mediaSettings,
       ItemSource defaultSource = null)
@@ -57,7 +58,8 @@ namespace Sitecore.MobileSDK
       }
 
       this.sessionConfig = config.SessionConfigShallowCopy();
-      this.requestMerger = new UserRequestMerger(this.sessionConfig, defaultSource);
+      this.entitySource = entitySource.ShallowCopy();
+      this.requestMerger = new UserRequestMerger(this.sessionConfig, defaultSource, this.entitySource);
 
       if (null != credentials)
       {
@@ -516,6 +518,7 @@ namespace Sitecore.MobileSDK
     private HttpClientHandler handler;
 
     protected readonly ISessionConfig sessionConfig;
+    protected readonly IEntitySource entitySource;
     private IScCredentials credentials;
     private readonly IMediaLibrarySettings mediaSettings;
 

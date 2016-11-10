@@ -14,10 +14,11 @@ namespace Sitecore.MobileSDK.UserRequest
 
   public class UserRequestMerger
   {
-    public UserRequestMerger(ISessionConfig defaultSessionConfig, IItemSource defaultSource)
+    public UserRequestMerger(ISessionConfig defaultSessionConfig, IItemSource defaultSource, IEntitySource defaultEntitySource)
     {
       this.ItemSourceMerger = new ItemSourceFieldMerger(defaultSource);
       this.SessionConfigMerger = new SessionConfigMerger(defaultSessionConfig);
+      this.EntitySourceMerger = new EntitySourceMerger(defaultEntitySource);
     }
 
     public IReadItemsByIdRequest FillReadItemByIdGaps(IReadItemsByIdRequest userRequest)
@@ -151,14 +152,8 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IReadEntitiesByPathRequest FillReadEntitiesByPathGaps(IReadEntitiesByPathRequest userRequest)
     {
-      //FIXME: @igk implement
-      #warning FillReadEntitiesByPathGaps not implemented!
+      IEntitySource newSource = this.EntitySourceMerger.FillEntitySourceGaps(userRequest.EntitySource);
 
-
-      EntitySource newSource = new EntitySource(userRequest.EntitySource.EntityNamespace,
-                                                userRequest.EntitySource.EntityController,
-                                                userRequest.EntitySource.EntityId,
-                                                userRequest.EntitySource.EntityAction);
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
 
       ReadEntitiesByPathParameters newRequest = new ReadEntitiesByPathParameters(newSource, mergedSessionConfig);
@@ -168,14 +163,8 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IReadEntityByIdRequest FillReadEntityByIdGaps(IReadEntityByIdRequest userRequest)
     {
-      //FIXME: @igk implement
-      #warning FillReadEntityByIdGaps not implemented!
+      IEntitySource newSource = this.EntitySourceMerger.FillEntitySourceGaps(userRequest.EntitySource);
 
-
-      EntitySource newSource = new EntitySource(userRequest.EntitySource.EntityNamespace,
-                                                userRequest.EntitySource.EntityController,
-                                                userRequest.EntitySource.EntityId,
-                                                userRequest.EntitySource.EntityAction);
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
 
       ReadEntityByIdParameters newRequest = new ReadEntityByIdParameters(userRequest.EntityID, newSource, mergedSessionConfig);
@@ -185,14 +174,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public ICreateEntityRequest FillCreateEntityGaps(ICreateEntityRequest userRequest)
     {
-      //FIXME: @igk implement
-#warning FillCreateEntityGaps not implemented!
-
-
-      EntitySource newSource = new EntitySource(userRequest.EntitySource.EntityNamespace,
-                                                userRequest.EntitySource.EntityController,
-                                                userRequest.EntitySource.EntityId,
-                                                userRequest.EntitySource.EntityAction);
+      IEntitySource newSource = this.EntitySourceMerger.FillEntitySourceGaps(userRequest.EntitySource);
 
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
 
@@ -204,14 +186,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IUpdateEntityRequest FillUpdateEntityGaps(IUpdateEntityRequest userRequest)
     {
-      //FIXME: @igk implement
-#warning FillUpdateEntityGaps not implemented!
-
-
-      EntitySource newSource = new EntitySource(userRequest.EntitySource.EntityNamespace,
-                                                userRequest.EntitySource.EntityController,
-                                                userRequest.EntitySource.EntityId,
-                                                userRequest.EntitySource.EntityAction);
+      IEntitySource newSource = this.EntitySourceMerger.FillEntitySourceGaps(userRequest.EntitySource);
 
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
 
@@ -222,14 +197,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public IDeleteEntityRequest FillDeleteEntityGaps(IDeleteEntityRequest userRequest)
     {
-      //FIXME: @igk implement
-#warning FillDeleteEntityGaps not implemented!
-
-
-      EntitySource newSource = new EntitySource(userRequest.EntitySource.EntityNamespace,
-                                                userRequest.EntitySource.EntityController,
-                                                userRequest.EntitySource.EntityId,
-                                                userRequest.EntitySource.EntityAction);
+      IEntitySource newSource = this.EntitySourceMerger.FillEntitySourceGaps(userRequest.EntitySource);
 
       ISessionConfig mergedSessionConfig = this.SessionConfigMerger.FillSessionConfigGaps(userRequest.SessionSettings);
 
@@ -242,6 +210,7 @@ namespace Sitecore.MobileSDK.UserRequest
 
     public ItemSourceFieldMerger ItemSourceMerger { get; private set; }
     public SessionConfigMerger SessionConfigMerger { get; private set; }
+    public EntitySourceMerger EntitySourceMerger { get; private set; }
   }
 }
 

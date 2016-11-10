@@ -6,7 +6,7 @@ namespace Sitecore.MobileSDK.API.Session
   /// <summary>
   /// Interface represents base session builder. 
   /// </summary>
-  public interface IBaseSessionBuilder
+  public interface IBaseSessionBuilder : IEntitySessionBuilder
   {
     /// <summary>
     /// Builds session.
@@ -88,7 +88,6 @@ namespace Sitecore.MobileSDK.API.Session
     /// this
     /// </returns>
     IBaseSessionBuilder MediaPrefix(string mediaPrefix);
-
   }
 }
 

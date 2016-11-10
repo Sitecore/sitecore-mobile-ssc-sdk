@@ -10,7 +10,7 @@
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Validators;
 
-  internal class SessionBuilder : IAuthenticatedSessionBuilder, IAnonymousSessionBuilder
+  internal class SessionBuilder : IAuthenticatedSessionBuilder, IAnonymousSessionBuilder, IEntitySessionBuilder
   {
     #region Main Logic
     public ISitecoreSSCSession BuildSession()
@@ -33,7 +33,14 @@
         this.itemSourceAccumulator.Language,
         this.itemSourceAccumulator.VersionNumber);
 
-      var result = new ScApiSession(conf, this.credentials, mediaSettings, itemSource);
+      var entitySource = new EntitySource(
+        this.entitySourceAccumulator.EntityNamespace,
+        this.entitySourceAccumulator.EntityController,
+        this.entitySourceAccumulator.EntityId,
+        this.entitySourceAccumulator.EntityAction);
+
+
+      var result = new ScApiSession(conf, entitySource, this.credentials, mediaSettings, itemSource);
       return result;
     }
 
@@ -224,32 +231,89 @@
     #endregion IAnonymousSessionBuilder
 
     #region Entity
-
-    //Namespace 
-    //Controller
-    //Id        
-    //Action    
-
     public IBaseSessionBuilder EntityRouteNamespace(string entityNamespace)
     {
       if (string.IsNullOrEmpty(entityNamespace)) {
         return this;
       }
 
-      BaseValidator.CheckForTwiceSetAndThrow(this.itemSourceAccumulator.Database,
-        this.GetType().Name + ".DefaultDatabase");
+      BaseValidator.CheckForTwiceSetAndThrow(this.entitySourceAccumulator.EntityNamespace,
+        this.GetType().Name + ".EntityRouteNamespace");
       BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(entityNamespace,
-        this.GetType().Name + ".DefaultDatabase");
+        this.GetType().Name + ".EntityRouteNamespace");
 
-      this.itemSourceAccumulator =
-        new ItemSourcePOD(
-          entityNamespace,
-          this.itemSourceAccumulator.Language,
-          itemSourceAccumulator.VersionNumber);
+      this.entitySourceAccumulator =
+            new EntitySource( 
+                             entityNamespace,
+                             this.entitySourceAccumulator.EntityController,
+                             this.entitySourceAccumulator.EntityId,
+                             this.entitySourceAccumulator.EntityAction);
 
       return this;
     }
 
+    public IBaseSessionBuilder EntityRouteController(string entityController)
+    {
+      if (string.IsNullOrEmpty(entityController)) {
+        return this;
+      }
+
+      BaseValidator.CheckForTwiceSetAndThrow(this.entitySourceAccumulator.EntityController,
+        this.GetType().Name + ".EntityRouteController");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(entityController,
+        this.GetType().Name + ".EntityRouteController");
+
+      this.entitySourceAccumulator =
+            new EntitySource(
+              this.entitySourceAccumulator.EntityNamespace,
+              entityController,
+              this.entitySourceAccumulator.EntityId,
+              this.entitySourceAccumulator.EntityAction);
+
+      return this;
+    }
+
+    public IBaseSessionBuilder EntityRouteId(string entityId)
+    {
+      if (string.IsNullOrEmpty(entityId)) {
+        return this;
+      }
+
+      BaseValidator.CheckForTwiceSetAndThrow(this.entitySourceAccumulator.EntityId,
+        this.GetType().Name + ".EntityRouteId");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(entityId,
+        this.GetType().Name + ".EntityRouteId");
+
+      this.entitySourceAccumulator =
+            new EntitySource(
+              this.entitySourceAccumulator.EntityNamespace,
+              this.entitySourceAccumulator.EntityController,
+              entityId,
+              this.entitySourceAccumulator.EntityAction);
+
+      return this;
+    }
+
+    public IBaseSessionBuilder EntityRouteAction(string entityAction)
+    {
+      if (string.IsNullOrEmpty(entityAction)) {
+        return this;
+      }
+
+      BaseValidator.CheckForTwiceSetAndThrow(this.entitySourceAccumulator.EntityAction,
+        this.GetType().Name + ".EntityRouteAction");
+      BaseValidator.CheckForNullEmptyAndWhiteSpaceOrThrow(entityAction,
+        this.GetType().Name + ".EntityRouteAction");
+
+      this.entitySourceAccumulator =
+            new EntitySource(
+              this.entitySourceAccumulator.EntityNamespace,
+              this.entitySourceAccumulator.EntityController,
+              this.entitySourceAccumulator.EntityId,
+              entityAction);
+
+      return this;
+    }
     #endregion Entity
 
     #region State

@@ -265,6 +265,8 @@
     <Compile Include="Entities\CrudTasks\DeleteEntityTask.cs" />
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\UpdateEntityRequestBuilder.cs" />
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\DeleteEntityRequestBuilder.cs" />
+    <Compile Include="API\Session\IEntitySessionBuilder.cs" />
+    <Compile Include="UserRequest\EntitySourceMerger.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
