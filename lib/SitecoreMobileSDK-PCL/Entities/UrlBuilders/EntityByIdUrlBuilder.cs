@@ -13,9 +13,9 @@ namespace Sitecore.MobileSDK.UrlBuilder.Entity
     {
     }
 
-    protected override string GetItemIdenticationForRequest(T request)
+    protected override string GetItemIdentificationForRequest(T request)
     {
-      string basePath = base.GetItemIdenticationForRequest(request);
+      string basePath = base.GetItemIdentificationForRequest(request);
 
       string result = basePath + "('" + request.EntityID + "')";
 

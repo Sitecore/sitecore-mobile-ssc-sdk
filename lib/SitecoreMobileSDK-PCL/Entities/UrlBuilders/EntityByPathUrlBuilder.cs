@@ -20,7 +20,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.Entity
       return hostUrl;
     }
 
-    protected override string GetItemIdenticationForRequest(T request)
+    protected override string GetItemIdentificationForRequest(T request)
     {
       string strItemPath = UrlBuilderUtils.EscapeDataString(request.EntitySource.EntityNamespace)
                                   + restGrammar.PathComponentSeparator

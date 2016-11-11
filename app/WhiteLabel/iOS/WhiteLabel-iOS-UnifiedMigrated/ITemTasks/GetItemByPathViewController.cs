@@ -157,6 +157,8 @@
                                                .Controller("admin")
                                                .TaskId("id")
                                                .Action("Todo")
+                                               .AddParametersRawValues("param1", "value1")
+                                               .AddParametersRawValues("param2", "value2")
                                                .Build();
 
           this.ShowLoader();

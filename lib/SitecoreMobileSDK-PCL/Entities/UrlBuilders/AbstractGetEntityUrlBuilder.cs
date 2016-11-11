@@ -5,15 +5,15 @@ namespace Sitecore.MobileSDK.UrlBuilder
 {
   using System;
   using System.Collections.Generic;
-  using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.Items;
+  using Sitecore.MobileSDK.API.Request.Entity;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.SSC;
+  using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
   public abstract class AbstractGetEntityUrlBuilder<TRequest>
-    where TRequest : IBaseItemRequest
+    where TRequest : IBaseEntityRequest
   {
     public AbstractGetEntityUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
     {
@@ -28,33 +28,67 @@ namespace Sitecore.MobileSDK.UrlBuilder
     {
       this.ValidateRequest(request);
 
-      string hostUrl = this.GetHostUrlForRequest(request);
-      string baseUrl = this.GetCommonPartForRequest(request).ToLowerInvariant();
+      string requestUrl = this.GetHostUrlForRequest(request);
 
-      hostUrl = hostUrl + this.restGrammar.PathComponentSeparator + baseUrl;
+      string routePath = this.GetEntityRoutePath(request);
 
-      string specificParameters = this.GetSpecificPartForRequest(request);
-
-
-      bool shouldTruncateBaseUrl = (!string.IsNullOrEmpty(specificParameters) 
-                                    && specificParameters.StartsWith(this.restGrammar.FieldSeparator));
-      while (shouldTruncateBaseUrl)
+      if (!string.IsNullOrEmpty(routePath))
       {
-        specificParameters = specificParameters.Substring(1);
-        shouldTruncateBaseUrl = (!string.IsNullOrEmpty(specificParameters) 
-                                 && specificParameters.StartsWith(this.restGrammar.FieldSeparator));
+        requestUrl =
+          requestUrl + routePath;
       }
 
+      string specificPart = this.GetSpecificPartForRequest(request);
 
-      string result = hostUrl;
-
-      if (!string.IsNullOrEmpty(specificParameters))
-      {
-        result =
-          result + specificParameters;
+      if (!string.IsNullOrEmpty(specificPart)) {
+        requestUrl =
+          requestUrl + specificPart;
       }
 
-      return result;
+      string customParameters = this.GetParametersString(request);
+
+      if (!string.IsNullOrEmpty(customParameters)) {
+        requestUrl =
+          requestUrl + restGrammar.HostAndArgsSeparator + customParameters;
+      }
+
+      return requestUrl;
+    }
+
+    private string GetParametersString(TRequest request)
+    {
+      if (request.ParametersRawValuesByName.Count == 0) {
+        return "";
+      }
+
+      string parametersString = "";
+      List<string> keysList = new List<string>(request.ParametersRawValuesByName.Keys);
+      foreach (string key in keysList) {
+        parametersString = parametersString +
+                      key +
+                      restGrammar.KeyValuePairSeparator +
+                      request.ParametersRawValuesByName[key].ToString() +
+                      restGrammar.FieldSeparator;
+      }
+
+      parametersString = parametersString.Remove(parametersString.Length - 1);
+
+      return parametersString;
+    }
+
+    private string GetEntityRoutePath(TRequest request)
+    { 
+      string strItemPath = UrlBuilderUtils.EscapeDataString(request.EntitySource.EntityNamespace)
+                                    + restGrammar.PathComponentSeparator
+                                    + UrlBuilderUtils.EscapeDataString(request.EntitySource.EntityController)
+                                    + restGrammar.PathComponentSeparator;
+      if (request.EntitySource.EntityId != null) {
+        strItemPath = strItemPath + UrlBuilderUtils.EscapeDataString(request.EntitySource.EntityId) + restGrammar.PathComponentSeparator;
+      }
+
+      strItemPath = strItemPath + UrlBuilderUtils.EscapeDataString(request.EntitySource.EntityAction);
+
+      return strItemPath;
     }
 
     protected virtual void ValidateRequest(TRequest request)
@@ -78,36 +112,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
     private string GetCommonPartForRequest(TRequest request)
     {
-      QueryParametersUrlBuilder queryParametersUrlBuilder = new QueryParametersUrlBuilder(this.restGrammar, this.sscGrammar);
-      string queryParamsUrl = queryParametersUrlBuilder.BuildUrlString(request.QueryParameters);
-
-      ItemSourceUrlBuilder sourceBuilder = new ItemSourceUrlBuilder(this.restGrammar, this.sscGrammar, request.ItemSource);
-      string itemSourceArgs = sourceBuilder.BuildUrlQueryString();
-
-      string result = string.Empty;
-
-      string[] restSubQueries = { itemSourceArgs, queryParamsUrl };
-      foreach (string currentSubQuery in restSubQueries)
-      {
-        if (!string.IsNullOrEmpty(currentSubQuery))
-        {
-          result =
-            result +
-            this.restGrammar.FieldSeparator + currentSubQuery;
-        }
-      }
-
-
-      if (request.IncludeStandardTemplateFields) {
-        result =
-          result +
-          this.restGrammar.FieldSeparator 
-              + this.sscGrammar.IncludeStandardTemplateFieldsParameterName 
-              + this.restGrammar.KeyValuePairSeparator 
-              + "true";
-      }
-
-      return result.ToLowerInvariant();
+      return "";
     }
 
     private void ValidateCommonRequest(TRequest request)
