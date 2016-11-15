@@ -18,11 +18,11 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
   internal class CreateEntityTask<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScCreateEntityResponse>
     where T : class, ICreateEntityRequest
   {
-    private readonly EntityByPathUrlBuilder<T> createEntityBuilder;
+    private readonly GetEntitiesUrlBuilder<T> createEntityBuilder;
     private readonly HttpClient httpClient;
 
     public CreateEntityTask(
-      EntityByPathUrlBuilder<T> createEntityBuilder,
+      GetEntitiesUrlBuilder<T> createEntityBuilder,
       HttpClient httpClient)
     {
       this.createEntityBuilder = createEntityBuilder;

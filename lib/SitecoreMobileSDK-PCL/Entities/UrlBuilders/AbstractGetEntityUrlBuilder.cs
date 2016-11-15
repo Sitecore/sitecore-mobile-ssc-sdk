@@ -35,7 +35,9 @@ namespace Sitecore.MobileSDK.UrlBuilder
       if (!string.IsNullOrEmpty(routePath))
       {
         requestUrl =
-          requestUrl + routePath;
+          requestUrl +
+          restGrammar.PathComponentSeparator +
+          routePath;
       }
 
       string specificPart = this.GetSpecificPartForRequest(request);
@@ -57,7 +59,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
     private string GetParametersString(TRequest request)
     {
-      if (request.ParametersRawValuesByName.Count == 0) {
+      if (request.ParametersRawValuesByName == null || request.ParametersRawValuesByName.Count == 0) {
         return "";
       }
 

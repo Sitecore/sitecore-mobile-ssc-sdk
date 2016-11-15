@@ -22,8 +22,7 @@
         foreach (IField singleField in fields) {
           cancelToken.ThrowIfCancellationRequested();
 
-          string lowercaseName = singleField.Name.ToLowerInvariant();
-          fieldsByName[lowercaseName] = singleField;
+          fieldsByName[singleField.Name] = singleField;
         }
 
         newItem = new ScEntity(fieldsByName);

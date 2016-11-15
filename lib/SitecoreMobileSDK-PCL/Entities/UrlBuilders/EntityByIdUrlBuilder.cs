@@ -5,7 +5,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.Entity
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.SSC;
 
-  public class EntityByIdUrlBuilder<T> : EntityByPathUrlBuilder<T>
+  public class EntityByIdUrlBuilder<T> : GetEntitiesUrlBuilder<T>
   where T : IReadEntityByIdRequest
   {
     public EntityByIdUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
@@ -15,9 +15,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.Entity
 
     protected override string GetItemIdentificationForRequest(T request)
     {
-      string basePath = base.GetItemIdentificationForRequest(request);
-
-      string result = basePath + "('" + request.EntityID + "')";
+      string result = "('" + request.EntityID + "')";
 
       return result;
     }

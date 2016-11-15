@@ -22,17 +22,7 @@ namespace Sitecore.MobileSDK.UrlBuilder.Entity
 
     protected override string GetItemIdentificationForRequest(T request)
     {
-      string strItemPath = UrlBuilderUtils.EscapeDataString(request.EntitySource.EntityNamespace)
-                                  + restGrammar.PathComponentSeparator
-                                  + UrlBuilderUtils.EscapeDataString(request.EntitySource.EntityController)
-                                  + restGrammar.PathComponentSeparator;
-      if (request.EntitySource.EntityId != null) {
-        strItemPath = strItemPath + UrlBuilderUtils.EscapeDataString(request.EntitySource.EntityId) + restGrammar.PathComponentSeparator;
-      }
-
-      strItemPath = strItemPath + UrlBuilderUtils.EscapeDataString(request.EntitySource.EntityAction);
-
-      return strItemPath;
+      return "";
     }
 
     protected override void ValidateSpecificRequest(T request)

@@ -1,11 +1,11 @@
-﻿namespace Sitecore.MobileSDK.UrlBuilder
+﻿namespace Sitecore.MobileSDK.UrlBuilder.Entity
 {
   using Sitecore.MobileSDK.API.Request.Entity;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.SSC;
 
 
-  public abstract class GetEntitiesUrlBuilder<TRequest> : AbstractGetEntityUrlBuilder<TRequest>
+  public class GetEntitiesUrlBuilder<TRequest> : AbstractGetEntityUrlBuilder<TRequest>
     where TRequest : IBaseEntityRequest
   {
     public GetEntitiesUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar) : 
@@ -17,9 +17,15 @@
     {
       return this.GetItemIdentificationForRequest(request);
     }
- 
-    protected abstract string GetItemIdentificationForRequest(TRequest request);
 
+    protected virtual string GetItemIdentificationForRequest(TRequest request)
+    {
+      return "";
+    }
+
+    protected override void ValidateSpecificRequest(TRequest request)
+    { 
+    }
   }
 }
 

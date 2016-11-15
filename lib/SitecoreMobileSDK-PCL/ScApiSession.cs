@@ -318,7 +318,7 @@ namespace Sitecore.MobileSDK
       //await this.GetPublicKeyAsync(cancelToken);
       IReadEntitiesByPathRequest autocompletedRequest = this.requestMerger.FillReadEntitiesByPathGaps(requestCopy);
 
-      var urlBuilder = new EntityByPathUrlBuilder<IReadEntitiesByPathRequest>(this.restGrammar, this.sscGrammar);
+      var urlBuilder = new GetEntitiesUrlBuilder<IReadEntitiesByPathRequest>(this.restGrammar, this.sscGrammar);
       var taskFlow = new GetEntitiesByPathTask(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
@@ -345,7 +345,7 @@ namespace Sitecore.MobileSDK
 
       ICreateEntityRequest autocompletedRequest = this.requestMerger.FillCreateEntityGaps(requestCopy);
 
-      var urlBuilder = new EntityByPathUrlBuilder<ICreateEntityRequest>(this.restGrammar, this.sscGrammar);
+      var urlBuilder = new GetEntitiesUrlBuilder<ICreateEntityRequest>(this.restGrammar, this.sscGrammar);
       var taskFlow = new CreateEntityTask<ICreateEntityRequest>(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);

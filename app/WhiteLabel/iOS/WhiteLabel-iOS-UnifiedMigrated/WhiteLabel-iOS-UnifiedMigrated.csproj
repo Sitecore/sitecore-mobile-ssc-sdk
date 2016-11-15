@@ -180,6 +180,10 @@
     <Compile Include="ITemTasks\SearchItemViewController.designer.cs">
       <DependentUpon>SearchItemViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ITemTasks\EntitiesDemoViewController.cs" />
+    <Compile Include="ITemTasks\EntitiesDemoViewController.designer.cs">
+      <DependentUpon>EntitiesDemoViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />

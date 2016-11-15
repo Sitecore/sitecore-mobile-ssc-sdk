@@ -61,7 +61,7 @@ namespace WhiteLabeliOS
 
     private void InitFeaturesList()
     {
-//      this.features.Insert(0, "uploadImageVC");
+      this.features.Insert(0, "entitiesProceed");
       this.features.Insert(0, "getMediaItem");
       this.features.Insert(0, "getItemBySearch");
       this.features.Insert(0, "getItemByQuery");
@@ -100,7 +100,7 @@ namespace WhiteLabeliOS
 
 			public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
 			{
-                var cell = tableView.DequeueReusableCell (CellIdentifier, indexPath);
+        var cell = tableView.DequeueReusableCell (CellIdentifier, indexPath);
 				string featureKey = controller.features [indexPath.Row].ToString ();
 				string featureTitle = NSBundle.MainBundle.LocalizedString (featureKey, null);
 				cell.TextLabel.Text = featureTitle;
@@ -116,7 +116,7 @@ namespace WhiteLabeliOS
 				UINavigationController navController = controller.NavigationController;
 				string featureKey = controller.features [indexPath.Row].ToString ();
 
-                this.controller.PerformSegue(featureKey, this.controller);
+        this.controller.PerformSegue(featureKey, this.controller);
 			}
       #endregion UITableViewDelegate
 

@@ -232,7 +232,6 @@
     <Compile Include="Entities\ScEntity.cs" />
     <Compile Include="Entities\Session\IReadEntityActions.cs" />
     <Compile Include="Entities\UrlBuilders\AbstractGetEntityUrlBuilder.cs" />
-    <Compile Include="Entities\UrlBuilders\EntityByPathUrlBuilder.cs" />
     <Compile Include="Entities\UrlBuilders\GetEntitiesUrlBuilder.cs" />
     <Compile Include="Entities\EntitiesRequest\ICreateEntityRequest.cs" />
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\IBaseEntityRequestParametersBuilder.cs" />

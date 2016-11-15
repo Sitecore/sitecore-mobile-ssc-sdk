@@ -39,69 +39,39 @@ namespace WhiteLabeliOS
       this.SendUpdateRequest();
     }
 
-    //private async void SendUpdateRequest()
-    //{
-    //  try
-    //  {
-    //    using (var session = this.instanceSettings.GetSession())
-    //    {
-    //      var request = ItemSSCRequestBuilder.UpdateItemRequestWithId(this.pathField.Text)
-    //        .AddFieldsRawValuesByNameToSet("Title", this.titleField.Text)
-    //        .AddFieldsRawValuesByNameToSet("Text", this.textField.Text)
-    //        .Database("master")
-    //        .Build();
-
-    //      this.ShowLoader();
-
-    //      var response = await session.UpdateItemAsync(request);
-    //      if (response.Updated)
-    //      {
-    //        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item updated successfully");
-    //      }
-    //      else
-    //      {
-    //        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
-    //      }
-    //    }
-    //  }
-    //  catch
-    //  {
-    //    AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item updated successfully");
-    //  }
-    //  finally
-    //  {
-    //    BeginInvokeOnMainThread(delegate
-    //    {
-    //      this.HideLoader();
-    //    });
-    //  }
-    //}
-
     private async void SendUpdateRequest()
     {
-      try {
-        using (var session = this.instanceSettings.GetSession()) {
-          var request = EntitySSCRequestBuilder.UpdateEntityRequest("333")
-                                               .Namespace("aggregate")
-                                               .Controller("admin")
-                                               .Action("Todo")
-                                               .AddFieldsRawValuesByNameToSet("Title", "new title")
-                                               .Build();
+      try
+      {
+        using (var session = this.instanceSettings.GetSession())
+        {
+          var request = ItemSSCRequestBuilder.UpdateItemRequestWithId(this.pathField.Text)
+            .AddFieldsRawValuesByNameToSet("Title", this.titleField.Text)
+            .AddFieldsRawValuesByNameToSet("Text", this.textField.Text)
+            .Database("master")
+            .Build();
 
           this.ShowLoader();
 
-          ScUpdateEntityResponse response = await session.UpdateEntityAsync(request);
-
-          if (response.Updated) {
-            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The entity updated successfully");
-          } else {
-            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The entity was not updated");
+          var response = await session.UpdateItemAsync(request);
+          if (response.Updated)
+          {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item updated successfully");
+          }
+          else
+          {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
           }
         }
-      } catch {
+      }
+      catch
+      {
         AlertHelper.ShowLocalizedAlertWithOkOption("Message", "The item updated successfully");
-      } finally {
-        BeginInvokeOnMainThread(delegate {
+      }
+      finally
+      {
+        BeginInvokeOnMainThread(delegate
+        {
           this.HideLoader();
         });
       }

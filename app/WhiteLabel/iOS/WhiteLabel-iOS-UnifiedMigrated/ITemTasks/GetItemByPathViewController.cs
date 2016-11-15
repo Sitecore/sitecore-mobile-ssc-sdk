@@ -65,121 +65,40 @@
       sender.Selected = !sender.Selected;
     }
 
-    //private async void SendRequest()
-    //{
-    //  try
-    //  {
-    //    using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
-    //    {
-    //      var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
-    //        .AddFieldsToRead(this.fieldNameTextField.Text)
-    //        .Build();
-          
-    //      this.ShowLoader();
-
-    //      ScItemsResponse response = await session.ReadItemAsync(request);
-
-    //      if (response.Any())
-    //      {
-    //        this.ShowItemsList(response);
-    //      }
-    //      else
-    //      {
-    //        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
-    //      }
-    //    }
-    //  }
-    //  catch(Exception e) 
-    //  {
-    //    this.CleanupTableViewBindings();
-    //    AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-    //  }
-    //  finally
-    //  {
-    //    BeginInvokeOnMainThread(delegate
-                                
-    //    {
-    //      this.FieldsTableView.ReloadData();
-    //      this.HideLoader();
-    //    });
-    //  }
-    //}
-
-    //Entity
-    //private async void SendRequest()
-    //{
-    //  //get all entities
-
-    //  try {
-    //    using (ISitecoreSSCSession session = this.instanceSettings.GetSession()) {
-          
-    //      var request = EntitySSCRequestBuilder.ReadEntitiesRequestWithPath()
-    //                                           .Namespace("aggregate")
-    //                                           .Controller("admin")
-    //                                           .Action("Todo")
-    //                                           .Build();
-
-    //      this.ShowLoader();
-
-    //      ScEntityResponse response = await session.ReadEntityAsync(request);
-
-    //      if (response.Any()) {
-    //        AlertHelper.ShowLocalizedAlertWithOkOption("Entities count", response.Count().ToString());
-    //        foreach(var entity in response) {
-    //          Console.WriteLine("ENTITY: " + entity["id"].RawValue);
-    //        }
-
-    //      } else {
-    //        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entities not found");
-    //      }
-    //    }
-    //  } catch (Exception e) {
-    //    this.CleanupTableViewBindings();
-    //    AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-    //  } finally {
-    //    BeginInvokeOnMainThread(delegate {
-    //      this.FieldsTableView.ReloadData();
-    //      this.HideLoader();
-    //    });
-    //  }
-    //}
-
-
     private async void SendRequest()
     {
-      //get entity by id
-
-      try {
-        using (ISitecoreSSCSession session = this.instanceSettings.GetSession()) {
-
-          var request = EntitySSCRequestBuilder.ReadEntityRequestById("1")
-                                               .Namespace("aggregate")
-                                               .Controller("admin")
-                                               .TaskId("id")
-                                               .Action("Todo")
-                                               .AddParametersRawValues("param1", "value1")
-                                               .AddParametersRawValues("param2", "value2")
-                                               .Build();
-
+      try
+      {
+        using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
+        {
+          var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
+            .AddFieldsToRead(this.fieldNameTextField.Text)
+            .Build();
+          
           this.ShowLoader();
 
-          ScEntityResponse response = await session.ReadEntityAsync(request);
+          ScItemsResponse response = await session.ReadItemAsync(request);
 
-          if (response.Any()) {
-            AlertHelper.ShowLocalizedAlertWithOkOption("Entities count", response.Count().ToString());
-            foreach (var entity in response) {
-              Console.WriteLine("ENTITY: " + entity["id"].RawValue);
-            }
-
-          } else {
-            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Entities not found");
+          if (response.Any())
+          {
+            this.ShowItemsList(response);
+          }
+          else
+          {
+            AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
           }
         }
-      } catch (Exception e) {
+      }
+      catch(Exception e) 
+      {
         this.CleanupTableViewBindings();
         AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-      } finally {
-        BeginInvokeOnMainThread(delegate {
+      }
+      finally
+      {
+        BeginInvokeOnMainThread(delegate
+                                
+        {
           this.FieldsTableView.ReloadData();
           this.HideLoader();
         });
