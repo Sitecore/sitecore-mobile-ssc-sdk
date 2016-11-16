@@ -3,7 +3,6 @@
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.SSC;
-  using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
   public class RunSitecoreSearchUrlBuilder : GetPagedItemsUrlBuilder<ISitecoreSearchRequest>

@@ -21,7 +21,7 @@ namespace Sitecore.MobileSDK.Entities
 
     }
 
-    public IUpdateEntityRequest DeepCopyUpdateEntityRequest()
+    new public IUpdateEntityRequest DeepCopyUpdateEntityRequest()
     {
       IEntitySource entitySource = null;
 
@@ -37,7 +37,7 @@ namespace Sitecore.MobileSDK.Entities
       return this.DeepCopyUpdateEntityRequest();
     }
 
-    public virtual  IReadEntityByIdRequest DeepCopyReadEntitiesByIdRequest()
+    new public virtual  IReadEntityByIdRequest DeepCopyReadEntitiesByIdRequest()
     {
       return this.DeepCopyUpdateEntityRequest();
     }

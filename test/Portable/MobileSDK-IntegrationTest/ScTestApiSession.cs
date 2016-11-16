@@ -4,6 +4,7 @@
   using System.Threading.Tasks;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Entities;
   using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.PasswordProvider.Interface;
@@ -13,10 +14,11 @@
   {
     public ScTestApiSession(
       ISessionConfig config,
+      IEntitySource entitySource,
       IScCredentials credentials,
       IMediaLibrarySettings mediaSettings,
       ItemSource defaultSource = null) :
-      base(config, credentials, mediaSettings, defaultSource)
+      base(config, entitySource, credentials, mediaSettings, defaultSource)
     {
       this.GetPublicKeyInvocationsCount = 0;
     }

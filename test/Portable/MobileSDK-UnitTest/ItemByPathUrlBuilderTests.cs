@@ -207,7 +207,7 @@
       var connection = new SessionConfig("localhost");
 
       var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO").Build();
-      var requestMerger = new UserRequestMerger(connection, null);
+      var requestMerger = new UserRequestMerger(connection, null, null);
       var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
 
       var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
@@ -226,7 +226,7 @@
 
       var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
         .Build();
-      var requestMerger = new UserRequestMerger(connection, null);
+      var requestMerger = new UserRequestMerger(connection, null, null);
       var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
 
       var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
@@ -245,7 +245,7 @@
       var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
         .Database("master")
         .Build();
-      var requestMerger = new UserRequestMerger(connection, null);
+      var requestMerger = new UserRequestMerger(connection, null, null);
       var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
 
       var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
@@ -264,7 +264,7 @@
       var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/oO")
         .Language("da")
         .Build();
-      var requestMerger = new UserRequestMerger(connection, null);
+      var requestMerger = new UserRequestMerger(connection, null, null);
       var mergedRequest = requestMerger.FillReadItemByPathGaps(request);
 
       var urlBuilder = new ItemByPathUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());

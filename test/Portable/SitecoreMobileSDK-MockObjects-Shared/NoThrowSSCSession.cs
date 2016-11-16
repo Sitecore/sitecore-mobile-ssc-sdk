@@ -6,11 +6,12 @@
   using System.Threading;
   using System.Threading.Tasks;
   using Sitecore.MobileSDK.API;
+  using Sitecore.MobileSDK.API.Entities;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Entity;
   using Sitecore.MobileSDK.API.Session;
-  using Sitecore.MobileSDK.PasswordProvider;
   using Sitecore.MobileSDK.PasswordProvider.Interface;
   using Sitecore.MobileSDK.PublicKey;
 
@@ -167,6 +168,34 @@
 
     #endregion Authentication
 
+    #region Entity
+
+    public async Task<ScEntityResponse> ReadEntityAsync(IReadEntitiesByPathRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      return await this.InvokeNoThrow(this.workerSession.ReadEntityAsync(request, cancelToken));
+    }
+
+    public async Task<ScEntityResponse> ReadEntityAsync(IReadEntityByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      return await this.InvokeNoThrow(this.workerSession.ReadEntityAsync(request, cancelToken));
+    }
+
+    public async Task<ScCreateEntityResponse> CreateEntityAsync(ICreateEntityRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      return await this.InvokeNoThrow(this.workerSession.CreateEntityAsync(request, cancelToken));
+    }
+
+    public async Task<ScUpdateEntityResponse> UpdateEntityAsync(IUpdateEntityRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      return await this.InvokeNoThrow(this.workerSession.UpdateEntityAsync(request, cancelToken));
+    }
+
+    public async Task<ScDeleteEntityResponse> DeleteEntityAsync(IDeleteEntityRequest request, CancellationToken cancelToken = default(CancellationToken))
+    {
+      return await this.InvokeNoThrow(this.workerSession.DeleteEntityAsync(request, cancelToken));
+    }
+
+    #endregion Entity
   }
 }
 

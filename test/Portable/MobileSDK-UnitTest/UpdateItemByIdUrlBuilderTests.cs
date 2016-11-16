@@ -32,7 +32,7 @@
       mutableSessionConfig.InstanceUrl = "mobiledev1ua1.dk.sitecore.net:7119";
 
       ItemSource source = LegacyConstants.DefaultSource();
-      this.requestMerger = new UserRequestMerger(mutableSessionConfig, source);
+      this.requestMerger = new UserRequestMerger(mutableSessionConfig, source, null);
 
     }
 

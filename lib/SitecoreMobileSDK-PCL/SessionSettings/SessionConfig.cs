@@ -5,7 +5,6 @@
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.Validators;
 
-  // TODO : remove this class
   public class SessionConfig : ISessionConfig
   {
     public SessionConfig(

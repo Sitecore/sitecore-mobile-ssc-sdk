@@ -84,8 +84,6 @@
         throw new ArgumentNullException(TaskFlowErrorMessages.USER_REQUEST_NULL_MESSAGE);
       }
 
-
-      Func<Exception, ProcessUserRequestException> urlExceptionWrapper = (Exception ex) => new ProcessUserRequestException(TaskFlowErrorMessages.BAD_USER_REQUEST_MESSAGE, ex);
       requestUrl = stages.BuildRequestUrlForRequestAsync(request, cancelToken);
 
       if (null == requestUrl)

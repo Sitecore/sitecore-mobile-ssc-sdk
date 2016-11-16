@@ -5,7 +5,7 @@ namespace Sitecore.MobileSDK.Entities
   using Sitecore.MobileSDK.API.Entities;
   using Sitecore.MobileSDK.API.Fields;
 
-  //TODO: @igk id field is required for entities implement it as property
+  //TODO: @igk add possibility to change id field key value
 
   public class ScEntity : ISitecoreEntity
   {

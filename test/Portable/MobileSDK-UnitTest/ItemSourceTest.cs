@@ -47,7 +47,7 @@
     [Test]
     public void TestApiSessionConstructorDoesNotRequiresDefaultSource()
     {
-      ScApiSession result = new ScApiSession(this.localhostConnection, this.credentials, this.mediaSettings, null);
+      ScApiSession result = new ScApiSession(this.localhostConnection, null, this.credentials, this.mediaSettings, null);
       Assert.IsNotNull(result);
     }
 
@@ -59,7 +59,7 @@
 
       TestDelegate initSessionAction = () =>
       {
-        ScApiSession result = new ScApiSession(null, this.credentials, this.mediaSettings, defaultSource);
+        ScApiSession result = new ScApiSession(null, null, this.credentials, this.mediaSettings, defaultSource);
         Debug.WriteLine( result );
       };
 

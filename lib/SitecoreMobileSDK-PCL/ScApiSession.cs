@@ -57,8 +57,12 @@ namespace Sitecore.MobileSDK
         throw new ArgumentNullException("ScApiSession.config cannot be null");
       }
 
+      if (entitySource != null)
+      { 
+         this.entitySource = entitySource.ShallowCopy();
+      }
+
       this.sessionConfig = config.SessionConfigShallowCopy();
-      this.entitySource = entitySource.ShallowCopy();
       this.requestMerger = new UserRequestMerger(this.sessionConfig, defaultSource, this.entitySource);
 
       if (null != credentials)
@@ -233,33 +237,6 @@ namespace Sitecore.MobileSDK
 
       return false;
     }
-
-    //protected virtual async Task<ICredentialsHeadersCryptor> GetCredentialsCryptorAsync(CancellationToken cancelToken = default(CancellationToken))
-    //{
-    //  bool isAnonymous = (null == this.Credentials) ||SSCCredentialsValidator.IsAnonymousSession(this.Credentials);
-
-    //  if (isAnonymous)
-    //  {
-    //    return new AnonymousSessionCryptor();
-    //  }
-    //  else if (SSCCredentialsValidator.IsValidCredentials(this.Credentials))
-    //  {
-    //    #if !ENCRYPTION_DISABLED
-    //    // TODO : flow should be responsible for caching. Do not hard code here
-    //    this.publicCertifiacte = await this.GetPublicKeyAsync(cancelToken);
-    //    #else
-    //    this.publicCertifiacte = null;
-    //    #endif
-
-    //    // TODO : credentials should not be passed as plain text strings. 
-    //    // TODO : Use ```SecureString``` class
-    //    return new AuthenticatedSessionCryptor(this.credentials.Username, this.credentials.Password, this.publicCertifiacte);
-    //  }
-    //  else
-    //  {
-    //    throw new ArgumentException(this.GetType().Name + " : web API credentials are not valid");
-    //  }
-    //}
 
     #endregion Encryption
 
@@ -436,10 +413,10 @@ namespace Sitecore.MobileSDK
         this.sscGrammar,
         this.sessionConfig,
         this.mediaSettings,
-        request.ItemSource);
+        autocompletedRequest.ItemSource);
 
       var taskFlow = new GetResourceTask(urlBuilder, this.httpClient);
-      return await RestApiCallFlow.LoadResourceFromNetworkFlow(request, taskFlow, cancelToken);
+      return await RestApiCallFlow.LoadResourceFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
     #endregion GetItems
 
@@ -501,8 +478,6 @@ namespace Sitecore.MobileSDK
 
     public async Task<ScAuthResponse> AuthenticateAsync(CancellationToken cancelToken = default(CancellationToken))
     {
-      var sessionUrlBuilder = new SessionConfigUrlBuilder(this.restGrammar, this.sscGrammar);
-
       var result = await this.GetPublicKeyAsync(cancelToken);
 
       return result;

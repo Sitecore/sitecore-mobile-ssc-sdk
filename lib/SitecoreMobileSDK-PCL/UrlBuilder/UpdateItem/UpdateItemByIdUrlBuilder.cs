@@ -22,7 +22,6 @@
       return result;
     }
 
-    //TODO: @igk we do not need it any more
     protected override string GetSpecificPartForRequest(IUpdateItemByIdRequest request)
     {
       return string.Empty;

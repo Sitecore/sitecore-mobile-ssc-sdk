@@ -134,7 +134,7 @@
       var connection = new SessionConfig("localhost");
 
       var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9").Build();
-      var requestMerger = new UserRequestMerger(connection, null);
+      var requestMerger = new UserRequestMerger(connection, null, null);
       var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
 
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
@@ -154,7 +154,7 @@
       var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .Database("master")
         .Build();
-      var requestMerger = new UserRequestMerger(connection, null);
+      var requestMerger = new UserRequestMerger(connection, null, null);
       var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
 
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
@@ -173,7 +173,7 @@
       var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("110d559f-dea5-42ea-9c1c-8a5df7e70ef9")
         .Language("da")
         .Build();
-      var requestMerger = new UserRequestMerger(connection, null);
+      var requestMerger = new UserRequestMerger(connection, null, null);
       var mergedRequest = requestMerger.FillReadItemByIdGaps(request);
 
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());

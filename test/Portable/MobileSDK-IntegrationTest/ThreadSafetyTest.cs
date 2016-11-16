@@ -36,7 +36,7 @@
       var connection = new SessionConfig(this.env.InstanceUrl);
       var defaultSource = LegacyConstants.DefaultSource();
 
-      this.session = new ScTestApiSession(connection, env.Users.Admin, this.mediaSettings, defaultSource);
+      this.session = new ScTestApiSession(connection, null, env.Users.Admin, this.mediaSettings, defaultSource);
       this.itemSource = new MutableItemSource("master", "en", 0);
     }
 

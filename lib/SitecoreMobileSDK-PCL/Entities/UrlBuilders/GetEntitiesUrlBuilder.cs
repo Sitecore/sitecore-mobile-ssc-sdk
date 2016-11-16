@@ -20,7 +20,7 @@
 
     protected virtual string GetItemIdentificationForRequest(TRequest request)
     {
-      return "";
+      return string.Empty;
     }
 
     protected override void ValidateSpecificRequest(TRequest request)

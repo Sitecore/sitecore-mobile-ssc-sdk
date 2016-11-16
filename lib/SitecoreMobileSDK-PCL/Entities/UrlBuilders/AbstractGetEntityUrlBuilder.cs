@@ -1,6 +1,4 @@
 ﻿
-//FIXME: REFACTOR!!!
-
 namespace Sitecore.MobileSDK.UrlBuilder
 {
   using System;
@@ -60,7 +58,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
     private string GetParametersString(TRequest request)
     {
       if (request.ParametersRawValuesByName == null || request.ParametersRawValuesByName.Count == 0) {
-        return "";
+        return string.Empty;
       }
 
       string parametersString = "";
@@ -95,11 +93,8 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
     protected virtual void ValidateRequest(TRequest request)
     {
-      //FIXME: @igk turn on validation, commented in entities needs
-      #warning turn on validation
-
-      //this.ValidateCommonRequest(request);
-      //this.ValidateSpecificRequest(request);
+      this.ValidateCommonRequest(request);
+      this.ValidateSpecificRequest(request);
     }
     #endregion Entry Point
 
@@ -114,7 +109,7 @@ namespace Sitecore.MobileSDK.UrlBuilder
 
     private string GetCommonPartForRequest(TRequest request)
     {
-      return "";
+      return string.Empty;
     }
 
     private void ValidateCommonRequest(TRequest request)
@@ -131,18 +126,13 @@ namespace Sitecore.MobileSDK.UrlBuilder
       {
         throw new ArgumentNullException("AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings.InstanceUrl cannot be null");
       }
-
-      if (null != request.QueryParameters)
-      {
-        this.ValidateFields(request.QueryParameters.Fields);
-      }
     }
 
     private void ValidateFields(IEnumerable<string> fields)
     {
-      if (DuplicateEntryValidator.IsDuplicatedFieldsInTheList(fields))
+      if (DuplicateEntryValidator.IsDuplicatedFieldsInTheListCaseInsensitive(fields))
       {
-        throw new ArgumentException("AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.QueryParameters.Fields must contain NO duplicates");
+        throw new ArgumentException("AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.Fields must contain NO duplicates");
       }
     }
 

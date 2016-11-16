@@ -23,7 +23,6 @@
       ISessionConfig connection = null;
       IItemSource itemSrc = null;
       IQueryParameters payload = null;
-      CreateItemParameters createParameters = null;
 
       if (null != this.SessionSettings)
       {

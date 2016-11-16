@@ -26,32 +26,32 @@
       return this;
     }
 
-    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(IDictionary<string, string> fieldsRawValuesByName)
+    new public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(IDictionary<string, string> fieldsRawValuesByName)
     {
       return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsRawValuesByNameToSet(fieldsRawValuesByName);
     }
 
-    public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldName, string fieldValue)
+    new public IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldName, string fieldValue)
     {
       return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsRawValuesByNameToSet(fieldName, fieldValue);
     }
 
-    public IUpdateItemRequestParametersBuilder<T> Database(string sitecoreDatabase)
+    new public IUpdateItemRequestParametersBuilder<T> Database(string sitecoreDatabase)
     {
       return (IUpdateItemRequestParametersBuilder<T>)base.Database(sitecoreDatabase);
     }
 
-    public IUpdateItemRequestParametersBuilder<T> Language(string itemLanguage)
+    new public IUpdateItemRequestParametersBuilder<T> Language(string itemLanguage)
     {
       return (IUpdateItemRequestParametersBuilder<T>)base.Language(itemLanguage);
     }
 
-    public IUpdateItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
+    new public IUpdateItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields)
     {
       return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsToRead(fields);
     }
 
-    public IUpdateItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
+    new public IUpdateItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams)
     {
       return (IUpdateItemRequestParametersBuilder<T>)base.AddFieldsToRead(fieldParams);
     }

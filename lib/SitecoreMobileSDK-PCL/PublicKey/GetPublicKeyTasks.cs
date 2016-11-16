@@ -47,7 +47,7 @@ namespace Sitecore.MobileSDK.PublicKey
     {
       Debug.WriteLine("REQUEST: " + requestUrl);
 
-      //TODO: @igk extract
+      //TODO: @igk hardcoded names
       var stringContent = new StringContent("{\"domain\":\""
                                             + this.credentials.Domain
                                             +"\",\"username\":\""

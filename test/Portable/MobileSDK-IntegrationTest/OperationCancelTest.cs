@@ -30,7 +30,7 @@
       var config = new SessionConfig(this.env.InstanceUrl);
       var defaultSource = LegacyConstants.DefaultSource();
 
-      this.session = new ScTestApiSession(config, this.env.Users.Admin, mediaSettings, defaultSource);
+      this.session = new ScTestApiSession(config, null, this.env.Users.Admin, mediaSettings, defaultSource);
     }
 
     [TearDown]

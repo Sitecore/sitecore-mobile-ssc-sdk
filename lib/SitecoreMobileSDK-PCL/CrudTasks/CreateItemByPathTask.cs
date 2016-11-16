@@ -79,15 +79,14 @@ namespace Sitecore.MobileSDK.CrudTasks
         fieldsAvailable = (request.FieldsRawValuesByName.Count > 0);
       }
 
-      //TODO: IGK refactor this
-
       if (fieldsAvailable) {
         foreach (var fieldElem in request.FieldsRawValuesByName) {
           jsonObject.Add(fieldElem.Key, fieldElem.Value);
         }
       }
 
-      //TODO: IGK check do we need some fields more. Documentation have no such content.
+      //FIXME: @igk hardcoded field names
+      //TODO: @igk check do we need some fields more. Documentation have no such content.
       jsonObject.Add("TemplateID", request.ItemTemplateId);
       jsonObject.Add("ItemName", request.ItemName);
 

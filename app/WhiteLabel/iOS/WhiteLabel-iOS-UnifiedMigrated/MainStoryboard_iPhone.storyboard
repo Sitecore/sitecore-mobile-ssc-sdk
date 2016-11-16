@@ -1151,35 +1151,41 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1UZ-QT-kVX">
-                                <rect key="frame" x="16" y="148" width="343" height="30"/>
+                                <rect key="frame" x="16" y="148" width="160" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="y8h-hV-GL7"/>
+                                </constraints>
                                 <state key="normal" title="Read All Entities"/>
                                 <connections>
                                     <action selector="ReadAllButtonTouched:" destination="MbK-qh-DRV" eventType="touchUpInside" id="wZz-uc-20G"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yj-kp-QfC">
-                                <rect key="frame" x="16" y="186" width="343" height="30"/>
+                                <rect key="frame" x="199" y="148" width="160" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="vR7-0f-oXM"/>
+                                </constraints>
                                 <state key="normal" title="Read Entity by Id"/>
                                 <connections>
                                     <action selector="ReadByIdButtonTouched:" destination="MbK-qh-DRV" eventType="touchUpInside" id="Q7l-5R-Pn0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bsy-RR-rab">
-                                <rect key="frame" x="16" y="224" width="343" height="30"/>
+                                <rect key="frame" x="16" y="186" width="343" height="30"/>
                                 <state key="normal" title="Create Entity"/>
                                 <connections>
                                     <action selector="CreateButtonTouched:" destination="MbK-qh-DRV" eventType="touchUpInside" id="Gwf-t3-4nL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gr4-tG-M0T">
-                                <rect key="frame" x="16" y="262" width="343" height="30"/>
+                                <rect key="frame" x="16" y="224" width="343" height="30"/>
                                 <state key="normal" title="Update Entity"/>
                                 <connections>
                                     <action selector="UpdateButtonTouched:" destination="MbK-qh-DRV" eventType="touchUpInside" id="ICh-VP-fr7"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LoE-5S-klr">
-                                <rect key="frame" x="16" y="300" width="343" height="30"/>
+                                <rect key="frame" x="16" y="262" width="343" height="30"/>
                                 <state key="normal" title="Delete Entity"/>
                                 <connections>
                                     <action selector="DeleteButtonTouched:" destination="MbK-qh-DRV" eventType="touchUpInside" id="4GK-Bd-2ga"/>
@@ -1188,27 +1194,25 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="bsy-RR-rab" firstAttribute="leading" secondItem="lzA-ca-hC5" secondAttribute="leadingMargin" id="1ni-KW-f3C"/>
-                            <constraint firstItem="4yj-kp-QfC" firstAttribute="top" secondItem="1UZ-QT-kVX" secondAttribute="bottom" constant="8" id="1vn-hi-4Yk"/>
-                            <constraint firstItem="bsy-RR-rab" firstAttribute="trailing" secondItem="lzA-ca-hC5" secondAttribute="trailingMargin" id="6lu-YP-gA6"/>
-                            <constraint firstItem="gr4-tG-M0T" firstAttribute="leading" secondItem="lzA-ca-hC5" secondAttribute="leadingMargin" id="86n-SJ-esr"/>
-                            <constraint firstItem="wzE-TH-NQd" firstAttribute="trailing" secondItem="lzA-ca-hC5" secondAttribute="trailingMargin" id="8BT-lJ-v6M"/>
-                            <constraint firstItem="1UZ-QT-kVX" firstAttribute="trailing" secondItem="lzA-ca-hC5" secondAttribute="trailingMargin" id="JmL-Ju-PzK"/>
-                            <constraint firstItem="jvw-8G-1nr" firstAttribute="trailing" secondItem="lzA-ca-hC5" secondAttribute="trailingMargin" id="JpR-cc-BNi"/>
-                            <constraint firstItem="wzE-TH-NQd" firstAttribute="leading" secondItem="lzA-ca-hC5" secondAttribute="leadingMargin" id="LSX-xe-0XS"/>
-                            <constraint firstItem="wzE-TH-NQd" firstAttribute="top" secondItem="jvw-8G-1nr" secondAttribute="bottom" constant="8" id="Rke-ZX-5EJ"/>
-                            <constraint firstItem="LoE-5S-klr" firstAttribute="top" secondItem="gr4-tG-M0T" secondAttribute="bottom" constant="8" id="TZw-d7-JP0"/>
-                            <constraint firstItem="bsy-RR-rab" firstAttribute="top" secondItem="4yj-kp-QfC" secondAttribute="bottom" constant="8" id="WNL-XW-eGx"/>
-                            <constraint firstItem="jvw-8G-1nr" firstAttribute="leading" secondItem="lzA-ca-hC5" secondAttribute="leadingMargin" id="Ygv-Pz-geG"/>
-                            <constraint firstItem="jvw-8G-1nr" firstAttribute="top" secondItem="FnK-2w-DnT" secondAttribute="bottom" constant="8" id="ZxZ-6g-xHf"/>
-                            <constraint firstItem="1UZ-QT-kVX" firstAttribute="leading" secondItem="lzA-ca-hC5" secondAttribute="leadingMargin" id="aAe-LS-H10"/>
-                            <constraint firstItem="LoE-5S-klr" firstAttribute="leading" secondItem="lzA-ca-hC5" secondAttribute="leadingMargin" id="g0j-GO-Ids"/>
-                            <constraint firstItem="4yj-kp-QfC" firstAttribute="trailing" secondItem="lzA-ca-hC5" secondAttribute="trailingMargin" id="kHS-uc-o4v"/>
-                            <constraint firstItem="1UZ-QT-kVX" firstAttribute="top" secondItem="wzE-TH-NQd" secondAttribute="bottom" constant="8" id="lQF-QE-hGf"/>
-                            <constraint firstItem="gr4-tG-M0T" firstAttribute="top" secondItem="bsy-RR-rab" secondAttribute="bottom" constant="8" id="mnL-C7-SnH"/>
-                            <constraint firstItem="gr4-tG-M0T" firstAttribute="trailing" secondItem="lzA-ca-hC5" secondAttribute="trailingMargin" id="sS0-s2-pYM"/>
-                            <constraint firstItem="4yj-kp-QfC" firstAttribute="leading" secondItem="lzA-ca-hC5" secondAttribute="leadingMargin" id="snb-4p-UEr"/>
-                            <constraint firstItem="LoE-5S-klr" firstAttribute="trailing" secondItem="lzA-ca-hC5" secondAttribute="trailingMargin" id="z2y-uP-niL"/>
+                            <constraint firstItem="LoE-5S-klr" firstAttribute="trailing" secondItem="lzA-ca-hC5" secondAttribute="trailingMargin" id="1rM-yq-Wcd"/>
+                            <constraint firstItem="jvw-8G-1nr" firstAttribute="leading" secondItem="lzA-ca-hC5" secondAttribute="leadingMargin" id="4DB-i6-ktS"/>
+                            <constraint firstItem="LoE-5S-klr" firstAttribute="leading" secondItem="lzA-ca-hC5" secondAttribute="leadingMargin" id="4oJ-0t-F7h"/>
+                            <constraint firstItem="wzE-TH-NQd" firstAttribute="top" secondItem="jvw-8G-1nr" secondAttribute="bottom" constant="8" id="8qq-AN-Bgm"/>
+                            <constraint firstItem="1UZ-QT-kVX" firstAttribute="leading" secondItem="lzA-ca-hC5" secondAttribute="leadingMargin" id="CWa-7q-wkH"/>
+                            <constraint firstItem="1UZ-QT-kVX" firstAttribute="top" secondItem="wzE-TH-NQd" secondAttribute="bottom" constant="8" id="ENC-MV-cN8"/>
+                            <constraint firstItem="jvw-8G-1nr" firstAttribute="top" secondItem="FnK-2w-DnT" secondAttribute="bottom" constant="8" id="KMc-Fa-T7V"/>
+                            <constraint firstItem="jvw-8G-1nr" firstAttribute="trailing" secondItem="lzA-ca-hC5" secondAttribute="trailingMargin" id="PHn-Vk-pAU"/>
+                            <constraint firstItem="gr4-tG-M0T" firstAttribute="top" secondItem="bsy-RR-rab" secondAttribute="bottom" constant="8" id="Qj2-wi-6ob"/>
+                            <constraint firstItem="wzE-TH-NQd" firstAttribute="trailing" secondItem="lzA-ca-hC5" secondAttribute="trailingMargin" id="UoF-xk-SEi"/>
+                            <constraint firstItem="4yj-kp-QfC" firstAttribute="trailing" secondItem="lzA-ca-hC5" secondAttribute="trailingMargin" id="gOv-r8-WlT"/>
+                            <constraint firstItem="LoE-5S-klr" firstAttribute="top" secondItem="gr4-tG-M0T" secondAttribute="bottom" constant="8" id="hSU-e5-Hkg"/>
+                            <constraint firstItem="bsy-RR-rab" firstAttribute="top" secondItem="4yj-kp-QfC" secondAttribute="bottom" constant="8" id="hnE-bm-fCa"/>
+                            <constraint firstItem="bsy-RR-rab" firstAttribute="trailing" secondItem="lzA-ca-hC5" secondAttribute="trailingMargin" id="irg-BV-dsw"/>
+                            <constraint firstItem="4yj-kp-QfC" firstAttribute="top" secondItem="wzE-TH-NQd" secondAttribute="bottom" constant="8" id="kei-hF-vtV"/>
+                            <constraint firstItem="gr4-tG-M0T" firstAttribute="leading" secondItem="lzA-ca-hC5" secondAttribute="leadingMargin" id="p9M-5C-nbV"/>
+                            <constraint firstItem="wzE-TH-NQd" firstAttribute="leading" secondItem="lzA-ca-hC5" secondAttribute="leadingMargin" id="qxY-T5-Gw2"/>
+                            <constraint firstItem="gr4-tG-M0T" firstAttribute="trailing" secondItem="lzA-ca-hC5" secondAttribute="trailingMargin" id="raK-3f-0jK"/>
+                            <constraint firstItem="bsy-RR-rab" firstAttribute="leading" secondItem="lzA-ca-hC5" secondAttribute="leadingMargin" id="tNz-HJ-3Ku"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="h9i-Mv-DTZ"/>

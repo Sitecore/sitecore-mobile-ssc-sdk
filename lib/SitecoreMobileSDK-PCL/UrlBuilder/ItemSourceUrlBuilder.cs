@@ -19,9 +19,7 @@
       this.restGrammar = restGrammar;
       this.sscGrammar = sscGrammar;
 
-      //FIXME: @igk turn on validation, commented in entities needs
-      #warning turn on validation
-      //this.Validate();
+      this.Validate();
     }
 
     public string BuildUrlQueryString()

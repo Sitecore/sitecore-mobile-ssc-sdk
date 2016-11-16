@@ -47,7 +47,7 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
 
     public async Task<string> SendRequestForUrlAsync(HttpRequestMessage request, CancellationToken cancelToken)
     {
-      //TODOvk: @igk debug request output, remove later
+      //TODO: @igk debug request output, remove later
       Debug.WriteLine("REQUEST: " + request);
       var result = await this.httpClient.SendAsync(request, cancelToken);
 
@@ -78,14 +78,13 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
         fieldsAvailable = (request.FieldsRawValuesByName.Count > 0);
       }
 
-      //TODO: IGK refactor this
-
       if (fieldsAvailable) {
         foreach (var fieldElem in request.FieldsRawValuesByName) {
           jsonObject.Add(fieldElem.Key, fieldElem.Value);
         }
       }
 
+      //FIXME: @igk hardcoded field name!!!
       jsonObject.Add("Id", request.EntityID);
 
       result = jsonObject.ToString(Formatting.None);
