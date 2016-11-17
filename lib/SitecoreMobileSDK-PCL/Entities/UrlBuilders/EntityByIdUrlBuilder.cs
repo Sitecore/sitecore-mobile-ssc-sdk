@@ -1,6 +1,7 @@
 ﻿
 namespace Sitecore.MobileSDK.UrlBuilder.Entity
 {
+  using System;
   using Sitecore.MobileSDK.API.Request.Entity;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.SSC;
@@ -18,6 +19,15 @@ namespace Sitecore.MobileSDK.UrlBuilder.Entity
       string result = "('" + request.EntityID + "')";
 
       return result;
+    }
+
+    protected override void ValidateSpecificRequest(T request)
+    {
+      base.ValidateSpecificRequest(request);
+
+      if (null == request.EntityID) {
+        throw new ArgumentNullException("EntityByIdUrlBuilder.GetBaseUrlForRequest() : EntityID cannot be null");
+      }
     }
   }
 }

@@ -24,7 +24,7 @@
     }
 
     protected override void ValidateSpecificRequest(TRequest request)
-    { 
+    {
     }
   }
 }

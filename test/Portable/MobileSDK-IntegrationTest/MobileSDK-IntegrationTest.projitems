@@ -28,5 +28,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)CancelOperationsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BuildSessionTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AuthenticateTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EntitiesTest.cs" />
   </ItemGroup>
 </Project>

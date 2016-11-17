@@ -235,7 +235,6 @@
     <Compile Include="Entities\UrlBuilders\GetEntitiesUrlBuilder.cs" />
     <Compile Include="Entities\EntitiesRequest\ICreateEntityRequest.cs" />
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\IBaseEntityRequestParametersBuilder.cs" />
-    <Compile Include="Entities\EntitiesRequest\ReadEntitiesByPathParameters.cs" />
     <Compile Include="Entities\EntitiesRequest\IBaseEntityRequest.cs" />
     <Compile Include="Entities\CrudTasks\CreateEntityhTask.cs" />
     <Compile Include="Entities\EntitiesRequest\ChangeEntitiesParameters.cs" />
@@ -266,6 +265,7 @@
     <Compile Include="Entities\EntitiesRequest\RequestsBuilders\DeleteEntityRequestBuilder.cs" />
     <Compile Include="API\Session\IEntitySessionBuilder.cs" />
     <Compile Include="UserRequest\EntitySourceMerger.cs" />
+    <Compile Include="Entities\EntitiesRequest\ReadEntitiesByPathParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

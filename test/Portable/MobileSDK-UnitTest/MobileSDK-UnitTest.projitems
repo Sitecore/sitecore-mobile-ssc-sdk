@@ -26,5 +26,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigMergerTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SessionConfigUrlBuilderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UpdateItemByIdUrlBuilderTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetEntitiesUrlBuilderTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EntityByIdUrlBuilderTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetEntitiesParserTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CreateEntitiesParserTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EntitySourceMergerTest.cs" />
   </ItemGroup>
 </Project>

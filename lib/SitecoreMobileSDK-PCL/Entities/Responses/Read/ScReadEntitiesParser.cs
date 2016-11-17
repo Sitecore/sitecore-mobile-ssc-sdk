@@ -1,15 +1,10 @@
-﻿namespace Sitecore.MobileSDK.Entities
+﻿
+namespace Sitecore.MobileSDK.Entities
 {
-  using System;
   using System.Collections.Generic;
   using System.Threading;
-  using Newtonsoft.Json;
   using Newtonsoft.Json.Linq;
   using Sitecore.MobileSDK.API.Entities;
-  using Sitecore.MobileSDK.API.Exceptions;
-  using Sitecore.MobileSDK.API.Fields;
-  using Sitecore.MobileSDK.Items.Fields;
-  using Sitecore.MobileSDK.Session;
 
   public static class ScReadEntitiesParser
   {
@@ -18,7 +13,7 @@
     {
       if (string.IsNullOrEmpty(responseString))
       {
-        throw new ArgumentException("response cannot null or empty");
+        return new ScEntityResponse(new List<ISitecoreEntity>(), statusCode);
       }
 
       var response = JToken.Parse(responseString);

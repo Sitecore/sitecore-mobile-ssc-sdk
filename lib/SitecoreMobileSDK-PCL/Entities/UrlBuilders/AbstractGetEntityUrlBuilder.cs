@@ -116,15 +116,27 @@ namespace Sitecore.MobileSDK.UrlBuilder
     {
       if (null == request)
       {
-        throw new ArgumentNullException("AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request cannot be null");
+        throw new ArgumentNullException("AbstractGetEntityUrlBuilder.GetBaseUrlForRequest() : request cannot be null");
       }
       else if (null == request.SessionSettings)
       {
-        throw new ArgumentNullException("AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings cannot be null");
+        throw new ArgumentNullException("AbstractGetEntityUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings cannot be null");
       }
       else if (null == request.SessionSettings.InstanceUrl)
       {
-        throw new ArgumentNullException("AbstractGetItemUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings.InstanceUrl cannot be null");
+        throw new ArgumentNullException("AbstractGetEntityUrlBuilder.GetBaseUrlForRequest() : request.SessionSettings.InstanceUrl cannot be null");
+      }
+      else if (null == request.EntitySource.EntityNamespace) 
+      {
+        throw new ArgumentNullException("AbstractGetEntityUrlBuilder.GetBaseUrlForRequest() : request.EntitySource.EntityNamespace cannot be null");
+      }
+      else if (null == request.EntitySource.EntityController) 
+      {
+        throw new ArgumentNullException("AbstractGetEntityUrlBuilder.GetBaseUrlForRequest() : request.EntitySource.EntityController cannot be null");
+      }
+      else if (null == request.EntitySource.EntityAction) 
+      {
+        throw new ArgumentNullException("AbstractGetEntityUrlBuilder.GetBaseUrlForRequest() : request.EntitySource.EntityAction cannot be null");
       }
     }
 

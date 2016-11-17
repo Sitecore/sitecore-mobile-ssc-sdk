@@ -21,5 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MutableSSCCredentialsPOD.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NoThrowSSCSession.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SSCCredentialsPOD.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MockReadEntitiesByPathParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MockReadEntityByIdParameters.cs" />
   </ItemGroup>
 </Project>
