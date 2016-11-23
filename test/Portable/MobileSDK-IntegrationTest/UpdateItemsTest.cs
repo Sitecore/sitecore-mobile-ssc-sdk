@@ -194,13 +194,15 @@
 
       ScItemsResponse items = await this.noThrowCleanupSession.ReadChildrenAsync(getItemsToDelet);
 
-      foreach (var item in items) {
+      if (items != null && items.ResultCount > 0)
+      {
+        foreach (var item in items) {
 
-        var deleteFromMaster = ItemSSCRequestBuilder.DeleteItemRequestWithId(item.Id)
-          .Database(database)
-          .Build();
-        await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
-
+          var deleteFromMaster = ItemSSCRequestBuilder.DeleteItemRequestWithId(item.Id)
+            .Database(database)
+            .Build();
+          await this.noThrowCleanupSession.DeleteItemAsync(deleteFromMaster);
+        }
       }
     }
   }

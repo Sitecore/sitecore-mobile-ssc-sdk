@@ -17,9 +17,10 @@ namespace Sitecore.MobileSDK.API.Items
     /// Initializes a new instance of the <see cref="ScItemsResponse"/> class.
     /// </summary>
     /// <param name="items">List of <see cref="ISitecoreItem"/></param>
-    public ScItemsResponse(List<ISitecoreItem> items)
+    public ScItemsResponse(List<ISitecoreItem> items, int statusCode)
     {
       this.Items = items;
+      this.StatusCode = statusCode;
     }
 
     #region Paging
@@ -30,6 +31,9 @@ namespace Sitecore.MobileSDK.API.Items
     /// </summary>
     public int ResultCount { 
       get {
+        if (this.Items == null) {
+          return 0;
+        }
         return this.Items.Count;
       }
     }
@@ -85,5 +89,13 @@ namespace Sitecore.MobileSDK.API.Items
       set;
     }
     #endregion IEnumerable
+
+
+    #region httpResponse 
+    public int StatusCode {
+      get;
+      private set;
+    }
+    #endregion httpResponse
   }
 }

@@ -19,9 +19,14 @@
 
     public static ScItemsResponse Parse(string responseString, string db, CancellationToken cancelToken)
     {
+      return ScItemsParser.Parse(responseString, db, 0, cancelToken);
+    }
+
+    public static ScItemsResponse Parse(string responseString, string db, int responseCode, CancellationToken cancelToken)
+    {
       if (string.IsNullOrEmpty(responseString))
       {
-        throw new ArgumentException("response cannot null or empty");
+        return new ScItemsResponse(null, responseCode);
       }
 
       var response = JToken.Parse(responseString);
@@ -36,9 +41,9 @@
       {
         results = response.Value<JToken>("Results");
       }
-      catch(Exception e)
+      catch(Exception)
       {
-        
+        return new ScItemsResponse(null, responseCode);
       }
 
       if ( results != null)
@@ -62,7 +67,7 @@
         items.Add(newItem);
       }
 
-      return new ScItemsResponse(items);
+      return new ScItemsResponse(items, responseCode);
     }
 
     public static ScItem ParseSource(JObject item, string db, CancellationToken cancelToken)

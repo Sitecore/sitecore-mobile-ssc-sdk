@@ -42,6 +42,7 @@
       //TODO: @igk debug request output, remove later
       Debug.WriteLine("REQUEST: " + requestUrl);
       HttpResponseMessage httpResponse = await this.httpClient.SendAsync(requestUrl, cancelToken);
+      this.statusCode = (int)httpResponse.StatusCode;
       return await httpResponse.Content.ReadAsStringAsync();
     }
 
@@ -51,7 +52,7 @@
       {
         //TODO: @igk debug response output, remove later
         Debug.WriteLine("RESPONSE: " + data);
-        return ScItemsParser.Parse(data, this.CurrentDb, cancelToken);
+        return ScItemsParser.Parse(data, this.CurrentDb, this.statusCode, cancelToken);
       };
       return await Task.Factory.StartNew(syncParseResponse, cancelToken) as TResponse;
     }

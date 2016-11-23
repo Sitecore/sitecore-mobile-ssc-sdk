@@ -9,14 +9,10 @@
   public class ScCreateItemResponse 
   {
 
-    public ScCreateItemResponse(string itemId)
+    public ScCreateItemResponse(string itemId, int statusCode)
     {
-      try {
-        ItemIdValidator.ValidateItemId(itemId, this.GetType().Name + ".ItemId");
         this.ItemId = itemId;
-      } catch {
-        throw new ParserException(TaskFlowErrorMessages.PARSER_EXCEPTION_MESSAGE);
-      }
+        this.StatusCode = statusCode;
     }
 
     public bool Created {
@@ -26,6 +22,11 @@
     }
 
     public string ItemId {
+      get;
+      private set;
+    }
+
+    public int StatusCode {
       get;
       private set;
     }

@@ -52,9 +52,19 @@ namespace Sitecore.MobileSDK.CrudTasks
       //TODO: @igk debug request output, remove later
       Debug.WriteLine("REQUEST: " + request);
       var result = await this.httpClient.SendAsync(request, cancelToken);
+      statusCode = (int)result.StatusCode;
 
-      IEnumerable<string> headerValues = result.Headers.GetValues("Location");
-      return headerValues.FirstOrDefault();
+      IEnumerable<string> headerValues;
+      string headerValue = "";
+
+      try {
+        headerValues = result.Headers.GetValues("Location");
+        headerValue = headerValues.FirstOrDefault();
+      } catch { 
+        
+      }
+
+      return headerValue;
     }
 
     public async Task<ScCreateItemResponse> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)
@@ -63,7 +73,7 @@ namespace Sitecore.MobileSDK.CrudTasks
       {
         //TODO: @igk debug response output, remove later
         Debug.WriteLine("RESPONSE: " + httpData);
-        return CreateItemResponseParser.ParseResponse(httpData, cancelToken);
+        return CreateItemResponseParser.ParseResponse(httpData, this.statusCode, cancelToken);
       };
       return await Task.Factory.StartNew(syncParseResponse, cancelToken);
     }
@@ -107,5 +117,7 @@ namespace Sitecore.MobileSDK.CrudTasks
         throw new ArgumentNullException("DeleteItemTasks.deleteItemsBuilder cannot be null");
       }
     }
+
+    private int statusCode = 0;
   }
 }

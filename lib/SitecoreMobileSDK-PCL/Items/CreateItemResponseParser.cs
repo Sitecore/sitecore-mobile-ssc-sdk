@@ -10,12 +10,12 @@
 
   public class CreateItemResponseParser
   {
-    public static ScCreateItemResponse ParseResponse(string response, CancellationToken token)
+    public static ScCreateItemResponse ParseResponse(string response, int statusCode, CancellationToken token)
     {
       token.ThrowIfCancellationRequested();
 
       if (string.IsNullOrEmpty(response)) {
-        throw new ArgumentException("response shouldn't be empty or null");
+        return new ScCreateItemResponse(null, statusCode);
       }
       //response example
       //http://cms80u2.test24dk1.dk.sitecore.net/sitecore/api/ssc/item/a62679f1-3948-48bd-ae69-c90adbf8f8d0?Database=web
@@ -28,7 +28,7 @@
 
       string result = response.Substring(pFrom, pTo - pFrom);
 
-      return new ScCreateItemResponse(result);
+      return new ScCreateItemResponse(result, statusCode);
     }
   }
 }

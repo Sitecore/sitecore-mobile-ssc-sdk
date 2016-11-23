@@ -73,6 +73,27 @@
     }
 
     [Test]
+    public async void TestCreateExistentEntity()
+    {
+      await this.RemoveAll();
+      var request = EntitySSCRequestBuilder.CreateEntityRequest("1")
+                                               .Namespace("aggregate")
+                                               .Controller("admin")
+                                               .Action("Todo")
+                                               .AddFieldsRawValuesByNameToSet("Title", "title")
+                                               .AddFieldsRawValuesByNameToSet("Url", null)
+                                               .Build();
+
+      var createResponse = await session.CreateEntityAsync(request);
+
+      Assert.IsTrue(createResponse.Created);
+
+      var secondCreateResponse = await session.CreateEntityAsync(request);
+
+      Assert.IsFalse(secondCreateResponse.Created);
+    }
+
+    [Test]
     public async void TestCreateEntityWithOnlyRequiredFields()
     {
       await this.RemoveAll();
@@ -158,6 +179,23 @@
       Assert.AreEqual(readEntity.Id, createResponse.CreatedEntity.Id);
       Assert.AreNotEqual(readEntity["Title"].RawValue, createResponse.CreatedEntity["Title"].RawValue);
       Assert.AreEqual("newtitle", readEntity["Title"].RawValue);
+    }
+
+    [Test]
+    public async void TestUpdateNotExistentEntity()
+    {
+      await this.RemoveAll();
+
+      var updaterequest = EntitySSCRequestBuilder.UpdateEntityRequest("fakeId")
+                                               .Namespace("aggregate")
+                                               .Controller("admin")
+                                               .Action("Todo")
+                                               .AddFieldsRawValuesByNameToSet("Title", "newtitle")
+                                               .Build();
+
+      var updateResponse = await session.UpdateEntityAsync(updaterequest);
+
+      Assert.IsFalse(updateResponse.Updated);
     }
 
     [Test]
