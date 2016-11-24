@@ -6,6 +6,7 @@ The SDK includes the following features:
 
 * Fetching CMS Content
 * Create, Delete, Update Items
+* Create, Delete, Update Entities
 * Downloading Media Resources
 
 The library is PCL standard compliant and can be used on the following platforms :
