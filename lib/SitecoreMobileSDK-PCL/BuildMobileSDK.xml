@@ -67,7 +67,7 @@
 <!-- ====================================================  -->
   <Target Name="QuickBuild">
     <CallTarget Targets="clean"/>
-    <!-- <CallTarget Targets="UnitTest"/> -->
+    <CallTarget Targets="UnitTest"/>
     <CallTarget Targets="SitecoreMobileSDK"/>
     <CallTarget Targets="package"/>
 	<!-- <CallTarget Targets="DeviceTests"/> -->
@@ -76,7 +76,7 @@
 
   <Target Name="FullBuild">
     <CallTarget Targets="QuickBuild"/>
-    <!-- <CallTarget Targets="IntegrationTest"/> -->
+    <CallTarget Targets="IntegrationTest"/>
   </Target>
 
  <!-- ====================================================  -->
