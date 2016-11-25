@@ -54,14 +54,8 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CancelOperationsTest.cs">
       <Link>CancelOperationsTest.cs</Link>
     </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CreateFromBranchTest.cs">
-      <Link>CreateFromBranchTest.cs</Link>
-    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CreateItemsTest.cs">
       <Link>CreateItemsTest.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\CryptorConstructionTest.cs">
-      <Link>CryptorConstructionTest.cs</Link>
     </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\DeleteItemsTest.cs">
       <Link>DeleteItemsTest.cs</Link>
@@ -72,14 +66,8 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetItemsTest.cs">
       <Link>GetItemsTest.cs</Link>
     </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetItemsWithScopeTest.cs">
-      <Link>GetItemsWithScopeTest.cs</Link>
-    </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetMediaItemsTest.cs">
       <Link>GetMediaItemsTest.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetMediaItemsWithHashesTest.cs">
-      <Link>GetMediaItemsWithHashesTest.cs</Link>
     </Compile>
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetPublicKeyTest.cs">
       <Link>GetPublicKeyTest.cs</Link>
@@ -117,51 +105,20 @@
     <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\UpdateItemsTest.cs">
       <Link>UpdateItemsTest.cs</Link>
     </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\GetRenderingHTMLTest.cs">
-      <Link>GetRenderingHTMLTest.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\MobileSDK-IntegrationTest\UploadMediaTest.cs">
-      <Link>UploadMediaTest.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\FunctionTracer.cs">
-      <Link>MockClasses\FunctionTracer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\LegacyConstants.cs">
-      <Link>MockClasses\LegacyConstants.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockGetItemsByQueryParameters.cs">
-      <Link>MockClasses\MockGetItemsByQueryParameters.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockMutableMediaOptions.cs">
-      <Link>MockClasses\MockMutableMediaOptions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockReadItemByIdParameters.cs">
-      <Link>MockClasses\MockReadItemByIdParameters.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MockReadItemByPathParameters.cs">
-      <Link>MockClasses\MockReadItemByPathParameters.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableItemSource.cs">
-      <Link>MockClasses\MutableItemSource.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableMediaLibrarySettings.cs">
-      <Link>MockClasses\MutableMediaLibrarySettings.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutablePagingParameters.cs">
-      <Link>MockClasses\MutablePagingParameters.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableSessionConfig.cs">
-      <Link>MockClasses\MutableSessionConfig.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\MutableWebApiCredentialsPOD.cs">
-      <Link>MockClasses\MutableWebApiCredentialsPOD.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\NoThrowWebApiSession.cs">
-      <Link>MockClasses\NoThrowWebApiSession.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Portable\SitecoreMobileSDK-MockObjects-Shared\WebApiCredentialsPOD.cs">
-      <Link>MockClasses\WebApiCredentialsPOD.cs</Link>
-    </Compile>
+    <Compile Include="MockClasses\FunctionTracer.cs" />
+    <Compile Include="MockClasses\LegacyConstants.cs" />
+    <Compile Include="MockClasses\MockMutableMediaOptions.cs" />
+    <Compile Include="MockClasses\MockReadEntitiesByPathParameters.cs" />
+    <Compile Include="MockClasses\MockReadEntityByIdParameters.cs" />
+    <Compile Include="MockClasses\MockReadItemByIdParameters.cs" />
+    <Compile Include="MockClasses\MockReadItemByPathParameters.cs" />
+    <Compile Include="MockClasses\MutableItemSource.cs" />
+    <Compile Include="MockClasses\MutableMediaLibrarySettings.cs" />
+    <Compile Include="MockClasses\MutablePagingParameters.cs" />
+    <Compile Include="MockClasses\MutableSessionConfig.cs" />
+    <Compile Include="MockClasses\MutableSSCCredentialsPOD.cs" />
+    <Compile Include="MockClasses\NoThrowSSCSession.cs" />
+    <Compile Include="MockClasses\SSCCredentialsPOD.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -170,10 +127,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\lib\PasswordProvider\portable\SitecoreMobileSdkPasswordProvider\Sitecore.MobileSDK.PasswordProvider.Interface.csproj">
-      <Project>{079D5D12-FF8E-46D4-8AFC-06CBF5A736C7}</Project>
-      <Name>Sitecore.MobileSDK.PasswordProvider.Interface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
       <Project>{d247d253-0923-4541-90b5-0f5e6304c33f}</Project>
       <Name>Sitecore.MobileSDK</Name>
