@@ -240,11 +240,11 @@
       Command="&quot;$(NugetExe)&quot; pack Sitecore.MobileSDK.nuspec"
       WorkingDirectory="$(ScriptsDirectory)\nuget" />
     <Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.1.0.0.nupkg"
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.SSC.1.1.0.nupkg"
       DestinationFolder="$(DeploymentDirectory)"
      />
 	<Copy
-      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.1.0.0.nupkg"
+      SourceFiles="$(ScriptsDirectory)\nuget\Sitecore.MobileSDK.SSC.1.1.0.nupkg"
       DestinationFolder="$(LocalNugetRepoDirectory)"
      />
 
