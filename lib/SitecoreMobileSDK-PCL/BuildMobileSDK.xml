@@ -76,7 +76,7 @@
 
   <Target Name="FullBuild">
     <CallTarget Targets="QuickBuild"/>
-    <CallTarget Targets="IntegrationTest"/>
+    <!-- <CallTarget Targets="IntegrationTest"/> -->
   </Target>
 
  <!-- ====================================================  -->
