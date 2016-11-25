@@ -5,7 +5,6 @@ namespace Sitecore.MobileSDK.UserRequest.ReadRequest.Entities
   using Sitecore.MobileSDK.API.Request.Entity;
   using Sitecore.MobileSDK.Entities;
 
-
   public class DeleteEntityRequestBuilder : ReadEntityByIdRequestBuilder<IDeleteEntityRequest>
   {
     public DeleteEntityRequestBuilder(string entityId)

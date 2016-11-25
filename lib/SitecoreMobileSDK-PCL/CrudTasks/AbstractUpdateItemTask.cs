@@ -5,7 +5,6 @@
   using System.Net.Http;
   using System.Threading;
   using System.Text;
-  using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.API.Items;
   using System.Diagnostics;
 

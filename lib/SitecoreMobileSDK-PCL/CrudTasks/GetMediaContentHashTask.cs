@@ -1,13 +1,11 @@
 ﻿namespace Sitecore.MobileSDK.CrudTasks
 {
-  using System;
   using System.Net.Http;
   using System.Diagnostics;
   using System.Threading;
   using System.Threading.Tasks;
 
   using Sitecore.MobileSDK.TaskFlow;
-  using Sitecore.MobileSDK.PublicKey;
   using Sitecore.MobileSDK.UrlBuilder.MediaItem;
   using Sitecore.MobileSDK.CrudTasks.Resource;
 

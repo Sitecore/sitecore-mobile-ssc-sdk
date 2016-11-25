@@ -1,7 +1,6 @@
 ﻿namespace Sitecore.MobileSDK.API.Request
 {
   using System.Collections.Generic;
-  using Sitecore.MobileSDK.API.Request.Parameters;
 
   /// <summary>
   /// Interface represents basic flow for creation of requets that update items.
@@ -41,6 +40,7 @@
     /// </returns>
     new IUpdateItemRequestParametersBuilder<T> AddFieldsRawValuesByNameToSet(string fieldName, string fieldValue);
 
+    /// <summary>
     /// Specifies item database.
     /// For example: "web"
     /// 
@@ -71,7 +71,7 @@
     /// <returns>
     /// this
     /// </returns>
-    new IUpdateItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields);
+    IUpdateItemRequestParametersBuilder<T> AddFieldsToRead(IEnumerable<string> fields);
 
     /// <summary>
     /// Adds the fields that will be read from the server.
@@ -81,7 +81,7 @@
     /// this
     /// </returns>
     /// <seealso cref="AddFieldsToRead(System.Collections.Generic.IEnumerable{string})" />
-    new IUpdateItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams);
+    IUpdateItemRequestParametersBuilder<T> AddFieldsToRead(params string[] fieldParams);
   }
 }
 

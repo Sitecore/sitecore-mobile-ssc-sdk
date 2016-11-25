@@ -1,6 +1,5 @@
 namespace Sitecore.MobileSDK.API.Entities
 {
-  using System;
   using System.Collections.Generic;
 
   public class ScEntityResponse : IEnumerable<ISitecoreEntity>
@@ -53,7 +52,7 @@ namespace Sitecore.MobileSDK.API.Entities
     /// <param name="index">The index of item.</param>
     ///
     /// <returns>
-    ///     <see cref="ISitecoreItem"/>.
+    ///     <see cref="ISitecoreEntity"/>.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException"> index is less than 0 or index is equal to or greater than <see cref="List{T}.Count"/>.</exception>
     public ISitecoreEntity this[int index]

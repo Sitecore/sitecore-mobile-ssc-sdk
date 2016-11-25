@@ -5,17 +5,12 @@
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Entities;
-  using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Entity;
-  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.MockObjects;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.Entity;
-  using Sitecore.MobileSDK.UrlBuilder.ItemByPath;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.SSC;
-  using Sitecore.MobileSDK.UserRequest;
 
   [TestFixture]
   public class GetEntitiesUrlBuilderTests

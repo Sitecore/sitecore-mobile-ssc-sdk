@@ -5,9 +5,6 @@
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Entities;
-  using Sitecore.MobileSDK.API.Exceptions;
-  using Sitecore.MobileSDK.API.Items;
-  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.MockObjects;
 
@@ -164,7 +161,7 @@
                                                .AddFieldsRawValuesByNameToSet("Title", "newtitle")
                                                .Build();
 
-      var updateResponse = await session.UpdateEntityAsync(updaterequest);
+      await session.UpdateEntityAsync(updaterequest);
 
       var readrequest = EntitySSCRequestBuilder.ReadEntityRequestById(createResponse.CreatedEntity.Id)
                                                .Namespace("aggregate")

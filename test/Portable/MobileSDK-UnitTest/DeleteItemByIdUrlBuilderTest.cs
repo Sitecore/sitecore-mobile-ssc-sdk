@@ -3,12 +3,10 @@
   using System;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items.Delete;
   using Sitecore.MobileSDK.MockObjects;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.UrlBuilder.DeleteItem;
-  using Sitecore.MobileSDK.UrlBuilder.QueryParameters;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
   using Sitecore.MobileSDK.UrlBuilder.SSC;
 

@@ -1,14 +1,12 @@
 ﻿namespace Sitecore.MobileSdkUnitTest
 {
   using System;
-  using System.Linq;
   using System.Threading;
   using System.Threading.Tasks;
   // @adk.review : waybe we should we wrap this? 
   using Newtonsoft.Json;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API.Exceptions;
-  using Sitecore.MobileSDK.API.Fields;
   using Sitecore.MobileSDK.API.Items;
   using Sitecore.MobileSDK.Items;
 

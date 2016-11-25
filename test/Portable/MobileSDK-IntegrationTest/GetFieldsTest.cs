@@ -2,11 +2,9 @@
 {
   using System;
   using System.Collections.ObjectModel;
-  using System.Linq;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
-  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.API.Session;
 
   [TestFixture]

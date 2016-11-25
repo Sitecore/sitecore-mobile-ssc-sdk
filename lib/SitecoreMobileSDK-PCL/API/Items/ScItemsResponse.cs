@@ -13,10 +13,6 @@ namespace Sitecore.MobileSDK.API.Items
   /// </summary>
   public class ScItemsResponse : IEnumerable<ISitecoreItem>
   {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ScItemsResponse"/> class.
-    /// </summary>
-    /// <param name="items">List of <see cref="ISitecoreItem"/></param>
     public ScItemsResponse(List<ISitecoreItem> items, int statusCode)
     {
       this.Items = items;

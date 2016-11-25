@@ -3,7 +3,6 @@
   using System;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
-  using Sitecore.MobileSDK.API.MediaItem;
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.MockObjects;
   using Sitecore.MobileSDK.PasswordProvider.Interface;

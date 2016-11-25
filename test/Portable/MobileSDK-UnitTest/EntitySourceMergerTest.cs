@@ -2,9 +2,6 @@
 {
   using NUnit.Framework;
   using Sitecore.MobileSDK.API.Entities;
-  using Sitecore.MobileSDK.API.Items;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.MockObjects;
   using Sitecore.MobileSDK.UserRequest;
 
   [TestFixture]

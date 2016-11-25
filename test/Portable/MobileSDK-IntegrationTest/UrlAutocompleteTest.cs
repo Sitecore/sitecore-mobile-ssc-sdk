@@ -3,7 +3,6 @@
   using NUnit.Framework;
 
   using Sitecore.MobileSDK.API;
-  using Sitecore.MobileSDK.API.Request.Parameters;
 
   [TestFixture]
   public class UrlAutocompleteTest

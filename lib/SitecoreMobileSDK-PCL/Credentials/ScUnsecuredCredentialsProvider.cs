@@ -1,8 +1,9 @@
-﻿using System;
-using Sitecore.MobileSDK.PasswordProvider.Interface;
-
+﻿
 namespace Sitecore.MobileSDK.PasswordProvider
 {
+  using System;
+  using Sitecore.MobileSDK.PasswordProvider.Interface;
+
   public class ScUnsecuredCredentialsProvider: IScCredentials
   {
     private string unencryptedLogin;

@@ -16,7 +16,7 @@ namespace Sitecore.MobileSDK.API.Request.Parameters
     /// 
     /// The value is case insensitive.
     /// </summary>
-    /// <param name="sitecoreDatabase">The Sitecore database.</param>
+    /// <param name="database">The Sitecore database.</param>
     /// <returns>
     /// this
     /// </returns>

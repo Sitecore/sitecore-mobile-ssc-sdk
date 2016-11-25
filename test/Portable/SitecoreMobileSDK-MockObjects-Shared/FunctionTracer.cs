@@ -1,5 +1,4 @@
 ﻿
-
 namespace Sitecore.MobileSDK.MockObjects
 {
   using System;
