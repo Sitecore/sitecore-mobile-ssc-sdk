@@ -190,7 +190,7 @@
     />
 
     <Exec
-      Command="UnitTest-Desktop-NUnitLite.exe -out:$(DeploymentDirectory)\UnitTestReport.txt -result:$(DeploymentDirectory)\UnitTestReport.xml -result=nunit2"
+      Command="UnitTest-Desktop-NUnitLite.exe --out:$(DeploymentDirectory)\UnitTestReport.txt --result:$(DeploymentDirectory)\UnitTestReport.xml --result=nunit2"
       WorkingDirectory="$(UnitTestDesktopBuildDirectory)"
       />
 </Target>
@@ -208,7 +208,7 @@
     />
 
     <Exec
-      Command="IntegrationTest-Desktop-NUnitLite.exe -out:$(DeploymentDirectory)\InegrationTestReport.txt -result:$(DeploymentDirectory)\IntegrationTestReport.xml -result=nunit2"
+      Command="IntegrationTest-Desktop-NUnitLite.exe --out:$(DeploymentDirectory)\InegrationTestReport.txt --result:$(DeploymentDirectory)\IntegrationTestReport.xml --result=nunit2"
       WorkingDirectory="$(IntegrationTestDesktopBuildDirectory)"
     />
 </Target>
