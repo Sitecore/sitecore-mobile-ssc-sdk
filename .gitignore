@@ -40,7 +40,7 @@ UpgradeLog.htm
 
 # NuGet
 packages
-*.exe
+#*.exe
 *.dgml
 lib/SitecoreMobileSDK-PCL/Sitecore.MobileSDK.XML
 *.MOV
