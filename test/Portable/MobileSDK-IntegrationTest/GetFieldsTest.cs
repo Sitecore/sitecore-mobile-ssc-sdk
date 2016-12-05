@@ -35,7 +35,9 @@
     [Test]
     public async void TestGetItemByIdWithContentFields()
     {
-      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.Home.Id)
+      var request = ItemSSCRequestBuilder.ReadentitiesRequest()
+                                         .AddFilter(fieldName, fieldValue)
+                                         .AddSorting(fieldName, fieldValue)
                                          .Build();
       
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);

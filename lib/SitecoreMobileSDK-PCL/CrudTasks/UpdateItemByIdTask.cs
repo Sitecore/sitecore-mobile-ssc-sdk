@@ -1,11 +1,13 @@
-﻿using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-
+﻿
 namespace Sitecore.MobileSDK.CrudTasks
 {
-  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using System.Net.Http;
+
+  using Sitecore.MobileSDK.UrlBuilder.UpdateItem;
   using Sitecore.MobileSDK.API.Request;
+
+  using Newtonsoft.Json.Linq;
+  using Newtonsoft.Json;
 
   internal class UpdateItemByIdTask : AbstractUpdateItemTask<IUpdateItemByIdRequest>
   {

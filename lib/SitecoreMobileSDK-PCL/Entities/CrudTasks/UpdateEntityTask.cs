@@ -46,7 +46,7 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
 
     public async Task<string> SendRequestForUrlAsync(HttpRequestMessage request, CancellationToken cancelToken)
     {
-      //TODOvk: @igk debug request output, remove later
+      //TODO: @igk debug request output, remove later
       Debug.WriteLine("REQUEST: " + request);
       var result = await this.httpClient.SendAsync(request, cancelToken);
 

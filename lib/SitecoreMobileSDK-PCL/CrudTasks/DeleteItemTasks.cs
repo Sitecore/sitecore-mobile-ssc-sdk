@@ -1,5 +1,4 @@
-﻿using System.Net;
-
+﻿
 namespace Sitecore.MobileSDK.CrudTasks
 {
   using System;

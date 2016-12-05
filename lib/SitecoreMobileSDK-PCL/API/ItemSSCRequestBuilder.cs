@@ -3,7 +3,6 @@ namespace Sitecore.MobileSDK.API
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.API.Request.Template;
-  using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.UserRequest;
   using Sitecore.MobileSDK.UserRequest.CreateRequest;
   using Sitecore.MobileSDK.UserRequest.ReadRequest;
