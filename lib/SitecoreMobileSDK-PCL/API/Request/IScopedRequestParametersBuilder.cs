@@ -2,7 +2,6 @@
 {
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request.Paging;
-  using Sitecore.MobileSDK.API.Request.Parameters;
 
 
   /// <summary>

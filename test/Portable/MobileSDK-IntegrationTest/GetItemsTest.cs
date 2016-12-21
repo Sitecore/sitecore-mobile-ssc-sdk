@@ -74,6 +74,26 @@
     }
 
     [Test]
+    public async void TestGetItemsChildrens()
+    {
+      var request = ItemSSCRequestBuilder.ReadChildrenRequestWithId(testData.Items.Home.Id).Build();
+
+      var response = await this.sessionAuthenticatedUser.ReadChildrenAsync(request);
+
+      testData.AssertItemsCount(4, response);
+    }
+
+    [Test]
+    public async void TestGetItemsChildrensWithEmptyResult()
+    {
+      var request = ItemSSCRequestBuilder.ReadChildrenRequestWithId(testData.Items.TestFieldsItem.Id).Build();
+
+      var response = await this.sessionAuthenticatedUser.ReadChildrenAsync(request);
+
+      testData.AssertItemsCount(0, response);
+    }
+
+    [Test]
     public async void TestGetItemByPathWithSpaces()
     {
       var response = await GetItemByPath(ItemWithSpacesPath);
@@ -241,6 +261,8 @@
       var response = await this.sessionAuthenticatedUser.ReadItemAsync(request);
       return response;
     }
+
+
 
   }
 }

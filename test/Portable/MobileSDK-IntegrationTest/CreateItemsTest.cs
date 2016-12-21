@@ -151,9 +151,7 @@
       //var readRequest = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.CreateItemsHere.Path + "/" + expectedItem.DisplayName)
       //                                  .Database("master")
       //                                  .Build();
-
       //var readResponse = await session.ReadItemAsync(readRequest);
-
       //var resultItem = this.CheckCreatedItem(readResponse, expectedItem);
       //Assert.AreEqual(CreatedTitle, resultItem["Title"].RawValue);
       //Assert.AreEqual(CreatedText, resultItem["Text"].RawValue);

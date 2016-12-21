@@ -213,18 +213,12 @@
       {
         var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
 
-        testData.AssertItemsCount(1, response);
-        ISitecoreItem resultItem = response[0];
-        testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-
-        var expectedSource = new ItemSource(Db, "en", 2);
-        testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-        Assert.AreEqual("English version 2 web", resultItem["Title"].RawValue);
+        testData.AssertItemsCount(0, response);
       }
     }
 
     [Test]
-    public void TestGetItemWithNotExistedDbReturnsException()
+    public async void TestGetItemWithNotExistedDbReturnsException()
     {
       const string Database = "new_database";
       var requestBuilder = new ReadItemByIdRequestBuilder(testData.Items.Home.Id).Database(Database);
@@ -233,15 +227,10 @@
         var session = this.CreateAdminSession()
       )
       {
-        TestDelegate testCode = async () =>
-        {
-          var task = GetItemByIdWithRequestBuilder(requestBuilder, session);
-          await task;
-        };
-        Exception exception = Assert.Throws<ParserException>(testCode);
 
+        var response = await GetItemByIdWithRequestBuilder(requestBuilder, session);
 
-        Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
+        testData.AssertItemsCount(0, response);
       }
     }
 
@@ -259,18 +248,13 @@
       {
         var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
 
-        testData.AssertItemsCount(1, response);
-        ISitecoreItem resultItem = response[0];
-        testData.AssertItemsAreEqual(testData.Items.ItemWithVersions, resultItem);
-
-        var expectedSource = new ItemSource(Db, "en", 2);
-        testData.AssertItemSourcesAreEqual(expectedSource, resultItem.Source);
-        Assert.AreEqual("English version 2 web", resultItem["Title"].RawValue);
+        testData.AssertItemsCount(0, response);
+        Assert.AreEqual(400, response.StatusCode);
       }
     }
 
     [Test]
-    public void TestGetItemWithInvalidDbReturnsException()
+    public async void TestGetItemWithInvalidDbReturnsException()
     {
       const string Db = "@#er$#";
       const string Language = "da";
@@ -280,14 +264,10 @@
         var session = this.CreateAdminSession(itemSource)
       )
       {
-        TestDelegate testCode = async () =>
-        {
-          var task = session.ReadItemAsync(this.requestWithVersionsItemId);
-          await task;
-        };
-        Exception exception = Assert.Throws<ParserException>(testCode);
+  
+        var response = await session.ReadItemAsync(this.requestWithVersionsItemId);
 
-        Assert.AreEqual("[Sitecore Mobile SDK] Data from the internet has unexpected format", exception.Message);
+        testData.AssertItemsCount(0, response);
        }
     }
 

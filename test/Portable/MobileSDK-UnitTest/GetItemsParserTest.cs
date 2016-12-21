@@ -39,15 +39,19 @@
     [Test]
     public void TestParseEmptyResponse()
     {
-      TestDelegate action = () => ScItemsParser.Parse(string.Empty, "web", CancellationToken.None);
-      Assert.Throws<ArgumentException>(action, "cannot parse empty response");
+      ScItemsResponse response = ScItemsParser.Parse(string.Empty, "web", CancellationToken.None);
+      Assert.NotNull(response);
+      Assert.AreEqual(0, response.ResultCount);
+      Assert.AreEqual(0, response.StatusCode);
     }
 
     [Test]
     public void TestParseNullResponse()
     {
-      TestDelegate action = () => ScItemsParser.Parse(null, "web", CancellationToken.None);
-      Assert.Throws<ArgumentException>(action, "cannot parse null response");
+      ScItemsResponse response = ScItemsParser.Parse(null, "web", CancellationToken.None);
+      Assert.NotNull(response);
+      Assert.AreEqual(0, response.ResultCount);
+      Assert.AreEqual(0, response.StatusCode);
     }
 
 

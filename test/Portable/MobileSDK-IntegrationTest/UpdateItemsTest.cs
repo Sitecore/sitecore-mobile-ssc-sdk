@@ -59,7 +59,7 @@
    
 
     [Test]
-    public void TestUpdateItemByNotExistentId()
+    public async void TestUpdateItemByNotExistentId()
     {
       var textValue = RandomText();
 
@@ -67,13 +67,9 @@
         .AddFieldsRawValuesByNameToSet("Text", textValue)
         .Build();
 
-      TestDelegate testCode = async () => {
-        await this.session.UpdateItemAsync(request);
-      };
+      var response = await this.session.UpdateItemAsync(request);
 
-      var exception = Assert.Throws<ParserException>(testCode);
-
-      Assert.IsTrue(exception.Message.Contains("Sitecore Mobile SDK] Data from the internet has unexpected format"));
+      Assert.AreEqual(405, response.StatusCode);
 
     }
 

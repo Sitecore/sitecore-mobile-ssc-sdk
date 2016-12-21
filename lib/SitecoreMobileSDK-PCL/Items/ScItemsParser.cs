@@ -43,7 +43,7 @@
       }
       catch(Exception)
       {
-        return new ScItemsResponse(null, responseCode);
+        
       }
 
       if ( results != null)
