@@ -64,6 +64,8 @@
         using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
         {
           var request = ItemSSCRequestBuilder.StoredQuerryRequest(queryTextField.Text)
+                                             .PageNumber(0)
+                                             .ItemsPerPage(100)
             .Build();
 
           this.ShowLoader();

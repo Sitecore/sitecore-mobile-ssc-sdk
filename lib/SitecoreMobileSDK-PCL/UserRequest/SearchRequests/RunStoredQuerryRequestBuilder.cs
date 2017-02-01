@@ -6,7 +6,7 @@ namespace Sitecore.MobileSDK.UserRequest.SearchRequest
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
 
-  public class RunStoredQuerryRequestBuilder : AbstractGetVersionedItemRequestBuilder<IReadItemsByIdRequest>
+  public class RunStoredQuerryRequestBuilder : AbstractGetVersionedItemRequestBuilder<ISitecoreStoredSearchRequest>
   {
     public RunStoredQuerryRequestBuilder(string itemId)
     {
@@ -15,16 +15,19 @@ namespace Sitecore.MobileSDK.UserRequest.SearchRequest
       this.itemId = itemId;
     }
 
-    public override IReadItemsByIdRequest Build()
+    public override ISitecoreStoredSearchRequest Build()
     {
       IPagingParameters pagingSettings = this.AccumulatedPagingParameters;
 
-      ReadItemsByIdParameters result = new ReadItemsByIdParameters(
-        null, 
-        this.itemSourceAccumulator, 
-        this.queryParameters, 
+      StoredSearchParameters result = new StoredSearchParameters(
+        null,
+        this.itemSourceAccumulator,
+        this.queryParameters,
+        this.AccumulatedPagingParameters,
+        this.itemId,
         this.icludeStanderdTemplateFields,
-        this.itemId);
+        null);
+
 
       return result;
     }

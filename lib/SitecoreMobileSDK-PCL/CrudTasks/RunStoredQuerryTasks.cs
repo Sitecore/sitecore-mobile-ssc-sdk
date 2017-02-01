@@ -6,7 +6,7 @@ namespace Sitecore.MobileSDK.CrudTasks
   using Sitecore.MobileSDK.UrlBuilder.Search;
   using Sitecore.MobileSDK.API.Items;
 
-  internal class RunStoredQuerryTasks : AbstractGetItemTask<IReadItemsByIdRequest, ScItemsResponse>
+  internal class RunStoredQuerryTasks : AbstractGetItemTask<ISitecoreStoredSearchRequest, ScItemsResponse>
   {
     public RunStoredQuerryTasks(RunStoredQuerryUrlBuilder urlBuilder, HttpClient httpClient)
       : base(httpClient)
@@ -14,7 +14,7 @@ namespace Sitecore.MobileSDK.CrudTasks
       this.urlBuilder = urlBuilder;
     }
 
-    protected override string UrlToGetItemWithRequest(IReadItemsByIdRequest request)
+    protected override string UrlToGetItemWithRequest(ISitecoreStoredSearchRequest request)
     {
       this.privateDb = request.ItemSource.Database;
       return this.urlBuilder.GetUrlForRequest(request);

@@ -25,6 +25,8 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchDebug>true</MtouchDebug>
     <MtouchArch>i386</MtouchArch>
+    <CodesignProvision>c69c2a1f-caa6-4fad-8897-5ae864c0f738</CodesignProvision>
+    <CodesignKey>iPhone Developer: Igor Khomich (6985FMBD4K)</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>full</DebugType>
@@ -51,8 +53,8 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <IpaPackageName>
     </IpaPackageName>
-    <BuildIpa>true</BuildIpa>
-    <CodesignProvision>15aa9e19-402c-4215-9441-6256dd5b7d03</CodesignProvision>
+    <BuildIpa>false</BuildIpa>
+    <CodesignProvision></CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>

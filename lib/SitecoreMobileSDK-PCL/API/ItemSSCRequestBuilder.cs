@@ -39,7 +39,7 @@ namespace Sitecore.MobileSDK.API
       return new ReadChildrenByIdRequestBuilder(itemId);
     }
 
-    public static IGetVersionedItemRequestParametersBuilder<IReadItemsByIdRequest> StoredQuerryRequest(string itemId)
+    public static IGetVersionedItemRequestParametersBuilder<ISitecoreStoredSearchRequest> StoredQuerryRequest(string itemId)
     {
       return new RunStoredQuerryRequestBuilder(itemId);
     }

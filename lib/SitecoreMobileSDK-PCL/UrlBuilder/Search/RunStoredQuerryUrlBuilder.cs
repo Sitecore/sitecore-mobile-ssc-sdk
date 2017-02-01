@@ -6,14 +6,14 @@
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
-  public class RunStoredQuerryUrlBuilder : GetItemsUrlBuilder<IReadItemsByIdRequest>
+  public class RunStoredQuerryUrlBuilder : GetPagedItemsUrlBuilder<ISitecoreStoredSearchRequest>
   {
     public RunStoredQuerryUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
       : base(restGrammar, sscGrammar)
     {
     }
 
-    protected override string GetHostUrlForRequest(IReadItemsByIdRequest request)
+    protected override string GetHostUrlForRequest(ISitecoreStoredSearchRequest request)
     {
       string hostUrl = base.GetHostUrlForRequest(request);
       string itemId = UrlBuilderUtils.EscapeDataString(request.ItemId.ToLowerInvariant());
@@ -22,12 +22,12 @@
       return result;
     }
 
-    protected override string GetItemIdenticationForRequest(IReadItemsByIdRequest request)
+    protected override string GetItemIdenticationForRequest(ISitecoreStoredSearchRequest request)
     {
       return null;
     }
 
-    protected override void ValidateSpecificRequest(IReadItemsByIdRequest request)
+    protected override void ValidateSpecificRequest(ISitecoreStoredSearchRequest request)
     {
       ItemIdValidator.ValidateItemId(request.ItemId, this.GetType().Name + ".ItemId");
     }

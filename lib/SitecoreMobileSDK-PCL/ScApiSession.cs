@@ -269,13 +269,13 @@ namespace Sitecore.MobileSDK
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
 
-    public async Task<ScItemsResponse> RunStoredQuerryAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<ScItemsResponse> RunStoredQuerryAsync(ISitecoreStoredSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
-      IReadItemsByIdRequest requestCopy = request.DeepCopyGetItemByIdRequest();
+      ISitecoreStoredSearchRequest requestCopy = request.DeepCopySitecoreStoredSearchRequest();
 
       await this.GetPublicKeyAsync(cancelToken);
 
-      IReadItemsByIdRequest autocompletedRequest = this.requestMerger.FillReadItemByIdGaps(requestCopy);
+      ISitecoreStoredSearchRequest autocompletedRequest = this.requestMerger.FillSitecoreStoredSearchGaps(requestCopy);
 
       var urlBuilder = new RunStoredQuerryUrlBuilder(this.restGrammar, this.sscGrammar);
       var taskFlow = new RunStoredQuerryTasks(urlBuilder, this.httpClient);
