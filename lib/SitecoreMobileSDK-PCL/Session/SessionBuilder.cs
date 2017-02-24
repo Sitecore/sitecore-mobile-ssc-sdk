@@ -9,11 +9,13 @@
   using Sitecore.MobileSDK.PasswordProvider.Interface;
   using Sitecore.MobileSDK.SessionSettings;
   using Sitecore.MobileSDK.Validators;
+    using System.Net.Http;
 
-  internal class SessionBuilder : IAuthenticatedSessionBuilder, IAnonymousSessionBuilder, IEntitySessionBuilder
+    internal class SessionBuilder : IAuthenticatedSessionBuilder, IAnonymousSessionBuilder, IEntitySessionBuilder
   {
     #region Main Logic
-    public ISitecoreSSCSession BuildSession()
+    public ISitecoreSSCSession BuildSession(HttpClientHandler handler,
+      HttpClient httpClient)
     {
       string optionalMediaRoot = this.OptionalMediaRoot();
       string optionalMediaExtension = this.OptionalMediaExtension();
@@ -40,13 +42,14 @@
         this.entitySourceAccumulator.EntityAction);
 
 
-      var result = new ScApiSession(conf, entitySource, this.credentials, mediaSettings, itemSource);
+      var result = new ScApiSession(conf, entitySource, this.credentials, mediaSettings, handler, httpClient, itemSource);
       return result;
     }
 
-    public ISitecoreSSCReadonlySession BuildReadonlySession()
+    public ISitecoreSSCReadonlySession BuildReadonlySession(HttpClientHandler handler,
+      HttpClient httpClient)
     {
-      return this.BuildSession();
+      return this.BuildSession(handler, httpClient);
     }
 
     private string OptionalMediaRoot()

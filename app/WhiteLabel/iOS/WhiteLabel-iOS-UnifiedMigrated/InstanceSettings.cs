@@ -7,6 +7,8 @@ namespace WhiteLabeliOS
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.PasswordProvider;
+  using System.Net.Http;
+
 
   public class InstanceSettings
   {
@@ -50,11 +52,14 @@ namespace WhiteLabeliOS
           )
       )
       {
+                HttpClientHandler handler = new HttpClientHandler();
+                HttpClient httpClient = new HttpClient(handler);
+
         var result = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.instanceUrl)
                                               .Credentials(credentials)
                                               .DefaultDatabase(this.instanceDataBase)
                                               .DefaultLanguage(this.instanceLanguage)
-                                              .BuildSession();
+                                              .BuildSession(handler, httpClient);
 
         return result;
       }
@@ -62,10 +67,13 @@ namespace WhiteLabeliOS
 
     public ISitecoreSSCSession GetAnonymousSession()
     {
-      var result = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(this.instanceUrl)
+            HttpClientHandler handler = new HttpClientHandler();
+            HttpClient httpClient = new HttpClient(handler);
+
+            var result = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(this.instanceUrl)
                                             .DefaultDatabase(this.instanceDataBase)
                                             .DefaultLanguage(this.instanceLanguage)
-                                            .BuildSession();
+                                            .BuildSession(handler, httpClient);
 
         return result;
     }

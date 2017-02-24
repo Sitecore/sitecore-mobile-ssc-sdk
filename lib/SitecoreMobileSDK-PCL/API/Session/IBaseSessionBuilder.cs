@@ -1,12 +1,13 @@
 namespace Sitecore.MobileSDK.API.Session
 {
   using Sitecore.MobileSDK.API.MediaItem;
+    using System.Net.Http;
 
 
-  /// <summary>
-  /// Interface represents base session builder. 
-  /// </summary>
-  public interface IBaseSessionBuilder : IEntitySessionBuilder
+    /// <summary>
+    /// Interface represents base session builder. 
+    /// </summary>
+    public interface IBaseSessionBuilder : IEntitySessionBuilder
   {
     /// <summary>
     /// Builds session.
@@ -14,7 +15,8 @@ namespace Sitecore.MobileSDK.API.Session
     /// <returns>
     ///   <seealso cref="ISitecoreSSCSession" />
     /// </returns>
-    ISitecoreSSCSession BuildSession();
+    ISitecoreSSCSession BuildSession(HttpClientHandler handler,
+      HttpClient httpClient);
 
     /// <summary>
     /// Builds session which contain read only operations.
@@ -22,7 +24,8 @@ namespace Sitecore.MobileSDK.API.Session
     /// <returns>
     ///   <seealso cref="ISitecoreSSCReadonlySession" />
     /// </returns>
-    ISitecoreSSCReadonlySession BuildReadonlySession();
+    ISitecoreSSCReadonlySession BuildReadonlySession(HttpClientHandler handler,
+      HttpClient httpClient);
 
     /// <summary>
     /// Specifies Item Web API version, 'v1' by default.

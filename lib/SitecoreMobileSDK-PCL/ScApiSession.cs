@@ -49,6 +49,8 @@ namespace Sitecore.MobileSDK
       IEntitySource entitySource,
       IScCredentials credentials,
       IMediaLibrarySettings mediaSettings,
+      HttpClientHandler handler,
+      HttpClient httpClient,
       ItemSource defaultSource = null)
     {
       if (null == config)
@@ -75,9 +77,9 @@ namespace Sitecore.MobileSDK
       }
 
       this.cookies = new CookieContainer();
-      this.handler = new HttpClientHandler();
+      this.handler = handler;
       this.handler.CookieContainer = cookies;
-      this.httpClient = new HttpClient(this.handler);
+      this.httpClient = httpClient;
 
     }
 

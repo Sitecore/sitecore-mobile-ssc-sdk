@@ -54,7 +54,8 @@
     <IpaPackageName>
     </IpaPackageName>
     <BuildIpa>false</BuildIpa>
-    <CodesignProvision></CodesignProvision>
+    <CodesignProvision>
+    </CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>
@@ -93,6 +94,9 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\solutions\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -107,6 +111,7 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -190,14 +195,7 @@
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\en.lproj\" />
-    <Folder Include="ITemTasks\" />
-    <Folder Include="ITemTasks\BaseClasses\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Resources\ru.lproj\" />
-    <Folder Include="FieldsTableView\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>

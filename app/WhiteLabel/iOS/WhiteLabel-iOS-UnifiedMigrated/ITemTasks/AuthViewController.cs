@@ -47,12 +47,15 @@
     {
       try
       {
+        HttpClientHandler handler = new HttpClientHandler();
+        HttpClient httpClient = new HttpClient(handler);
+
         using (var credentials = new ScUnsecuredCredentialsProvider(this.loginField.Text, this.passwordField.Text, this.siteField.Text))
         using 
-        ( 
-            var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.urlField.Text)
-            .Credentials(credentials)
-            .BuildReadonlySession()
+        (
+                var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.urlField.Text)
+                 .Credentials(credentials)
+                 .BuildReadonlySession(handler, httpClient)
         )
         {
           this.ShowLoader();
