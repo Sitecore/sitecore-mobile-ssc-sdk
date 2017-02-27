@@ -1,5 +1,6 @@
 ﻿namespace MobileSDKIntegrationTest
 {
+  using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
   using Sitecore.MobileSDK;
@@ -17,8 +18,10 @@
       IEntitySource entitySource,
       IScCredentials credentials,
       IMediaLibrarySettings mediaSettings,
+      HttpClientHandler handler,
+      HttpClient httpClient,
       ItemSource defaultSource = null) :
-      base(config, entitySource, credentials, mediaSettings, defaultSource)
+      base(config, entitySource, credentials, mediaSettings, handler, httpClient, defaultSource)
     {
       this.GetPublicKeyInvocationsCount = 0;
     }

@@ -1,6 +1,7 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Net.Http;
   using System.Threading.Tasks;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
@@ -35,10 +36,13 @@
 
     private ISitecoreSSCSession CreateSession()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       return SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .DefaultDatabase("master")
-        .BuildSession();
+        .BuildSession(handler, httpClient);
     }
 
 
@@ -109,10 +113,13 @@
     {
       await this.RemoveAll();
 
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       var noAccessSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.NoCreateAccess)
         .DefaultDatabase("master")
-        .BuildSession();
+        .BuildSession(handler, httpClient);
 
       ISitecoreItem item = await this.CreateItem("master", "Item to delete without delete access");
 
@@ -179,10 +186,13 @@
 
     private async Task<ISitecoreItem> CreateItem(string database, string itemName, ISitecoreItem parentItem = null)
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using (var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
              .Credentials(testData.Users.Admin)
              .DefaultDatabase("master")
-             .BuildSession()) 
+             .BuildSession(handler, httpClient)) 
       {
         string parentPath = (parentItem == null) ? this.testData.Items.CreateItemsHere.Path : parentItem.Path;
 

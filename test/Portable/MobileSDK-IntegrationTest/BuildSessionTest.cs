@@ -1,6 +1,7 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Net.Http;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;
@@ -80,11 +81,15 @@
     [Test]
     public void TestBuildSessionWithNullDatabaseDoNotReturnsException()
     {
+
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
         (
           var session = this.NewSession()
           .DefaultDatabase(null)
-          .BuildReadonlySession()
+          .BuildReadonlySession(handler, httpClient)
         )
       {
         Assert.IsNotNull(session);
@@ -103,11 +108,14 @@
     [Test]
     public void TestBuildSessionWithNullMediaSourceExtensionDoNotReturnsException()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
         (
           var session = this.NewSession()
           .DefaultMediaResourceExtension(null)
-          .BuildSession()
+          .BuildSession(handler, httpClient)
         )
       {
         Assert.IsNotNull(session);
@@ -117,11 +125,14 @@
     [Test]
     public void TestBuildSessionWithEmptyMediaLibraryRootDoNotReturnsException()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = this.NewSession()
         .MediaLibraryRoot("")
-        .BuildSession()
+        .BuildSession(handler, httpClient)
       )
       {
         Assert.IsNotNull(session);

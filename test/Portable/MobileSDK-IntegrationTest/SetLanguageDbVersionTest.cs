@@ -1,6 +1,7 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Net.Http;
   using System.Threading.Tasks;
   using NUnit.Framework;
 
@@ -59,13 +60,16 @@
     [Test]
     public async void TestGetItemWithNullLanguage()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session =
           SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
             .Credentials(testData.Users.Admin)
             .DefaultDatabase("master")
-            .BuildReadonlySession()
+            .BuildReadonlySession(handler, httpClient)
       )
       {
         var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
@@ -81,13 +85,15 @@
     [Test]
     public async void TestGetItemWithNullDb()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
       using
       (
         var session =
           SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
             .Credentials(testData.Users.Admin)
             .DefaultLanguage("en")
-            .BuildReadonlySession()
+            .BuildReadonlySession(handler, httpClient)
       )
       {
         var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath("/sitecore/content/home")
@@ -350,6 +356,9 @@
 
     private ISitecoreSSCReadonlySession CreateAdminSession(ItemSource itemSource = null)
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       var builder =
         SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin);
@@ -359,18 +368,21 @@
         builder.DefaultDatabase(itemSource.Database).DefaultLanguage(itemSource.Language);
       }
 
-      var session = builder.BuildReadonlySession();
+      var session = builder.BuildReadonlySession(handler, httpClient);
       return session;
     }
 
     private ISitecoreSSCReadonlySession CreateCreatorexSession()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       var session =
         SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(this.testData.Users.Creatorex)
           .DefaultDatabase("web")
           .DefaultLanguage("en")
-          .BuildReadonlySession();
+          .BuildReadonlySession(handler, httpClient);
 
       return session;
     }

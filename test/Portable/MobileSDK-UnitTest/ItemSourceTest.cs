@@ -2,6 +2,7 @@
 {
   using System;
   using System.Diagnostics;
+  using System.Net.Http;
   using NUnit.Framework;
   using Sitecore.MobileSDK;
   using Sitecore.MobileSDK.API;
@@ -47,7 +48,10 @@
     [Test]
     public void TestApiSessionConstructorDoesNotRequiresDefaultSource()
     {
-      ScApiSession result = new ScApiSession(this.localhostConnection, null, this.credentials, this.mediaSettings, null);
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
+      ScApiSession result = new ScApiSession(this.localhostConnection, null, this.credentials, this.mediaSettings, handler, httpClient, null);
       Assert.IsNotNull(result);
     }
 
@@ -56,10 +60,12 @@
     public void TestApiSessionConstructorRequiresConfig()
     {
       ItemSource defaultSource = LegacyConstants.DefaultSource();
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
 
       TestDelegate initSessionAction = () =>
       {
-        ScApiSession result = new ScApiSession(null, null, this.credentials, this.mediaSettings, defaultSource);
+        ScApiSession result = new ScApiSession(null, null, this.credentials, this.mediaSettings, handler, httpClient, defaultSource);
         Debug.WriteLine( result );
       };
 

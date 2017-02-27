@@ -1,6 +1,7 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Net.Http;
   using System.Threading;
   using System.Threading.Tasks;
   using NUnit.Framework;
@@ -21,6 +22,9 @@
     {
       this.env = TestEnvironment.DefaultTestEnvironment();
 
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       this.mediaSettings = new MediaLibrarySettings(
         "/sitecore/media library",
         "ashx",
@@ -29,7 +33,7 @@
       var config = new SessionConfig(this.env.InstanceUrl);
       var defaultSource = LegacyConstants.DefaultSource();
 
-      this.session = new ScTestApiSession(config, null, this.env.Users.Admin, mediaSettings, defaultSource);
+      this.session = new ScTestApiSession(config, null, this.env.Users.Admin, mediaSettings, handler, httpClient, defaultSource);
     }
 
     [TearDown]

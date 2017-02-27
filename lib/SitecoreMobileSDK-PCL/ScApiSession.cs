@@ -271,7 +271,7 @@ namespace Sitecore.MobileSDK
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
 
-    public async Task<ScItemsResponse> RunStoredQuerryAsync(ISitecoreStoredSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<ScItemsResponse> RunStoredQueryAsync(ISitecoreStoredSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       ISitecoreStoredSearchRequest requestCopy = request.DeepCopySitecoreStoredSearchRequest();
 
@@ -279,8 +279,8 @@ namespace Sitecore.MobileSDK
 
       ISitecoreStoredSearchRequest autocompletedRequest = this.requestMerger.FillSitecoreStoredSearchGaps(requestCopy);
 
-      var urlBuilder = new RunStoredQuerryUrlBuilder(this.restGrammar, this.sscGrammar);
-      var taskFlow = new RunStoredQuerryTasks(urlBuilder, this.httpClient);
+      var urlBuilder = new RunStoredQueryUrlBuilder(this.restGrammar, this.sscGrammar);
+      var taskFlow = new RunStoredQueryTasks(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }

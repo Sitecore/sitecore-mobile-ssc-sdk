@@ -1,6 +1,7 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Net.Http;
   using System.Threading.Tasks;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
@@ -20,11 +21,14 @@
     [SetUp]
     public void Setup()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       testData = TestEnvironment.DefaultTestEnvironment();
       this.sessionAuthenticatedUser =
         SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin)
-          .BuildReadonlySession();
+          .BuildReadonlySession(handler, httpClient);
     }
 
     [TearDown]
@@ -207,8 +211,7 @@
     [Test]
     public void TestGetItemByIdWithSpacesOnlyReturnsError()
     {
-      TestDelegate testCode = async () =>
-      {
+      TestDelegate testCode = async () => {
         var task = this.GetItemById(" ");
         await task;
       };
@@ -233,10 +236,14 @@
     [Test]
     public void TestGetItemByPathWithUserWithoutReadAccessToHomeItem()
     {
+
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       var sessionWithoutAccess =
         SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.NoReadUserExtranet)
-          .BuildReadonlySession();
+          .BuildReadonlySession(handler, httpClient);
 
       var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
 

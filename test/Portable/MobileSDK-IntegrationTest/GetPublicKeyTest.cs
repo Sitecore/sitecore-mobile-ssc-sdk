@@ -1,6 +1,7 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Net.Http;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
@@ -30,11 +31,14 @@
     [Test]
     public async void TestGetItemAsAuthenticatedUser()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin)
-          .BuildReadonlySession()
+          .BuildReadonlySession(handler, httpClient)
       )
       {
         var response = await session.ReadItemAsync(requestWithItemId);
@@ -46,12 +50,15 @@
     [Test]
     public async void TestMissingHttpIsAutocompletedDuringAuthentication()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(urlWithoutHttp)
           .Credentials(this.testData.Users.Admin)
-          .BuildReadonlySession()
+          .BuildReadonlySession(handler, httpClient)
       )
       {
         var certrificate = await session.ReadItemAsync(this.requestWithItemId);
@@ -62,12 +69,15 @@
     [Test]
     public async void TestAuthenticateWithSlashInTheEnd()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       string urlWithSlahInTheEnd = testData.InstanceUrl + '/';
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(urlWithSlahInTheEnd)
           .Credentials(this.testData.Users.Admin)
-          .BuildReadonlySession()
+          .BuildReadonlySession(handler, httpClient)
       )
       {
         var response = await session.ReadItemAsync(requestWithItemId);
@@ -79,11 +89,14 @@
     [Test]
     public void TestGetItemsWithNotExistentInstanceUrlReturnsError()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("http://mobiledev1ua1.dddk.sitecore.net")
           .Credentials(this.testData.Users.Admin)
-          .BuildReadonlySession()
+          .BuildReadonlySession(handler, httpClient)
       )
       {
         TestDelegate testCode = async () =>
@@ -101,13 +114,16 @@
     [Test]
     public void TestGetItemWithNotExistentUserReturnsError()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(this.testData.Users.NotExistent)
           .DefaultDatabase("web")
           .DefaultLanguage("en")
-          .BuildSession()
+          .BuildSession(handler, httpClient)
       )
       {
         TestDelegate testCode = async () =>
@@ -125,11 +141,14 @@
     [Test]
     public void TestGetItemWithInvalidUsernameAndPasswordReturnsError()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(new SSCCredentialsPOD("/?*not#valid@username", "*not_valid ^ pwd", "fdfdfd"))
-          .BuildSession()
+          .BuildSession(handler, httpClient)
       )
       {
         TestDelegate testCode = async () =>
@@ -147,12 +166,15 @@
     [Test]
     public void TestGetItemAsAnonymousWithoutReadAccessReturnsError()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
         .DefaultDatabase("web")
         .DefaultLanguage("en")
-        .BuildReadonlySession()
+        .BuildReadonlySession(handler, httpClient)
       )
       {
         TestDelegate testCode = async () =>

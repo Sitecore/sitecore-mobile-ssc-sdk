@@ -1,6 +1,7 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Net.Http;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Exceptions;
@@ -26,11 +27,14 @@
     [Test]
     public async void TestCheckValidCredentials()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Admin)
-          .BuildReadonlySession()
+          .BuildReadonlySession(handler, httpClient)
       )
       {
         var response = await session.AuthenticateAsync();
@@ -41,11 +45,14 @@
     [Test]
     public async void TestGetAuthenticationWithNotExistentUsername()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.NotExistent)
-          .BuildReadonlySession()
+          .BuildReadonlySession(handler, httpClient)
       ) {
         var response = await session.AuthenticateAsync();
         Assert.False(response.IsSuccessful);
@@ -55,11 +62,14 @@
     [Test]
     public async void TestGetAuthenticationAstUserInExtraneDomainToWebsite()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Creatorex)
-          .BuildReadonlySession()
+          .BuildReadonlySession(handler, httpClient)
       )
       {
         var response = await session.AuthenticateAsync();
@@ -70,11 +80,14 @@
     [Test]
     public async void TestGetAuthenticationAsUserInSitecoreDomainToWebsite()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.SitecoreCreator)
-          .BuildReadonlySession()
+          .BuildReadonlySession(handler, httpClient)
       )
       {
         var response = await session.AuthenticateAsync();
@@ -85,11 +98,14 @@
     [Test]
     public async void TestGetAuthenticationWithNotExistentPassword()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(new SSCCredentialsPOD(testData.Users.Admin.Username, "wrongpassword", "sitecore"))
-        .BuildReadonlySession()
+        .BuildReadonlySession(handler, httpClient)
       )
       {
         var response = await session.AuthenticateAsync();
@@ -100,11 +116,14 @@
     [Test]
     public async void TestGetAuthenticationWithInvalidPassword()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(new SSCCredentialsPOD(testData.Users.Admin.Username, "Password $#%^&^*", "sitecore"))
-        .BuildReadonlySession()
+        .BuildReadonlySession(handler, httpClient)
       )
       {
         var response = await session.AuthenticateAsync();
@@ -115,11 +134,14 @@
     [Test]
     public async void TestGetAuthenticationWithInvalidUsername()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(new SSCCredentialsPOD("Username $#%^&^*", testData.Users.Admin.Password, "sitecore"))
-          .BuildReadonlySession()
+          .BuildReadonlySession(handler, httpClient)
       )
       {
         var response = await session.AuthenticateAsync();
@@ -130,11 +152,14 @@
     [Test]
     public void TestGetPublicKeyWithNotExistentUrl()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("http://mobilesdk-notexistent.com")
           .Credentials(testData.Users.Admin)
-          .BuildReadonlySession()
+          .BuildReadonlySession(handler, httpClient)
       )
       {
         TestDelegate testCode = async () =>
@@ -163,11 +188,14 @@
     [Test]
     public void TestGetAuthenticationWithInvalidUrl()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("\\m.dk%&^&*(.net")
         .Credentials(testData.Users.Admin)
-        .BuildReadonlySession()
+        .BuildReadonlySession(handler, httpClient)
       )
       {
         TestDelegate testCode = async () =>
@@ -184,12 +212,15 @@
     [Test]
     public async void TestGetAuthenticationForUrlWithoutHttp()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       var urlWithoutHttp = testData.InstanceUrl.Remove(0, 7);
       using
       (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(urlWithoutHttp)
           .Credentials(testData.Users.Admin)
-          .BuildReadonlySession()
+          .BuildReadonlySession(handler, httpClient)
       )
       {
         var response = await session.AuthenticateAsync();

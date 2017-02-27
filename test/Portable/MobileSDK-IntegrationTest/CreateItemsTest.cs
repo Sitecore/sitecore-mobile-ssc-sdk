@@ -1,6 +1,7 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Net.Http;
   using System.Threading.Tasks;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
@@ -30,9 +31,12 @@
 
     private ISitecoreSSCSession CreateSession()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       var result = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
-        .BuildSession();
+        .BuildSession(handler, httpClient);
 
       return result;
     }
@@ -368,8 +372,11 @@
     [Test]
     public async void TestCreateItemByPathWithAnonymousUserReturnsException()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       var anonymousSession = SitecoreSSCSessionBuilder.AnonymousSessionWithHost(testData.InstanceUrl)
-        .BuildSession();
+        .BuildSession(handler, httpClient);
       
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplateId(testData.Items.Home.TemplateId)
@@ -389,9 +396,13 @@
     [Test]
     public async void TestCreateItemByPathWithUserWithoutCreateAccessReturnsException()
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       var anonymousSession = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.NoCreateAccess)
-        .BuildSession();
+        .BuildSession(handler, httpClient);
+      
       var request = ItemSSCRequestBuilder.CreateItemRequestWithParentPath(this.testData.Items.CreateItemsHere.Path)
         .ItemTemplateId(testData.Items.Home.TemplateId)
         .ItemName("item created with nocreate user")

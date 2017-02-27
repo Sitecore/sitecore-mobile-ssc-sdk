@@ -1,6 +1,7 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
+  using System.Net.Http;
   using System.Threading.Tasks;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
@@ -22,12 +23,15 @@
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       this.sessionAuthenticatedUser =
         SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
           .Credentials(testData.Users.Admin)
           .DefaultDatabase("web")
           .DefaultLanguage("en")
-          .BuildReadonlySession();
+          .BuildReadonlySession(handler, httpClient);
 
       this.requestWithItemId = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Build();
@@ -105,11 +109,14 @@
       const string Language = "en";
       const int Version = 2;
 
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .DefaultDatabase(Db)
         .DefaultLanguage("da")
-        .BuildReadonlySession();
+        .BuildReadonlySession(handler, httpClient);
 
 
       var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
@@ -134,11 +141,14 @@
       const int Version = 2;
       var source = new ItemSource("web", Language, 1);
 
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .DefaultDatabase(source.Database)
         .DefaultLanguage(source.Language)
-        .BuildReadonlySession();
+        .BuildReadonlySession(handler, httpClient);
 
       var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(testData.Items.ItemWithVersions.Id)
         .Version(Version)
@@ -230,11 +240,14 @@
 
     private async Task<ScItemsResponse> GetItemByIdWithItemSource(ItemSource itemSource)
     {
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(testData.InstanceUrl)
         .Credentials(testData.Users.Admin)
         .DefaultLanguage(itemSource.Language)
         .DefaultDatabase(itemSource.Database)
-        .BuildReadonlySession();
+        .BuildReadonlySession(handler, httpClient);
 
       IReadItemsByIdRequest request = null;
 

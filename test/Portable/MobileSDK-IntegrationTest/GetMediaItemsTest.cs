@@ -3,6 +3,7 @@
   using System;
   using System.Globalization;
   using System.IO;
+  using System.Net.Http;
   using System.Threading.Tasks;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
@@ -24,10 +25,13 @@
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       this.session =
         SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin)
-          .BuildReadonlySession();
+          .BuildReadonlySession(handler, httpClient);
     }
 
     [TearDown]
@@ -232,10 +236,14 @@
     public void TestMediaWithoutAccessToFolder()
     {
       const string MediaPath = "/sitecore/media library/Images/kirkorov";
+
+      HttpClientHandler handler = new HttpClientHandler();
+      HttpClient httpClient = new HttpClient(handler);
+
       var sessionNoReadAccess =
         SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.NoReadUserExtranet)
-          .BuildReadonlySession();
+          .BuildReadonlySession(handler, httpClient);
 
       var request = ItemSSCRequestBuilder.DownloadResourceRequestWithMediaPath(MediaPath)
         .Build();
