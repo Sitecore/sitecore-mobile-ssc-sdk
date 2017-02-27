@@ -4345,9 +4345,25 @@
     ],
     ".NETStandard,Version=v1.4": []
   },
-  "tools": {},
-  "projectFileToolGroups": {},
   "packageFolders": {
-    "/Users/Igor/.nuget/packages/": {}
+    "C:\\Users\\igk\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "restore": {
+      "projectUniqueName": "C:\\Users\\igk\\Desktop\\sitecore-mobile-pcl-sdk\\lib\\SitecoreMobileSDK-PCL\\Sitecore.MobileSDK.csproj",
+      "projectName": "Sitecore.MobileSDK",
+      "projectPath": "C:\\Users\\igk\\Desktop\\sitecore-mobile-pcl-sdk\\lib\\SitecoreMobileSDK-PCL\\Sitecore.MobileSDK.csproj",
+      "projectJsonPath": "C:\\Users\\igk\\Desktop\\sitecore-mobile-pcl-sdk\\lib\\SitecoreMobileSDK-PCL\\project.json",
+      "projectStyle": "ProjectJson"
+    },
+    "dependencies": {
+      "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
+      "NETStandard.Library": "1.6.1",
+      "Newtonsoft.Json": "9.0.1",
+      "System.Net.Http": "4.3.1"
+    },
+    "frameworks": {
+      "netstandard1.4": {}
+    }
   }
 }

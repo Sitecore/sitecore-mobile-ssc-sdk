@@ -1,4 +1,4 @@
-
+﻿
 namespace Sitecore.MobileSDK.CrudTasks
 {
   using System.Net.Http;
@@ -6,9 +6,9 @@ namespace Sitecore.MobileSDK.CrudTasks
   using Sitecore.MobileSDK.UrlBuilder.Search;
   using Sitecore.MobileSDK.API.Items;
 
-  internal class RunStoredQueryTasks : AbstractGetItemTask<ISitecoreStoredSearchRequest, ScItemsResponse>
+  internal class RunStoredQuerryTasks : AbstractGetItemTask<ISitecoreStoredSearchRequest, ScItemsResponse>
   {
-    public RunStoredQueryTasks(RunStoredQueryUrlBuilder urlBuilder, HttpClient httpClient)
+    public RunStoredQuerryTasks(RunStoredQuerryUrlBuilder urlBuilder, HttpClient httpClient)
       : base(httpClient)
     {
       this.urlBuilder = urlBuilder;
@@ -27,7 +27,7 @@ namespace Sitecore.MobileSDK.CrudTasks
     }
 
     private string privateDb = null;
-    private readonly RunStoredQueryUrlBuilder urlBuilder;
+    private readonly RunStoredQuerryUrlBuilder urlBuilder;
   }
 }
 

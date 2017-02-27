@@ -1,6 +1,5 @@
 ﻿namespace MobileSDKIntegrationTest
 {
-  using System.Net.Http;
   using NUnit.Framework;
 
   using Sitecore.MobileSDK.API;
@@ -28,15 +27,12 @@
       var urlWithoutHttp = this.RemoveHttpSymbols(this.testData.InstanceUrl);
       var url = urlWithoutHttp;
 
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
-
       using
       (
         var session =
           SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(url)
             .Credentials(this.testData.Users.Admin)
-            .BuildReadonlySession(handler, httpClient)
+            .BuildReadonlySession()
       )
       {
         var requestWithItemPath = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
@@ -53,15 +49,12 @@
       var urlWithTwoSlash = testData.InstanceUrl + "//";
       var url = this.RemoveHttpSymbols(urlWithTwoSlash);
 
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
-
       using
       (
         var session =
           SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(url)
             .Credentials(this.testData.Users.Admin)
-            .BuildReadonlySession(handler, httpClient)
+            .BuildReadonlySession()
       )
       {
         var requestWithItemPath = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.testData.Items.Home.Path).Build();
@@ -89,16 +82,12 @@
       //    at Microsoft.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
       //    at Microsoft.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccess(Task task)
       //    at Sitecore.MobileSDK.ScApiSession.<ReadItemAsync>d__a.MoveNext() in c:\dev\Jenkins\jobs\XamarinSDK-FullBuild\workspace\lib\SitecoreMobileSDK-PCL\ScApiSession.cs:line 215
-
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
-
       using
       (
         var session =
           SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(url)
             .Credentials(this.testData.Users.Admin)
-            .BuildReadonlySession(handler, httpClient)
+            .BuildReadonlySession()
       )
       {
         var requestWithItemId = ItemSSCRequestBuilder.ReadItemsRequestWithId(this.testData.Items.Home.Id).Build();

@@ -1,7 +1,6 @@
 ﻿namespace Sitecore.MobileSdkUnitTest
 {
   using System;
-  using System.Net.Http;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Session;
@@ -66,9 +65,6 @@
     [Test]
     public void TestAnonymousSessionShouldBeCreatedByTheBuilder()
     {
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
-
       var builder =
         SitecoreSSCSessionBuilder.AnonymousSessionWithHost("sitecore.net")
           .DefaultDatabase("web")
@@ -77,10 +73,10 @@
           .DefaultMediaResourceExtension("ashx")
           .MediaPrefix("~/media");
 
-      var session = builder.BuildSession(handler, httpClient);
+      var session = builder.BuildSession();
       Assert.IsNotNull(session);
 
-      var roSession = builder.BuildReadonlySession(handler, httpClient);
+      var roSession = builder.BuildReadonlySession();
       Assert.IsNotNull(roSession);
     }
 
@@ -96,13 +92,11 @@
         .MediaLibraryRoot("/sitecore/media library")
         .DefaultMediaResourceExtension("ashx");
 
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
 
-      ISitecoreSSCSession session = builder.BuildSession(handler, httpClient);
+      ISitecoreSSCSession session = builder.BuildSession();
       Assert.IsNotNull(session);
 
-      var roSession = builder.BuildReadonlySession(handler, httpClient);
+      var roSession = builder.BuildReadonlySession();
       Assert.IsNotNull(roSession);
     }
     #endregion Builder Interface
@@ -199,15 +193,12 @@
     [Test]
     public void TestDatabaseDoNotThrowsExceptionForNullInput()
     {
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
-
       using
         (
         var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
         .Credentials(this.adminCredentials)
         .DefaultDatabase(null)
-          .BuildSession(handler, httpClient)
+        .BuildSession()
         )
       {
         Assert.IsNotNull(session);
@@ -217,15 +208,12 @@
     [Test]
     public void TestLanguageDoNotThrowsExceptionForNullInput()
     {
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
-
       using
         (
           var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
           .Credentials(this.adminCredentials)
           .DefaultLanguage(null)
-          .BuildSession(handler, httpClient)
+          .BuildSession()
         )
       {
         Assert.IsNotNull(session);
@@ -235,14 +223,11 @@
     [Test]
     public void TestSiteDoNotThrowsExceptionForNullInput()
     {
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
-
       using
         (
           var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
           .Credentials(this.adminCredentials)
-          .BuildSession(handler, httpClient)
+          .BuildSession()
         )
       {
         Assert.IsNotNull(session);
@@ -253,15 +238,12 @@
     [Test]
     public void TestMediaDoNotThrowsExceptionForNullInput()
     {
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
-
       using
         (
           var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
           .Credentials(this.adminCredentials)
           .MediaLibraryRoot(null)
-          .BuildSession(handler, httpClient)
+          .BuildSession()
         )
       {
         Assert.IsNotNull(session);
@@ -272,15 +254,12 @@
     [Test]
     public void TestMediaExtDonotThrowsExceptionForNullInput()
     {
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
-
       using
         (
           var session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost("sitecore.net")
           .Credentials(this.adminCredentials)
           .DefaultMediaResourceExtension(null)
-          .BuildSession(handler, httpClient)
+          .BuildSession()
         )
       {
         Assert.IsNotNull(session);

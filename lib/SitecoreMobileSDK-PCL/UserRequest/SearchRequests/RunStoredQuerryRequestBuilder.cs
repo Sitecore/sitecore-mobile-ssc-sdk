@@ -1,4 +1,4 @@
-using Sitecore.MobileSDK.API.Request.Parameters;
+﻿using Sitecore.MobileSDK.API.Request.Parameters;
 
 namespace Sitecore.MobileSDK.UserRequest.SearchRequest
 {
@@ -6,9 +6,9 @@ namespace Sitecore.MobileSDK.UserRequest.SearchRequest
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
 
-  public class RunStoredQueryRequestBuilder : AbstractGetVersionedItemRequestBuilder<ISitecoreStoredSearchRequest>
+  public class RunStoredQuerryRequestBuilder : AbstractGetVersionedItemRequestBuilder<ISitecoreStoredSearchRequest>
   {
-    public RunStoredQueryRequestBuilder(string itemId)
+    public RunStoredQuerryRequestBuilder(string itemId)
     {
       ItemIdValidator.ValidateItemId(itemId, this.GetType().Name + ".ItemId");
 

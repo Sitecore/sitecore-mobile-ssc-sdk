@@ -3,7 +3,6 @@
   using System;
   using System.Diagnostics;
   using System.IO;
-  using System.Net.Http;
   using System.Threading.Tasks;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API.Exceptions;
@@ -37,10 +36,7 @@
       var connection = new SessionConfig(this.env.InstanceUrl);
       var defaultSource = LegacyConstants.DefaultSource();
 
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
-
-      this.session = new ScTestApiSession(connection, null, env.Users.Admin, this.mediaSettings, handler, httpClient, defaultSource);
+      this.session = new ScTestApiSession(connection, null, env.Users.Admin, this.mediaSettings, defaultSource);
       this.itemSource = new MutableItemSource("master", "en", 0);
     }
 

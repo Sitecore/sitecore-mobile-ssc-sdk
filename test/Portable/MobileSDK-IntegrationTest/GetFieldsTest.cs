@@ -2,7 +2,6 @@
 {
   using System;
   using System.Collections.ObjectModel;
-  using System.Net.Http;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
@@ -19,13 +18,10 @@
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
-
       this.sessionAuthenticatedUser =
         SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Admin)
-          .BuildReadonlySession(handler, httpClient);
+          .BuildReadonlySession();
     }
 
     [TearDown]
@@ -218,13 +214,10 @@
     {
       //TODO: @igk behaviour confirmation required
 
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
-
       var sessionCreatorexUser =
         SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
           .Credentials(this.testData.Users.Creatorex)
-          .BuildReadonlySession(handler, httpClient);
+          .BuildReadonlySession();
 
       var request = ItemSSCRequestBuilder.ReadItemsRequestWithId("{00CB2AC4-70DB-482C-85B4-B1F3A4CFE643}")
                                          .Build();

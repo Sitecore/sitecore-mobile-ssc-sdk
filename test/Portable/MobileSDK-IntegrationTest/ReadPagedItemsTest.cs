@@ -1,7 +1,6 @@
 ﻿namespace MobileSDKIntegrationTest
 {
   using System;
-  using System.Net.Http;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
@@ -18,14 +17,11 @@
     {
       this.testData = TestEnvironment.DefaultTestEnvironment();
 
-      HttpClientHandler handler = new HttpClientHandler();
-      HttpClient httpClient = new HttpClient(handler);
-
       this.session = SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
         .Credentials(this.testData.Users.Admin)
         .DefaultDatabase("master")
         .DefaultLanguage("en")
-        .BuildReadonlySession(handler, httpClient);
+        .BuildReadonlySession();
     }
 
     [TearDown]

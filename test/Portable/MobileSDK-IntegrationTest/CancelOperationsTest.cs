@@ -3,7 +3,6 @@
   using System;
   using System.Diagnostics;
   using System.IO;
-  using System.Net.Http;
   using System.Threading;
   using NUnit.Framework;
   using Sitecore.MobileSDK.API;
@@ -26,13 +25,10 @@
       {
         this.testData = TestEnvironment.DefaultTestEnvironment();
 
-        HttpClientHandler handler = new HttpClientHandler();
-        HttpClient httpClient = new HttpClient(handler);
-
         this.session =
           SitecoreSSCSessionBuilder.AuthenticatedSessionWithHost(this.testData.InstanceUrl)
             .Credentials(this.testData.Users.Admin)
-            .BuildReadonlySession(handler, httpClient);
+            .BuildReadonlySession();
       }
     }
 

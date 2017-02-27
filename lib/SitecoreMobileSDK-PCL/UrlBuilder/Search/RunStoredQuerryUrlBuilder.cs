@@ -1,4 +1,4 @@
-namespace Sitecore.MobileSDK.UrlBuilder.Search
+﻿namespace Sitecore.MobileSDK.UrlBuilder.Search
 {
   using Sitecore.MobileSDK.API.Request;
   using Sitecore.MobileSDK.UrlBuilder.Rest;
@@ -6,9 +6,9 @@ namespace Sitecore.MobileSDK.UrlBuilder.Search
   using Sitecore.MobileSDK.Utils;
   using Sitecore.MobileSDK.Validators;
 
-  public class RunStoredQueryUrlBuilder : GetPagedItemsUrlBuilder<ISitecoreStoredSearchRequest>
+  public class RunStoredQuerryUrlBuilder : GetPagedItemsUrlBuilder<ISitecoreStoredSearchRequest>
   {
-    public RunStoredQueryUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
+    public RunStoredQuerryUrlBuilder(IRestServiceGrammar restGrammar, ISSCUrlParameters sscGrammar)
       : base(restGrammar, sscGrammar)
     {
     }
