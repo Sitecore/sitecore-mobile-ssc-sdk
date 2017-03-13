@@ -15,8 +15,7 @@ namespace Sitecore.MobileSDK.API.Session
     /// <returns>
     ///   <seealso cref="ISitecoreSSCSession" />
     /// </returns>
-    ISitecoreSSCSession BuildSession(HttpClientHandler handler,
-      HttpClient httpClient);
+    ISitecoreSSCSession BuildSession();
 
     /// <summary>
     /// Builds session which contain read only operations.
@@ -24,8 +23,7 @@ namespace Sitecore.MobileSDK.API.Session
     /// <returns>
     ///   <seealso cref="ISitecoreSSCReadonlySession" />
     /// </returns>
-    ISitecoreSSCReadonlySession BuildReadonlySession(HttpClientHandler handler,
-      HttpClient httpClient);
+    ISitecoreSSCReadonlySession BuildReadonlySession();
 
     /// <summary>
     /// Specifies Item Web API version, 'v1' by default.

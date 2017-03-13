@@ -14,8 +14,7 @@
     internal class SessionBuilder : IAuthenticatedSessionBuilder, IAnonymousSessionBuilder, IEntitySessionBuilder
   {
     #region Main Logic
-    public ISitecoreSSCSession BuildSession(HttpClientHandler handler,
-      HttpClient httpClient)
+    public ISitecoreSSCSession BuildSession()
     {
       string optionalMediaRoot = this.OptionalMediaRoot();
       string optionalMediaExtension = this.OptionalMediaExtension();
@@ -42,14 +41,13 @@
         this.entitySourceAccumulator.EntityAction);
 
 
-      var result = new ScApiSession(conf, entitySource, this.credentials, mediaSettings, handler, httpClient, itemSource);
+      var result = new ScApiSession(conf, entitySource, this.credentials, mediaSettings, itemSource);
       return result;
     }
 
-    public ISitecoreSSCReadonlySession BuildReadonlySession(HttpClientHandler handler,
-      HttpClient httpClient)
+    public ISitecoreSSCReadonlySession BuildReadonlySession()
     {
-      return this.BuildSession(handler, httpClient);
+      return this.BuildSession();
     }
 
     private string OptionalMediaRoot()

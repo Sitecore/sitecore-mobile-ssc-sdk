@@ -1,4 +1,4 @@
-﻿namespace Sitecore.MobileSDK.MockObjects
+namespace Sitecore.MobileSDK.MockObjects
 {
   using System;
   using System.Diagnostics;
@@ -135,9 +135,9 @@
       return await this.InvokeNoThrow(this.workerSession.RunSearchAsync(request, cancelToken));
     }
 
-    public async Task<ScItemsResponse> RunStoredQuerryAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<ScItemsResponse> RunStoredQueryAsync(ISitecoreStoredSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
-      return await this.InvokeNoThrow(this.workerSession.RunStoredQuerryAsync(request, cancelToken));
+      return await this.InvokeNoThrow(this.workerSession.RunStoredQueryAsync(request, cancelToken));
     }
 
     #endregion Search Items

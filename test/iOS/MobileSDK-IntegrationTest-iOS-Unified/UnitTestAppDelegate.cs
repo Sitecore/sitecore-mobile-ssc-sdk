@@ -37,7 +37,8 @@ namespace MobileSDKIntegrationTestiOSUnified
       ServicePointManager
         .ServerCertificateValidationCallback +=
           (sender, cert, chain, sslPolicyErrors) => true;
-      
+
+
       runner = new TouchRunner(window);
 
       // register every tests included in the main application/assembly

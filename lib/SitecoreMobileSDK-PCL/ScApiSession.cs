@@ -49,8 +49,6 @@ namespace Sitecore.MobileSDK
       IEntitySource entitySource,
       IScCredentials credentials,
       IMediaLibrarySettings mediaSettings,
-      HttpClientHandler handler,
-      HttpClient httpClient,
       ItemSource defaultSource = null)
     {
       if (null == config)
@@ -77,9 +75,9 @@ namespace Sitecore.MobileSDK
       }
 
       this.cookies = new CookieContainer();
-      this.handler = handler;
+      this.handler = new HttpClientHandler();
       this.handler.CookieContainer = cookies;
-      this.httpClient = httpClient;
+      this.httpClient = new HttpClient(handler);
 
     }
 
@@ -271,7 +269,7 @@ namespace Sitecore.MobileSDK
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
 
-    public async Task<ScItemsResponse> RunStoredQuerryAsync(ISitecoreStoredSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<ScItemsResponse> RunStoredQueryAsync(ISitecoreStoredSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       ISitecoreStoredSearchRequest requestCopy = request.DeepCopySitecoreStoredSearchRequest();
 
@@ -279,8 +277,8 @@ namespace Sitecore.MobileSDK
 
       ISitecoreStoredSearchRequest autocompletedRequest = this.requestMerger.FillSitecoreStoredSearchGaps(requestCopy);
 
-      var urlBuilder = new RunStoredQuerryUrlBuilder(this.restGrammar, this.sscGrammar);
-      var taskFlow = new RunStoredQuerryTasks(urlBuilder, this.httpClient);
+      var urlBuilder = new RunStoredQueryUrlBuilder(this.restGrammar, this.sscGrammar);
+      var taskFlow = new RunStoredQueryTasks(urlBuilder, this.httpClient);
 
       return await RestApiCallFlow.LoadRequestFromNetworkFlow(autocompletedRequest, taskFlow, cancelToken);
     }
