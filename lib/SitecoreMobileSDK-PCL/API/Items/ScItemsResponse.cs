@@ -15,7 +15,12 @@ namespace Sitecore.MobileSDK.API.Items
   {
     public ScItemsResponse(List<ISitecoreItem> items, int statusCode)
     {
-      this.Items = items;
+
+      if (items != null) {
+        this.Items = items;
+      } else {
+        this.Items = new List<ISitecoreItem>();
+      }
       this.StatusCode = statusCode;
     }
 

@@ -203,6 +203,10 @@
       <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
       <Name>Sitecore.MobileSDK</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\lib\SSCExtensions\SSCExtensions.csproj">
+      <Project>{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}</Project>
+      <Name>SSCExtensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

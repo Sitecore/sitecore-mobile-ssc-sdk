@@ -13,10 +13,11 @@ namespace WhiteLabeliOS
   using Sitecore.MobileSDK.API.Session;
   using Sitecore.MobileSDK.API;
   using Sitecore.MobileSDK.API.Items;
-
+  using SSCExtensions;
 
   public partial class GetItemByIdViewController : BaseTaskTableViewController
   {
+
     public GetItemByIdViewController(IntPtr handle) : base(handle)
     {
       Title = NSBundle.MainBundle.LocalizedString("getItemById", null);
@@ -71,22 +72,29 @@ namespace WhiteLabeliOS
       }
     }
 
+
     private async void SendRequest()
     {
-      try
-      {
-        using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
-        {
+      try {
+        using (ISitecoreSSCSession session = this.instanceSettings.GetSession()) {
           this.ShowLoader();
 
-          var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
-                                             .AddFieldsToRead(this.fieldNameTextField.Text)
-                                             .IncludeStandardTemplateFields(true)
-                                             .Build();
+          var ext = ExtendedSessionBuilder.ExtendedSessionWith(session)
+                                          .Build();
 
 
-          ScItemsResponse response = await session.ReadItemAsync(request);
-          response = await session.ReadItemAsync(request);
+          var request = ExtendedSSCRequestBuilder.SitecoreQueryRequest("/sitecore/content//*[@@templateid='{DA86D7C6-DBF8-464C-8B43-68ED1EBB44EA}']")
+                                                 .Database("web")
+                                                 .PageNumber(0)
+                                                 .ItemsPerPage(20)
+                                                 .AddFieldsToRead("title")
+                                                 .Build();
+
+
+          var response = await ext.SearchBySitecoreQueryAsync(request);
+
+          Console.WriteLine("RESULT COUNT: " + response.Count().ToString());
+
           if (response.Any())
           {
             this.ShowItemsList(response);
@@ -96,21 +104,57 @@ namespace WhiteLabeliOS
             AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
           }
         }
-      }
-      catch(Exception e) 
-      {
+      } catch (Exception e) {
         this.CleanupTableViewBindings();
         AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
-      }
-      finally
-      {
-        BeginInvokeOnMainThread(delegate
-        {
+      } finally {
+        BeginInvokeOnMainThread(delegate {
           this.HideLoader();
           this.FieldsTableView.ReloadData();
         });
       }
     }
+
+    //private async void SendRequest()
+    //{
+    //  try
+    //  {
+    //    using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
+    //    {
+    //      this.ShowLoader();
+
+    //      var request = ItemSSCRequestBuilder.ReadItemsRequestWithId(itemIdTextField.Text)
+    //                                         .AddFieldsToRead(this.fieldNameTextField.Text)
+    //                                         .IncludeStandardTemplateFields(true)
+    //                                         .Build();
+
+
+    //      ScItemsResponse response = await session.ReadItemAsync(request);
+    //      response = await session.ReadItemAsync(request);
+    //      if (response.Any())
+    //      {
+    //        this.ShowItemsList(response);
+    //      }
+    //      else
+    //      {
+    //        AlertHelper.ShowLocalizedAlertWithOkOption("Message", "Item is not exist");
+    //      }
+    //    }
+    //  }
+    //  catch(Exception e) 
+    //  {
+    //    this.CleanupTableViewBindings();
+    //    AlertHelper.ShowLocalizedAlertWithOkOption("Error", e.Message);
+    //  }
+    //  finally
+    //  {
+    //    BeginInvokeOnMainThread(delegate
+    //    {
+    //      this.HideLoader();
+    //      this.FieldsTableView.ReloadData();
+    //    });
+    //  }
+    //}
 
     private async void SendChildrenRequest()
     {
@@ -119,7 +163,6 @@ namespace WhiteLabeliOS
         using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
         {
           var request = ItemSSCRequestBuilder.ReadChildrenRequestWithId(itemIdTextField.Text)
-                                             .AddFieldsToRead("bla")
                                              .Build();
 
           this.ShowLoader();

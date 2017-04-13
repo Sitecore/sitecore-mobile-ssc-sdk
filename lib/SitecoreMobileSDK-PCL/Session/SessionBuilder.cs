@@ -51,6 +51,7 @@
 
     private string OptionalMediaRoot()
     {
+      
       string optionalMediaRoot = this.mediaRoot;
       if (null == optionalMediaRoot)
       {

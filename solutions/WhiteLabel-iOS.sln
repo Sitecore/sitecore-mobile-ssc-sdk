@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK", "..\li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteLabel-iOS-UnifiedMigrated", "..\app\WhiteLabel\iOS\WhiteLabel-iOS-UnifiedMigrated\WhiteLabel-iOS-UnifiedMigrated.csproj", "{50EA2C35-2DB9-4EF8-8E24-2D19F9A09EB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSCExtensions", "..\lib\SSCExtensions\SSCExtensions.csproj", "{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -39,6 +41,18 @@ Global
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhone.Build.0 = Release|Any CPU
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Release|iPhone.Build.0 = Release|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.AppStore|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection

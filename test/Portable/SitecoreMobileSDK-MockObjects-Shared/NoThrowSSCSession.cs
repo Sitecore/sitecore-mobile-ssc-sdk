@@ -135,7 +135,7 @@
       return await this.InvokeNoThrow(this.workerSession.RunSearchAsync(request, cancelToken));
     }
 
-    public async Task<ScItemsResponse> RunStoredQuerryAsync(IReadItemsByIdRequest request, CancellationToken cancelToken = default(CancellationToken))
+    public async Task<ScItemsResponse> RunStoredQuerryAsync(ISitecoreStoredSearchRequest request, CancellationToken cancelToken = default(CancellationToken))
     {
       return await this.InvokeNoThrow(this.workerSession.RunStoredQuerryAsync(request, cancelToken));
     }
