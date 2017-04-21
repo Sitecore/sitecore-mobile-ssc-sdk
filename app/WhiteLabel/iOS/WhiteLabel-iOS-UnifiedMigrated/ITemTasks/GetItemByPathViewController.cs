@@ -72,8 +72,8 @@
         using (ISitecoreSSCSession session = this.instanceSettings.GetSession())
         {
           var request = ItemSSCRequestBuilder.ReadItemsRequestWithPath(this.ItemPathField.Text)
-            .AddFieldsToRead(this.fieldNameTextField.Text)
-            .Build();
+                                             .AddFieldsToRead(this.fieldNameTextField.Text)
+                                             .Build();
           
           this.ShowLoader();
 

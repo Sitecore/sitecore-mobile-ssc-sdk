@@ -6,7 +6,7 @@ namespace Sitecore.MobileSDK.UserRequest.SearchRequest
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
 
-  public class RunStoredSearchRequestBuilder : AbstractGetVersionedItemRequestBuilder<ISitecoreStoredSearchRequest>
+  public class RunStoredSearchRequestBuilder : AbstractGetPagedItemRequestBuilder<ISitecoreStoredSearchRequest>
   {
     public RunStoredSearchRequestBuilder(string itemId)
     {

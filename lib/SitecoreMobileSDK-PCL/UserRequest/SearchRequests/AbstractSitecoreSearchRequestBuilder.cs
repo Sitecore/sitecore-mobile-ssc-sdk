@@ -11,7 +11,7 @@ namespace Sitecore.MobileSDK.UserRequest.SearchRequest
   using Sitecore.MobileSDK.UrlBuilder.SortParameters;
   using Sitecore.MobileSDK.Validators;
 
-  public abstract class AbstractSitecoreSearchRequestBuilder<T> : AbstractGetVersionedItemRequestBuilder<T>,
+  public abstract class AbstractSitecoreSearchRequestBuilder<T> : AbstractGetPagedItemRequestBuilder<T>,
   ISearchItemRequestParametersBuilder<T>
   where T : class
   {

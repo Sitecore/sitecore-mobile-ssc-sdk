@@ -17,7 +17,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)SetLanguageDbVersionTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SetDefaultSessionSettingsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScTestApiSession.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ReadPagedItemsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OperationCancelTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetPublicKeyTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetMediaItemsTest.cs" />

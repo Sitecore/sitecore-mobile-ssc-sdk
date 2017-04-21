@@ -2,7 +2,7 @@ namespace Sitecore.MobileSDK.API.Request
 {
   using System.Collections.Generic;
 
-  public interface ISearchItemRequestParametersBuilder<T> : IGetVersionedItemRequestParametersBuilder<T>
+  public interface ISearchItemRequestParametersBuilder<T> : IPagedRequestParametersBuilder<T>
     where T : class
   {
     ISearchItemRequestParametersBuilder<T> AddAscendingFieldsToSort(params string[] fieldParams);
