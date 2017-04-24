@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bot Application1", "..\app\Bot Application\Bot Application1.csproj", "{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.MobileSDK", "..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj", "{D247D253-0923-4541-90B5-0F5E6304C33F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSCExtensions", "..\lib\SSCExtensions\SSCExtensions.csproj", "{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D247D253-0923-4541-90B5-0F5E6304C33F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
