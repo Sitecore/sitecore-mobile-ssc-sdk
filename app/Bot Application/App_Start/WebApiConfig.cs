@@ -1,6 +1,9 @@
 ﻿using System.Web.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Net;
+using System.Net.Security;
+using System;
 
 namespace Bot_Application1
 {
@@ -8,6 +11,21 @@ namespace Bot_Application1
     {
         public static void Register(HttpConfiguration config)
         {
+            #warning SSL cheks disabled in test needs, remove this code!!!
+            try
+            {
+                //Change SSL checks so that all checks pass
+                ServicePointManager.ServerCertificateValidationCallback =
+                   new RemoteCertificateValidationCallback(
+                        delegate
+                        { return true; }
+                    );
+            }
+            catch (Exception ex)
+            {
+               //do nothing
+            }
+
             // Json settings
             config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

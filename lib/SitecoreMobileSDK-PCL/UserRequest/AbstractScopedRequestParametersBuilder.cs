@@ -76,7 +76,7 @@ namespace Sitecore.MobileSDK.UserRequest
       }
       else if (null != this.pagingOptions.OptionalPageNumber)
       {
-        throw new InvalidOperationException(this.GetType().Name + ".PageNumber : Property cannot be assigned twice.");
+        //throw new InvalidOperationException(this.GetType().Name + ".PageNumber : Property cannot be assigned twice.");
       }
 
       this.pagingOptions = new PagingParameters(this.pagingOptions.OptionalItemsPerPage, pageNumber);
