@@ -2,9 +2,7 @@
 {
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request;
-  using Sitecore.MobileSDK.API.Request.Parameters;
-  using Sitecore.MobileSDK.Items;
-  using Sitecore.MobileSDK.Validators;
+  using Sitecore.MobileSDK.API.Request.Paging;
 
   public abstract class AbstractGetPagedItemRequestBuilder<T> : 
           AbstractGetVersionedItemRequestBuilder<T>,
@@ -12,9 +10,9 @@
   where T : class
   {
 
-    new public IPagedRequestParametersBuilder<T> PageNumber(int pageNumber)
+    new public IPageNumberAccumulator<T> PageNumber(int pageNumber)
     {
-      return (IPagedRequestParametersBuilder<T>)base.PageNumber(pageNumber);
+      return (IPageNumberAccumulator<T>)base.PageNumber(pageNumber);
     }
 
     new public IPagedRequestParametersBuilder<T> ItemsPerPage(int itemsCountPerPage)

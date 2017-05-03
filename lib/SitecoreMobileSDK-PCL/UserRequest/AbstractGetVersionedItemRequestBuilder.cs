@@ -2,6 +2,7 @@
 {
   using System.Collections.Generic;
   using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.API.Request.Paging;
   using Sitecore.MobileSDK.API.Request.Parameters;
   using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.Validators;
@@ -47,9 +48,9 @@
       return (IGetVersionedItemRequestParametersBuilder<T>)base.AddFieldsToRead(fieldParams);
     }
 
-    new public IGetVersionedItemRequestParametersBuilder<T> PageNumber(int pageNumber)
+    new public IPageNumberAccumulator<T> PageNumber(int pageNumber)
     {
-      return (IGetVersionedItemRequestParametersBuilder<T>)base.PageNumber(pageNumber);
+      return (IPageNumberAccumulator<T>)base.PageNumber(pageNumber);
     }
 
     new public IGetVersionedItemRequestParametersBuilder<T> ItemsPerPage(int itemsCountPerPage)

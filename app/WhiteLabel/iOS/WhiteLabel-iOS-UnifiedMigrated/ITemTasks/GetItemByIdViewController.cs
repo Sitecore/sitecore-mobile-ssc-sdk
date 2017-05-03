@@ -84,9 +84,9 @@ namespace WhiteLabeliOS
 
 
           var request = ExtendedSSCRequestBuilder.SitecoreQueryRequest("/sitecore/content//*[@@templateid='{DA86D7C6-DBF8-464C-8B43-68ED1EBB44EA}']")
-                                                 .Database("web")
                                                  .PageNumber(0)
                                                  .ItemsPerPage(20)
+                                                 .Database("web")
                                                  .AddFieldsToRead("title")
                                                  .Build();
 
