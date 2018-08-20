@@ -51,10 +51,12 @@ Global
 		{50EA2C35-2DB9-4EF8-8E24-2D19F9A09EB7}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
 		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
-		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
 		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.AppStore|iPhone.ActiveCfg = Release|Any CPU
 		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.AppStore|iPhone.Build.0 = Release|Any CPU
-		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
 		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
@@ -71,7 +73,5 @@ Global
 		StartupItem = ..\app\WhiteLabel\iOS\WhiteLabel-iOS-Unified\WhiteLabel-iOS-Unified.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
-		$1.DirectoryNamespaceAssociation = None
-		$1.ResourceNamePolicy = FileFormatDefault
 	EndGlobalSection
 EndGlobal
