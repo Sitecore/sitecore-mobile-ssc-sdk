@@ -122,7 +122,6 @@ namespace SCHelpers
 
                     var request = ExtendedSSCRequestBuilder.SitecoreQueryRequest(query)
                                                            .PageNumber(0)
-                                                           .PageNumber(0)
                                                            .ItemsPerPage(500)//max
                                                            .Build();
 

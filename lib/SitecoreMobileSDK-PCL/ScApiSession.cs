@@ -78,8 +78,7 @@ namespace Sitecore.MobileSDK
       this.handler = new HttpClientHandler();
       this.handler.CookieContainer = cookies;
       this.httpClient = new HttpClient(this.handler);
-
-    }
+        }
 
     #region IDisposable
     void ReleaseResources()

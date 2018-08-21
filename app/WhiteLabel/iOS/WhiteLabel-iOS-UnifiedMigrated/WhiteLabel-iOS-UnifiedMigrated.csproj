@@ -25,6 +25,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchDebug>true</MtouchDebug>
     <MtouchArch>i386</MtouchArch>
+    <CodesignProvision>c69c2a1f-caa6-4fad-8897-5ae864c0f738</CodesignProvision>
     <CodesignKey>iPhone Developer: Igor Khomich (6985FMBD4K)</CodesignKey>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>

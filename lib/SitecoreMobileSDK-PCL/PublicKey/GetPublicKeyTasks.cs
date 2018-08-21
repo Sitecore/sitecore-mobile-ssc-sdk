@@ -55,7 +55,7 @@ namespace Sitecore.MobileSDK.PublicKey
                                             + "\",\"password\":\""
                                             + this.credentials.Password
                                             + "\"}", Encoding.UTF8, "application/json");
-      
+
       HttpResponseMessage httpResponse = await this.httpClient.PostAsync(requestUrl, stringContent, cancelToken);
 
       int code = (int)httpResponse.StatusCode;
