@@ -110,12 +110,12 @@
   <Import Project="..\..\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems" Label="Shared" Condition="Exists('..\..\Portable\MobileSDK-IntegrationTest\MobileSDK-IntegrationTest.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
-      <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
-      <Name>Sitecore.MobileSDK</Name>
+    <ProjectReference Include="..\..\..\lib\Sitecore.MobileSDK.SSC.NetStandard\Sitecore.MobileSDK.SSC.NetStandard.csproj">
+      <Project>{A54FA70B-5C19-4314-900D-D69B4E7E68C0}</Project>
+      <Name>Sitecore.MobileSDK.SSC.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Portable\SitecoreMobileSDK-MockObjects\Sitecore.MobileSDK.MockObjects.csproj">
-      <Project>{B99EEE93-6176-438F-B601-E0382545166A}</Project>
+      <Project>{C3EAB075-1ACC-4641-A0BF-C75F5D6CF99B}</Project>
       <Name>Sitecore.MobileSDK.MockObjects</Name>
     </ProjectReference>
   </ItemGroup>
