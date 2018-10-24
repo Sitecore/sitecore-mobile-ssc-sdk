@@ -23,7 +23,7 @@
 
       this.ValidateRequest(request);
 
-      string autocompletedInstanceUrl = SessionConfigValidator.AutocompleteInstanceUrl(request.InstanceUrl);
+      string autocompletedInstanceUrl = SessionConfigValidator.AutocompleteInstanceUrlWithHttps(request.InstanceUrl);
 
       string result =
         autocompletedInstanceUrl + this.sscGrammar.ItemSSCEndpoint;

@@ -22,11 +22,9 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchLink>None</MtouchLink>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchDebug>true</MtouchDebug>
-    <MtouchArch>i386</MtouchArch>
-    <CodesignProvision>c69c2a1f-caa6-4fad-8897-5ae864c0f738</CodesignProvision>
-    <CodesignKey>iPhone Developer: Igor Khomich (6985FMBD4K)</CodesignKey>
+    <MtouchArch>x86_64</MtouchArch>
+    <CodesignKey>iPhone Developer</CodesignKey>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
@@ -99,6 +97,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\solutions\packages\Newtonsoft.Json.11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -108,6 +109,7 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -200,12 +202,12 @@
     <Folder Include="FieldsTableView\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\lib\SitecoreMobileSDK-PCL\Sitecore.MobileSDK.csproj">
-      <Project>{D247D253-0923-4541-90B5-0F5E6304C33F}</Project>
-      <Name>Sitecore.MobileSDK</Name>
+    <ProjectReference Include="..\..\..\..\lib\Sitecore.MobileSDK.SSC.NetStandard\Sitecore.MobileSDK.SSC.NetStandard.csproj">
+      <Project>{034BCC05-3F6F-4B8C-A6A1-5B81EF8EACF8}</Project>
+      <Name>Sitecore.MobileSDK.SSC.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\lib\SSCExtensions\SSCExtensions.csproj">
-      <Project>{E6E4395F-81E3-4F35-B294-DADE5F1E53CB}</Project>
+      <Project>{E6C27F82-53B6-415F-AA77-D30B9E3CB26C}</Project>
       <Name>SSCExtensions</Name>
     </ProjectReference>
   </ItemGroup>

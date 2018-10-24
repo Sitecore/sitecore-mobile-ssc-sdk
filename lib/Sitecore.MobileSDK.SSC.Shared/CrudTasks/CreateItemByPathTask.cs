@@ -1,31 +1,33 @@
 ﻿
-namespace Sitecore.MobileSDK.CrudTasks.Entity
+namespace Sitecore.MobileSDK.CrudTasks
 {
   using System;
+  using System.Collections.Generic;
   using System.Diagnostics;
+  using System.Linq;
   using System.Net.Http;
   using System.Text;
   using System.Threading;
   using System.Threading.Tasks;
   using Newtonsoft.Json;
   using Newtonsoft.Json.Linq;
-  using Sitecore.MobileSDK.API.Entities;
-  using Sitecore.MobileSDK.API.Request.Entity;
-  using Sitecore.MobileSDK.Entities;
+  using Sitecore.MobileSDK.API.Items;
+  using Sitecore.MobileSDK.API.Request;
+  using Sitecore.MobileSDK.Items;
   using Sitecore.MobileSDK.TaskFlow;
-  using Sitecore.MobileSDK.UrlBuilder.Entity;
+  using Sitecore.MobileSDK.UrlBuilder.CreateItem;
 
-  internal class CreateEntityTask<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScCreateEntityResponse>
-    where T : class, ICreateEntityRequest
+  internal class CreateItemByPathTask<T> : IRestApiCallTasks<T, HttpRequestMessage, string, ScCreateItemResponse>
+    where T : class, ICreateItemByPathRequest
   {
-    private readonly GetEntitiesUrlBuilder<T> createEntityBuilder;
+    private readonly CreateItemByPathUrlBuilder createItemBuilder;
     private readonly HttpClient httpClient;
 
-    public CreateEntityTask(
-      GetEntitiesUrlBuilder<T> createEntityBuilder,
+    public CreateItemByPathTask(
+      CreateItemByPathUrlBuilder createItemBuilder,
       HttpClient httpClient)
     {
-      this.createEntityBuilder = createEntityBuilder;
+      this.createItemBuilder = createItemBuilder;
       this.httpClient = httpClient;
 
       this.Validate();
@@ -33,7 +35,7 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
 
     public HttpRequestMessage BuildRequestUrlForRequestAsync(T request, CancellationToken cancelToken)
     {
-      var url = this.createEntityBuilder.GetUrlForRequest(request);
+      var url = this.createItemBuilder.GetUrlForRequest(request);
 
       HttpRequestMessage result = new HttpRequestMessage(HttpMethod.Post, url);
 
@@ -50,24 +52,33 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
       //TODO: @igk debug request output, remove later
       Debug.WriteLine("REQUEST: " + request);
       var result = await this.httpClient.SendAsync(request, cancelToken);
+      statusCode = (int)result.StatusCode;
 
-      this.statusCode = (int)result.StatusCode;
+      IEnumerable<string> headerValues;
+      string headerValue = "";
 
-      return await result.Content.ReadAsStringAsync();
+      try {
+        headerValues = result.Headers.GetValues("Location");
+        headerValue = headerValues.FirstOrDefault();
+      } catch { 
+        
+      }
+
+      return headerValue;
     }
 
-    public async Task<ScCreateEntityResponse> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)
+    public async Task<ScCreateItemResponse> ParseResponseDataAsync(string httpData, CancellationToken cancelToken)
     {
-      Func<ScCreateEntityResponse> syncParseResponse = () =>
+      Func<ScCreateItemResponse> syncParseResponse = () =>
       {
         //TODO: @igk debug response output, remove later
-        Debug.WriteLine("RESPONSE: " + httpData);
-        return ScCreateEntityParser.Parse(httpData, this.statusCode, cancelToken);
+        //Debug.WriteLine("RESPONSE: " + httpData);
+        return CreateItemResponseParser.ParseResponse(httpData, this.statusCode, cancelToken);
       };
       return await Task.Factory.StartNew(syncParseResponse, cancelToken);
     }
 
-    public string GetFieldsListString(T request)
+    public string GetFieldsListString(ICreateItemByPathRequest request)
     {
       string result = string.Empty;
 
@@ -84,8 +95,10 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
         }
       }
 
-      //FIXME: @igk hardcoded field name!!!
-      jsonObject.Add("Id", request.EntityID);
+      //FIXME: @igk hardcoded field names
+      //TODO: @igk check do we need some fields more. Documentation have no such content.
+      jsonObject.Add("TemplateID", request.ItemTemplateId);
+      jsonObject.Add("ItemName", request.ItemName);
 
       result = jsonObject.ToString(Formatting.None);
 
@@ -96,16 +109,15 @@ namespace Sitecore.MobileSDK.CrudTasks.Entity
     {
       if (null == this.httpClient)
       {
-        throw new ArgumentNullException("CreateEntityTask.httpClient cannot be null");
+        throw new ArgumentNullException("DeleteItemTasks.httpClient cannot be null");
       }
 
-      if (null == this.createEntityBuilder)
+      if (null == this.createItemBuilder)
       {
-        throw new ArgumentNullException("CreateEntityTask.createEntityBuilder cannot be null");
+        throw new ArgumentNullException("DeleteItemTasks.deleteItemsBuilder cannot be null");
       }
     }
 
     private int statusCode = 0;
-
   }
 }

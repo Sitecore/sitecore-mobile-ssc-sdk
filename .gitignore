@@ -37,6 +37,8 @@ UpgradeLog.htm
 *.VisualState.xml
 *.psess
 *.sln.*
+/.vs
+.vs
 
 # NuGet
 packages

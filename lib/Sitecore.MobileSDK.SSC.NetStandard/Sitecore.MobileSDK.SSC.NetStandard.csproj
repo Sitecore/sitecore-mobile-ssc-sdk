@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+  <Import Project="..\Sitecore.MobileSDK.SSC.Shared\Sitecore.MobileSDK.SSC.Shared.projitems" Label="Shared" Condition="Exists('..\Sitecore.MobileSDK.SSC.Shared\Sitecore.MobileSDK.SSC.Shared.projitems')" />
+</Project>

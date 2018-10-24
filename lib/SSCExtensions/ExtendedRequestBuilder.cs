@@ -1,4 +1,7 @@
 ﻿
+using Sitecore.MobileSDK.API.Request;
+using Sitecore.MobileSDK.UserRequest.ReadRequest;
+
 namespace SSCExtensions
 {
   public class ExtendedRequestBuilder

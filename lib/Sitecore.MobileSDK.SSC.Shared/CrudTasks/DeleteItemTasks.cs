@@ -49,7 +49,7 @@ namespace Sitecore.MobileSDK.CrudTasks
       Func<ScDeleteItemsResponse> syncParseResponse = () =>
       {
         //TODO: @igk debug response output, remove later
-        Debug.WriteLine("RESPONSE: " + httpData);
+        //Debug.WriteLine("RESPONSE: " + httpData);
         return DeleteItemsResponseParser.ParseResponse(httpData, cancelToken);
       };
       return await Task.Factory.StartNew(syncParseResponse, cancelToken);

@@ -183,7 +183,7 @@ namespace Sitecore.MobileSDK
 
       if (this.credentials != null) {
 
-        string url = SessionConfigValidator.AutocompleteInstanceUrl(this.Config.InstanceUrl);
+        string url = SessionConfigValidator.AutocompleteInstanceUrlWithHttps(this.Config.InstanceUrl);
         IEnumerable<Cookie> prevCookies = this.cookies.GetCookies(new Uri(url)).Cast<Cookie>();
         bool noCookies = true;
 

@@ -47,7 +47,7 @@
       mediaPathValidator.ValidateMediaPath(path, this.GetType().Name + ".Path");
 
       string relativePath = path;
-      string result = SessionConfigValidator.AutocompleteInstanceUrl(this.sessionConfig.InstanceUrl);
+            string result = SessionConfigValidator.AutocompleteInstanceUrlWithHttps(this.sessionConfig.InstanceUrl);
 
       string lowerCasePathForComparisonNeeds = path.ToLowerInvariant();
       string lowerCaseMediaHook = this.mediaSettings.MediaPrefix.ToLowerInvariant();
