@@ -36,6 +36,6 @@ The SDK supports producing native applications through the Xamarin framework
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\lib\Sitecore.MobileSDK.SSC.NetStandard\bin\Release\Sitecore.MobileSDK.dll" target="lib\netstandard1.4\Sitecore.MobileSDK.dll"/>
+    <file src="..\..\lib\Sitecore.MobileSDK.SSC.NetStandard\bin\Release\netstandard1.6\Sitecore.MobileSDK.SSC.NetStandard.dll" target="lib\netstandard1.6\Sitecore.MobileSDK.SSC.NetStandard.dll"/>
   </files>
 </package>
