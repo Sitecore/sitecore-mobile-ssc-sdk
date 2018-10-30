@@ -3,7 +3,7 @@
   <metadata>
     <id>Sitecore.MobileSDK.SSC</id>
     <title>Sitecore Mobile SDK (SSC) for Xamarin</title>
-    <version>1.1.2</version>
+    <version>1.2.0</version>
     <authors>Sitecore Mobile Team</authors>
     <owners>Sitecore Corporation A&#8260;S</owners>
     <licenseUrl>https://raw.githubusercontent.com/Sitecore/sitecore-mobile-pcl-sdk/master/license.txt</licenseUrl>
@@ -28,8 +28,8 @@ The SDK supports producing native applications through the Xamarin framework
 
     <releaseNotes>Initial release with items manipulation support</releaseNotes>
 
-    <copyright>Copyright 1999-2016 Sitecore</copyright> 
-    <tags>Sitecore iOS Android PCL Xamarin</tags>
+    <copyright>Copyright 1999-2018 Sitecore</copyright> 
+    <tags>Sitecore iOS Android NETStandard Xamarin</tags>
    
     <dependencies>
       <dependency id="Newtonsoft.Json" version="9.0.1"/>
@@ -40,6 +40,6 @@ The SDK supports producing native applications through the Xamarin framework
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\lib\SitecoreMobileSDK-PCL\bin\Release\Sitecore.MobileSDK.dll" target="lib\portable-win+net4+sl5+wp8\"/>
+    <file src="..\..\lib\Sitecore.MobileSDK.SSC.NetStandard\bin\Release\Sitecore.MobileSDK.dll" target="lib\netstandard1.4\Sitecore.MobileSDK.dll"/>
   </files>
 </package>

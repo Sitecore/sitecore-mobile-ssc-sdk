@@ -50,7 +50,7 @@
       IReadEntityByIdRequest request = mutableParameters;
 
       string result = this.entitybyIdBuilder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/id/action('bla')";
+      string expected = "https://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/id/action('bla')";
 
       Assert.AreEqual(expected, result);
     }
@@ -68,7 +68,7 @@
       IReadEntityByIdRequest request = mutableParameters;
 
       string result = this.entitybyIdBuilder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/id/action('bla')?field1=value1&field2=value2";
+      string expected = "https://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/id/action('bla')?field1=value1&field2=value2";
 
       Assert.AreEqual(expected, result);
     }
@@ -86,7 +86,7 @@
       IReadEntityByIdRequest request = mutableParameters;
 
       string result = this.entitybyIdBuilder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/id/action('bla')?fIeLd1=VaLuE1&FiElD2=vAlUe2";
+      string expected = "https://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/id/action('bla')?fIeLd1=VaLuE1&FiElD2=vAlUe2";
 
       Assert.AreEqual(expected, result);
     }
@@ -104,7 +104,7 @@
       IReadEntityByIdRequest request = mutableParameters;
 
       string result = this.entitybyIdBuilder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/id/action('BuGaGa')?fIeLd1=VaLuE1&FiElD2=vAlUe2";
+      string expected = "https://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/id/action('BuGaGa')?fIeLd1=VaLuE1&FiElD2=vAlUe2";
 
       Assert.AreEqual(expected, result);
     }
@@ -121,7 +121,7 @@
       IReadEntityByIdRequest request = mutableParameters;
 
       string result = this.entitybyIdBuilder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/action('bla')";
+      string expected = "https://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/action('bla')";
 
       Assert.AreEqual(expected, result);
     }

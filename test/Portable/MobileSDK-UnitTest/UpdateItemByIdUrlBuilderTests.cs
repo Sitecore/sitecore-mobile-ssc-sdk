@@ -50,7 +50,7 @@
       IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps(request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/sitecore/api/ssc/item/%7B110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7D?database=web&language=en";
+      string expected = "https://mobiledev1ua1.dk.sitecore.net:7119/sitecore/api/ssc/item/%7B110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7D?database=web&language=en";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
       string expectedFieldsResult = "";
@@ -71,7 +71,7 @@
       IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps(request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/sitecore/api/ssc/item/%7B110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7D?database=web&language=en&version=1";
+      string expected = "https://mobiledev1ua1.dk.sitecore.net:7119/sitecore/api/ssc/item/%7B110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7D?database=web&language=en&version=1";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
       string expectedFieldsResult = "field1=value1&field2=value2";
@@ -91,7 +91,7 @@
       IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps(request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/sitecore/api/ssc/item/%7B110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7D?database=web&language=en";
+      string expected = "https://mobiledev1ua1.dk.sitecore.net:7119/sitecore/api/ssc/item/%7B110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7D?database=web&language=en";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
       string expectedFieldsResult = "field1=VaLuE1&field2=VaLuE2";
@@ -111,7 +111,7 @@
       IUpdateItemByIdRequest autocompletedRequest = this.requestMerger.FillUpdateItemByIdGaps(request);
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/sitecore/api/ssc/item/%7B110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7D?database=web&language=en";
+      string expected = "https://mobiledev1ua1.dk.sitecore.net:7119/sitecore/api/ssc/item/%7B110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7D?database=web&language=en";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
       string expectedFieldsResult = "field1=VaLuE1&field2=VaLuE2";
@@ -160,7 +160,7 @@
 
       string result = this.builder.GetUrlForRequest(autocompletedRequest);
       string expected =
-        "http://mobiledev1ua1.dk.sitecore.net:7119/sitecore/api/ssc/item/%7B110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7D?database=db&language=lg";
+        "https://mobiledev1ua1.dk.sitecore.net:7119/sitecore/api/ssc/item/%7B110d559f-dea5-42ea-9c1c-8a5df7e70ef9%7D?database=db&language=lg";
 
       string fieldsResult = this.builder.GetFieldValuesList(autocompletedRequest);
       string expectedFieldsResult = "field1=VaLuE1&field2=VaLuE2&field3=VaLuE3";

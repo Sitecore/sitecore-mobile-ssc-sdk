@@ -75,7 +75,7 @@
       IReadItemsByIdRequest parameters = mutableParameters;
 
       string result = this.builder.GetUrlForRequest(parameters);
-      string expected = "http://sitecore.net/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9?database=web&language=en";
+      string expected = "https://sitecore.net/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9?database=web&language=en";
 
       Assert.AreEqual(expected, result);
     }
@@ -92,7 +92,7 @@
       IReadItemsByIdRequest parameters = mutableParameters;
 
       string result = this.builder.GetUrlForRequest(parameters);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net:7119/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9?database=web&language=en";
+      string expected = "https://mobiledev1ua1.dk.sitecore.net:7119/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9?database=web&language=en";
 
       Assert.AreEqual(expected, result);
     }
@@ -140,7 +140,7 @@
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9";
+      string expected = "https://localhost/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9";
 
       Assert.AreEqual(expected, result);
     }
@@ -160,7 +160,7 @@
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9?database=master";
+      string expected = "https://localhost/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9?database=master";
 
       Assert.AreEqual(expected, result);
     }
@@ -179,7 +179,7 @@
       var urlBuilder = new ItemByIdUrlBuilder(RestServiceGrammar.ItemSSCV2Grammar(), SSCUrlParameters.ItemSSCV2UrlParameters());
 
       string result = urlBuilder.GetUrlForRequest(mergedRequest);
-      string expected = "http://localhost/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9?language=da";
+      string expected = "https://localhost/sitecore/api/ssc/item/110d559f-dea5-42ea-9c1c-8a5df7e70ef9?language=da";
 
       Assert.AreEqual(expected, result);
     }

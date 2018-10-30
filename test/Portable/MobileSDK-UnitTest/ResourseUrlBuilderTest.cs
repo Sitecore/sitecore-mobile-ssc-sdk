@@ -83,7 +83,7 @@
     public void AbsolutePathWithoutOptionsTest()
     {
       string result = this.builder.BuildUrlStringForPath("/sitecore/media library/2/1 dot png", null);
-      const string Expected = "http://test.host/~/media/2/1%20dot%20png.ashx?sc_database=web&sc_language=en";
+      const string Expected = "https://test.host/~/media/2/1%20dot%20png.ashx?sc_database=web&sc_language=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -92,7 +92,7 @@
     public void RelativePathTest()
     {
       string result = this.builder.BuildUrlStringForPath("/mediaXYZ/1 dot png", null);
-      const string Expected = "http://test.host/~/media/mediaxyz/1%20dot%20png.ashx?sc_database=web&sc_language=en";
+      const string Expected = "https://test.host/~/media/mediaxyz/1%20dot%20png.ashx?sc_database=web&sc_language=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -109,7 +109,7 @@
     public void TestDoubleExtensionOnMediaHookIsAllowed()
     {
       string result = this.builder.BuildUrlStringForPath("~/media/XYZ/1.png.ashx", null);
-      string expected = "http://test.host/~/media/xyz/1.png.ashx?sc_database=web&sc_language=en";
+      string expected = "https://test.host/~/media/xyz/1.png.ashx?sc_database=web&sc_language=en";
 
       Assert.AreEqual(expected, result);
     }
@@ -148,7 +148,7 @@
 
 
       string result = customBuilder.BuildUrlStringForPath("~/mediaXYZ/1.png.ashx", null);
-      string expected = "http://custom.host/~/mediaxyz/1.png.ashx?sc_database=web&sc_language=en";
+      string expected = "https://custom.host/~/mediaxyz/1.png.ashx?sc_database=web&sc_language=en";
 
       Assert.AreEqual(expected, result);
     }
@@ -157,7 +157,7 @@
     public void PathContaignMediaHookTest()
     {
       string result = this.builder.BuildUrlStringForPath("~/media/1", null);
-      const string Expected = "http://test.host/~/media/1.ashx?sc_database=web&sc_language=en";
+      const string Expected = "https://test.host/~/media/1.ashx?sc_database=web&sc_language=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -166,7 +166,7 @@
     public void PathContaignMediaHookAndExtensionTest()
     {
       string result = this.builder.BuildUrlStringForPath("~/media/1.ashx", null);
-      const string Expected = "http://test.host/~/media/1.ashx?sc_database=web&sc_language=en";
+      const string Expected = "https://test.host/~/media/1.ashx?sc_database=web&sc_language=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -175,7 +175,7 @@
     public void PathProperlyEscapedTest()
     {
       string result = this.builder.BuildUrlStringForPath("~/media/Images/test image", null);
-      const string Expected = "http://test.host/~/media/images/test%20image.ashx?sc_database=web&sc_language=en";
+      const string Expected = "https://test.host/~/media/images/test%20image.ashx?sc_database=web&sc_language=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -185,7 +185,7 @@
     public void ResourceNameIsCaseInsensitiveTest()
     {
       string result = this.builder.BuildUrlStringForPath("~/media/Images/SoMe ImAGe", null);
-      const string Expected = "http://test.host/~/media/images/some%20image.ashx?sc_database=web&sc_language=en";
+      const string Expected = "https://test.host/~/media/images/some%20image.ashx?sc_database=web&sc_language=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -196,7 +196,7 @@
       var options = new DownloadMediaOptions();
 
       string result = this.builder.BuildUrlStringForPath("~/media/1", options);
-      const string Expected = "http://test.host/~/media/1.ashx?sc_database=web&sc_language=en";
+      const string Expected = "https://test.host/~/media/1.ashx?sc_database=web&sc_language=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -210,7 +210,7 @@
       options.SetDisplayAsThumbnail(true);
 
       string result = this.builder.BuildUrlStringForPath("~/media/1/2", options);
-      const string Expected = "http://test.host/~/media/1/2.ashx?w=100&bc=white&thn=1&sc_database=web&sc_language=en";
+      const string Expected = "https://test.host/~/media/1/2.ashx?w=100&bc=white&thn=1&sc_database=web&sc_language=en";
 
       Assert.AreEqual(Expected, result);
     }
@@ -227,7 +227,7 @@
       options.SetDisplayAsThumbnail(false);
 
       string result = this.builder.BuildUrlStringForPath("~/media/1", options);
-      const string expected = "http://test.host/~/media/1.ashx?w=100&thn=0&sc_database=web&sc_language=en";
+      const string expected = "https://test.host/~/media/1.ashx?w=100&thn=0&sc_database=web&sc_language=en";
 
       Assert.AreEqual(expected, result);
     }
@@ -246,7 +246,7 @@
       options.SetScale(2.5f);
 
       string result = this.builder.BuildUrlStringForPath("~/media/1.png", options);
-      const string expected = "http://test.host/~/media/1.png?w=10&h=10&mw=10&mh=10&bc=3f0000&dmc=0&as=0&sc=2.5&thn=1&sc_database=web&sc_language=en";
+      const string expected = "https://test.host/~/media/1.png?w=10&h=10&mw=10&mh=10&bc=3f0000&dmc=0&as=0&sc=2.5&thn=1&sc_database=web&sc_language=en";
 
       Assert.AreEqual(expected, result);
     }
@@ -260,7 +260,7 @@
 
 
       string result = this.builder.BuildUrlStringForPath("~/media/1", options);
-      const string Expected = "http://test.host/~/media/1.ashx?mw=10&sc=3.0005&sc_database=web&sc_language=en";
+      const string Expected = "https://test.host/~/media/1.ashx?mw=10&sc=3.0005&sc_database=web&sc_language=en";
 
       Assert.AreEqual(Expected, result);
     }

@@ -49,7 +49,7 @@
       IBaseEntityRequest request = mutableParameters;
 
       string result = this.getEntityBuilder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/id/action";
+      string expected = "https://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/id/action";
 
       Assert.AreEqual(expected, result);
     }
@@ -66,7 +66,7 @@
       IBaseEntityRequest request = mutableParameters;
 
       string result = this.getEntityBuilder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/id/action?field1=value1&field2=value2";
+      string expected = "https://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/id/action?field1=value1&field2=value2";
 
       Assert.AreEqual(expected, result);
     }
@@ -83,7 +83,7 @@
       IBaseEntityRequest request = mutableParameters;
 
       string result = this.getEntityBuilder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/id/action?fIeLd1=VaLuE1&FiElD2=vAlUe2";
+      string expected = "https://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/id/action?fIeLd1=VaLuE1&FiElD2=vAlUe2";
 
       Assert.AreEqual(expected, result);
     }
@@ -99,7 +99,7 @@
       IBaseEntityRequest request = mutableParameters;
 
       string result = this.getEntityBuilder.GetUrlForRequest(request);
-      string expected = "http://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/action";
+      string expected = "https://mobiledev1ua1.dk.sitecore.net/sitecore/api/ssc/namespace/controller/action";
 
       Assert.AreEqual(expected, result);
     }

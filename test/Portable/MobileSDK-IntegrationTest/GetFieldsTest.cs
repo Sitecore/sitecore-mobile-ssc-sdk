@@ -60,7 +60,7 @@
       testData.AssertItemsCount(1, response);
       testData.AssertItemsAreEqual(testData.Items.Home, response[0]);
 
-      Assert.AreEqual(87, response[0].FieldsCount);
+      Assert.AreEqual(91, response[0].FieldsCount);
       Assert.AreEqual("Home", response[0]["__Display name"].RawValue);
     }
 
