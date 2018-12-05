@@ -1,4 +1,4 @@
-Sitecore Mobile SDK (SSC) for Xamarin - a Portable .NET Library
+Sitecore Mobile SDK (SSC) for Xamarin - a .NET Standard Library
 ========
 
 The SDK is a framework that is designed to help the developer produce native mobile applications that use and serve content that is managed by Sitecore. The framework enables developers to rapidly develop applications utilizing their existing .NET development skill sets. 
@@ -9,7 +9,7 @@ The SDK includes the following features:
 * Create, Delete, Update Entities
 * Downloading Media Resources
 
-The library is PCL standard compliant and can be used on the following platforms :
+The library is .NET Standard and can be used on the following platforms :
 
 * iOS 8 and newer
 * Android 4.0 and newer
@@ -17,7 +17,7 @@ The library is PCL standard compliant and can be used on the following platforms
 * Windows Phone 8.1 and newer
 
 It uses the modern C# approaches such as :
-* PCL distribution
+* .NET Standard distribution
 * async/await based API
 * Fluent interface
 
@@ -56,7 +56,6 @@ using
 ```
 # Downloads
 - [NuGet packages](https://www.nuget.org/packages/Sitecore.MobileSDK.SSC/)
-- [Xamarin component](https://components.xamarin.com/view/sitecore.mobilesdk.ssc/)
 
 # Links
 - [Documentation](https://doc.sitecore.net/mobile_sdk_for_xamarin)
