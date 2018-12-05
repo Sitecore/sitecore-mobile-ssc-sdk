@@ -22,11 +22,11 @@ It uses the modern C# approaches such as :
 * Fluent interface
 
 # Licence
-[SITECORE SHARED SOURCE LICENSE](https://github.com/Sitecore/sitecore-mobile-pcl-sdk/blob/master/license.txt)
+[SITECORE SHARED SOURCE LICENSE](https://github.com/Sitecore/sitecore-mobile-ssc-sdk/blob/master/license.txt)
 
 ## Code Snippet
 
-As the SDK is designed as a portable class library (PCL), you can use the same code on all platforms to fetch the default "home" item content. 
+You can use the same code on all platforms to fetch the default "home" item content. 
 
 ```csharp
 using (var credentials = new ScUnsecuredCredentialsProvider ("login", "password", "domain")) // providing secure credentials
