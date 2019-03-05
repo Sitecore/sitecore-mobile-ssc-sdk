@@ -58,4 +58,4 @@ using
 - [NuGet packages](https://www.nuget.org/packages/Sitecore.MobileSDK.SSC/)
 
 # Links
-- [Documentation](https://doc.sitecore.net/mobile_sdk_for_xamarin)
+- [Documentation](https://doc.sitecore.com/legacy-docs/sitecore-mobile-sdk-for-xamarin-ssc-1.1.pdf)
